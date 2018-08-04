@@ -1,0 +1,15 @@
+@import "bootstrap-sprockets";
+@import "bootstrap";
+
+$main-color: #845423;
+$sub-color: #dbbc74;
+$accent-color: #845423;
+$link-color: #7749f4;
+
+ .top_banner{
+     width: 100%;
+ }
+
+ h1{
+     color: $main-color;
+ }
