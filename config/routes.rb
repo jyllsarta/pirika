@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   get 'pirika_console/index'
   get 'pirika_console/',  to: "pirika_console#index"
+  post 'pirika_console/',  to: "pirika_console#update"
 
   get 'static_pages/show'
   root 'static_pages#show'
