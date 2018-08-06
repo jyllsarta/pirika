@@ -1,0 +1,26 @@
+html,body{
+	overflow-y:hidden;
+	margin: 0px 0px;
+	height:100%;
+}
+
+img{
+	margin: 0px 0px;	
+}
+
+#top_illust{
+	width: 100%;
+	opacity: 0;
+	position: relative;
+}
+
+#top_link{
+	opacity: 0;
+	position: fixed;
+	bottom: -5%;
+  	right: 10%;
+}
+
+#title{
+	width: 80%;
+}

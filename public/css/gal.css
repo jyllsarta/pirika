@@ -1,0 +1,10 @@
+.floating_thumbnail{
+	border:1px solid #aaaaaa;
+	margin: 25px 43px;
+	width: 400px;
+	position: float;
+}
+.floating_thumbnail:hover{
+	border:1px solid #000000;
+	opacity: 0.8;
+}

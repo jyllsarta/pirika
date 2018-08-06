@@ -1,0 +1,59 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+
+	<meta name="description" content="寒さに耐えきれないときに便利なwebサービスです。" />
+	<meta property="og:title" content="寒すぎて%sになった">
+	<meta property="og:url" content="https://jyllsarta.github.io/samusugi.html">
+	<meta property="og:image" content="https://jyllsarta.github.io/images/icon/ogp_image.png">
+	<meta property="og:site_name" content="さーたはうす">
+	<meta property="og:description" content="寒さに耐えきれないときに便利なwebサービスです。" />
+
+	<meta name="twitter:card" content="summary" />
+	<meta name="twitter:site" content="@jyll" />
+
+	<title>寒すぎて%sになった</title>
+	<script src="js/jquery-1.9.1.min.js"></script>
+	<link href="css/samusugi.css?201801250029" rel="stylesheet" type="text/css">
+	<script src="js/ga.js"></script>
+</head>
+<body>
+<h1>寒すぎて%sになった</h1>
+
+<p id="samusugi">寒すぎて%sになった</p>
+
+<button id="control" class="btn">止める</button>
+<button id="tweet" class="btn">つぶやく</button>
+
+<hr>
+<p>iPhone用コピペエリア</p>
+<p>(つぶやくボタンがうまく効かない人用　コピーボタンを押して手動でツイートしてね)</p>
+<textarea name="" id="copypastearea" cols="45" rows="3">(止めるボタンを押してね)</textarea>
+
+<button id="copy" class="btn">コピー</button>
+<div id="copied" class="hidden">クリップボードにコピーしました...！</div>
+
+<p>
+制作：<a href="top.html">さーたはうす</a>
+</p>
+
+<span id="shadowcopypastearea"></span>
+
+<script>//iOSのコピペ用コード
+ var button = document.getElementById('copy');
+ button.addEventListener('click', function(){
+    var copyarea = document.getElementById('shadowcopypastearea')
+    var range = document.createRange();
+    range.selectNode(copyarea);
+    window.getSelection().addRange(range);
+    document.execCommand('copy')
+    showCopiedTicker()
+});
+</script>
+
+<script src="js/samusugi.js"></script>
+
+</body>
+</html>

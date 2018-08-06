@@ -1,0 +1,3000 @@
+/****************************************/
+/* ゲームウィンドウの外側のスタイル */
+/****************************************/
+
+
+body{
+	margin:0px 0px 0px 0px;
+	font-family: "Rounded Mplus 1c";
+	background-image: url("../images/neko/etc/tile.png")
+}
+
+#header_img{
+	display: block;
+	width: 1200px;
+	height: 132px;
+	margin : auto;
+}
+
+#contents{
+	border-radius: 10px 10px 0px 0px;
+	background-color: #FFFFFF;
+	width: 1210px;	
+	position: relative;
+	margin: auto;
+}
+
+
+#bug_report{
+	position: relative;
+	margin: auto;
+	width: 1210px;
+	height: 20px;
+	top: -4px;
+	background-color: #FFFFFF;
+	border-radius:0px 0px 10px 10px;
+}
+#version{
+	display: inline-block;
+	text-align: left;
+	padding-left: 20px;
+	width: 400px;
+}
+#wanna_report{
+	display: inline-block;
+	text-align: right;	
+	width: 750px;
+}
+
+#manual_link{
+	position: absolute;
+	right: 5px;
+	top: 90px;
+	width: 280px;
+	height: 40px;
+	font-size: 40px;
+	text-align: right;
+	font-family: "Nico Moji";
+	color: #2c4f2d;
+	background: linear-gradient(rgba(255, 255, 255, 0) 40%, #72ff87 70%,#54a04e);
+}
+#manual_link:hover{
+	filter: brightness(200%);
+}
+
+#death_ie{
+	position: absolute;
+	top : 200px;
+	left: 100px;
+	width: 800px;
+	color: #e87171;
+	font-weight: 700;
+	font-size: 35px;
+}
+
+/****************************************/
+/* ゲームウィンドウ内のスタイル */
+/****************************************/
+::selection{
+	background:rgba(0,0,0,0);
+};
+
+
+#game_window_cover{
+	position: relative;
+	width: 1200px;
+	margin: auto;
+}
+
+#game_window{
+	width: 1200px;
+	height: 800px;
+}
+
+.hidden{
+	visibility: hidden;
+}
+
+.none{
+	display: none;
+}
+
+/****************************************/
+/* タイトル画面 */
+/****************************************/
+
+#title{
+	width: 1200px;
+	height: 800px;
+	background-color: #ABCABC;
+}
+/****************************************/
+/* ステージ選択画面 */
+/****************************************/
+
+#stage{
+	width: 1200px;
+	height: 800px;
+	background-color: #654456;
+
+}
+
+/****************************************/
+/*メイン */
+/****************************************/
+#main{
+	position: absolute;
+	width: 1200px;
+	height: 800px;
+	background-color: #000000;
+	color:#FFFFFF;
+	overflow: hidden;
+}
+
+#blur{
+	position: absolute;
+	width: 1200px;
+	height: 800px;
+	box-shadow: 0px 0px 2px 5px white inset;
+}
+
+#background{
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	width: 1200px;
+	height: 800px;
+	overflow: hidden;
+}
+#background_image_fg{
+	mix-blend-mode: screen;
+}
+
+.background_image{
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	height: 800px;
+}
+
+#datetime_info_area{
+	position: absolute;
+	top: 20px;
+	left: 20px;
+	width:920px;
+	height: 90px;
+}
+
+.shadow_background{
+	border: 2px solid #010203;
+	border-radius: 5px 5px;
+	background-color: rgba(0,0,0,0.4);
+	box-shadow:2px 2px 2px rgba(0,0,0,0.4);
+}
+
+#extra_event_area{
+	position: absolute;
+	top: 2px;
+	left: 100px;
+	width: 220px;
+	font-size: 16px;
+}
+
+#extra_event_text{
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	color: #FFFF88;
+}
+#extra_event_timer{
+	position: absolute;
+	top: 18px;
+	left: 80px;
+	text-align: right;
+	font-size: 18px;
+}
+
+#datetime_index_area{
+	padding-top: 3px;
+	width: 900px;
+	height: 35px;
+	font-size: 0px;
+}
+
+#clock_text{
+	display: inline-block;
+	width: 320px;
+	padding-left: 20px;
+	padding-top: 10px;
+	font-size: 18px;
+}
+#current_dungeon_text{
+	display: inline-block;
+	width: 220px;
+	font-size: 18px;
+	padding-top: 10px;
+}
+#depth_text{
+	display: inline-block;
+	padding-top: 10px;
+	font-size: 18px;
+	width: 180px;
+}
+#next_event_text{
+	display: inline-block;
+	padding-top: 10px;
+	font-size: 18px;
+	width: 160px;
+}
+
+#datetime_param_area{
+	display: inline-block;
+	width: 900px;
+	height: 50px;
+	font-size: 0px;
+}
+
+.separator{
+	font-size: 20px;
+}
+
+#date_area{
+	display: inline-block;
+	width: 140px;
+	font-size: 28px;
+	padding-left: 30px;
+}
+#time_area{
+	display: inline-block;
+	font-size: 28px;
+	width: 200px;
+}
+.dungeon_name{
+	display: inline-block;
+	font-size: 24px;
+	width: 220px;
+}
+#floor_area{
+	display: inline-block;
+	width: 185px;
+	font-size: 28px;
+}
+#current_floor{
+	display: inline-block;
+	width: 80px;
+	font-size: 28px;
+	text-align: right;	
+}
+#next_event_sec{
+	display: inline-block;
+	text-align: right;
+	width: 65px;	
+	font-size: 28px;
+	text-align: right;
+}
+
+.calender_letter{
+	font-size: 28px;
+	font-size: 25px;
+}
+
+.overdepthed{
+	color: #FFFF00;
+}
+
+#menu_button_area{
+	position: absolute;
+	top: 20px;
+	right: 20px;
+	width: 220px;
+	height: 570px;
+}
+
+#menu_list{
+	list-style: none;
+}
+
+.menu_item{
+	margin: 4px 4px;
+	background-color: #232137;
+	color: #FFFFFF;
+	font-size: 22px;
+	padding-top: 7px;
+	padding-left: 30px;
+	height: 40px;
+	font-family: "Mplus 1p";
+	font-weight: 400;
+	border-radius: 4px 4px;
+	border: 2px solid #000000;
+	opacity: 0.8;
+}
+
+.menu_item:hover{
+	background-color: #313451;
+}
+
+#character_data_area{
+	position: absolute;
+	top: 130px;
+	left: 20px;
+	width: 410px;
+	height: 100px;
+}
+
+#condition_area_siro{
+	position: absolute;
+	top: 0px;
+	left: 5px;
+	width: 400px;
+	height: 50px;
+	font-size: 0px;
+}
+
+#condition_area_kuro{
+	position: absolute;
+	top: 50px;
+	left: 5px;
+	width: 400px;
+	height: 50px;
+	font-size: 0px;
+}
+
+.lv_show_area{
+	display: inline-block;
+	width: 45px;
+	text-align: right;
+}
+
+.name_lv_area{
+	display: inline-block;
+	width: 100px;
+	height: 50px;
+	font-size: 16px;
+	/*なんで1pxずれたのかわからないけどこれがないとブレる*/
+	transform: translateY(-1px);
+	background: linear-gradient(to right, rgba(0,0,0,0) 0%,rgba(0,0,0,0.2));
+}
+
+.gauge_area{
+	display: inline-block;
+	width: 220px;
+}
+
+.hp_gauge_now{
+	position: absolute;
+	top: 19px;
+	width: 100px;
+	height: 3px;
+	transform: skew(-40deg,0);
+	background: linear-gradient(to right, #4076ae 0%,#90cbf8 );
+}
+
+.hp_gauge_max{
+	position: absolute;
+	top: 19px;
+	width: 285px;
+	height: 3px;
+	background: linear-gradient(to right, #f0868e 0%,#ffc3c3 );
+	transform: skew(-40deg,0);
+}
+
+.condition_text{
+	display: inline-block;
+	font-size: 16px;
+	width: 220px;
+	height: 25px;
+	background: linear-gradient(to right, rgba(0,0,0,0.2) 0%,rgba(0,0,0,0));
+	font-size: 0px;
+}
+
+.exp_gauge_now{
+	position: absolute;
+	top: 43px;
+	width: 100px;
+	height: 3px;
+	transform: skew(-40deg,0);
+	background: linear-gradient(to right, #70a6ee 0%,#303baf );
+}
+
+.exp_gauge_max{
+	position: absolute;
+	top: 43px;
+	width: 285px;
+	height: 3px;
+	transform: skew(-40deg,0);
+	background: linear-gradient(to right, #a0a6ae 0%,#ffffff );
+}
+
+.mini_param_unit{
+	font-size: 15px;
+}
+
+.condition_value{
+	display: inline-block;
+	width: 45px;
+	text-align: right;
+	padding-right: 5px;
+	font-size: 16px;
+}
+
+.condition_index{
+	display: inline-block;
+	width: 30px;
+	font-size: 16px;
+}
+
+#message_log_area{
+	position: absolute;
+	overflow: scroll;
+	top: 250px;
+	left: 20px;
+	width: 410px;
+	height: 340px;
+}
+
+#message_log_queue_dummy{
+	display: none;
+}
+
+#message_logs{
+	list-style: none;
+}
+
+#message_log_area::-webkit-scrollbar {
+	width: 14px;
+	opacity: 0.3;
+	background-color: #151021;
+}
+
+#message_log_area::-webkit-scrollbar-track {
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+	border-radius: 3px;
+}
+
+#message_log_area::-webkit-scrollbar-thumb {
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5);
+	background-color: #353539;
+	border-radius: 3px;
+}
+
+#message_log_area::-webkit-scrollbar-corner{
+	display: none;
+}
+
+#message_log_area::-webkit-scrollbar:horizontal{
+	display: none;
+}
+
+.log{
+	margin-left: 2px;
+}
+
+.log_time{
+	display: inline-block;
+	width: 80px;
+	border-right: dotted 2px #88AAFF;
+}
+
+.log_message{
+	display: inline-block;
+	width: 296px;
+	margin-left: 8px;
+}
+
+.character_chip_alive{
+	width: 140px;
+	height: 210px;
+}
+
+.character_chip_dead{
+	padding-top: 70px;
+	width: 210px;
+	height: 140px;
+}
+
+.flip{
+	transform: scale(-1, 1);
+}
+
+#character_siro{
+	position: absolute;
+	top: 380px;
+}
+
+
+#character_kuro{
+	position: absolute;
+	top: 382px;
+}
+
+#sit_siro{
+	position: absolute;
+	top: 405px;
+	left: 770px;
+}
+#sit_kuro{
+	position: absolute;
+	top: 420px;
+	left: 600px;
+}
+
+#sit_siro_1, #sit_siro_2{
+	position: absolute;
+	height: 180px;
+	width: 114px;
+}
+
+#sit_kuro_1, #sit_kuro_2{
+	position: absolute;
+	height: 170px;
+	width: 140px;
+}
+
+.sit_animation_1{
+	animation: kubifuri_1 1s linear infinite alternate;
+}
+@keyframes kubifuri_1{
+	0% {opacity: 0;}
+	49% {opacity: 0;}
+	50% {opacity: 1;}
+	100% {opacity: 1;}
+}
+
+.sit_animation_2{
+	animation: kubifuri_2 1s linear infinite alternate;
+}
+@keyframes kubifuri_2{
+	0% {opacity: 1;}
+	49% {opacity: 1;}
+	50% {opacity: 0;}
+	100% {opacity: 0;}
+}
+
+#character_hitbox_siro{
+	position: absolute;
+	top: 380px;
+	width: 140px;
+	height: 210px;	
+}
+#character_hitbox_kuro{
+	position: absolute;
+	top: 380px;
+	width: 140px;
+	height: 210px;	
+}
+
+#ressurect_count_area{
+	position: absolute;
+	top: 400px;
+	left: 500px;
+	width: 250px;
+	height: 50px;
+	background-color: #292029;
+	border-radius: 3px 3px;
+	border : dotted 4px #FFFFFF;
+	text-align: center;
+}
+
+#ressurection_light{
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	width: 1200px;
+	height: 800px;
+	opacity: 0;
+	background-color: #FFFFFF;
+	mix-blend-mode:overlay;
+}
+
+#ressurection_overlay{
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	width: 1200px;
+	height: 800px;
+	opacity: 0;
+	background-color: #FFFFFF;
+	mix-blend-mode:screen;
+}
+.ressurect_text{
+	font-size: 24px;
+}
+
+#ressurect_count{
+	font-size: 30px;
+}
+
+#window_frame{
+	position: absolute;
+	top: 0px;
+	left: 0px;
+}
+
+#window_frame_image{
+	width: 1200px;
+	height: 800px;
+}
+
+#sprite_area{
+	position: absolute;
+	top: 0px;
+	left: 0px;
+}
+
+#sprite_image{
+	position: absolute;
+	opacity: 0;
+	top: 110px;
+	left: 240px;	
+	width: 700px;
+	height: 467px;	
+}
+
+.sprite_unit{
+	position: absolute;
+	overflow: hidden;
+	opacity: 0;
+	top: 110px;
+	left: 240px;	
+	width: 700px;
+	height: 467px;		
+}
+
+.sprite{
+	position: absolute;
+	top: 0px;
+	left: 0px;	
+	width: 700px;
+	height: 467px;	
+	will-change: transform;
+}
+
+
+.light{
+	mix-blend-mode: overlay;
+}
+
+#dungeon_select_menu{
+	overflow: hidden;
+	position: absolute;	
+	opacity: 0;
+	top: 30px;
+	left: 50px;
+	width: 1100px;
+	height: 700px;
+	background-color: #08121a;
+}
+
+#status_back_button{
+	position: absolute;
+	top: 20px;
+	left: 20px;
+}
+
+#dungeon_select_back_button{
+	position: absolute;
+	top: 20px;
+	left: 20px;
+}
+
+#dungeon_menu_text{
+	font-size: 50px;
+	position: relative;
+	top: 15px;
+	left: 140px;
+	width: 500px;
+}
+
+#dungeon_list{
+	position: relative;
+	padding-top: 10px;
+	padding-left: 10px;
+	top: 30px;
+	left: 20px;
+	width: 440px;
+	height: 400px;
+	list-style: none;
+	background-color: #030517;
+}
+
+.light_background{
+	background: linear-gradient(to right, rgba(39,41,69,1) 25%,rgba(30,32,43,.6));
+}
+
+.light_background_rev{
+	background: linear-gradient(to right, rgba(30,32,43,.6) 25%,rgba(39,41,69,1));
+}
+
+.star_background{
+	background: linear-gradient(to right, rgba(39,41,69,1) 25%,rgba(0,0,0,0));
+}
+
+.star_background_rev{
+	background: linear-gradient(to right, rgba(0,0,0,0) 25%,rgba(39,41,69,1));
+}
+
+.dungeon_item{
+	padding-left: 10px;
+	padding-top: 5px;
+	margin:10px 10px;
+	width: 380px;
+	height: 50px;
+	font-size: 30px;
+	background: linear-gradient(to right, rgba(39,41,69,1) 25%,rgba(0,0,0,0));
+	border-radius: 25px 25px;
+}
+
+.dungeon_item:before{
+	content: "◆ ";
+}
+
+.dungeon_item:hover{
+	opacity: 0.6;
+}
+
+#dungeon_select_preview_image{
+	position: absolute;
+	width: 600px;
+	height: 400px;
+	top: 110px;
+	left: 480px;
+	border-radius: 10px 10px;
+}
+
+#dungeon_detail_area{
+	position: absolute;
+	top: 530px;
+	left: 20px;
+	width: 510px;
+	height: 150px;
+	font-size: 18px;
+	background-color: #030517;
+}
+
+#dungeon_detail_decide_area{
+	position: absolute;
+	top: 530px;
+	left: 550px;
+	width: 530px;
+	height: 150px;
+	font-size: 18px;
+	background-color: #030517;	
+}
+
+#status_menu{
+	overflow: hidden;
+	position: absolute;	
+	opacity: 0;
+	top: 30px;
+	left: 50px;
+	width: 1100px;
+	height: 700px;
+	background-color: #08121a;
+}
+
+#equipment_menu{
+	overflow: hidden;
+	position: absolute;	
+	opacity: 0;
+	top: 30px;
+	left: 50px;
+	width: 1100px;
+	height: 700px;
+	background-color: #08121a;
+}
+
+#equipment_back_button{
+	position: absolute;
+	top: 10px;
+	left: 10px;
+}
+
+.back_button{
+	width: 60px;
+	height: 58px;
+	font-size: 40px;
+	padding-left: 20px;
+	background-color: #535393;
+	border:4px solid #a3a3f3; 
+	border-radius: 7px 7px;
+	box-shadow: 0px 0px 5px 3px rgba(0,0,0,1);
+}
+
+.back_button:before{
+	content: " ←"
+}
+
+.back_button:hover{
+	background-color: #b3b3ff ;
+}
+
+.changed{
+	animation: kirakira 1.5s linear infinite;
+	border-color: #e88b5a;
+}
+@keyframes kirakira{
+	0% {background-color: #fcdc74;}
+	50% {background-color: #dd9c40;}
+	100% {background-color: #fcdc74;}
+}
+.changed:hover{
+	opacity: 0.6;
+}
+
+#equipment_back_info_text{
+	position: absolute;
+	top: 80px;
+	left: 10px;
+	font-size: 14px;
+}
+
+#equip_menu_text{
+	position: absolute;
+	top: 7px;
+	left: 120px;
+	font-size: 50px;
+}
+
+#equip_character_toggle_button{
+	position: absolute;
+	top: 85px;
+	left: 210px;
+}
+
+
+#change_chara_image{
+	width: 150px;
+	height: 70px;
+}
+
+#change_chara_image:hover{
+	mix-blend-mode: screen;
+}
+
+
+#equip_charagter_image{
+	position: absolute;
+	top:60px;
+	left: -30px;
+	width: 460px;
+	height: 690px;
+}
+
+#equip_select_area{
+	position: absolute;
+	top: 20px;
+	left: 360px;
+	width: 720px;
+	height: 410px;
+}
+
+#pager{
+	position: absolute;
+	top: 20px;
+	left: 20px;
+	font-size: 20px;
+}
+
+#pager_button_area{
+	position: absolute;
+	top: 5px;
+	left: 165px;
+}
+
+.disabled{
+	color: #888888;
+}
+
+#pager_button_prev_10{
+	display: inline-block;
+	font-size: 18px;
+	width: 30px;
+	height: 30px;
+	transform: scaleX(0.65);
+}
+#pager_button_prev{
+	margin-left: 7px;
+	display: inline-block;
+	font-size: 35px;
+	width: 40px;
+	height: 40px;
+}
+#pager_button_next{
+	margin-left: 10px;
+	display: inline-block;
+	font-size: 35px;
+	width: 40px;
+	height: 40px;
+}
+#pager_button_next_10{
+	display: inline-block;
+	font-size: 18px;
+	width: 30px;
+	height: 30px;
+	transform: scaleX(0.65);
+}
+.pager_button:hover{
+	color: #bfdfff;
+}
+
+#power_show_text{
+	position: absolute;
+	top: 15px;
+	left: 330px;
+}
+
+#sort_cancel{
+	position: absolute;
+	top:-60px;
+	left: -500px;
+	width: 1200px;
+	height: 800px;
+}
+
+#sort_toggle_menu_open_button{
+	position: absolute;
+	top: 10px;
+	left: 350px;
+	width: 140px;
+	height: 40px;
+	background-color: #535393;
+	border-radius: 3px 3px;
+	padding-top: 5px;
+	font-size: 22px;
+	text-align: center;
+}
+
+#sort_toggle_menu_open_button:hover{
+	background-color: #C1C2C3;
+}
+
+#sort_toggle_popup{
+	position: absolute;
+	top: 50px;
+	left: 215px;
+	width: 408px;
+	height: 84px;
+	background-color: #102036;
+	border-radius: 3px 3px;
+	font-size: 19px;
+}
+
+#sort_toggle_box{
+	display: flex;
+	flex-wrap: wrap;
+}
+#sort_change_text{
+	position: absolute;
+	padding-left: 3px;
+	padding-right: 3px;
+	top: -23px;
+	font-size: 16px;
+	background-color: #102036;
+	border-radius: 3px;
+}
+
+.sort_toggle_button{
+	width: 100px;
+	height: 35px;
+	text-align: center;
+	margin: 1px 1px;
+	padding-top: 5px;
+	border-radius: 3px;
+	background-color: #404f66;	
+}
+#sort_to_id{
+	background-color: #5c6263;
+}
+#sort_to_power{
+	background-color: #252626;
+}
+#sort_to_str{
+	background-color: #661e4d;
+}
+#sort_to_dex{
+	background-color: #294929;
+}
+#sort_to_def{
+	background-color: #2e357a;
+}
+#sort_to_agi{
+	background-color: #514d1f;
+}
+#sort_to_atk{
+	background-color: #661b2f;
+}
+#sort_to_sld{
+	background-color: #2f3170;
+}
+.sort_toggle_button:hover{
+	filter: brightness(200%);
+}
+
+
+#equip_coin_show_area{
+	position: absolute;
+	top: 17px;
+	left: 455px;
+	width: 280px;
+	font-size: 24px;
+}
+
+#equip_area_coin_icon{
+	position: absolute;
+	top: -4px;
+	left: 40px;
+	width: 40px;
+	height: 40px;
+}
+
+
+#equip_coin_amount{
+	display: inline-block;
+	width: 180px;
+	text-align: right;
+	padding-right: 10px;
+}
+
+
+#equipment_list{
+	list-style: none;
+	position: absolute;
+	top: 65px;
+	left: 10px;
+}
+
+.equip_item{
+	position: relative;
+	padding: 2px 2px;
+	width: 480px;
+	height: 29px;
+}
+
+.equip_item:hover{
+	opacity: 0.7;
+}
+
+.equip_list_icon{
+	position: relative;
+	width: 30px;
+	height: 30px;
+	float: left;
+}
+
+.equip_list_text{
+	display: inline-block;
+	margin-left: 5px;
+	vertical-align:to;
+	font-size: 19px;
+	width: 270px;
+}
+
+.equip_list_param{
+	display: inline-block;
+	width: 70px;	
+	font-size: 19px;
+	padding-right: 5px;
+	text-align: right;
+	vertical-align: top;
+}
+
+.param_digest_icon_container{
+	display: inline-flex;
+	flex-direction: row;
+	justify-content: space-around;
+	width: 30px;
+	height: 20px;
+}
+
+.param_digest{
+	width: 5px;
+	height: 18px;
+	border-radius: 1px 1px;
+	transform: translateY(4px);
+	padding-top: 4px;
+}
+
+.current_equip_digest{
+	padding-top: 0px;
+}
+
+.param_digest_str{
+	background: linear-gradient(to bottom,#ff4c9f 10%,#68000c);
+}
+.param_digest_dex{
+	background: linear-gradient(to bottom,#00ff0c 10%,#163f00);
+}
+.param_digest_def{
+	background: linear-gradient(to bottom,#00bfff 10%,#001a72);
+}
+.param_digest_agi{
+	background: linear-gradient(to bottom,#ffff64 10%,#5e3f0f);
+}
+
+.equip_build_button{
+	display: inline-block;
+	width: 50px;
+	text-align: center;
+	background-color: #090901;
+	border: 2px dotted #FFFFFF;
+	border-radius: 20px 20px;
+}
+
+.equip_build_button:hover{
+	background-color: #7471A3;
+}
+
+.rare{
+	color:#FFFF55;
+}
+
+.epic{
+	color:#33FFFF;
+}
+
+.legendary{
+	color:#FF88EE;
+}
+
+.equipped{
+	opacity: 0.4;
+}
+
+#equip_detail_area{
+	position: absolute;
+	top: 65px;
+	left: 490px;
+	width: 210px;
+	height: 335px;
+	background-color: #121212;
+}
+
+#equipment_detail_icon{
+	position: relative;
+	top: 5px;
+	left: 5px;
+	width: 30px;
+	height: 30px;
+	float: left;	
+}
+
+#equip_detail_name{
+	position: relative;
+	top: 11px;
+	left: 5px;
+	font-size: 18px;
+}
+
+#equip_param_area{
+	position: absolute;
+	top: 45px;
+	left: 15px;
+	width: 200px;
+	height: 245px;
+}
+
+#equip_param_list{
+	list-style: none;
+}
+
+.param_unit{
+	position: relative;
+	padding-bottom: 2px;
+	left: 5px;
+	width: 180px;
+	height: 25px;
+	font-size: 17px;
+}
+
+#flavor_text{
+	position: relative;
+	top: 0px;
+	left: -3px;
+	width: 190px;
+	height: 115px;
+	font-size: 15px;
+}
+
+#equip_build_popup_area{
+	position: absolute;
+	top: 150px;
+	left: 250px;
+	width: 600px;
+	height: 400px;
+}
+
+.popup{
+	box-shadow: 0px 0px 5px 3px rgba(43,21,28,1);
+	background-color: #000006;
+	opacity:0.95;	
+	border: 2px solid #222255;
+}
+
+#equip_build_popup_text{
+	position: absolute;
+	top: 10px;
+	left: 150px;
+	font-size: 40px;
+}
+
+#equip_build_popup_quit_button{
+	position: absolute;
+	top: 10px;
+	left: 10px;
+	width: 60px;
+	height: 60px;
+}
+
+#build_amount_coin_have_show_area{
+	position: absolute;
+	top: 10px;
+	left: 350px;
+}
+
+.coin_icon{
+	position: relative;
+	top: 10px;
+	width: 50px;
+	height: 50px;
+}
+
+#build_cost{
+	font-size: 40px;
+}
+
+#coin_amount{
+	display: inline-block;
+	width: 110px;
+	font-size: 40px;
+	text-align: right;
+}
+
+#equip_build_item_name_area{
+	position: absolute;
+	top: 90px;
+	left: 60px;
+	font-size: 25px;
+}
+
+#unachieved_item_text{
+	position: absolute;
+	top: 150px;
+	left: 100px;
+	font-size: 25px;
+}
+
+#equip_build_param_list{
+	position: absolute;
+	top: 150px;
+	left: 50px;
+	font-size: 25px;
+	list-style: none;
+}
+
+.build_index{
+	display: inline-block;
+	width: 60px;
+}
+
+.build_sepalator{
+	display: inline-block;
+	width: 40px;
+}
+
+.param_prev,.param_after{
+	display: inline-block;
+	width: 100px;
+	text-align: right;
+}
+
+.param_diff{
+	display: inline-block;
+	width: 70px;
+	text-align: right;
+}
+
+.plus{
+	color: #44eeff;
+}
+
+.minus{
+	color: #ff6644;
+}
+
+#build_decide_text{
+	font-size: 30px;
+}
+
+#build_decide_button{
+	position: absolute;
+	padding: 0px 10px;
+	top: 307px;
+	left: 195px;
+	height: 70px;
+	background-color: #060124;
+	border: 2px solid #224455;
+}
+
+#character_status_area{
+	position: absolute;
+	top: 450px;	
+	left: 360px;
+	width: 720px;
+	height: 230px;
+}
+
+#current_equip_list{
+	position: relative;
+	top: 8px;
+	left: 10px;
+	list-style: none;
+	font-size: 19px;
+}
+
+.current_equip_item{
+	margin-top: 16px;
+	margin-bottom: 16px;
+	padding-left: 3px;
+	width: 310px;
+	background-color: #212933;
+}
+
+.current_equip_text{
+	display: inline-block;
+	width: 271px; 
+	vertical-align: top;
+}
+
+.equip_first{
+	margin-left: -5px;
+}
+
+.equip_second{
+	margin-left: 2px;
+}
+
+.equip_third{
+	margin-left: 9px;
+}
+
+.equip_fourth{
+	margin-left: 16px;
+}
+
+#status_list{
+	list-style: none;
+	position: absolute;
+	top: 25px;
+	left: 330px;
+	font-size: 21px;
+}
+
+.status_unit{
+	height: 50px;
+	margin: 0px 30px;
+}
+
+.status_text{
+	display: inline-block;
+	width: 40px;
+}
+
+.status_param{
+	display: inline-block;
+	width: 70px;
+	text-align: right;
+}
+.over_million{
+	font-size: 17px;
+}
+
+.status_param_diff{
+	display: inline-block;
+	width: 70px;
+	text-align: right;
+}
+
+.decrease{
+	color: #FF0000;
+}
+
+#goryu_arrow_atk{
+	position: absolute;
+	top: 32px;
+	left: 570px;
+	width: 40px;
+	height: 70px;
+}
+
+#goryu_arrow_def{
+	position: absolute;
+	top: 132px;
+	left: 570px;
+	width: 40px;
+	height: 70px;
+}
+
+#atk_text{
+	position: absolute;
+	top: 32px;
+	left: 610px;
+	font-size: 15px;
+}
+
+#def_text{
+	position: absolute;
+	top: 132px;
+	left: 610px;
+	font-size: 15px;
+}
+
+#atk_value{
+	position: absolute;
+	top: 52px;
+	left: 620px;
+	font-size: 20px;
+}
+
+#def_value{
+	position: absolute;
+	top: 152px;
+	left: 620px;
+	font-size: 20px;
+}
+
+#enemy_rank_show_area{
+	position: absolute;
+	bottom: 5px;
+	right: 10px;
+}
+
+
+#fadeouter{
+	display: block;
+	opacity: 0;
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	width: 1200px;
+	height: 800px;
+	background-color: #123456;
+	color: #FFFFFF;
+}
+
+
+#stairs_fadeouter{
+	opacity: 0;
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	width: 1200px;
+	height: 800px;
+	background-color: #000000;
+}
+
+#dungeon_detail_total_floor_area{
+	position: absolute;
+	top: 30px;
+	left: 20px;
+	font-size: 20px;
+}
+
+#dungeon_detail_completed_floor_area{
+	position: absolute;
+	top: 80px;
+	left: 20px;
+	font-size: 20px;
+}
+
+#dungeon_decide_button{
+	position: absolute;
+	top: 30px;
+	left: 350px;
+	font-size: 40px;
+	padding: 10px 10px;
+	border: dotted 4px #FFFFFF;
+}
+
+#dungeon_decide_button:hover{
+	opacity: 0.8;
+}
+
+#depth_select_area{
+	position: absolute;
+	top: 45px;
+	left: 145px;
+	width: 200px;
+	font-size: 40px;
+}
+
+#depth_increment_area{
+	position: absolute;
+	top: 10px;
+	left: 200px;
+	width: 150px;
+	font-size: 30px;
+}
+
+#depth_decrement_area{
+	position: absolute;
+	top: 100px;
+	left: 200px;
+	width: 150px;
+	font-size: 30px;
+}
+
+#dungeon_decide_current_depth{
+	text-align: right;
+	display: inline-block;
+	width: 140px;
+}
+
+.depth_select_button{
+	color:#b9b9b9;
+}
+.depth_select_button:hover{
+	opacity: 0.7;
+}
+
+/****************/
+/*装備結果ポップアップ*/
+/****************/
+#equip_result_fade_cover{
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	width: 1200px;
+	height: 800px;
+	opacity: 0;
+}
+#equip_result_animation_dummy{
+	position: absolute;
+	top: 0px;
+	left: 0px;
+}
+#equip_edit_result_popup{
+	position: absolute;
+	top: 150px;
+	left: 300px;
+	width: 600px;
+	height: 400px;
+	background-color: #1e1e23;
+	opacity: 0.9;
+}
+#equip_result_show_text{
+	position: absolute;
+	top: 5px;
+	left: 5px;
+	font-size: 24px;
+}
+#equip_result_siro{
+	position: absolute;
+	display: flex;
+	flex-direction: column;
+	top: 60px;
+	right: 50px;
+	width: 370px;
+	height: 140px;
+}
+#equip_result_kuro{
+	position: absolute;
+	display: flex;
+	flex-direction: column;
+	top: 230px;
+	left: 50px;
+	width: 370px;
+	height: 140px;
+}
+.equip_result{
+	height: 31px;
+	font-size: 20px;
+	margin: 2px 0px;
+}
+.equip_result_param_index{
+	display: inline-block;
+	width: 42px;
+}
+.equip_result_value{
+	display: inline-block;
+	text-align: right;
+	width: 85px;
+}
+.equip_result_separator{
+	display: inline-block;
+	width: 20px;
+}
+.equip_result_parenthesis{
+	width: 10px;
+}
+#result_image_siro{
+	position: absolute;
+	top: -10px;
+	left: -10px;
+	width: 240px;
+	height: 360px;
+}
+#result_image_kuro{
+	position: absolute;
+	bottom: -50px;
+	right: -10px;
+	width: 280px;
+	height: 420px;
+}
+#equip_edit_cancel_button{
+	position: absolute;
+	right: 5px;
+	top: 5px;
+	width: 120px;
+	padding-top: 10px;
+	height: 40px;
+	font-size: 18px;
+	border-radius: 3px;
+	text-align: center;
+	background-color: #7c568c;
+	animation: cancel_edit 2s linear infinite;
+}
+#equip_edit_complete_button{
+	position: absolute;
+	right: 135px;
+	top: 5px;
+	width: 120px;
+	padding-top: 10px;
+	height: 40px;
+	font-size: 18px;
+	border-radius: 3px;
+	text-align: center;
+	background-color: #7c568c;
+	animation: complete_edit 2s linear infinite;
+}
+
+@keyframes cancel_edit{
+	0% {background-color:#7c568c;}
+	50% {background-color: #8e3473;}
+	0% {background-color:#7c568c;}
+}
+
+@keyframes complete_edit{
+	0% {background-color:#4286f4;}
+	50% {background-color: #1b4ea0;}
+	0% {background-color:#4286f4;}
+}
+
+#equip_edit_cancel_button:hover{
+	filter: brightness(200%);
+}
+
+
+/****************/
+/*ステータス画面*/
+/****************/
+
+#status_show_text{
+	position: absolute;
+	top: 15px;
+	left: 120px;
+	font-size: 50px;
+}
+
+#status_character_siro{
+	position: absolute;
+	top: 40px;
+	left: -40px;
+	width: 440px;
+	height: 660px;
+}
+
+#status_character_kuro{
+	position: absolute;
+	top: -30px;
+	left: 620px;
+	width: 480px;
+	height: 720px;
+}
+
+#equip_siro{
+	opacity: 0.9;
+	list-style: none;
+	position: absolute;
+	top: 420px;
+	left:180px;
+	width: 350px;
+	height: 250px;
+}
+
+#equip_kuro{
+	opacity: 0.9;
+	list-style: none;
+	position: absolute;
+	top: 420px;
+	left: 580px;
+	width: 350px;
+	height: 250px;
+}
+
+.status_equip_item{
+	background-color: #030e13;
+	height: 45px;
+	margin: 10px 10px;
+	padding-top: 5px;
+	font-size: 23px;
+	box-shadow: 0px 0px 5px 3px rgba(3,15,19,1);
+}
+
+#status_siro{
+	opacity: 0.9;
+	list-style: none;
+	position: absolute;
+	top: 165px;
+	left: 280px;
+	width: 220px;
+	height: 250px;
+}
+
+#status_kuro{
+	opacity: 0.9;
+	list-style: none;
+	position: absolute;
+	top: 165px;
+	left: 610px;
+	width: 220px;
+	height: 250px;
+}
+
+.status{
+	background-color: #030e13;
+	height: 32px;
+	margin: 10px 10px;
+	font-size: 20px;	
+	box-shadow: 0px 0px 5px 3px rgba(3,15,19,1);
+	padding-left: 10px;
+	border-radius: 3px 3px;
+}
+
+.status_index{
+	display: inline-block;
+	width: 60px;
+}
+
+#status_achievement_list{
+	opacity: 0.8;
+	list-style: none;
+	position: absolute;
+	top: 5px;
+	right:20px;
+	width: 400px;
+	height: 150px;
+}
+
+.achievement_item{
+	height: 28px;
+	margin: 10px 10px;
+	font-size: 19px;	
+	box-shadow: 0px 0px 5px 3px rgba(3,15,19,1);
+	padding-left: 10px;	
+	border-radius: 3px 3px;
+}
+
+.achievement_title{
+	display: inline-block;
+	width: 240px;
+}
+
+#achievement_icons_area{
+	position: absolute;
+	display: flex;
+	justify-content:space-around;
+	padding: 0px 5px;
+	left: 218px;
+	top: 109px;
+	width: 448px;
+	height: 48px;
+	opacity: 0.9;
+	background-color: rgba(39,41,69,.7);
+	border-radius: 4px 4px;
+	opacity: 0;
+}
+
+.achievement_icon{
+	list-style: none;
+	background-color:#030812;
+	width: 34px;
+	height: 34px;
+	margin:5px 1px;
+	padding: 2px 2px;
+	border-radius: 2px 2px;
+}
+
+.achievement_icon_image{
+	padding: 1px 1px;	
+	width: 32px;
+	height: 32px;
+}
+
+.cleared{
+	background-color: #ffeeaa;
+}
+
+#achievement_detail_area{
+	background-color: #030821;
+	position: absolute;
+	translateX : 100px;
+	translateY :100px;
+	width: 350px;
+	height: 100px;
+	border-radius: 5px;
+	border: 2px solid #ddeeff;
+}
+
+#achievement_detail_icon{
+	position: absolute;
+	left: 18px;
+	top: 18px;
+	width:64px;
+	height: 64px;
+}
+
+#achievement_icon_title{
+	position: absolute;
+	font-size: 18px;
+	top: 5px;
+	left: 100px;
+}
+
+#achievement_icon_description{
+	position: absolute;
+	top: 33px;
+	left: 110px;
+	width: 220px;
+}
+
+#achievement_progress{
+	position: absolute;
+	bottom: 0px;
+	left: 110px;
+}
+
+#playtime_area{
+	position: absolute;
+	left: 400px;
+	top: 15px;
+	width: 245px;
+	height: 70px;
+	font-size: 20px;
+	padding: 5px 15px;
+	border-radius: 5px 5px;
+	background-color: rgba(39,41,69,.7);
+}
+
+#playtime{
+	font-size: 24px;
+}
+
+
+#save_ticker{
+	position: absolute;
+	right: 5px;
+	bottom: 5px;
+	width: 400px;
+	height: 40px;
+	font-size: 30px;
+	text-align: right;
+	transateX : 400px;
+	opacity: 0;
+	border-radius: 4px 4px;
+}
+
+#loading_splash{
+	position: relative;
+	width: 1200px;
+	height: 800px;
+	border-radius: 4px 4px;
+	margin: auto;
+	display: table-cell;
+}
+
+#option_menu{
+	overflow: hidden;
+	position: absolute;	
+	top: 30px;
+	left: 50px;
+	width: 1100px;
+	height: 700px;
+	background-color: #08121a;
+	opacity: .95;
+}
+
+#option_show_text{
+	position: absolute;
+	top: 15px;
+	left: 120px;
+	font-size: 50px;
+}
+
+#option_back_button{
+	position: absolute;
+	top: 20px;
+	left: 20px;
+}
+
+#option_container{
+	display: flex;
+	flex-direction: column;
+	position: absolute;
+	top: 100px;
+	left: 150px;
+	width: 800px;
+	height: 500px;
+}
+
+.option_item{
+	font-size: 24px;
+	height: 100px;
+	width: 800px;
+	border-radius: 8px 8px 8px 8px;
+}
+
+.option_item:hover{
+	opacity: 0.8;
+	background-color: rgba(76,90,111,1);
+}
+
+.option_index{
+	position: relative;
+	top: 20px;
+	left: 10px;
+}
+
+.option_value{
+	position: relative;
+	top: -50px;
+	left: 600px;
+	font-size: 50px;
+}
+
+.option_description{
+	position: relative;
+	top: 20px;
+	left: 10px;
+	font-size: 16px;
+}
+
+#option_background{
+	position: absolute;
+	bottom:0px;
+	right: 0px;
+	opacity: 0.2;
+}
+
+#notitication_setting_text{
+	position: absolute;
+	font-size: 24px;
+	left: 160px;
+	top: 520px;
+}
+
+#notification_setting_cointainer{
+	display: flex;
+	flex-direction: column;
+	position: absolute;
+	top: 517px;
+	left: 400px;
+	width: 600px;
+	height: 160px;
+}
+.notification_item{
+	width: 600px;
+	height: 35px;
+	font-size: 20px;
+}
+.notification_item:hover{
+	opacity: 0.3;
+}
+.notification_index{
+	display: inline-block;
+	width: 400px;
+	vertical-align: middle;
+}
+.notification_value{
+	display: inline-block;
+	width: 80px;
+	vertical-align: middle;
+	font-size: 30px;
+}
+.notification_off{
+	opacity: 0.5;
+}
+
+
+/*おみくじ画面*/
+#gacha_menu{
+	overflow: hidden;
+	position: absolute;	
+	top: 30px;
+	left: 50px;
+	width: 1100px;
+	height: 700px;
+	background-color: #08121a;
+	opacity: .95;
+}
+
+#gacha_show_text{
+	position: absolute;
+	top: 15px;
+	left: 120px;
+	font-size: 50px;
+}
+
+#gacha_description{
+	position: absolute;
+	top: 20px;
+	left: 400px;
+	font-size: 18px;
+}
+
+#gacha_back_button{
+	position: absolute;
+	top: 20px;
+	left: 20px;
+}
+
+#gacha_rate_area{
+	position: absolute;
+	padding: 10px 10px;
+	display: flex;
+	flex-direction: column;
+	justify-content:space-around;
+	right: 20px;
+	top: 150px;
+	width: 270px;
+	height: 230px; 
+}
+
+.gacha_rate_item{
+	width: 270px;
+	height: 46px;
+	font-size: 30px;
+	border-radius: 5px 5px;
+}
+
+.gacha_rate_index{
+	display: inline-block;
+	width: 100px;
+	text-align: center;
+	vertical-align: middle;
+}
+
+.gacha_rate_value{
+	display: inline-block;
+	width: 150px;
+	text-align: right;
+	vertical-align: middle;
+}
+
+.gacha_button_template{
+	position: absolute;
+	padding-top: 7px;
+	font-size:26px;
+	width: 120px;
+	height: 80px;
+	vertical-align: middle;
+	text-align: center;
+}
+
+#gacha_take_button{
+	bottom: 80px;
+	right: 170px;
+	border : 2px solid #dbecff;
+}
+
+#gacha_take_10_button{
+	bottom: 80px;
+	right: 30px;
+	background: linear-gradient(to bottom,#f55738 10%,#552708);
+	border : 2px solid #ffd7c8;
+}
+
+.free_spin_not_available{
+	background: linear-gradient(to bottom,#619aff 10%,#153778);
+}
+
+.free_spin_available{
+	background: linear-gradient(to bottom,#6ad979 10%,rgb(43,86,52));
+}
+
+.gacha_cost_icon{
+	position: absolute;
+	left: 10px;
+	bottom: 10px;
+	width: 32px;
+	height: 32px;
+}
+
+.gacha_button_value{
+	position: absolute;
+	right: 10px;
+	bottom: 6px;
+	text-align: right;
+}
+
+.cant_take{
+	opacity: 0.3;
+}
+
+#gacha_take_10_button:hover, #gacha_take_button:hover{
+	opacity: 0.5;
+}
+
+#gacha_coin_area{
+	position: absolute;
+	bottom: 210px;
+	right: 20px;
+	width: 294px;
+	height: 64px;
+	font-size: 0;
+}
+
+#gacha_coin_icon{
+	display: inline-block;
+	float: left;
+	padding-left: 30px;
+	width: 64px;
+	height: 64px;	
+}
+
+#gacha_coin_show_area{
+	display: inline-block;
+	width: 150px;
+	height: 64px;
+	font-size: 40px;
+	text-align: right;
+}
+
+#next_free_gacha_area{
+	position: absolute;
+	bottom: 0px;
+	right: 0px;
+	width: 350px;
+	height: 64px;
+	font-size: 18px;	
+}
+
+#gacha_result_area{
+	position: absolute;
+	width: 500px;
+	height: 430px;
+	left: 100px;
+	top: 16px;
+	background-color: #08020a;
+}
+
+#gacha_result{
+	position: absolute;
+	display: flex;
+	flex-wrap: wrap;
+	align-content: center;
+	justify-content: space-around;
+	width: 500px;
+	height: 380px;
+	top: 55px;
+}
+
+#gacha_result_text{
+	position: absolute;
+	left: 80px;
+	top: 10px;
+	font-size: 24px;	
+}
+
+#gacha_result_back_button{
+	position: absolute;
+	top:10px;
+	left: 10px;
+	width: 35px;
+	height: 30px;
+	font-size: 25px;
+}
+.gacha_result_item{
+	margin: 2px 4px;
+	padding-left: 20px;
+	font-size: 20px;
+	width: 400px;
+	height: 30px;
+	border-radius: 10px 0px 0px 10px;
+}
+
+/*セーブ管理画面*/
+#save_menu{
+	overflow: hidden;
+	position: absolute;	
+	top: 30px;
+	left: 50px;
+	width: 1100px;
+	height: 700px;
+	background-color: #08121a;
+	opacity: .95;
+}
+
+#save_description{
+	position: absolute;
+	top: 100px;
+	left: 200px;
+}
+
+h2{
+	font-size: 30px;
+}
+
+p{
+	font-size: 20px;
+}
+
+#save_show_text{
+	position: absolute;
+	top: 15px;
+	left: 120px;
+	font-size: 50px;
+}
+
+#save_back_button{
+	position: absolute;
+	top: 20px;
+	left: 20px;
+}
+
+#save_data_area, #save_read_area{
+	background-color: #3a414c;
+	border-radius: 4px;
+	margin:10px;
+	width: 600px;
+	height: 100px;
+	font-size: 15px;
+	color: #FFFFFF;
+}
+#save_data_area::selection, #save_read_area::selection{
+	background: #a3ffe9;
+}
+#copy_to_clipboard{
+	position: absolute;
+	top: 266px;
+	left: 840px;
+	width: 110px;
+	height: 50px;
+}
+#copied{
+	position: absolute;
+	top: 246px;
+	left: 840px;
+	font-size: 14px;
+}
+
+.save_menu_btn{
+	font-size: 30px;
+	border-radius: 4px;
+	padding-top: 3px;
+	padding-left: 10px;
+	background-color: #3a5582;
+}
+.save_menu_btn:hover{
+	filter: brightness(200%);
+}
+
+#read_save_button{
+	position: absolute;
+	top: 466px;
+	left: 840px;
+	width: 110px;
+	height: 50px;
+	}
+#read_info{
+	position: absolute;
+	top: 520px;
+	left: 840px;
+	font-size: 14px;
+}
+#save_read_error{
+	position: absolute;
+	top: 450px;
+	left: 840px;
+	font-size: 14px;
+	color: #6dccff;
+}
+
+#save_data_area::-webkit-scrollbar , #save_read_area::-webkit-scrollbar {
+	width: 14px;
+	opacity: 0.3;
+	background-color: #151021;
+}
+
+#save_data_area::-webkit-scrollbar-track, #save_read_area::-webkit-scrollbar-track {
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+	border-radius: 3px;
+}
+
+#save_data_area::-webkit-scrollbar-thumb, #save_read_area::-webkit-scrollbar-thumb {
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5);
+	background-color: #353539;
+	border-radius: 3px;
+}
+
+#save_data_area::-webkit-scrollbar-corner, #save_read_area::-webkit-scrollbar-corner{
+	display: none;
+}
+
+#save_data_area::-webkit-scrollbar:horizontal, #save_read_area::-webkit-scrollbar:horizontal{
+	display: none;
+}
+
+#save_read_confirm{
+	position: absolute;
+	top: 200px;
+	left: 300px;
+	width: 500px;
+	height: 300px;
+	background-color: #1e1e23;
+	padding-top: 10px;
+	padding-left: 10px;
+}
+#save_info_readed{
+	padding-top: 10px;
+	padding-left: 30px;
+}
+#save_read_confirm_text{
+	font-size: 35px;
+}
+#read_save_decide{
+	position: absolute;
+	top: 230px;
+	left: 40px;
+	width: 110px;
+	height: 50px;	
+}
+#read_save_cancel{
+	position: absolute;
+	top: 230px;
+	left: 170px;
+	width: 110px;
+	height: 50px;	
+}
+#save_load_cover{
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	width: 1200px;
+	height: 800px;
+	background-color: #000000;
+}
+
+
+#stage_number{
+	position: absolute;
+	top: 30px;
+	left: 50px;
+	width: 600px;
+	height: 60px;
+	font-family: "Mplus 1p";
+	font-weight : 100;
+	font-size: 40px;
+}
+#stage_title{
+	position: absolute;
+	top: 70px;
+	left: 50px;
+	width: 1000px;
+	height: 130px;
+	font-family: "Mplus 1p";
+	font-weight : 100;
+	font-size: 100px;
+	border-bottom: solid 2px #FFFFFF;
+}
+#stage_description{
+	position: absolute;
+	top: 230px;
+	left: 50px;
+	width: 1000px;
+	height: 400px;
+	font-family: "Mplus 1p";
+	font-weight : 100;
+	font-size: 26px;
+	line-height: 2.2em;
+}
+#stage_change_tips_text{
+	position: absolute;
+	bottom: 110px;
+	left: 50px;
+	position: absolute;
+	font-family: "Mplus 1p";
+	font-weight : 100;
+	font-size: 26px;
+}
+#stage_change_tips{
+	position: absolute;
+	bottom: 50px;
+	left: 100px;
+	width: 600px;
+	font-size: 20px;
+	font-family: "Mplus 1p";
+	font-weight : 100;
+}
+#stage_change_end_button{
+	position: absolute;
+	bottom: 0px;
+	right: 20px;
+	font-family: "Mplus 1p";
+	font-weight : 200;
+	font-size: 30px;
+}
+#stage_shadow{
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	width: 1200px;
+	height: 800px;
+	background: linear-gradient(to bottom, rgba(0,0,0,0.55),rgba(1,1,1,0.9));	
+	mix-blend-mode: multiply;
+}
+.last_letter{
+	color: #74d4f2;
+}
+#changestage_click_cover{
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	width: 1200px;
+	height: 800px;
+	opacity:0;	
+}
+.whole_screen{
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	width: 1200px;
+	height: 800px;
+}
+#blight_normal{
+	mix-blend-mode: normal;
+	background-color: #FFFFFF;
+}
+#blight_screen{
+	mix-blend-mode: screen;
+	background-color: #FFFFFF;
+}
+#blight_overlay{
+	mix-blend-mode: overlay;
+	background-color: #FFFFFF;
+}
+
+
+.pekapeka{
+	animation: pekapeka 1.5s linear infinite;
+}
+@keyframes pekapeka{
+	0% {opacity: 0.7;}
+	50% {opacity: 1;}
+	100% {opacity: 0.7;}
+}
+
+#tutorial{
+	position: absolute;
+	color: #000044;
+	top: 20px;
+	left: 750px;
+	width: 400px;
+	height: 200px;
+   background: url(../images/neko/etc/tutorial_back.png) 130px 0px no-repeat;
+	background-color: #FFFFFF;
+	overflow: hidden;
+}
+#tutorial_title{
+	position: absolute;
+	font-weight: 600;
+	top: 5px;
+	left: 10px;
+	font-size: 24px;
+}
+#tutorial_description{
+	position: absolute;
+	font-weight: 500;
+	top: 40px;
+	left: 10px;
+	font-size: 18px;
+}
+
+#tutorial_click_cover{
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	width: 1200px;
+	height: 800px;
+	}
+
+
+/*ミニゲーム関連*/
+#mini_game_area{
+	position: absolute;
+	top: 610px;
+	left: 20px;
+	width: 1160px;
+	height: 170px;
+	overflow: hidden;
+}
+
+#mini_game_title{
+	position: absolute;
+	top: 30px;
+	left: 150px;
+	font-family: "Nico Moji";
+	font-size: 60px;
+}
+
+#jump{
+	position: absolute;
+	bottom: 10px;
+	left: 10px;
+	width: 80px;
+	height: 55px;
+	padding-top: 25px;
+	text-align: center;
+	font-size: 20px; 
+	border-radius: 40px;
+	background-color: #28235a;
+	box-shadow: 0px 0px 2px 5px #000000;
+}
+
+#jump:hover{
+	 filter: brightness(300%);
+}
+
+#mini_game_start{
+	
+}
+
+#mini_game_area .floor{
+	position: absolute;
+	width: 1160px;
+	height: 10px;
+	bottom: 0px;
+	background-color: #444444;
+}
+
+#mini_game_area .ceiling{
+	position: absolute;
+	width: 1160px;
+	height: 10px;
+	top: 0px;
+	background-color: #444444;
+}
+#charagter_image{
+	position: absolute;
+	width: 40px;
+	height: 60px;
+	top: 100px;
+	left: 150px;
+}
+
+.obstacle{
+	position: absolute;
+	width: 0;
+	height: 0;
+	opacity: 0;
+	top: 100px;
+	left: 150px;
+	border-style: solid;
+	border-width: 0 30px 60px 30px;
+	border-color: transparent transparent #444444 transparent;
+}
+
+#score_area{
+	position: absolute;
+	top:35px;
+	left: 10px;
+	opacity: 0.2;
+	font-size: 20px;
+}
+
+#high_score_area{
+	position: absolute;
+	top:10px;
+	left: 10px;
+	opacity: 0.2;
+	font-size: 20px;
+}
+
+#buee{
+	position: relative;
+	top:90px;
+	left: 180px;
+	opacity: 0;
+	font-size:18px;
+}
+
+#score_popup{
+	opacity: 0;
+	position: absolute;
+	top: 40px;
+	left: 350px;
+	width: 300px;
+}
+
+#score_coin{
+	display: inline-block;
+	width: 48px;
+	height: 48px;
+}
+
+#score_popup_powder{
+	opacity: 0;
+	position: absolute;
+	top: 40px;
+	left: 630px;
+	width: 300px;
+}
+#score_powder{
+	display: inline-block;
+	width: 48px;
+	height: 48px;
+}
+
+#earned_coin_value, #earned_powder_value{
+	vertical-align: top;
+	display: inline-block;
+	font-family: "Nico Moji";
+	font-size: 48px;	
+}
+
+#epilogue{
+	opacity: 0;
+}
+
+#epilogue_text{
+	position: absolute;
+	top: 230px;
+	left: 50px;
+	width: 1000px;
+	height: 400px;
+	font-family: "Mplus 1p";
+	font-weight : 100;
+	font-size: 26px;
+	line-height: 2.2em;	
+	color: #000000;
+}
+
+.epilogue_illust{
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	width: 1200px;
+	height: 800px;
+}
+
+.epilogue_unseen{
+	background-color: #fff39e;
+	color: #302f2c;
+	animation: pekapeka 1.5s linear infinite;
+}
+@keyframes epilogue_unseen{
+	0% {opacity: 0.7;}
+	50% {opacity: 1;}
+	100% {opacity: 0.7;}
+}
+
+#omake_image{
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	width: 1200px;
+	height: 800px;
+	opacity: 0;
+}
+
+
+#shop_button{
+	position: absolute;
+	top: 500px;
+	left: 750px;
+	width: 180px;
+	height: 100px;
+}
+#shop_button_image{
+	position: absolute;
+	top: 00px;
+	left: 00px;
+	width: 180px;
+	height: 100px;
+}
+#shop_button_image_new{
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	width: 180px;
+	height: 100px;
+}
+.new{
+	animation: shop_kira 2s linear infinite;	
+}
+@keyframes shop_kira{
+	0% {
+		opacity: 0.9;
+	}
+	50% {
+		opacity: 1;
+	}
+	100% {
+		opacity: 0.9;
+	}
+}
+#shop_button_image_new:hover{
+	filter: brightness(150%);
+}
+
+#shop_back_button{
+	position: absolute;
+	top: -8px;
+	left: -65px;
+	width: 60px;
+	height: 120px;	
+}
+#shop_back_button:hover{
+	filter: brightness(150%);
+}
+#shop_menu{
+	color: #000000;
+	position: absolute;
+	top: 120px;
+	left: 100px;
+	width: 1000px;
+	height: 560px;
+	background: linear-gradient(to bottom, #FFFFFF 25%,#d6e5ff);	
+	border: 8px solid #2B2D41;
+	opacity: 0.97;
+}
+#shop_window_background{
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	width: 1000px;
+	height: 560px;	
+}
+#shop_pirika{
+	position: absolute;
+	bottom: 20px;
+	right: 20px;
+}
+#shop_words_frame{
+	position: absolute;
+	top: 20px;
+	right: 20px;
+}
+#shop_item_list{
+	position: absolute;
+	display: flex;
+	flex-direction: column;	
+	top: 100px;
+	left: 20px;
+}
+
+.shop_item{
+	border-radius: 4px;
+	display: inline-block;
+	width: 540px;
+	height: 40px;
+	font-size: 21px;
+	color: #020408;
+	margin: 2px 0px;
+	background: linear-gradient(to right, rgba(181, 255, 224,0.3) 20%, rgba(255,255,255,0) 70%);
+	border-bottom: solid 2px #176295;
+}
+.shop_item:hover{
+	filter: brightness(120%);
+}
+.shop_item_name{
+	display: inline-block;
+	vertical-align: center;
+	width: 300px;
+}
+.shop_item_power{
+	display: inline-block;
+	vertical-align: center;
+	padding-right: 20px;
+	text-align: right;
+	width:110px;	
+}
+.shop_item_value{
+	display: inline-block;
+	vertical-align: center;
+	text-align: right;
+	padding-right: 10px;
+	margin-top: 2px;
+	height: 35px;
+	width: 100px;
+	border-radius: 4px;
+	background: linear-gradient(to bottom, #e9e9e9 45%, #bebebe 52%);
+}
+.buyable{
+	background: linear-gradient(to bottom, #fdffbc 45%, #e0bf6b 52%);
+	border-bottom: solid 2px #176295;
+}
+.sold_out{
+	color: #d3d3d3;
+	background: linear-gradient(to bottom, #757575 45%, #232323 52%);	
+}
+.shop_coin{
+	display: inline-block;
+	width: 30px;
+	height: 30px;
+}
+.shop_item_cost{
+	display: inline-block;
+	width: 65px;
+	transform: translateY(-4px);
+	text-align: right;	
+}
+#shop_text{
+	position: absolute;
+	top: 20px;
+	left: 20px;
+	font-size: 40px;
+}
+
+
+#shop_param_list{
+	position: absolute;
+	display: flex;
+	flex-direction: column;	
+	bottom: 15px;
+	left: 30px;
+}
+.shop_param{
+	border-radius: 4px;
+	display: inline-block;
+	width: 220px;
+	height: 40px;
+	padding-left: 10px;
+	font-size: 27px;
+	color: #020408;
+	margin: 2px 0px;
+	background: linear-gradient(to right, rgba(181, 255, 224,0.3) 20%, rgba(255,255,255,0) 70%);
+}
+.shop_param:hover{
+	filter: brightness(120%);
+}
+.shop_param_name{
+	display: inline-block;
+	vertical-align: center;
+	width: 50px;
+	border-radius: 4px;
+}
+.shop_param_value{
+	display: inline-block;
+	vertical-align: center;
+	width: 170px;
+	text-align: right;
+	border-radius: 4px;
+}
+#shop_item_flavor{
+	position: absolute;
+	bottom: 30px;
+	left: 300px;
+	height: 130px;
+	width: 300px;
+	padding: 5px 5px;
+	font-size: 17px;
+	border-radius: 4px;
+	border:2px solid #020408;
+}
+#pirika_message{
+	position: absolute;
+	top: 50px;
+	right: 50px;
+	font-size: 21px;
+	width: 350px;
+}
+#shop_current_powder{
+	position: absolute;
+	top: 20px;
+	left: 320px;
+	width: 400px;
+	height: 60px;
+	font-size: 40px;
+}
+#current_powder_icon{
+	display: inline-block;
+	width: 60px;
+	height: 60px;
+}
+#current_powder_amount{
+	display: inline-block;
+	width: 330px;
+	height: 50px;
+	transform: translateY(-10px);
+}
+#shop_list_caption_area{
+	position: absolute;
+	top: 80px;
+	left: 20px;
+	width: 500px;
+}
+#shop_item_caption_name{
+	display: inline-block;
+	width: 350px;
+}
+#shop_item_caption_power{
+	display: inline-block;
+	width: 70px;
+}
+#shop_item_caption_value{
+	display: inline-block;
+	width: 70px;
+}
+.not_effective{
+	opacity: 0.3;
+}
+.shop_rare{
+	color:#7c6004;
+}
+.shop_epic{
+	color:#2c7ee8;
+}
+.shop_legendary{
+	color:#e82ca9;
+}
+#pirika_caption{
+	position: absolute;
+	padding-left: 10px;
+	padding-right: 10px;
+	padding-top: 10px;
+	border-radius: 4px;
+	bottom: 10px;
+	right: 10px;
+	font-size: 20px;	background: linear-gradient(to bottom, rgba(255, 255, 255,0) 10%, rgba(255,255,255,1) 30%);
+}
+.pirika_small{
+	font-size: 18px;
+}
+#update_shop_item_button{
+	position: absolute;
+	bottom: 188px;
+	left: 450px;
+	padding-left: 5px;
+	padding-bottom: 15px;
+	height: 20px;
+	width: 105px;
+	border-radius: 4px;
+	background: linear-gradient(to bottom, #e9e9e9 45%, #bebebe 52%);
+	font-size: 21px;
+}
+#update_shop_item_button:hover{
+	filter: brightness(120%);
+}
+#coin_icon_refresh{
+	display: inline-block;
+	width: 30px;
+	height: 30px;
+	transform: translateY(5px);
+}
+#item_refresh_text{
+	position: absolute;
+	bottom: 205px;
+	left: 220px;
+}
+#item_refresh_coin_show_area{
+	position: absolute;
+	bottom: 186px;
+	left: 220px;	
+}
+#item_shop_coin_icon{
+	display: inline-block;
+	width: 20px;
+	height: 20px;
+	transform: translateY(5px);	
+}
+
+.is_extra_dungeon_available{
+	background-color: #fff39e;
+	color: #302f2c;
+	animation: extra_peka 1.5s linear infinite;
+}
+@keyframes extra_peka{
+	0% {opacity: 0.7;}
+	50% {opacity: 1;}
+	100% {opacity: 0.7;}
+}
