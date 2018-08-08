@@ -1,12 +1,13 @@
 require 'yaml'
 
 class PirikaConsoleController < ApplicationController
+  before_action :check_params
   def index
   end
   def update
     puts "Pi!" 
     yaml = YAML.load_file("config/pirika_secrets.yml")
-    call_api yaml["token"], yaml["signals"]["fan_on"]
+    call_api yaml["token"], yaml["signals"][params["data"]["action"]]
   end
 
 private
@@ -21,5 +22,10 @@ private
     req["Authorization"] = "Bearer #{token}"
     req.body = ""
     res = http.request(req)
+  end
+
+  def check_params
+    puts "チェックしたよ！"
+    params.permit(:data)
   end
 end
