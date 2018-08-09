@@ -11,7 +11,6 @@ class PirikaConsoleController < ApplicationController
 
 private
   def call_api(token, signal_id)
-
     url = "https://api.nature.global/1/signals/#{signal_id}/send"
     uri = URI.parse(url)
     http = Net::HTTP.new(uri.host, uri.port)
