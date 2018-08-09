@@ -5,7 +5,6 @@ class PirikaConsoleController < ApplicationController
   def index
   end
   def update
-    puts "Pi!" 
     yaml = YAML.load_file("config/pirika_secrets.yml")
     call_api yaml["token"], yaml["signals"][params["data"]["action"]]
   end
@@ -25,7 +24,6 @@ private
   end
 
   def check_params
-    puts "チェックしたよ！"
     params.permit(:data)
   end
 end
