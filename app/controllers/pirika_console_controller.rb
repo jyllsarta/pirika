@@ -6,7 +6,7 @@ class PirikaConsoleController < ApplicationController
   end
   def update
     yaml = YAML.load_file("config/pirika_secrets.yml")
-    call_api yaml["token"], yaml["signals"][params["data"]["action"]]
+    call_api yaml["token"], yaml["signals"][params["data"]["signal"]]
   end
 
 private

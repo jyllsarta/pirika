@@ -1,4 +1,8 @@
 <h1>ピリカちゃんwebコンソール</h1>
 
-<%= button_to  "ぴ", action: :update, remote:true, data: {action: :fan_on} %>
-<%= button_to  "ぽち", action: :update, remote:true, data: {action: :light_off} %>
+<h2>扇風機のボタン</h2>
+<%= button_to  "ぴ", {action: :update, remote:true, data:{ signal: :fan_on}} , form_class: "controll_panel" %>
+
+
+<h2>電気のボタン</h2>
+<%= button_to  "ぽち", {action: :update, remote:true, data:{ signal: :light_off}}, form_class: "controll_panel" %>
