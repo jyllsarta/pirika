@@ -1,5 +1,6 @@
 <!DOCTYPE HTML>
 <html>
+
 <head>
 	<title>盗賊ちゃんクリッカー</title>
 	<meta charset="utf-8" />
@@ -23,10 +24,12 @@
 	<script src="lib/jquery.easing.1.3.js"></script>
 
 	<script>
-		(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-			(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-			m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-		})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+		(function (i, s, o, g, r, a, m) {
+		i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+			(i[r].q = i[r].q || []).push(arguments)
+		}, i[r].l = 1 * new Date(); a = s.createElement(o),
+			m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+		})(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
 
 		ga('create', 'UA-85276428-1', 'auto');
 		ga('send', 'pageview');
@@ -48,17 +51,26 @@
 		</div>
 
 		<span id="menu" class="collapse">
-			<div id="menu_collapse_button">メニューを閉じる <span class="glyphicon glyphicon-triangle-left"></span></div>
-			<span id="achievement_tab_button">実績<span class="glyphicon glyphicon-glass"></span></span>
-			<span id="hire_tab_button">レベルアップ<span class="glyphicon glyphicon-user"></span></span>
+			<div id="menu_collapse_button">メニューを閉じる
+				<span class="glyphicon glyphicon-triangle-left"></span>
+			</div>
+			<span id="achievement_tab_button">実績
+				<span class="glyphicon glyphicon-glass"></span>
+			</span>
+			<span id="hire_tab_button">レベルアップ
+				<span class="glyphicon glyphicon-user"></span>
+			</span>
 			<div id="hire_menu" class="">
 				<div id="item_detail_area" selecting="character_biscla">
 					<div id="item_detail_character_name">ビスクラヴレット</div>
-					<span id="item_detail_sps">263k</span><span id="item_detail_sps_unit">sps/lv</span>
+					<span id="item_detail_sps">263k</span>
+					<span id="item_detail_sps_unit">sps/lv</span>
 					<img id="item_detail_character_image" src="images/touzoku/icon/biscla.png">
 					<div id="item_detail_character_text">クッキーを焼いてくれるかわいい人狼。おまんじゅう工場には必要ない。</div>
-					<div id="cost_text" class="attributes">コスト</div><div id="item_detail_character_cost">254.8k</div>
-					<div id="level_text" class="attributes">レベル</div><div id="item_detail_character_level">154</div>
+					<div id="cost_text" class="attributes">コスト</div>
+					<div id="item_detail_character_cost">254.8k</div>
+					<div id="level_text" class="attributes">レベル</div>
+					<div id="item_detail_character_level">154</div>
 					<div id="item_detail_hire_button" class="btn btn-lg hire_button">雇う</div>
 				</div>
 				<ul id="hire_character_list">
@@ -133,7 +145,9 @@
 				<div id="achievement_rule">
 					<p id="achievement_rule_title">実績</p>
 					<p id="achievement_rule_main">達成するごとに生産力が20%ずつ上昇します！</p>
-					<p id="achievement_rule_text">達成数：<span id="cleared_achievements">0</span>/18 → <span id="production_multiplier">0</span>%増幅</p>
+					<p id="achievement_rule_text">達成数：
+						<span id="cleared_achievements">0</span>/18 →
+						<span id="production_multiplier">0</span>%増幅</p>
 				</div>
 				<div id="achievement_detail_area">
 					<p id="achievement_title">百獣の王</p>
@@ -204,7 +218,9 @@
 			</div>
 		</span>
 
-		<div id="menu_button" class="btn">menu<span class="glyphicon glyphicon-triangle-right"></div>
+		<div id="menu_button" class="btn">menu
+			<span class="glyphicon glyphicon-triangle-right">
+		</div>
 
 		<img id="make_button" src="images/touzoku/material/btn_up.png">
 
