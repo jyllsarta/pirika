@@ -3,11 +3,11 @@
         <a href="top.html"><img id="top_banner" src="images/top_banner.png"></a>
     </div>
     <div id="nav_menu">
-        <a href="top.html" class="menu_item here">Top</a>
-        <a href="top.html#sec_about" class="menu_item">About</a>
-        <a href="top.html#sec_text" class="menu_item">Text</a>
-        <a href="illusts.html" class="menu_item">Illust</a>
-        <a href="works.html" class="menu_item">Works</a>
-        <a href="contact.html" class="menu_item">Contact</a>
+        <%= link_to "Top", top_path , class:"menu_item" %>
+        <%= link_to "About", "#{top_path}#about" , class:"menu_item" %>
+        <%= link_to "Text", "#{top_path}#text" , class:"menu_item" %>
+        <%= link_to "Illust", illusts_path , class:"menu_item" %>
+        <%= link_to "Works", works_path , class:"menu_item" %>
+        <%= link_to "Contact", contact_path , class:"menu_item" %>
     </div>
 </header>
