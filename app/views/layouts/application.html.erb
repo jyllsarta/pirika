@@ -2,11 +2,13 @@
 <html>
   <head>
     <title><%= full_title(yield :title) %></title>
+    <%= render "layouts/common_head" %>
     <%= render  "layouts/shim" %>
+    
   </head>
 
   <body>
-    <%= render  "layouts/header" %>
+    <%= render "layouts/header" %>
     <div class="main">
       <%= yield %>
     </div>
