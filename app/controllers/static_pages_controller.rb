@@ -5,7 +5,7 @@ class StaticPagesController < ApplicationController
   def articles
   end
 
-  def contacts
+  def contact
   end
 
   def illusts

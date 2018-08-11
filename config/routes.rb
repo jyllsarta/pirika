@@ -15,6 +15,8 @@ Rails.application.routes.draw do
   get 'touzoku/',  to: "static_pages#touzoku"
   get 'twitter_webhook/',  to: "static_pages#twitter_webhook"
   get 'works/',  to: "static_pages#works"
+  get 'contact/',  to: "static_pages#contact"
+  get 'illusts/',  to: "static_pages#illusts"
 
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
