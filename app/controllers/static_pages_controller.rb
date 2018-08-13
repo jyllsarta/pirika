@@ -1,5 +1,5 @@
 class StaticPagesController < ApplicationController
-  def show
+  def index
   end
 
   def articles
@@ -27,9 +27,6 @@ class StaticPagesController < ApplicationController
   end
 
   def samusugi
-  end
-
-  def top
   end
 
   def touzoku
