@@ -2,9 +2,6 @@ class StaticPagesController < ApplicationController
   def index
   end
 
-  def articles
-  end
-
   def contact
   end
 
