@@ -12,12 +12,15 @@ class StaticPagesController < ApplicationController
   end
 
   def neko
+    render 'static_pages/neko', :layout => nil
   end
 
   def neko2
+    render 'static_pages/neko2', :layout => nil
   end
 
   def nekomanual
+    render 'static_pages/nekomanual', :layout => nil
   end
 
   def sainokawara
