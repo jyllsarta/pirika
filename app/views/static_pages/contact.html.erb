@@ -1,2 +1,41 @@
 <% provide :title, "Contact" %>
-<h1>こんたくと</h1>
+<h1>Contact:(連絡フォーム)</h1>
+<p>
+    じぃるに連絡ができるフォームです。
+</p>
+<p>
+    絵のリクエストでも、有償無償を問わずなにか正式な依頼でも、匿名で伝えたいことでもなんでも受け付けます。お気軽にどうぞ。
+</p>
+<p>
+    返信が必要な内容の場合、返信用アドレスに24時間以内に連絡します。
+</p>
+<form action="javascript:void(0)">
+    <div id="mailform" class="flex_dl">
+        <div class="flex_item">
+            <div class="flex_dt">お名前</div>
+            <div class="flex_dd">
+                <input type="text" id="name" name="name" length="50">
+            </div>
+        </div>
+        <div class="flex_item">
+            <div class="flex_dt">メールアドレス(返信用)</div>
+            <div class="flex_dd">
+                <input type="text" id="email" name="email" length="50">
+            </div>
+        </div>
+        <div class="flex_item">
+            <div class="flex_dt">
+                内容
+            </div>
+            <div class="flex_dd">
+                <textarea id="content" name="content" cols="60" rows="20"></textarea>
+            </div>
+        </div>
+    </div>
+    <input type="submit" id="submit" value="送信">
+    <div id="sending">送信中 </div>
+    <div id="error"></div>
+</form>
+
+<%= javascript_include_tag "mailform" %>
+<%= stylesheet_link_tag "contact" %>

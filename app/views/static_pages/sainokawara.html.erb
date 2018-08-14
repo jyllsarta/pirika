@@ -1,2 +1,39 @@
 <% provide :title, "賽の河原" %>
-<h1>さいかわ</h1>
+<h1>賽の河原</h1>
+<div>石を好きなだけ積めるwebサービスです。今のところ鬼は来ません。</div>
+
+<div id="game_screen">
+    <div id="player">
+        <div id="myname" class="name"></div>
+        <img src="images/saikawa/1p.png" class="player_icon">
+        <div id="mystones" class="stones"></div>			
+    </div>
+
+    <div id="friends">
+        
+    </div>
+
+
+    <div id="namedisp" class="emphasise_name">ユーザ名を決めてね(最大4文字、他人に表示されます)</div>
+    <textarea name="username" id="namearea" cols="30" rows="1"></textarea>
+    <div id="add">
+        <img src="images/saikawa/plus1_hov.png" alt="" id="add_btn_cover">
+        <img src="images/saikawa/plus1.png" alt="" id="add_btn">
+    </div>
+    <div id="ranking">
+        <div class="rankuser">
+            <div class="username">Rank</div>
+            <div class="score">積んだ数</div>
+            <div class="crashed">崩した数</div>
+        </div>
+        <div id="rankusers">
+        </div>
+    </div>
+</div>
+
+<%= javascript_include_tag "md5" %>
+<%= javascript_include_tag "object_array_sort" %>
+<%= javascript_include_tag "saikawa_logic" %>
+<%= javascript_include_tag "saikawa_connection" %>
+<%= javascript_include_tag "saikawa_view" %>
+<%= stylesheet_link_tag "saikawa" %>

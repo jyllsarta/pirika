@@ -1,0 +1,33 @@
+h1{
+	font-size:25px;	
+}
+
+#samusugi{
+	height: 80px;
+}
+
+.btn{
+	display: block;
+	text-align: left;
+	padding: 0;
+	margin : 5px 5px;
+	border: 1px solid #514114;
+	background: linear-gradient(to bottom, #FFFFFF 45%, #bebebe 82%);
+	width: 100px;
+	height: 40px;
+}
+
+hr{
+	margin-top:50px;
+}
+
+.button{
+}
+
+#copied{
+	opacity: 0;
+}
+
+#shadowcopypastearea{
+	opacity: 0;
+}

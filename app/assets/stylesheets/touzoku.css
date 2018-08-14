@@ -1,0 +1,501 @@
+
+body{
+	background-color: #EEEEEE;
+	width: 375px;
+	margin-right: auto;
+	margin-left : auto;
+	margin-top: 0px;
+	margin-bottom: 0px;
+}
+
+
+
+#navigation{
+	z-index: 1000000;
+}
+
+#contents{
+	position: relative;
+	width: 375px;
+	height: 595px;
+	background: url("../images/touzoku/material/background.png") 0 0 no-repeat;
+	background-size:cover;
+}
+
+#background{
+	width: 375px;
+}
+
+#sps_show_area{
+	height: 50px;
+	width: 100%;
+	padding: 3px 3px;
+	font-family: "Comic Sans MS", cursive, sans-serif;
+	background-color: #123123;
+}
+
+#score{
+	font-size: 30px;
+	color: #EFFFEF;
+}
+
+.score_unit_text{
+	font-size: 14px;
+	color: #AFFFAF;
+}
+
+#sps{
+	font-style: italic;
+	font-size: 25px;
+	color: #EFFFEF;
+}
+
+#fukidasi{
+	position: absolute;
+	top:51px;
+	left: 219px;
+	width: 160px;
+}
+
+#message_list{
+	position: absolute;
+	top:53px;
+	left: 185px;
+	width: 175px;
+	color: #123123;
+	font-size: 14px;	
+}
+
+.message{
+	list-style: none;
+	margin: 2px 2px;
+	color: #123123;
+	font-size: 14px;		
+}
+
+#menu_button{
+	position: absolute;
+	top: 50px;
+	left: 0px;
+	z-index:10000;
+	color: #FFFFFF;
+	width: 70px;
+	background-color: #234234;
+}
+
+
+.collapse{
+	display: none;
+}
+
+
+
+#menu{
+	z-index: 10001;
+	position: absolute;
+	top: 50px;
+	left: 0px;
+	width: 300px;
+	height: 540px;
+	opacity: 0.9;
+	background-color: #000000;
+}
+
+#menu_collapse_button{
+	color: #FFFFFF;
+	padding-top: 16px;
+	text-align: center;
+	width: 300px;
+	height: 50px;
+	background-color: #432100;
+}
+
+#menu_collapse_button:hover{
+	opacity: 0.4;
+}
+
+#hire_tab_button{
+	float: right;
+	color: #EFFFEF;
+	padding-top: 6px;
+	text-align: center;
+	width: 150px;
+	height: 30px;
+	background-color: #123123;
+	border-bottom:1px solid #EFFFEF;
+}
+
+#achievement_tab_button{
+	float: right;
+	color: #EFFFEF;
+	padding-top: 6px;
+	text-align: center;
+	width: 150px;
+	height: 30px;
+	background-color: #321321;
+	border-bottom:1px solid #EFFFEF;
+}
+
+#hire_menu{
+
+}
+
+#achievement_menu{
+
+}
+
+#achievement_icon{
+	position: absolute;
+	top: 170px;
+	left: 210px;
+	width: 75px;
+}
+
+.achievement_icon_mini{
+	width: 40px;
+}
+
+#achievement_rule{
+	position: absolute;
+	top:80px;
+	left: 0px;
+	width: 300px;
+	height: 80px;
+	border-bottom:1px solid #EFFFEF;
+}
+
+#achievement_rule_title{
+	position: absolute;
+	top: 0px;
+	left: 2px;
+	color: #AFFFAF;
+	font-size: 20px;
+}
+
+#achievement_rule_main{
+	position: absolute;
+	top: 22px;
+	left: 2px;
+	color: #EFFFEF;
+	font-size: 13px;
+}
+
+#achievement_rule_text{
+	position: absolute;
+	top: 42px;
+	left: 2px;
+	color: #EFFFEF;
+	font-size: 13px;
+}
+
+#cleared_achievements, #production_multiplier{
+	font-size: 20px;
+}
+
+
+
+#achievement_title{
+	position: absolute;
+	top:162px;
+	left: 2px;
+	font-size: 24px;
+	color: #FFFFFF;
+}
+#achievement_description{
+	color: #EFFFEF;
+	font-size: 12px;
+	position: absolute;
+	top:198px;
+	left: 2px;
+	width: 200px;
+}
+#achievement_says{
+	color: #EFFFEF;
+	font-size: 12px;
+	position: absolute;
+	top:230px;
+	left: 2px;
+	width: 200px;
+}
+#achievement_iscleared{
+	color: #EFFFEF;
+	font-size: 20px;
+	position: absolute;
+	top:250px;
+	left: 210px;
+	width: 100px;
+}
+
+#achievement_list{
+	padding-left:0px;
+}
+#achievement_list_area{
+	margin-left: 0px;
+	position: absolute;
+	top:300px;
+	left: 0px;
+}
+
+.achievements{
+	float: left;
+	width: 60px;
+	height: 60px;
+	list-style: none;
+	background-color: #123123;
+}
+
+.cleared_achievement{
+	background-color: #555522;
+}
+
+.achievements:hover{
+	opacity: 0.6;
+}
+
+#item_detail_area{
+	margin-top: 30px;
+	position: relative;
+	background-color: #123123;
+	height: 160px;
+	border-bottom: 1px solid #EFFFEF;
+}
+
+#item_detail_character_name{
+	position: absolute;
+	top:4px;
+	left: 2px;
+	font-size: 24px;
+	color: #FFFFFF;
+}
+
+#item_detail_sps{
+	position: absolute;
+	top:9px;
+	left: 192px;
+	font-size: 19px;
+	color: #EFFFEF;	
+}
+
+#item_detail_sps_unit{
+	position: absolute;
+	top:14px;
+	left: 260px;
+	font-size: 15px;
+	color: #AFFFAF;
+}
+
+#item_detail_character_image{
+	position: absolute;
+	top:40px;
+	left: 5px;
+	width: 70px;
+}
+
+#item_detail_character_text{
+	color: #EFFFEF;
+	font-size: 12px;
+	position: absolute;
+	top:43px;
+	left: 90px;
+	width: 200px;
+}
+
+.attributes{
+	color: #AFFFAF;
+	font-size: 9px;	
+}
+
+#cost_text{
+	position: absolute;
+	top:118px;
+	left: 4px;
+}
+
+#level_text{
+	position: absolute;
+	top:118px;
+	left: 120px;
+}
+
+#item_detail_character_cost{
+	position: absolute;
+	top:124px;
+	left: 25px;
+	font-size: 24px;
+	color: #EFFFEF;
+}
+
+#item_detail_character_level{
+	position: absolute;
+	top:124px;
+	left: 142px;
+	font-size: 24px;
+	color: #EFFFEF;
+}
+
+#item_detail_hire_button{
+	padding: 5px 3px;
+	width: 90px;
+	height: 40px;
+	position: absolute;
+	top:114px;
+	left: 204px;
+	font-size: 20px;
+}
+
+.hire_button{
+	color: #AFFFAF;
+	background-color: #456;
+	border: 1px solid #AFFFAF;	
+}
+
+
+.available{
+	background-color: #FFA;
+	border:1px solid #EEF;
+	color: #440;	
+}
+
+
+#hire_character_list{
+	padding-left: 0px;
+	margin-left: 0px;
+}
+
+.hide_from_character_list{
+	display: none;
+}
+
+.hire_character{
+	float: left;
+	width: 75px;
+	height: 75px;
+	list-style: none;
+	background-color: #123123;
+	/*border:1px solid #AFFFAF;*/
+}
+
+.hire_character:hover{
+	opacity: 0.4;
+}
+
+.hire_item_character_name{
+	position: relative;
+	top: 2px;
+	left: 2px;
+	color: #EFFFEF;
+	font-size: 13px;
+}
+
+.hire_item_character_image{
+	float: left;
+	position: relative;
+	top: 3px;
+	left: 5px;
+	width: 40px;
+}
+
+.hire_item_level{
+	position: relative;
+	top: 35px;
+	left:9px;
+	font-size: 16px;
+	color: #EFFFEF;
+}
+
+
+/*  メニュー以外*/
+
+#golden_cookie{
+	z-index: 10000;
+	width: 100px;
+	position: absolute;
+	top: 100px;
+	left: 100px;
+}
+
+#make_button{
+	z-index:10000;
+	position: absolute;
+	top: 187px;
+	left: 227px;
+	width: 55px;
+}
+
+#siso_line_area{
+	position: absolute;
+	top:260px;
+	left: 0px;
+
+}
+
+#siso_list{
+	padding-left: 0px;
+	list-style: none;
+	margin: 0px 0px;
+}
+
+.siso{
+	position: absolute;
+	top: 10px;
+	left: 300px;
+	opacity: 1;
+}
+
+.siso_image{
+	z-index: 100;
+	width: 90px;
+}
+
+#characters{
+	position: absolute;
+}
+
+#characters_position_setter{
+	position: absolute;
+	top: 18px;
+}
+
+.character_frame{
+	z-index: 500;
+	position: absolute;
+	top:0px;
+	left: 0px;
+	width: 375px;
+}
+
+.hide{
+	display: none;
+}
+
+#message_board{
+	z-index: 1000;
+	position: absolute;
+	top: 53px;
+	left: 78px;
+	height: 45px;
+	width: 290px;
+	background-color: #FCFFFC;
+	border:2px dashed #123123;
+}
+
+#message_area{
+	padding: 4px 2px;
+	color: #223;
+	opacity: 0;
+	line-height:120%;
+}
+
+#message_area span{
+	font-family: 'lat';	
+	opacity: 0;
+	color:#564;
+}
+
+#fixed_footer{
+    z-index: 999;
+    position: absolute;  
+    right: 0;  
+    bottom: 0;  	
+    width: 375px;
+}
