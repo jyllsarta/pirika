@@ -448,11 +448,13 @@ body{
 
 #message_log_area::-webkit-scrollbar-track {
 	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+	box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
 	border-radius: 3px;
 }
 
 #message_log_area::-webkit-scrollbar-thumb {
 	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5);
+	box-shadow: inset 0 0 6px rgba(0,0,0,0.5);
 	background-color: #353539;
 	border-radius: 3px;
 }
@@ -1817,8 +1819,6 @@ body{
 #achievement_detail_area{
 	background-color: #030821;
 	position: absolute;
-	translateX : 100px;
-	translateY :100px;
 	width: 350px;
 	height: 100px;
 	border-radius: 5px;
@@ -1878,7 +1878,6 @@ body{
 	height: 40px;
 	font-size: 30px;
 	text-align: right;
-	transateX : 400px;
 	opacity: 0;
 	border-radius: 4px 4px;
 }
@@ -2134,7 +2133,6 @@ body{
 }
 
 #gacha_coin_icon{
-	display: inline-block;
 	float: left;
 	padding-left: 30px;
 	width: 64px;
@@ -2307,11 +2305,13 @@ p{
 
 #save_data_area::-webkit-scrollbar-track, #save_read_area::-webkit-scrollbar-track {
 	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+	box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
 	border-radius: 3px;
 }
 
 #save_data_area::-webkit-scrollbar-thumb, #save_read_area::-webkit-scrollbar-thumb {
 	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5);
+	box-shadow: inset 0 0 6px rgba(0,0,0,0.5);
 	background-color: #353539;
 	border-radius: 3px;
 }
@@ -2541,11 +2541,7 @@ p{
 }
 
 #jump:hover{
-	 filter: brightness(300%);
-}
-
-#mini_game_start{
-	
+	filter: brightness(300%);
 }
 
 #mini_game_area .floor{
