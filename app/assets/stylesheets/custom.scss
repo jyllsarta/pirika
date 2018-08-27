@@ -1,26 +1,2 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
-
-$main-color: #3a2a1a;
-$sub-color: #dbbc74;
-$accent-color: #845423;
-$link-color: #7749f4;
-
-.top_banner{
-    width: 100%;
-}
-
-.main{
-    width: 800px;
-    margin: 0px auto;
-    border-left: 1px dashed $accent-color;
-    border-right: 1px dashed $accent-color;
-}
-
-h1{
-    color: $main-color;
-}
-h2{
-    color: $main-color;
-    font-size: 20px;
-}

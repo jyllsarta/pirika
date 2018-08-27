@@ -1,49 +1,67 @@
-<% provide :title, "なんで" %>
+<% provide :title, "なぜTwitterはUserStreamを廃止したがるのか" %>
 <h1>なぜTwitterはUserStreamを廃止したがるのか</h1>
-<p>
-    そのほうがTwitter社が楽だからです。以下で解説します。
-</p>
+
+<section>
+    <p>
+        そのほうがTwitter社が楽だからです。以下で解説します。
+    </p>
+</section>
+
 <h1>
     UserStream
 </h1>
-<img  class="big_illust" src="images/articles/userstream.png" alt="userstreamが辛い感じの画像">
-<p>
-    UserStreamは、<b>各ユーザ</b>が一人ひとりコネクションを持ち、送信するデータが発生し次第それぞれにデータを送ります。
-</p>
-<p>
-    UserStreamの場合、Twitterは<b>要求を受ける側</b>となり、基本的に常に待ち構えている必要があります。また、フォロー数が少なかったりしてあまりデータを送信しなくてもいい人とのコネクションもずっと保ち続けなければなりません。
-</p>
+
+<section>
+    <img  class="big_illust" src="images/articles/userstream.png" alt="userstreamが辛い感じの画像">
+    <p>
+        UserStreamは、<b>各ユーザ</b>が一人ひとりコネクションを持ち、送信するデータが発生し次第それぞれにデータを送ります。
+    </p>
+    <p>
+        UserStreamの場合、Twitterは<b>要求を受ける側</b>となり、基本的に常に待ち構えている必要があります。また、フォロー数が少なかったりしてあまりデータを送信しなくてもいい人とのコネクションもずっと保ち続けなければなりません。
+    </p>
+</section>
+
 <h1>Account Activity API(Webhook)</h1>
-<img class="big_illust" src="images/articles/webhook.png" alt="webhookは(twitterにとって)いいぞ">
-<p>
-    Webhookは、各サードパーティアプリが「こいつらのアカウントに関してなんかあったらここに教えてくれ」というデータの送信先を登録する仕組みになっています。
-</p>
-<p>
-    今度は<b>アプリ側</b>がいつでもTwitterからの連絡を受け取れるようにしなければなりません。Twitterは要求を送信する側となり、連絡すべき何かが発生したときだけ動けばよくなります。フォロー数が少ない人はその人がフォローしてる人の発言があるまで放置できるようになります。UserStreamと比べて、こっちのほうがサーバーの通信能力を使い切れそうですね。
-</p>
-<p>
-    Webhookではアプリ側がいつでも指定の場所でデータを受信できる必要があります。
-    この仕組みでデータをやり取りするには、各アプリの開発者が自分のアプリ用のサーバーを立てっぱなしにしておく必要があります。ユーザ数の多いアプリの場合、サーバーの維持費がかかりそうですね。
-</p>
-<p>
-    それとは別に、<a href="https://developer.twitter.com/en/docs/accounts-and-users/subscribe-account-activity/overview">このAPIは1アプリにつき35アカウント以上を登録する場合にはお金がかかります。</a> 一般の人に開放するとなると無料枠では高々35人までしか使えないアプリになってしまうので、無料でアプリを配信するのは難しそうです。
-</p>
+<section>
+    <img class="big_illust" src="images/articles/webhook.png" alt="webhookは(twitterにとって)いいぞ">
+    <p>
+        Webhookは、各サードパーティアプリが「こいつらのアカウントに関してなんかあったらここに教えてくれ」というデータの送信先を登録する仕組みになっています。
+    </p>
+    <p>
+        今度は<b>アプリ側</b>がいつでもTwitterからの連絡を受け取れるようにしなければなりません。Twitterは要求を送信する側となり、連絡すべき何かが発生したときだけ動けばよくなります。フォロー数が少ない人はその人がフォローしてる人の発言があるまで放置できるようになります。UserStreamと比べて、こっちのほうがサーバーの通信能力を使い切れそうですね。
+    </p>
+    <p>
+        Webhookではアプリ側がいつでも指定の場所でデータを受信できる必要があります。
+        この仕組みでデータをやり取りするには、各アプリの開発者が自分のアプリ用のサーバーを立てっぱなしにしておく必要があります。ユーザ数の多いアプリの場合、サーバーの維持費がかかりそうですね。
+    </p>
+    <p>
+        それとは別に、<a href="https://developer.twitter.com/en/docs/accounts-and-users/subscribe-account-activity/overview">このAPIは1アプリにつき35アカウント以上を登録する場合にはお金がかかります。</a> 一般の人に開放するとなると無料枠では高々35人までしか使えないアプリになってしまうので、無料でアプリを配信するのは難しそうです。
+    </p>
+</section>
+
 <hr>
-<p>
-    UserStreamには仕組みの面で古くなっていたほかにも、プロモツイートを流し込めないという欠点がありました。現状サードパーティのアプリで使われるぶんにはTwitter社には負荷でしかないので、無料で見るならwebや公式アプリで広告を見てもらい、広告なしのサードパーティアプリを使うならその分のお金は払ってもらう、という意図があるのでしょう。
-</p>
-<p>
-    そういうわけで、アプリ開発者はサーバーを立ててユーザからお金を取る仕組みを作るという大工事をするか、このままUserStreamの廃止に任せて配信を終了するかを迫られている状況になり、少しずつ騒ぎになってきているという事態なのでした。
-</p>
+
+<section>
+    <p>
+        UserStreamには仕組みの面で古くなっていたほかにも、プロモツイートを流し込めないという欠点がありました。現状サードパーティのアプリで使われるぶんにはTwitter社には負荷でしかないので、無料で見るならwebや公式アプリで広告を見てもらい、広告なしのサードパーティアプリを使うならその分のお金は払ってもらう、という意図があるのでしょう。
+    </p>
+    <p>
+        そういうわけで、アプリ開発者はサーバーを立ててユーザからお金を取る仕組みを作るという大工事をするか、このままUserStreamの廃止に任せて配信を終了するかを迫られている状況になり、少しずつ騒ぎになってきているという事態なのでした。
+    </p>
+</section>
+
 <hr>
-<p>(2018/3/2 20:00追記)</p>
-<p>
-    <a href="http://cucmberium.hatenablog.com/entry/twitter-userstream">
-        TwitterにおけるUserStreamの終焉とその代用
-    </a>
-    <br>
-    廃止予定がなく、代用できるAPIがあったみたいです。 通知が受信できないこと、鍵アカウントを対象に含められないことなど制約はありますが、とりあえずの対策としては有効かもしれません。
-</p>
-<p>
-    <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-text="なぜtwitterはUserStreamを停止したがるのか / さーたはうす" data-url=<%= twitter_webhook_url %> data-related="jyll" data-show-count="false">Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
-</p>
+
+<section>
+    <p>(2018/3/2 20:00追記)</p>
+    <p>
+        <a href="http://cucmberium.hatenablog.com/entry/twitter-userstream">
+            TwitterにおけるUserStreamの終焉とその代用
+        </a>
+        <br>
+        廃止予定がなく、代用できるAPIがあったみたいです。 通知が受信できないこと、鍵アカウントを対象に含められないことなど制約はありますが、とりあえずの対策としては有効かもしれません。
+    </p>
+    <p>
+        <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-text="なぜtwitterはUserStreamを停止したがるのか / さーたはうす" data-url=<%= twitter_webhook_url %> data-related="jyll" data-show-count="false">Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+    </p>
+</section>
