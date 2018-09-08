@@ -19,6 +19,10 @@ class StaticPagesController < ApplicationController
     render 'static_pages/neko2', :layout => nil
   end
 
+  def snipon
+    render 'static_pages/snipon', :layout => nil
+  end
+
   def nekomanual
     render 'static_pages/nekomanual', :layout => nil
   end

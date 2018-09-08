@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   get 'neko/',        to: "static_pages#neko"
   get 'nekomanual/',  to: "static_pages#nekomanual"
   get 'neko2/',       to: "static_pages#neko2"
+  get 'snipon/',       to: "static_pages#snipon"
   get 'touzoku/',     to: "static_pages#touzoku"
   get 'twitter_webhook/',  to: "static_pages#twitter_webhook"
 
