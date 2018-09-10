@@ -17,13 +17,17 @@
         <li>精密射撃をするゲームです。マウスで狙って左クリックで打てます。</li>
         <li>スペースを押している間は拡大して狙えます。</li>
         <li>いまのところは精度や時間で評価されず、とりあえずクリアを目指すゲームになっています。安心して撃ちまくりましょう。</li>
+        <li>タイトル画像はナナイちゃんですが、仮です。二次創作要素はありません。</li>
     </ul>
 
 </div>
 
 <%= stylesheet_link_tag "snipon" %>
-<%= javascript_include_tag "jquery-1.9.1.min.js" %>
 <%= javascript_include_tag "UnityLoader.js" %>
+<%= javascript_include_tag "jquery-1.9.1.min.js" %>
+<%= javascript_include_tag "neko2" %>
 <script>
-    $(function(){var gameInstance = UnityLoader.instantiate("gameContainer", "/game/snipon/Build.json");});
+$(function () {
+	var gameInstance = UnityLoader.instantiate("gameContainer", "game/snipon/Build.json");
+})
 </script>

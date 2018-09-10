@@ -76,8 +76,11 @@
 </div>
 
 <%= stylesheet_link_tag "neko2" %>
-<%= javascript_include_tag "jquery-1.9.1.min.js" %>
+<%= javascript_include_tag "neko2" %>
 <%= javascript_include_tag "UnityLoader.js" %>
+<%= javascript_include_tag "jquery-1.9.1.min.js" %>
 <script>
-    $(function(){var gameInstance = UnityLoader.instantiate("gameContainer", "/game/nekofade/Build.json");});
+$(function () {
+	var gameInstance = UnityLoader.instantiate("gameContainer", "game/nekofade/Build.json");
+})
 </script>
