@@ -3,43 +3,42 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 .title_image{
-	align:right;
-	width: 	640px;	
+    width: 640px;
 }
 .title_image:hover{
-	filter: brightness(130%);
+    filter: brightness(130%);
 }
 
 .screenshot{
-	width: 	180px;
+    width: 180px;
 }
 .screenshot:hover{
-	filter: brightness(130%);
+    filter: brightness(130%);
 }
 
 .screenshot_box{
-	margin-left: 30px;
+    margin-left: 30px;
 }
 
 .thumb{
-	width: 248px;
-	height: 248px;
-	background-image: url("../images/illust_thumbnails/124.png");
-	background-size: 400px;
-	background-position: center;
-	background-repeat: no-repeat;
-	box-shadow:inset -1px -1px 2px 3px rgba(242,240,255,2);
-	filter: brightness(105%);
+    width: 248px;
+    height: 248px;
+    background-image: url("../images/illust_thumbnails/124.png");
+    background-size: 400px;
+    background-position: center;
+    background-repeat: no-repeat;
+    box-shadow:inset -1px -1px 2px 3px rgba(242,240,255,2);
+    filter: brightness(105%);
 }
 
 #illustBox{
-	display: flex;
-	width: 100%;
-	flex-direction: row;
-	flex-wrap: wrap;
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+    flex-wrap: wrap;
 }
 
 .thumb:hover{
-	filter: none;
-	filter: brightness(120%) blur(2px);
+    filter: none;
+    filter: brightness(120%) blur(2px);
 }

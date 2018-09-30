@@ -2,76 +2,76 @@ $main_color: #ffd3fb;
 $sub_color: #271f25;
 
 body{
-	color: #FFFFFF;	
-	background-image: url("../images/snipon/tile.png")
+    color: #FFFFFF;    
+    background-image: url("../images/snipon/tile.png")
 }
 
 #title{
-	width: 1280px;
-	border-bottom: 1px solid $main_color;
+    width: 1280px;
+    border-bottom: 1px solid $main_color;
 }
 
 #gameContainer{
-	width: 1280px;
-	height: 720px;
-	border-bottom: 1px solid $main_color;
-	margin: 0px auto;
+    width: 1280px;
+    height: 720px;
+    border-bottom: 1px solid $main_color;
+    margin: 0px auto;
 }
 
 #mainContents{
-	width: 1280px;
-	margin: 0px auto;
-	border: 1px solid $main_color;
-	background-color: $sub_color;
+    width: 1280px;
+    margin: 0px auto;
+    border: 1px solid $main_color;
+    background-color: $sub_color;
 }
 
 h2{
-	font-size: 20px;
-	margin-left: 30px;
-	font-weight: 500;
+    font-size: 20px;
+    margin-left: 30px;
+    font-weight: 500;
 }
 
 p{
-	margin-left: 30px;
-	width: 800px;
+    margin-left: 30px;
+    width: 800px;
 }
 
 a{
-	color: #7fdeff;
+    color: #7fdeff;
 }
 a:visited{
-	color: #238db2;
+    color: #238db2;
 }
 a:hover{
-	color: #f7fdff;
+    color: #f7fdff;
 }
 
 
 #addComment{
-	margin: 0px auto;
-	padding-left: 10px;
-	padding-top: 10px;
-	width: 1270px;
-	height: 40px;
-	border-bottom: 1px solid $main_color;	
+    margin: 0px auto;
+    padding-left: 10px;
+    padding-top: 10px;
+    width: 1270px;
+    height: 40px;
+    border-bottom: 1px solid $main_color;    
 }
 
 
 #comment, #userName{
-	display: inline-block;
-	position: relative;
-	top: 5px;
-	margin-top: 5px;
-	height: 16px;
-	background-color: #575c68;
-	color: #FFFFFF;
+    display: inline-block;
+    position: relative;
+    top: 5px;
+    margin-top: 5px;
+    height: 16px;
+    background-color: #575c68;
+    color: #FFFFFF;
 }
 
 #send{
-	border: 1px solid $main_color;
-	margin: 2px;
-	padding: 5px 20px;
+    border: 1px solid $main_color;
+    margin: 2px;
+    padding: 5px 20px;
 }
 #send:hover{
-	background-color: #727a8e;
+    background-color: #727a8e;
 }

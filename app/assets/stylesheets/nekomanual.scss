@@ -1,116 +1,116 @@
 body{
-	margin:0px 0px 0px 0px;
-	font-family: "Rounded Mplus 1c";
-	background-image: url("../images/neko/etc/tile.png")
+    margin:0px 0px 0px 0px;
+    font-family: "Rounded Mplus 1c";
+    background-image: url("../images/neko/etc/tile.png")
 }
 
 #header_img{
-	display: block;
-	width: 1200px;
-	height: 132px;
-	margin : auto;
+    display: block;
+    width: 1200px;
+    height: 132px;
+    margin : auto;
 }
 
 #contents{
-	border-radius: 10px 10px 10px 10px;
-	background-color: #FFFFFF;
-	width: 1210px;	
-	position: relative;
-	margin: auto;
-	padding-bottom: 7px;
-	padding-left: 10px;
-	color: #352c28;
-	font-size: 20px;
+    border-radius: 10px 10px 10px 10px;
+    background-color: #FFFFFF;
+    width: 1210px;    
+    position: relative;
+    margin: auto;
+    padding-bottom: 7px;
+    padding-left: 10px;
+    color: #352c28;
+    font-size: 20px;
 }
 header{
-	margin-bottom: 20px;
+    margin-bottom: 20px;
 }
 .back_to_game{
-	background-color: #fff9cc;
-	border-radius: 10px;
-	box-shadow: 4px 4px #ede5b8;
+    background-color: #fff9cc;
+    border-radius: 10px;
+    box-shadow: 4px 4px #ede5b8;
 }
 a:visited{
-	color: #ba5581;
+    color: #ba5581;
 }
 a:hover{
-	color:#ffe1ce;
-	background-color: #fffdf2;
-	box-shadow: -1px -1px 4px 2px #fcf7db;
+    color:#ffe1ce;
+    background-color: #fffdf2;
+    box-shadow: -1px -1px 4px 2px #fcf7db;
 }
 h1{
-	font-size: 40px;
+    font-size: 40px;
 }
 h2{
-	margin-left: 10px;
-	font-size: 30px;
+    margin-left: 10px;
+    font-size: 30px;
 }
 
 b{
-	color: #41459b;
+    color: #41459b;
 }
 
 ul{
-	list-style: none;
-	margin-top: 10px;
-	margin-bottom: 10px;
+    list-style: none;
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 li{
-	margin-top: 10px;
-	margin-bottom: 10px;
-	margin-left: 100px;
-	background-color: #efefef;
-	width: 900px;
-	border-radius: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-left: 100px;
+    background-color: #efefef;
+    width: 900px;
+    border-radius: 10px;
 }
 
 p{
-	margin-top: 10px;
-	margin-bottom: 10px;
-	margin-left: 100px;
-	background-color: #efefef;
-	width: 900px;
-	border-radius: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-left: 100px;
+    background-color: #efefef;
+    width: 900px;
+    border-radius: 10px;
 }
 
 .screenshot{
-	margin-left: 100px;
-	border-radius: 10px;
-	width: 900px;
-	height: 600px;
+    margin-left: 100px;
+    border-radius: 10px;
+    width: 900px;
+    height: 600px;
 }
 
 .panel{
-	position: relative;
-	width: 900px;
-	height: 600px;
+    position: relative;
+    width: 900px;
+    height: 600px;
 }
 
 .description{
-	position: absolute;
-	border: 4px solid #fffa00;
-	transform: translateX(100px);
-	color: #fffa00;
-	font-weight: 800;
-	font-size: 30px;
-	border-radius: 4px;
-	padding-left: 3px;
+    position: absolute;
+    border: 4px solid #fffa00;
+    transform: translateX(100px);
+    color: #fffa00;
+    font-weight: 800;
+    font-size: 30px;
+    border-radius: 4px;
+    padding-left: 3px;
 }
 
 dl{
-	margin-left: 100px;
-	background-color: #efefef;
-	border-radius: 10px;
-	width: 900px;
-	margin-top: 10px;
-	margin-bottom: 10px;
+    margin-left: 100px;
+    background-color: #efefef;
+    border-radius: 10px;
+    width: 900px;
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 dt{
-	display: inline-block;
-	width: 200px;
-	font-weight: 800;
+    display: inline-block;
+    width: 200px;
+    font-weight: 800;
 }
 dd{
-	display: inline-block;
-	width: 700px;
+    display: inline-block;
+    width: 700px;
 }
