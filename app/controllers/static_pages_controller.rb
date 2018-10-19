@@ -31,6 +31,7 @@ class StaticPagesController < ApplicationController
   end
 
   def samusugi
+    render 'static_pages/samusugi', :layout => nil
   end
 
   def touzoku
