@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   get 'samusugi/',    to: "static_pages#samusugi"
   get 'works/',       to: "static_pages#works"
   get 'illusts/',     to: "static_pages#illusts"
+  get 'rakugaki/',     to: "static_pages#rakugaki"
   get 'sainokawara/', to: "static_pages#sainokawara"
   get 'neko/',        to: "static_pages#neko"
   get 'nekomanual/',  to: "static_pages#nekomanual"

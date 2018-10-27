@@ -8,6 +8,9 @@ class StaticPagesController < ApplicationController
   def illusts
   end
 
+  def rakugaki
+  end
+
   def index
   end
 
