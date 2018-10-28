@@ -1,10 +1,11 @@
 <% provide :title, "Illusts" %>
 <div class="main">
     <h1>イラスト</h1>
-    <p><a href="/rakugaki">らくがき</a>もあります。眠いときにちゃちゃっと描いたものです。</p>
-    <section>
-        <div id="illustBox"></div>
-    </section>
+    <p><a href="/rakugaki">らくがき</a>もあります。そちらは眠いときにちゃちゃっと描いたものです。</p>
+        <div id="illustBox">
+            <% (1..@image_count).to_a.reverse.each do |n| %>
+                <a href="/images/illust_all/<%= n %>.png"><div class="thumb" style="background-image: url('/images/illust_thumbnails/<%= n %>.png');"></div></a>
+            <% end %>
+        </div>
 </div>
-<%= javascript_include_tag "loadIllusts" %>
 <%= stylesheet_link_tag "illusts" %>

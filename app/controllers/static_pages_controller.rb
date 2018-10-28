@@ -6,9 +6,11 @@ class StaticPagesController < ApplicationController
   end
 
   def illusts
+    @image_count = image_paths("illust_all").length
   end
 
   def rakugaki
+    @image_count = image_paths("rakugaki").length
   end
 
   def index
@@ -44,5 +46,11 @@ class StaticPagesController < ApplicationController
   end
 
   def works
+  end
+
+private
+  def image_paths(dirname)
+    paths = Dir.glob("public/images/#{dirname}/*")
+    paths.map{|x| x[(7..-1)]} #trim "public/"
   end
 end
