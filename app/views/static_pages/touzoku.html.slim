@@ -1,0 +1,221 @@
+- provide :title, "盗賊ちゃんクリッカー"
+#contents
+  #sps_show_area
+    span#score_area
+      span.score_unit_text
+        | 在庫：
+      span#score
+        | 0
+      span.score_unit_text
+        | 個
+      span#sps
+        | 0
+      span.score_unit_text
+        | sps
+  span#menu.collapse
+    #menu_collapse_button
+      | メニューを閉じる 
+      span.glyphicon.glyphicon-triangle-left
+    span#achievement_tab_button
+      | 実績 
+      span.glyphicon.glyphicon-glass
+    span#hire_tab_button
+      | レベルアップ 
+      span.glyphicon.glyphicon-user
+    #hire_menu
+      #item_detail_area[selecting="character_biscla"]
+        #item_detail_character_name
+          | ビスクラヴレット
+        span#item_detail_sps
+          | 263k
+        span#item_detail_sps_unit
+          | sps/lv
+        img#item_detail_character_image[src="images/touzoku/icon/biscla.png"]
+        #item_detail_character_text
+          | クッキーを焼いてくれるかわいい人狼。おまんじゅう工場には必要ない。
+        #cost_text.attributes
+          | コスト
+        #item_detail_character_cost
+          | 254.8k
+        #level_text.attributes
+          | レベル
+        #item_detail_character_level
+          | 154
+        #item_detail_hire_button.btn.btn-lg.hire_button
+          | 雇う
+      ul#hire_character_list
+        li#character_biscla.hire_character
+          .hire_item_character_name
+            | ビスクラ
+          img.hire_item_character_image[src="images/touzoku/icon/biscla.png"]
+          .hire_item_level
+            | 0
+        li#character_eater.hire_character
+          .hire_item_character_name
+            | 擬人ﾁｱｲｰﾀｰ
+          img.hire_item_character_image[src="images/touzoku/icon/gijinka_eater.png"]
+          .hire_item_level
+            | 0
+        li#character_el.hire_character
+          .hire_item_character_name
+            | エル
+          img.hire_item_character_image[src="images/touzoku/icon/el.png"]
+          .hire_item_level
+            | 0
+        li#character_clucky.hire_character
+          .hire_item_character_name
+            | クラッキー
+          img.hire_item_character_image[src="images/touzoku/icon/clucky.png"]
+          .hire_item_level
+            | 0
+        li#character_ukokkei.hire_character
+          .hire_item_character_name
+            | 富豪っち
+          img.hire_item_character_image[src="images/touzoku/icon/ukokkei.png"]
+          .hire_item_level
+            | 0
+        li#character_etafle.hire_character
+          .hire_item_character_name
+            | エタフレ
+          img.hire_item_character_image[src="images/touzoku/icon/etafle.png"]
+          .hire_item_level
+            | 0
+        li#character_domo.hire_character
+          .hire_item_character_name
+            | ドモヴォーイ
+          img.hire_item_character_image[src="images/touzoku/icon/domo.png"]
+          .hire_item_level
+            | 0
+        li#character_puka.hire_character
+          .hire_item_character_name
+            | プーカ
+          img.hire_item_character_image[src="images/touzoku/icon/puka.png"]
+          .hire_item_level
+            | 0
+        li#character_utahime.hire_character
+          .hire_item_character_name
+            | 歌姫
+          img.hire_item_character_image[src="images/touzoku/icon/utahime.png"]
+          .hire_item_level
+            | 0
+        li#character_enyde.hire_character
+          .hire_item_character_name
+            | エニード
+          img.hire_item_character_image[src="images/touzoku/icon/enyde.png"]
+          .hire_item_level
+            | 0
+        li#character_ganeida.hire_character
+          .hire_item_character_name
+            | ガネイダ
+          img.hire_item_character_image[src="images/touzoku/icon/ganeida.png"]
+          .hire_item_level
+            | 0
+        li#character_fede.hire_character
+          .hire_item_character_name
+            | フェデルマ
+          img.hire_item_character_image[src="images/touzoku/icon/fede.png"]
+          .hire_item_level
+            | 0
+        li#character_nimue.hire_character
+          .hire_item_character_name
+            | ニムエ
+          img.hire_item_character_image[src="images/touzoku/icon/nimue.png"]
+          .hire_item_level
+            | 0
+    #achievement_menu.hide
+      #achievement_rule
+        p#achievement_rule_title
+          | 実績
+        p#achievement_rule_main
+          | 達成するごとに生産力が20%ずつ上昇します！
+        p#achievement_rule_text
+          | 達成数： 
+          span#cleared_achievements
+            | 0
+          | /18 → 
+          span#production_multiplier
+            | 0
+          | %増幅
+      #achievement_detail_area
+        p#achievement_title
+          | 百獣の王
+        p#achievement_description
+          | ビスクラをlv20にする。
+        p#achievement_says
+          | 「やったニャー！就職先決まったニャー！」
+        img#achievement_icon[src="images/touzoku/icon/biscla.png"]
+        p#achievement_iscleared
+          | 未達成
+      #achievement_list_area
+        ul#achievement_list
+          li#achievement_biscla20.achievements.hide
+            img.achievement_icon_mini[src="images/touzoku/icon/biscla.png"]
+          li#achievement_eater20.achievements.hide
+            img.achievement_icon_mini[src="images/touzoku/icon/gijinka_eater.png"]
+          li#achievement_el20.achievements.hide
+            img.achievement_icon_mini[src="images/touzoku/icon/el.png"]
+          li#achievement_clucky20.achievements.hide
+            img.achievement_icon_mini[src="images/touzoku/icon/clucky.png"]
+          li#achievement_ukokkei20.achievements.hide
+            img.achievement_icon_mini[src="images/touzoku/icon/ukokkei.png"]
+          li#achievement_etafle20.achievements.hide
+            img.achievement_icon_mini[src="images/touzoku/icon/etafle.png"]
+          li#achievement_domo20.achievements.hide
+            img.achievement_icon_mini[src="images/touzoku/icon/domo.png"]
+          li#achievement_puka20.achievements.hide
+            img.achievement_icon_mini[src="images/touzoku/icon/puka.png"]
+          li#achievement_utahime20.achievements.hide
+            img.achievement_icon_mini[src="images/touzoku/icon/utahime.png"]
+          li#achievement_enyde20.achievements.hide
+            img.achievement_icon_mini[src="images/touzoku/icon/enyde.png"]
+          li#achievement_ganeida20.achievements.hide
+            img.achievement_icon_mini[src="images/touzoku/icon/ganeida.png"]
+          li#achievement_fede20.achievements.hide
+            img.achievement_icon_mini[src="images/touzoku/icon/fede.png"]
+          li#achievement_nimue20.achievements.hide
+            img.achievement_icon_mini[src="images/touzoku/icon/nimue.png"]
+          li#achievement_totalclick100.achievements
+            img.achievement_icon_mini[src="images/touzoku/icon/touzoku.png"]
+          li#achievement_goldenclick10.achievements
+            img.achievement_icon_mini[src="images/touzoku/icon/golden.png"]
+          li#achievement_totallevel100.achievements
+            img.achievement_icon_mini[src="images/touzoku/icon/lv100.png"]
+          li#achievement_totallevel300.achievements.hide
+            img.achievement_icon_mini[src="images/touzoku/icon/lv300.png"]
+          li#achievement_totallevel500.achievements.hide
+            img.achievement_icon_mini[src="images/touzoku/icon/lv500.png"]
+  #menu_button.btn
+    | menu 
+    span.glyphicon.glyphicon-triangle-right
+
+  img#make_button[src="images/touzoku/material/btn_up.png"]
+  img#golden_cookie.hide[src="images/touzoku/material/golden_cookie.png"]
+  #message_board
+    p#message_area
+      | メッセージがここに出ます～ちょっと長いとこんな感じです～～～～～
+  img#fixed_footer[src="images/touzoku/footer.png"]
+  #characters_position_setter
+    #characters
+      img#frame_touzoku.character_frame[src="images/touzoku/frame/touzoku.png"]
+      img#frame_el.character_frame.hide[src="images/touzoku/frame/el.png"]
+      img#frame_utahime.character_frame.hide[src="images/touzoku/frame/utahime.png"]
+      img#frame_puka.character_frame.hide[src="images/touzoku/frame/puka.png"]
+      img#frame_ganeida.character_frame.hide[src="images/touzoku/frame/ganeida.png"]
+      img#frame_biscla.character_frame.hide[src="images/touzoku/frame/biscla.png"]
+      img#frame_ukokkei.character_frame.hide[src="images/touzoku/frame/ukokkei.png"]
+      img#frame_clucky.character_frame.hide[src="images/touzoku/frame/clucky.png"]
+      img#frame_etafle.character_frame.hide[src="images/touzoku/frame/etafle.png"]
+      img#frame_fede.character_frame.hide[src="images/touzoku/frame/fede.png"]
+      img#frame_domo.character_frame.hide[src="images/touzoku/frame/domo.png"]
+      img#frame_enyde.character_frame.hide[src="images/touzoku/frame/enyde.png"]
+      img#frame_nimue.character_frame.hide[src="images/touzoku/frame/nimue.png"]
+      img#frame_eater.character_frame.hide[src="images/touzoku/frame/gijinka_eater.png"]
+  #siso_line_area
+    ul#siso_list
+
+= javascript_include_tag "jquery-1.9.1.min"
+= javascript_include_tag "jquery-numerator"
+= javascript_include_tag "jquery.yurayura"
+= javascript_include_tag "jquery.cookie"
+= javascript_include_tag "touzoku"
+= stylesheet_link_tag "touzoku"

@@ -1,0 +1,30 @@
+- provide :title, "そげきねこ"
+#mainContents
+  img#title[src="images/snipon/title.png"]
+  #gameContainer
+  #addComment
+    span
+      | 物申すエリア(開発者にコメントを届けられます)
+    textarea#userName[name="" cols="10" rows="1"]
+      | お名前
+    textarea#comment[name="" cols="80" rows="1"]
+      | なんでも気づいたことを書いてね
+    span#send
+      | 送信
+  h2
+    |  簡易マニュアル 
+  ul
+    li
+      | 精密射撃をするゲームです。マウスで狙って左クリックで打てます。
+    li
+      | スペースを押している間は拡大して狙えます。
+    li
+      | いまのところは精度や時間で評価されず、とりあえずクリアを目指すゲームになっています。安心して撃ちまくりましょう。
+    li
+      | タイトル画像はナナイちゃんですが、仮です。二次創作要素はありません。
+= stylesheet_link_tag "snipon"
+= javascript_include_tag "UnityLoader.js"
+= javascript_include_tag "jquery-1.9.1.min.js"
+= javascript_include_tag "neko2"
+script
+  |  $(function () { var gameInstance = UnityLoader.instantiate("gameContainer", "game/snipon/Build.json"); }) 

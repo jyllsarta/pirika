@@ -1,0 +1,30 @@
+- provide :title, "寒すぎて%sになった"
+h1
+  | 寒すぎて%sになった
+p#samusugi
+  | 寒すぎて%sになった
+button#control.btn
+  | 止める
+button#tweet.btn
+  | つぶやく
+hr
+p
+  | iPhone用コピペエリア
+p
+  | (つぶやくボタンがうまく効かない人用　コピーボタンを押して手動でツイートしてね)
+textarea#copypastearea[name="" cols="45" rows="3"]
+  | (止めるボタンを押してね)
+button#copy.btn
+  | コピー
+#copied.hidden
+  | クリップボードにコピーしました...！
+p
+  |  制作：
+  a[href="top"]
+    | さーたはうす
+span#shadowcopypastearea
+script
+  | //iOSのコピペ用コード var button = document.getElementById('copy'); button.addEventListener('click', function(){ var copyarea = document.getElementById('shadowcopypastearea') var range = document.createRange(); range.selectNode(copyarea); window.getSelection().addRange(range); document.execCommand('copy') showCopiedTicker() }); 
+= javascript_include_tag "jquery-1.9.1.min"
+= javascript_include_tag "samusugi"
+= stylesheet_link_tag "samusugi"

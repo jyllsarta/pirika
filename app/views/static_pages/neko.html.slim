@@ -1,0 +1,1422 @@
+- provide :title, "しろことくろこ"
+#contents
+  header
+    img#header_img[src="images/neko/etc/banner.png"]
+    a[href="nekomanual"]
+      #manual_link
+        | マニュアルはこちら
+  #game_window_cover
+    #loading_progress_bar
+    #game_window.none
+      #main.hidden
+        #background
+          img#background_image_bg.background_image[src="images/neko/bg/st1-0-0.png"]
+        #ressurect_count_area.hidden
+          span.ressurect_text
+            | 復活まで：
+          span#ressurect_count
+            | 5000
+          span.ressurect_text
+            | 秒
+        #character_siro
+          img.character_chip_alive[src="images/neko/chara/siro.png"]
+        #character_kuro
+          img.character_chip_alive[src="images/neko/chara/kuro.png"]
+        #sit_siro.hidden
+          img#sit_siro_1[src="images/neko/chara/siro_sit_1.png"]
+          img#sit_siro_2[src="images/neko/chara/siro_sit_2.png"]
+        #sit_kuro.flip.hidden
+          img#sit_kuro_1[src="images/neko/chara/kuro_sit_1.png"]
+          img#sit_kuro_2[src="images/neko/chara/kuro_sit_2.png"]
+        img#background_image_floor.background_image[src="images/neko/bg/st1-0-1.png"]
+        img#background_image_fg.background_image[src="images/neko/bg/st1-0-2.png"]
+        #stairs_fadeouter.hidden
+        #blur
+        #character_hitbox_siro
+        #character_hitbox_kuro
+        #datetime_info_area.shadow_background
+          #extra_event_area
+            #extra_event_text
+              | 不在時イベント再生中：
+            #extra_event_timer
+              | 残り
+              span#time_remain
+                | 4:21:02
+          #datetime_index_area
+            span#clock_text
+              | 時刻：
+            span#current_dungeon_text
+              | 現在の次元：
+            span#depth_text
+              | フロア：
+            span#next_event_text
+              | 次イベントまで：
+          #datetime_param_area
+            span#date_area
+              span#month
+                | 12
+              span.separator
+                | 月
+              span#day
+                | 31
+              span.separator
+                | 日
+            span#time_area
+              span#hour
+                | 22
+              span.separator
+                | :
+              span#minute
+                | 38
+              span.separator
+                | :
+              span#second
+                | 45
+            span.dungeon_name
+              | ぬるじげん
+            span#floor_area
+              span#current_floor
+                | 1333
+              span.separator
+                | /
+              span#max_floor.separator
+                | 9999
+              span.separator
+                | F
+            span#next_event_sec
+              | 40
+            span.separator
+              | 秒
+        #menu_button_area.shadow_background
+          ul#menu_list
+            li#ressurect_button.menu_item
+              | 回復
+            li#menu_equip_button.menu_item
+              | 装備
+            li#status_show_button.menu_item
+              | ステータス
+            li#dungeon_list_show_button.menu_item
+              | 次元層選択
+            li#gacha_menu_show_button.menu_item
+              | おみくじ（1）
+            li#save_button.menu_item
+              | セーブ
+            li#option_button.menu_item
+              | オプション
+            li#epilogue_button.hidden.menu_item
+              | エピローグ
+            li#omake_button.hidden.menu_item
+              | おまけ
+            li#rest_button.hidden.menu_item
+              | 休憩
+        #character_data_area.shadow_background
+          #condition_area_siro
+            .name_lv_area
+              span
+                | しろこ：
+              br
+              span
+                | 　
+              span#lv_siro.lv_show_area
+                | 123
+              span
+                |  Lv
+            .gauge_area
+              .hp_show_area
+                #hp_gauge_max_siro.hp_gauge_max
+                #hp_gauge_now_siro.hp_gauge_now
+                .condition_text
+                  span.condition_index
+                    | HP
+                  span.mini_param_unit
+                    | :
+                  span#hp_siro.condition_value
+                    | 12345
+                  span.mini_param_unit
+                    | /
+                  span#hp_max_siro.condition_value
+                    | 34567
+              .exp_show_area
+                #exp_gauge_max_siro.exp_gauge_max
+                #exp_gauge_now_siro.exp_gauge_now
+                .condition_text
+                  span.condition_index
+                    | EXP
+                  span.mini_param_unit
+                    | :
+                  span#exp_siro.condition_value
+                    | 99
+                  span.mini_param_unit
+                    | /
+                  span.condition_value
+                    | 100
+          #condition_area_kuro
+            .name_lv_area
+              span
+                | くろこ：
+              br
+              span
+                | 　
+              span#lv_kuro.lv_show_area
+                | 123
+              span
+                |  Lv
+            .gauge_area
+              .hp_show_area
+                #hp_gauge_max_kuro.hp_gauge_max
+                #hp_gauge_now_kuro.hp_gauge_now
+                .condition_text
+                  span.condition_index
+                    | HP
+                  span.mini_param_unit
+                    | :
+                  span#hp_kuro.condition_value
+                    | 12345
+                  span.mini_param_unit
+                    | /
+                  span#hp_max_kuro.condition_value
+                    | 34567
+              .exp_show_area
+                #exp_gauge_max_kuro.exp_gauge_max
+                #exp_gauge_now_kuro.exp_gauge_now
+                .condition_text
+                  span.condition_index
+                    | EXP
+                  span.mini_param_unit
+                    | :
+                  span#exp_kuro.condition_value
+                    | 99
+                  span.mini_param_unit
+                    | /
+                  span.condition_value
+                    | 100
+        #message_log_area.shadow_background
+          #message_log_queue_dummy
+          ul#message_logs
+        #mini_game_area.shadow_background
+          .ceiling
+          .floor
+          #character
+            img#charagter_image[src="images/neko/minigame/siro.png"]
+            #buee
+              | ぶえー
+          ul#obstacles
+
+          .obstacle
+          .obstacle
+          .obstacle
+          .obstacle
+          .obstacle
+          .obstacle
+          .obstacle
+          .obstacle
+          .obstacle
+          .obstacle
+          #mini_game_title
+            | イガイガヨケ
+          #jump
+            | はじめる
+          #score_area
+            span
+              | 　　スコア：
+            span#score
+              | 0
+          #high_score_area
+            span
+              | ハイスコア：
+            span#high_score
+              | 0
+          #score_popup
+            img#score_coin[src="images/neko/icons/coin.png"]
+            #earned_coin_value
+              | +12
+          #score_popup_powder
+            img#score_powder[src="images/neko/icons/powder.png"]
+            #earned_powder_value
+              | +12
+        #shop_button.hidden
+          img#shop_button_image[src="images/neko/etc/shop_button.png"]
+          img#shop_button_image_new.new[src="images/neko/etc/shop_button_new.png"]
+        #window_frame
+
+        img#sprite_image.hidden[src="images/neko/sprite/battle/all.png"]
+        #sprite_area
+          #item_sprite.hidden.sprite_unit
+            img#sprite_item_background.sprite[src="images/neko/sprite/item/background.png"]
+            img#sprite_item_kuro.sprite[src="images/neko/sprite/item/kuro.png"]
+            img#sprite_item_siro.sprite[src="images/neko/sprite/item/siro.png"]
+            img#sprite_item_treasure.sprite[src="images/neko/sprite/item/treasure.png"]
+            img#sprite_item_text.sprite[src="images/neko/sprite/item/text_window_item.png"]
+          #powder_sprite.hidden.sprite_unit
+            img#sprite_powder_background.sprite[src="images/neko/sprite/powder/background.png"]
+            img#sprite_powder_faily.sprite[src="images/neko/sprite/powder/faily.png"]
+            img#sprite_powder_kuro_hand.sprite[src="images/neko/sprite/powder/kuro_hand.png"]
+            img#sprite_powder_kuro.sprite[src="images/neko/sprite/powder/kuro.png"]
+            img#sprite_powder_dish.sprite[src="images/neko/sprite/powder/dish.png"]
+            img#sprite_powder_feather.sprite[src="images/neko/sprite/powder/feather.png"]
+            img#sprite_powder_powder.sprite[src="images/neko/sprite/powder/powder.png"]
+            img#sprite_powder_light.sprite[src="images/neko/sprite/powder/light.png"]
+            img#sprite_powder_text.sprite[src="images/neko/sprite/powder/text.png"]
+          #boss_battle_sprite.hidden.sprite_unit
+            img#sprite_boss_battle_background.sprite[src="images/neko/sprite/boss_battle/background.png"]
+            img#sprite_boss_battle_boss.sprite[src="images/neko/sprite/boss_battle/boss.png"]
+            img#sprite_boss_battle_siro.sprite[src="images/neko/sprite/boss_battle/siro.png"]
+            img#sprite_boss_battle_kuro.sprite[src="images/neko/sprite/boss_battle/kuro.png"]
+          #battle_sprite.hidden.sprite_unit
+            img#sprite_battle_background.sprite[src="images/neko/sprite/battle/background.png"]
+            img#sprite_battle_enemy3.sprite[src="images/neko/sprite/battle/enemy3.png"]
+            img#sprite_battle_kuro.sprite[src="images/neko/sprite/battle/kuro.png"]
+            img#sprite_battle_enemy2.sprite[src="images/neko/sprite/battle/enemy2.png"]
+            img#sprite_battle_enemy1.sprite[src="images/neko/sprite/battle/enemy1.png"]
+            img#sprite_battle_siro.sprite[src="images/neko/sprite/battle/siro.png"]
+            img#sprite_battle_text.sprite[src="images/neko/sprite/battle/text_window_battle.png"]
+          #faily_battle_sprite.hidden.sprite_unit
+            img#sprite_faily_battle_background.sprite[src="images/neko/sprite/faily_battle/background.png"]
+            img#sprite_faily_battle_faily0.sprite.sprite_faily_battle_faily[src="images/neko/sprite/faily_battle/0.png"]
+            img#sprite_faily_battle_faily1.sprite.sprite_faily_battle_faily[src="images/neko/sprite/faily_battle/1.png"]
+            img#sprite_faily_battle_faily2.sprite.sprite_faily_battle_faily[src="images/neko/sprite/faily_battle/2.png"]
+            img#sprite_faily_battle_faily3.sprite.sprite_faily_battle_faily[src="images/neko/sprite/faily_battle/3.png"]
+            img#sprite_faily_battle_faily4.sprite.sprite_faily_battle_faily[src="images/neko/sprite/faily_battle/4.png"]
+            img#sprite_faily_battle_faily5.sprite.sprite_faily_battle_faily[src="images/neko/sprite/faily_battle/5.png"]
+            img#sprite_faily_battle_faily6.sprite.sprite_faily_battle_faily[src="images/neko/sprite/faily_battle/6.png"]
+            img#sprite_faily_battle_faily7.sprite.sprite_faily_battle_faily[src="images/neko/sprite/faily_battle/7.png"]
+            img#sprite_faily_battle_faily8.sprite.sprite_faily_battle_faily[src="images/neko/sprite/faily_battle/8.png"]
+            img#sprite_faily_battle_faily9.sprite.sprite_faily_battle_faily[src="images/neko/sprite/faily_battle/9.png"]
+            #sprite_faily_battle_mark_window
+            img#sprite_faily_battle_mark_blur.sprite[src="images/neko/sprite/faily_battle/0-mark-blur.png"]
+            img#sprite_faily_battle_mark.sprite[src="images/neko/sprite/faily_battle/0-mark.png"]
+            img#sprite_faily_battle_text.sprite[src="images/neko/sprite/faily_battle/text.png"]
+            img#sprite_faily_battle_screen.sprite[src="images/neko/sprite/faily_battle/screen.png"]
+          #battle_win_sprite.hidden.sprite_unit
+            img#sprite_battle_win_background.sprite[src="images/neko/sprite/battle/win/background.png"]
+            img#sprite_battle_win_star.sprite[src="images/neko/sprite/battle/win/star.png"]
+            img#sprite_battle_win_kuro.sprite[src="images/neko/sprite/battle/win/kuro.png"]
+            img#sprite_battle_win_siro.sprite[src="images/neko/sprite/battle/win/siro.png"]
+            img#sprite_battle_win_filter.sprite[src="images/neko/sprite/battle/win/win_filter.png"]
+            img#sprite_battle_win_text.sprite[src="images/neko/sprite/battle/win/win_text.png"]
+          #battle_lose_sprite.hidden.sprite_unit
+            img#sprite_battle_lose_background.sprite[src="images/neko/sprite/battle/lose/background.png"]
+            img#sprite_battle_lose_kuro.sprite[src="images/neko/sprite/battle/lose/kuro.png"]
+            img#sprite_battle_lose_siro.sprite[src="images/neko/sprite/battle/lose/siro.png"]
+            img#sprite_battle_lose_filter.sprite[src="images/neko/sprite/battle/lose/lose_filter.png"]
+            img#sprite_battle_lose_text.sprite[src="images/neko/sprite/battle/lose/lose_text.png"]
+          #stairs_sprite.hidden.sprite_unit
+            img#sprite_stairs_background.sprite[src="images/neko/sprite/stairs/background.png"]
+            img#sprite_stairs_siro.sprite[src="images/neko/sprite/stairs/siro.png"]
+            img#sprite_stairs_kuro.sprite[src="images/neko/sprite/stairs/kuro.png"]
+            img#sprite_stairs_text.sprite[src="images/neko/sprite/stairs/text_window_stairs.png"]
+          #resurrect_sprite.hidden.sprite_unit
+            img#sprite_resurrect_background.sprite[src="images/neko/sprite/resurrect/background.png"]
+            img#sprite_resurrect_siro_dead.sprite[src="images/neko/sprite/resurrect/siro_dead.png"]
+            img#sprite_resurrect_siro_alive.sprite[src="images/neko/sprite/resurrect/siro_alive.png"]
+            img#sprite_resurrect_kuro_dead.sprite[src="images/neko/sprite/resurrect/kuro_dead.png"]
+            img#sprite_resurrect_kuro_alive.sprite[src="images/neko/sprite/resurrect/kuro_alive.png"]
+            img#sprite_resurrect_light.sprite.light[src="images/neko/sprite/resurrect/light.png"]
+            img#sprite_resurrect_text.sprite[src="images/neko/sprite/resurrect/text_window.png"]
+        #ressurection_light.hidden
+          | にゃにゃ
+        #ressurection_overlay.hidden
+          | にゃあん！
+        #dungeon_select_menu.hidden.shadow_background
+          #dungeon_select_back_button.back_button
+          #dungeon_menu_text
+            | 次元層選択
+          ul#dungeon_list.shadow_background
+            li.dungeon_item.star_background[stage_id="0"]
+              | ダンジョンいっこめ
+            li.dungeon_item.star_background[stage_id="1"]
+              | ダンジョンにこめ
+            li.dungeon_item.star_background[stage_id="2"]
+              | ダンジョンさんこめ
+            li.dungeon_item.star_background[stage_id="3"]
+              | ダンジョンよんこめ
+            li.dungeon_item.star_background[stage_id="4"]
+              | ダンジョンいつつめ
+          img#dungeon_select_preview_image[src="images/neko/bg/st1.png"]
+          #dungeon_detail_area.shadow_background
+            #dungeon_detail_name
+              | ダンジョンの名前がここに
+            #dungeon_detail_text
+              | すご～く暗くて深い闇のそこに育つ草を抜きにいこう。
+          #dungeon_detail_decide_area.shadow_background
+            #dungeon_detail_total_floor_area
+              span.floor_text
+                | 深さ:
+              span#dungeon_detail_total_floor
+                | 100
+              span.floor_text
+                | F
+            #dungeon_detail_completed_floor_area
+              span.floor_text
+                | 到達:
+              span#dungeon_detail_completed_floor
+                | 23
+              span.floor_text
+                | F
+            #dungeon_decide_button
+              | 潜る
+            #depth_select_area
+              span#dungeon_decide_current_depth
+                | 1
+              span.floor_text
+                | F
+            #depth_increment_area
+              span#depth_plus_100.depth_select_button
+                | ▲
+              span#depth_plus_10.depth_select_button
+                | ▲
+              span#depth_plus_1.depth_select_button
+                | ▲
+            #depth_decrement_area
+              span#depth_minus_100.depth_select_button
+                | ▼
+              span#depth_minus_10.depth_select_button
+                | ▼
+              span#depth_minus_1.depth_select_button
+                | ▼
+        #status_menu.hidden
+          #status_show_text
+            | ステータス
+          img#status_character_siro[src="images/neko/chara/siro_active.png"]
+          img#status_character_kuro[src="images/neko/chara/kuro_active.png"]
+          #status_back_button.back_button
+          ul#status_siro
+            li.status.star_background
+              span.status_index
+                | LV
+              span.status_value
+                | -
+            li.status.star_background
+              span.status_index
+                | HP
+              span.status_value
+                | -
+            li.status.star_background
+              span.status_index
+                | STR
+              span.status_value
+                | -
+            li.status.star_background
+              span.status_index
+                | DEX
+              span.status_value
+                | -
+            li.status.star_background
+              span.status_index
+                | DEF
+              span.status_value
+                | -
+            li.status.star_background
+              span.status_index
+                | AGI
+              span.status_value
+                | -
+          ul#status_kuro
+            li.status.star_background_rev
+              span.status_index
+                | LV
+              span.status_value
+                | -
+            li.status.star_background_rev
+              span.status_index
+                | HP
+              span.status_value
+                | -
+            li.status.star_background_rev
+              span.status_index
+                | STR
+              span.status_value
+                | -
+            li.status.star_background_rev
+              span.status_index
+                | DEX
+              span.status_value
+                | -
+            li.status.star_background_rev
+              span.status_index
+                | DEF
+              span.status_value
+                | -
+            li.status.star_background_rev
+              span.status_index
+                | AGI
+              span.status_value
+                | -
+          #playtime_area
+            #playtime_text
+              | プレイ時間
+            #playtime
+              span#playhour
+                | 12
+              span
+                | :
+              span#playminutes
+                | 12
+              span
+                | :
+              span#playseconds
+                | 12
+          ul#achievement_icons_area.star_background
+            li.achievement_icon
+              img.achievement_icon_image[src="images/neko/achievement/0.png" achievement_id="0"]
+            li.achievement_icon
+              img.achievement_icon_image[src="images/neko/achievement/1.png" achievement_id="1"]
+            li.achievement_icon
+              img.achievement_icon_image[src="images/neko/achievement/2.png" achievement_id="2"]
+            li.achievement_icon
+              img.achievement_icon_image[src="images/neko/achievement/3.png" achievement_id="3"]
+            li.achievement_icon
+              img.achievement_icon_image[src="images/neko/achievement/4.png" achievement_id="4"]
+            li.achievement_icon
+              img.achievement_icon_image[src="images/neko/achievement/5.png" achievement_id="5"]
+            li.achievement_icon
+              img.achievement_icon_image[src="images/neko/achievement/6.png" achievement_id="6"]
+            li.achievement_icon
+              img.achievement_icon_image[src="images/neko/achievement/7.png" achievement_id="7"]
+            li.achievement_icon
+              img.achievement_icon_image[src="images/neko/achievement/8.png" achievement_id="8"]
+            li.achievement_icon
+              img.achievement_icon_image[src="images/neko/achievement/9.png" achievement_id="9"]
+          ul#equip_siro
+            li.status_equip_item.light_background
+              | -
+            li.status_equip_item.light_background
+              | -
+            li.status_equip_item.light_background
+              | -
+            li.status_equip_item.light_background
+              | -
+          ul#equip_kuro
+            li.status_equip_item.light_background_rev
+              | -
+            li.status_equip_item.light_background_rev
+              | -
+            li.status_equip_item.light_background_rev
+              | -
+            li.status_equip_item.light_background_rev
+              | -
+          ul#status_achievement_list
+            li.achievement_item.light_background
+              span.achievement_title
+                | 発見アイテム数
+              span#achievement_item_found.achievement_procedure
+                | 68
+            li.achievement_item.light_background
+              span.achievement_title
+                | 最大強化したアイテム数
+              span#achievement_item_builded.achievement_procedure
+                | 5
+            li.achievement_item.light_background
+              span.achievement_title
+                | コイン総取得枚数
+              span#achievement_coin_earned.achievement_procedure
+                | 2
+            li.achievement_item.light_background
+              span.achievement_title
+                | 最深到達階数
+              span#achievement_depth.achievement_procedure
+                | 43F
+          #achievement_detail_area.hidden
+            img#achievement_detail_icon[src="images/neko/achievement/1.png"]
+            #achievement_icon_title
+              | 100万匹の死骸
+            #achievement_icon_description
+              | しろことくろこの死亡回数が1000000回を突破した。
+            #achievement_progress
+              span#current_achievement_progress
+                | 524282
+              span
+                | /
+              span#max_achievement_progress
+                | 1000000
+        #option_menu.shadow_background.hidden
+          img#option_background[src="images/neko/etc/option_background.png"]
+          #option_show_text
+            | オプション
+          #option_back_button.back_button
+          ul#option_container
+
+          #option_animation_on.option_item
+            .option_index
+              | イベント時にアニメーションを再生する
+            .option_description
+              | かなり軽くなりますが、とてもさみしくなります
+            #enable_event_animation.option_value
+              | ☑
+          #option_loitering_on.option_item
+            .option_index
+              | キャラの歩行
+            .option_description
+              | すこしだけ軽くなりますが、さみしくなります
+            #enable_loitering.option_value
+              | ☑
+          #option_scroll_background.option_item
+            .option_index
+              | 背景をスクロールさせる
+            .option_description
+              | ほんのすこしだけ軽くなりますが、さみしくなります
+            #enable_scroll_background.option_value
+              | ☑
+          #option_notification.option_item
+            .option_index
+              | 通知を行う
+            .option_description
+              | 全滅時やダンジョン踏破時にポコッと通知を表示してくれます
+            #enable_notification.option_value
+              | ☑
+          #notitication_setting_text
+            | 通知の個別設定：
+          #notification_setting_cointainer
+            #notification_death.notification_item
+              span.notification_index
+                | 全滅時にお知らせする
+              span.notification_value
+                | ☑
+            #notification_clear.notification_item
+              span.notification_index
+                | ダンジョン踏破時にお知らせする
+              span.notification_value
+                | ☑
+            #notification_freespin.notification_item
+              span.notification_index
+                | フリーおみくじが引けるようになったとき
+              span.notification_value
+                | ☑
+            #notification_jihou.notification_item
+              span.notification_index
+                | かわいい時報
+              span.notification_value
+                | ☑
+        #equipment_menu.hidden.shadow_background
+          #equip_menu_text
+            | 装備
+          img#equip_charagter_image[src="images/neko/chara/siro_active.png"]
+          #equip_character_toggle_button
+            img#change_chara_image[src="images/neko/icons/change_chara.png"]
+          #equip_select_area.shadow_background
+            #pager
+              span#equip_pager_page_text
+                | ページ
+              span#current_page
+                | 1
+              span#pager_sepalator
+                | /
+              span#total_page
+                | 23
+            #pager_button_area
+              span#pager_button_prev_10.pager_button
+                | ◁◁
+              span#pager_button_prev.pager_button
+                | ◀
+              span#pager_button_next.pager_button
+                | ▶
+              span#pager_button_next_10.pager_button
+                | ▷▷
+            #sort_toggle_menu_open_button
+              | [ID順]
+            #equip_coin_show_area
+              img#equip_area_coin_icon[src="images/neko/icons/coin.png"]
+              span#equip_coin_amount
+                | 120
+            ul#equipment_list
+              li.equip_item
+                img.equip_list_icon[src="images/neko/icons/unachieved.png"]
+                span.equip_list_text
+                  | 棒きれ
+                span.equip_list_param
+                  | -
+                .param_digest_icon_container
+                  .param_digest.param_digest_str
+                  .param_digest.param_digest_dex
+                  .param_digest.param_digest_def
+                  .param_digest.param_digest_agi
+                span.equip_build_button
+                  | 強化
+              li.equip_item
+                img.equip_list_icon[src="images/neko/icons/unachieved.png"]
+                span.equip_list_text
+                  | 棒きれ
+                span.equip_list_param
+                  | -
+                .param_digest_icon_container
+                  .param_digest.param_digest_str
+                  .param_digest.param_digest_dex
+                  .param_digest.param_digest_def
+                  .param_digest.param_digest_agi
+                span.equip_build_button
+                  | 強化
+              li.equip_item
+                img.equip_list_icon[src="images/neko/icons/unachieved.png"]
+                span.equip_list_text
+                  | 棒きれ
+                span.equip_list_param
+                  | -
+                .param_digest_icon_container
+                  .param_digest.param_digest_str
+                  .param_digest.param_digest_dex
+                  .param_digest.param_digest_def
+                  .param_digest.param_digest_agi
+                span.equip_build_button
+                  | 強化
+              li.equip_item
+                img.equip_list_icon[src="images/neko/icons/unachieved.png"]
+                span.equip_list_text
+                  | 棒きれ
+                span.equip_list_param
+                  | -
+                .param_digest_icon_container
+                  .param_digest.param_digest_str
+                  .param_digest.param_digest_dex
+                  .param_digest.param_digest_def
+                  .param_digest.param_digest_agi
+                span.equip_build_button
+                  | 強化
+              li.equip_item
+                img.equip_list_icon[src="images/neko/icons/unachieved.png"]
+                span.equip_list_text
+                  | 棒きれ
+                span.equip_list_param
+                  | -
+                .param_digest_icon_container
+                  .param_digest.param_digest_str
+                  .param_digest.param_digest_dex
+                  .param_digest.param_digest_def
+                  .param_digest.param_digest_agi
+                span.equip_build_button
+                  | 強化
+              li.equip_item
+                img.equip_list_icon[src="images/neko/icons/unachieved.png"]
+                span.equip_list_text
+                  | 棒きれ
+                span.equip_list_param
+                  | -
+                .param_digest_icon_container
+                  .param_digest.param_digest_str
+                  .param_digest.param_digest_dex
+                  .param_digest.param_digest_def
+                  .param_digest.param_digest_agi
+                span.equip_build_button
+                  | 強化
+              li.equip_item
+                img.equip_list_icon[src="images/neko/icons/unachieved.png"]
+                span.equip_list_text
+                  | 棒きれ
+                span.equip_list_param
+                  | -
+                .param_digest_icon_container
+                  .param_digest.param_digest_str
+                  .param_digest.param_digest_dex
+                  .param_digest.param_digest_def
+                  .param_digest.param_digest_agi
+                span.equip_build_button
+                  | 強化
+              li.equip_item
+                img.equip_list_icon[src="images/neko/icons/unachieved.png"]
+                span.equip_list_text
+                  | 棒きれ
+                span.equip_list_param
+                  | -
+                .param_digest_icon_container
+                  .param_digest.param_digest_str
+                  .param_digest.param_digest_dex
+                  .param_digest.param_digest_def
+                  .param_digest.param_digest_agi
+                span.equip_build_button
+                  | 強化
+              li.equip_item
+                img.equip_list_icon[src="images/neko/icons/unachieved.png"]
+                span.equip_list_text
+                  | 棒きれ
+                span.equip_list_param
+                  | -
+                .param_digest_icon_container
+                  .param_digest.param_digest_str
+                  .param_digest.param_digest_dex
+                  .param_digest.param_digest_def
+                  .param_digest.param_digest_agi
+                span.equip_build_button
+                  | 強化
+              li.equip_item
+                img.equip_list_icon[src="images/neko/icons/unachieved.png"]
+                span.equip_list_text
+                  | 棒きれ
+                span.equip_list_param
+                  | -
+                .param_digest_icon_container
+                  .param_digest.param_digest_str
+                  .param_digest.param_digest_dex
+                  .param_digest.param_digest_def
+                  .param_digest.param_digest_agi
+                span.equip_build_button
+                  | 強化
+            #equip_detail_area.shadow_background
+              img#equipment_detail_icon[src="images/neko/icons/unachieved.png"]
+              #equip_detail_name
+                | ---
+              #equip_param_area
+                ul#equip_param_list
+                  li.param_unit
+                    span.status_text
+                      | TOTAL
+                    span#status_detail_total.status_param
+                      | +10
+                  li.param_unit
+                    span.status_text
+                      | STR
+                    span#status_detail_str.status_param
+                      | +10
+                  li.param_unit
+                    span.status_text
+                      | DEX
+                    span#status_detail_dex.status_param
+                      | +10
+                  li.param_unit
+                    span.status_text
+                      | DEF
+                    span#status_detail_def.status_param
+                      | +10
+                  li.param_unit
+                    span.status_text
+                      | AGI
+                    span#status_detail_agi.status_param
+                      | +10
+                #flavor_text
+                  | おいしそうなスパゲッティのサンプルだ。投げて使う。
+            #sort_cancel.hidden
+            #sort_toggle_popup.hidden.shadow_background
+              #sort_change_text
+                | ソート順切り替え
+              #sort_toggle_box
+                #sort_to_power.sort_toggle_button
+                  | [つよさ順]
+                #sort_to_id.sort_toggle_button
+                  | [ID順]
+                #sort_to_atk.sort_toggle_button
+                  | [攻順]
+                #sort_to_sld.sort_toggle_button
+                  | [守順]
+                #sort_to_str.sort_toggle_button
+                  | [STR順]
+                #sort_to_dex.sort_toggle_button
+                  | [DEX順]
+                #sort_to_def.sort_toggle_button
+                  | [DEF順]
+                #sort_to_agi.sort_toggle_button
+                  | [AGI順]
+          #equipment_back_button.back_button
+          #equipment_back_info_text.shadow_background
+            | 装備ウィンドウを閉じます。
+          #character_status_area.shadow_background
+            ul#current_equip_list
+              li.current_equip_item.equip_first.shadow_background.star_background[item_id=""]
+                span.current_equip_text
+                  | -
+                .param_digest_icon_container.current_equip_digest
+                  .param_digest.param_digest_str
+                  .param_digest.param_digest_dex
+                  .param_digest.param_digest_def
+                  .param_digest.param_digest_agi
+              li.current_equip_item.equip_second.shadow_background.star_background[item_id=""]
+                span.current_equip_text
+                  | -
+                .current_equip_digest.param_digest_icon_container
+                  .param_digest.param_digest_str
+                  .param_digest.param_digest_dex
+                  .param_digest.param_digest_def
+                  .param_digest.param_digest_agi
+              li.current_equip_item.equip_third.shadow_background.star_background[item_id=""]
+                span.current_equip_text
+                  | -
+                .current_equip_digest.param_digest_icon_container
+                  .param_digest.param_digest_str
+                  .param_digest.param_digest_dex
+                  .param_digest.param_digest_def
+                  .param_digest.param_digest_agi
+              li.current_equip_item.equip_fourth.shadow_background.star_background[item_id=""]
+                span.current_equip_text
+                  | -
+                .current_equip_digest.param_digest_icon_container
+                  .param_digest.param_digest_str
+                  .param_digest.param_digest_dex
+                  .param_digest.param_digest_def
+                  .param_digest.param_digest_agi
+            #status_show_area
+              ul#status_list
+                li.status_unit
+                  span.status_text
+                    | STR
+                  span#status_total_str.status_param
+                    | 10
+                  span#status_diff_str.status_param_diff
+                li.status_unit
+                  span.status_text
+                    | DEX
+                  span#status_total_dex.status_param
+                    | 10
+                  span#status_diff_dex.status_param_diff
+                li.status_unit
+                  span.status_text
+                    | DEF
+                  span#status_total_def.status_param
+                    | 10
+                  span#status_diff_def.status_param_diff
+                li.status_unit
+                  span.status_text
+                    | AGI
+                  span#status_total_agi.status_param
+                    | 10
+                  span#status_diff_agi.status_param_diff
+              img#goryu_arrow_atk[src="images/neko/etc/goryu.png"]
+              img#goryu_arrow_def[src="images/neko/etc/goryu.png"]
+              #atk_text
+                | 攻
+              #atk_value
+                | 321254
+              #def_text
+                | 守
+              #def_value
+                | 887623
+              #enemy_rank_show_area
+                span.enemy_rank_show_text
+                  | この辺りの敵の攻撃力：
+                span#current_enemy_atk
+                  | 99999
+          #equip_build_popup_area.hidden.shadow_background.popup
+            #equip_build_popup_text
+              | 装備強化
+            #equip_build_popup_quit_button.back_button
+            #build_amount_coin_have_show_area
+              img.coin_icon[src="images/neko/icons/coin.png"]
+              span#coin_amount
+                | 876
+            #equip_build_item_name_area
+              span.equip_name
+                | 超絶はがねのつるぎ
+              span#build_plus_area
+                span.build_prev
+                  | +7
+                span.build_sepalator
+                  | →
+                span.build_after
+                  | +8
+            ul#equip_build_param_list
+              li.build_param_item
+                span.build_index
+                  | STR
+                span.param_prev
+                  | 0
+                span.build_sepalator
+                  | →
+                span.param_after
+                  | 0
+                span.build_sepalator
+                  | 　(
+                span.param_diff
+                  | +0
+                span.build_sepalator
+                  | )
+              li.build_param_item
+                span.build_index
+                  | DEX
+                span.param_prev
+                  | 0
+                span.build_sepalator
+                  | →
+                span.param_after
+                  | 0
+                span.build_sepalator
+                  | 　(
+                span.param_diff
+                  | +0
+                span.build_sepalator
+                  | )
+              li.build_param_item
+                span.build_index
+                  | DEF
+                span.param_prev
+                  | 0
+                span.build_sepalator
+                  | →
+                span.param_after
+                  | 0
+                span.build_sepalator
+                  | 　(
+                span.param_diff
+                  | +0
+                span.build_sepalator
+                  | )
+              li.build_param_item
+                span.build_index
+                  | AGI
+                span.param_prev
+                  | 0
+                span.build_sepalator
+                  | →
+                span.param_after
+                  | 0
+                span.build_sepalator
+                  | 　(
+                span.param_diff
+                  | +0
+                span.build_sepalator
+                  | )
+            #unachieved_item_text.hidden
+              | このアイテムを生成します
+            #build_decide_button
+              span#build_decide_text
+                | 強化
+              img.coin_icon[src="images/neko/icons/coin.png"]
+              span#build_cost
+                | 143
+        #equip_result_fade_cover.hidden
+        #equip_result_animation_dummy
+        #equip_edit_result_popup.hidden.shadow_background
+          img#result_image_siro[src="images/neko/chara/siro_active.png"]
+          img#result_image_kuro[src="images/neko/chara/kuro_active.png"]
+          #equip_result_show_text
+            | 装備編集結果
+          #equip_edit_cancel_button
+            | 編集を破棄
+          #equip_edit_complete_button
+            | 編集を確定
+          #equip_result_siro
+            .star_background_rev.equip_result
+              span.equip_result_param_index
+                | STR
+              span#equip_before_siro_str.equip_result_value
+                | 999999
+              span.equip_result_separator
+                | →
+              span#equip_after_siro_str.equip_result_value
+                | 999999
+              span.equip_result_parenthesis
+                | (
+              span#equip_diff_siro_str.equip_result_value
+                |  +999999
+              span.equip_result_parenthesis
+                | )
+            .star_background_rev.equip_result
+              span.equip_result_param_index
+                | DEX
+              span#equip_before_siro_dex.equip_result_value
+                | 999999
+              span.equip_result_separator
+                | →
+              span#equip_after_siro_dex.equip_result_value
+                | 999999
+              span.equip_result_parenthesis
+                | (
+              span#equip_diff_siro_dex.equip_result_value
+                |  +999999
+              span.equip_result_parenthesis
+                | )
+            .star_background_rev.equip_result
+              span.equip_result_param_index
+                | DEF
+              span#equip_before_siro_def.equip_result_value
+                | 999999
+              span.equip_result_separator
+                | →
+              span#equip_after_siro_def.equip_result_value
+                | 999999
+              span.equip_result_parenthesis
+                | (
+              span#equip_diff_siro_def.equip_result_value
+                |  +999999
+              span.equip_result_parenthesis
+                | )
+            .star_background_rev.equip_result
+              span.equip_result_param_index
+                | AGI
+              span#equip_before_siro_agi.equip_result_value
+                | 999999
+              span.equip_result_separator
+                | →
+              span#equip_after_siro_agi.equip_result_value
+                | 999999
+              span.equip_result_parenthesis
+                | (
+              span#equip_diff_siro_agi.equip_result_value
+                |  +999999
+              span.equip_result_parenthesis
+                | )
+          #equip_result_kuro
+            .star_background.equip_result
+              span.equip_result_param_index
+                | STR
+              span#equip_before_kuro_str.equip_result_value
+                | 999999
+              span.equip_result_separator
+                | →
+              span#equip_after_kuro_str.equip_result_value
+                | 999999
+              span.equip_result_parenthesis
+                | (
+              span#equip_diff_kuro_str.equip_result_value
+                |  +999999
+              span.equip_result_parenthesis
+                | )
+            .star_background.equip_result
+              span.equip_result_param_index
+                | DEX
+              span#equip_before_kuro_dex.equip_result_value
+                | 999999
+              span.equip_result_separator
+                | →
+              span#equip_after_kuro_dex.equip_result_value
+                | 999999
+              span.equip_result_parenthesis
+                | (
+              span#equip_diff_kuro_dex.equip_result_value
+                |  +999999
+              span.equip_result_parenthesis
+                | )
+            .star_background.equip_result
+              span.equip_result_param_index
+                | DEF
+              span#equip_before_kuro_def.equip_result_value
+                | 999999
+              span.equip_result_separator
+                | →
+              span#equip_after_kuro_def.equip_result_value
+                | 999999
+              span.equip_result_parenthesis
+                | (
+              span#equip_diff_kuro_def.equip_result_value
+                |  +999999
+              span.equip_result_parenthesis
+                | )
+            .star_background.equip_result
+              span.equip_result_param_index
+                | AGI
+              span#equip_before_kuro_agi.equip_result_value
+                | 999999
+              span.equip_result_separator
+                | →
+              span#equip_after_kuro_agi.equip_result_value
+                | 999999
+              span.equip_result_parenthesis
+                | (
+              span#equip_diff_kuro_agi.equip_result_value
+                |  +999999
+              span.equip_result_parenthesis
+                | )
+        #gacha_menu.hidden
+          #gacha_show_text
+            | おみくじ
+          #gacha_back_button.back_button
+          #gacha_description
+            |  一回コイン200枚でランダムなアイテムを獲得できます。
+            br
+            |  現在の階層では手に入らない高ランク・高強化値アイテムが出現します。
+            br
+            |  (いわゆる「ガチャ限装備」は存在しません。すべてのアイテムは塔で拾えます。)
+            br
+          #gacha_sprite
+            img#sprite_gacha_background.sprite[src="images/neko/sprite/gacha/background.png"]
+            ul#mikuji_stick_list
+
+            img#sprite_gacha_mikuji.sprite[src="images/neko/sprite/gacha/mikuji.png"]
+            img#sprite_gacha_kuro.sprite[src="images/neko/sprite/gacha/kuro.png"]
+            img#sprite_gacha_siro.sprite[src="images/neko/sprite/gacha/siro.png"]
+            img#sprite_gacha_kuro_daki.sprite[src="images/neko/sprite/gacha/kuro_daki.png"]
+            img#sprite_gacha_siro_daki.sprite[src="images/neko/sprite/gacha/siro_daki.png"]
+            #gacha_result_fade
+              | も
+            img#gacha_result_background[src="images/neko/sprite/gacha/result_background.png"]
+            #gacha_result_area.hidden.shadow_background
+              #gacha_result
+
+              #gacha_result_text
+                | おみくじ結果
+              #gacha_result_back_button.back_button
+          #gacha_rate_area.shadow_background
+            .gacha_rate_item.star_background_rev
+              span.gacha_rate_index
+                | ★
+              span.gacha_rate_value
+                | 7.00%
+            .gacha_rate_item.star_background_rev
+              span.gacha_rate_index
+                | ☆
+              span.gacha_rate_value
+                | 15.00%
+            .gacha_rate_item.star_background_rev
+              span.gacha_rate_index
+                | *
+              span.gacha_rate_value
+                | 23.00%
+            .gacha_rate_item.star_background_rev
+              span.gacha_rate_index
+                | ○
+              span.gacha_rate_value
+                | 55.00%
+          #gacha_coin_area.shadow_background
+            img#gacha_coin_icon[src="images/neko/icons/coin.png"]
+            span#gacha_coin_show_area
+              | 9999
+          #gacha_take_button.free_spin_available.gacha_button_template
+            .gacha_button_index
+              | 1回引く
+            img.gacha_cost_icon[src="images/neko/icons/coin.png"]
+            .gacha_button_value
+              | 無料
+          #gacha_take_10_button.gacha_button_template
+            .gacha_button_index
+              | 10回引く
+            img.gacha_cost_icon[src="images/neko/icons/coin.png"]
+            .gacha_button_value
+              | 2000
+          #next_free_gacha_area
+            span
+              | 次のフリーおみくじまで：
+            span#next_free_gacha_time
+              | 9:38:10
+        #save_menu.shadow_background.hidden
+          #save_show_text
+            | セーブ管理
+          #save_back_button.back_button
+          #save_description
+            h2
+              | セーブデータ出力
+            p
+              | セーブデータをテキストに出力します。コピペで保存できます。
+            p
+              | (いわゆる<引き継ぎコード>ではなく、生のセーブデータをテキストの形で保存します。)
+            textarea#save_data_area[wrap="soft"]
+            h2
+              | セーブデータ読み込み
+            p
+              | 保存したセーブデータを読み込みます。
+            textarea#save_read_area[wrap="soft"]
+          #copy_to_clipboard.save_menu_btn
+            | コピー
+          #copied.hidden
+            | クリップボードにコピーしました！
+          #read_save_button.save_menu_btn
+            | 読込み
+          #read_info
+            | セーブ読込み確認画面が開きます。
+          #save_read_error.hidden
+            | セーブデータの認識に失敗しました。
+          #save_read_confirm.hidden.shadow_background
+            #save_read_confirm_text
+              | セーブ読込み確認
+            #save_info_readed
+              p
+                | 以下のセーブデータを読込みます。
+              p
+                | しろこ：
+                span#save_siro_lv
+                  | 123
+                | lv
+              p
+                | くろこ：
+                span#save_kuro_lv
+                  | 125
+                | lv
+              p
+                | プレイ時間：
+                span#save_playtime
+                  | 231:22:09
+            #read_save_decide.save_menu_btn
+              | 読込む
+            #read_save_cancel.save_menu_btn
+              | やめる
+        #shop_menu.hidden.shadow_background
+          #shop_text
+            | ピリカショップ
+          img#shop_back_button[src="images/neko/etc/shop_back_button.png"]
+          img#shop_pirika[src="images/neko/etc/pirika.png"]
+          img#shop_words_frame[src="images/neko/etc/words.png"]
+          #pirika_caption
+            span.pirika_small
+              | 工房のクラフト妖精
+            | 　ピリカちゃん
+          #shop_current_powder
+            img#current_powder_icon[src="images/neko/icons/powder.png"]
+            span#current_powder_amount
+              | 0
+          #shop_list_caption_area
+            span#shop_item_caption_name
+              | アイテム名
+            span#shop_item_caption_power
+              | つよさ
+            span#shop_item_caption_value
+              | 価格
+          #shop_item_list
+            #shop_item_0.shop_item
+              span.shop_item_name
+                | -
+              span.shop_item_power
+                | 1123123
+              span.shop_item_value
+                img.shop_coin[src="images/neko/icons/powder.png"]
+                span.shop_item_cost
+                  | 1
+            #shop_item_1.shop_item
+              span.shop_item_name
+                | -
+              span.shop_item_power
+                | 1123123
+              span.shop_item_value
+                img.shop_coin[src="images/neko/icons/powder.png"]
+                span.shop_item_cost
+                  | 1
+            #shop_item_2.shop_item
+              span.shop_item_name
+                | -
+              span.shop_item_power
+                | 1123123
+              span.shop_item_value
+                img.shop_coin[src="images/neko/icons/powder.png"]
+                span.shop_item_cost
+                  | 1
+            #shop_item_3.shop_item
+              span.shop_item_name
+                | -
+              span.shop_item_power
+                | 1123123
+              span.shop_item_value
+                img.shop_coin[src="images/neko/icons/powder.png"]
+                span.shop_item_cost
+                  | 1
+            #shop_item_4.shop_item
+              span.shop_item_name
+                | -
+              span.shop_item_power
+                | 1123123
+              span.shop_item_value
+                img.shop_coin[src="images/neko/icons/powder.png"]
+                span.shop_item_cost
+                  | 1
+          #shop_param_list
+            .shop_param
+              span.shop_param_name
+                | STR
+              span#shop_param_value_str.shop_param_value
+                | -
+            .shop_param
+              span.shop_param_name
+                | DEX
+              span#shop_param_value_dex.shop_param_value
+                | -
+            .shop_param
+              span.shop_param_name
+                | DEF
+              span#shop_param_value_def.shop_param_value
+                | -
+            .shop_param
+              span.shop_param_name
+                | AGI
+              span#shop_param_value_agi.shop_param_value
+                | -
+          #shop_item_flavor
+            | -
+          span#item_refresh_text
+            | 品揃えをすぐに入れ替える：
+          span#item_refresh_coin_show_area
+            span
+              | 本日残り：
+            span#shop_refresh_last
+              | 5
+            | 回　
+            img#item_shop_coin_icon[src="images/neko/icons/coin.png"]
+            span#item_shop_coin_amount
+              | 2229181
+          #update_shop_item_button
+            img#coin_icon_refresh[src="images/neko/icons/coin.png"]
+            span
+              | 2000
+          #pirika_dummy
+          #pirika_message
+        #save_ticker.star_background_rev.hidden
+          |  セーブしました。 
+        img#omake_image.hidden[src="images/neko/etc/extra.png"]
+        #epilogue.hidden
+          #epilogue_dummy
+          img#epilogue_1.epilogue_illust[src="images/neko/epilogue/2.png"]
+          img#epilogue_0.epilogue_illust[src="images/neko/epilogue/1.png"]
+          #epilogue_text
+        #tutorial.hidden.shadow_background
+          #tutorial_title
+          #tutorial_description
+        #tutorial_click_cover.hidden
+        #fadeouter.hidden
+          img#stage_background[src="images/neko/bg/st2.png"]
+          #stage_shadow
+          #stage_number
+            | 第三次元層
+          #stage_change_end_button.pekapeka
+            | click anywhere to proceed...
+          #stage_title
+            span#title_prev
+              | 氷雪と春風の小
+            span.last_letter
+              | 路
+          #stage_description
+            |  密林を抜けると果ての見えない吹き抜けに出た。
+            br
+            |  僅かに上空から風が吹いているのを感じる。
+            br
+            |  空間の歪んだ塔内部では外界の空気を吸う術などないと諦めていたが、
+            br
+            |  この次元はどうやら外部と物理的につながっている領域もあるようだ。
+            br
+            |  外に繋がる窓を見つけたら手紙を落としてみよう、と、
+            br
+            |  久しく抱くことのなかった気楽な冒険気分を抱きつつ、一行は塔を登り続ける。 
+          #stage_change_tips_text
+            | TIPS:
+          #stage_change_tips
+            | STRとDEXはバランスが大切です。それぞれの値が近いほど効率よく攻撃力が上がります。
+          #changestage_click_cover
+        #changestage_blight.hidden
+          #blight_normal.whole_screen
+          #blight_screen.whole_screen
+          #blight_overlay.whole_screen
+        #save_load_cover.hidden
+img#loading_splash[src="images/neko/etc/loading_splash5.png"]
+#death_ie.hidden
+  | ごめんなさい。
+  br
+  | しろことくろこの塔登るやつ は Internet Explorerでは動作しません。
+  br
+  a[href="https://www.google.co.jp/chrome/browser/desktop/"]
+    | Google Chrome
+  | で遊ぶことを推奨しています。
+#bug_report
+  span#version
+    |  制作：
+    a[href="/"]
+      | さーたはうす
+    | 　version : 2.08 　
+    a[href="nekomanual#update"]
+      | 更新履歴
+  span#wanna_report
+    |  感想・バグ報告は 
+    a[href="https://twitter.com/jyll"]
+      | @jyll
+    | か
+    a[href="https://twitter.com/hashtag/%E3%81%97%E3%82%8D%E3%81%93%E3%81%A8%E3%81%8F%E3%82%8D%E3%81%93"]
+      | #しろことくろこ
+    | にお願いします。 
+= javascript_include_tag "jquery-1.9.1.min"
+= javascript_include_tag "jquery.easing.1.3"
+= javascript_include_tag "jquery.cookie"
+= javascript_include_tag "jquery-numerator"
+= javascript_include_tag "jquery.transform"
+= javascript_include_tag "checkIE"
+= javascript_include_tag "handlers"
+= javascript_include_tag "view"
+= javascript_include_tag "values"
+= javascript_include_tag "neko"
+= javascript_include_tag "battle"
+= javascript_include_tag "minigame"
+= javascript_include_tag "pushnotification"
+= stylesheet_link_tag "reset"
+= stylesheet_link_tag "neko"
+= stylesheet_link_tag "sprites"
+= stylesheet_link_tag "https://fonts.googleapis.com/earlyaccess/mplus1p.css"
+= stylesheet_link_tag "https://fonts.googleapis.com/earlyaccess/roundedmplus1c.css"
+= stylesheet_link_tag "https://fonts.googleapis.com/earlyaccess/nicomoji.css"

@@ -1,0 +1,34 @@
+- provide :title, "賽の河原"
+h1
+  | 賽の河原
+div
+  | 石を好きなだけ積めるwebサービスです。今のところ鬼は来ません。
+#game_screen
+  #player
+    #myname.name
+    img.player_icon[src="images/saikawa/1p.png"]
+    #mystones.stones
+  #friends
+
+  #namedisp.emphasise_name
+    | ユーザ名を決めてね(最大4文字、他人に表示されます)
+  textarea#namearea[name="username" cols="30" rows="1"]
+  #add
+    img#add_btn_cover[src="images/saikawa/plus1_hov.png" alt=""]
+    img#add_btn[src="images/saikawa/plus1.png" alt=""]
+  #ranking
+    .rankuser
+      .username
+        | Rank
+      .score
+        | 積んだ数
+      .crashed
+        | 崩した数
+    #rankusers
+
+= javascript_include_tag "md5"
+= javascript_include_tag "object_array_sort"
+= javascript_include_tag "saikawa_logic"
+= javascript_include_tag "saikawa_connection"
+= javascript_include_tag "saikawa_view"
+= stylesheet_link_tag "saikawa"
