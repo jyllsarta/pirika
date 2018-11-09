@@ -1,0 +1,12 @@
+- provide :title, "Illusts"
+.main
+  h1
+    | イラスト
+  p
+    a[href="/rakugaki"]
+      | らくがき
+    | もあります。そちらは眠いときにちゃちゃっと描いたものです。
+  #illustBox
+    - (1..@image_count).to_a.reverse.each do |n|
+      = render 'illust_thumbnail'
+= stylesheet_link_tag "illusts"
