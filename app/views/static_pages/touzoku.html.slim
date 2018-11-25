@@ -213,7 +213,8 @@
   #siso_line_area
     ul#siso_list
 
-= javascript_include_tag "jquery-1.9.1.min"
+// layout:false なのでjquery個別読み込みが必要 かつ、どれかが悪さしているので1系必須
+= javascript_include_tag "jquery-1.12.4.min"
 = javascript_include_tag "jquery-numerator"
 = javascript_include_tag "jquery.yurayura"
 = javascript_include_tag "jquery.cookie"
