@@ -2,4 +2,13 @@
 .main
   h1
     | しろこのカラータイル
+  .screen
+    - (0..9).each do |y|
+      .row
+        - (0..9).each do |x|
+          .panel x=x y=y
+            = "#{x},#{y}"
+
 = stylesheet_link_tag "colortile"
+= javascript_include_tag "jquery-3.3.1.min"
+= javascript_include_tag "tile/colortile"

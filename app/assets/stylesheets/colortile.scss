@@ -5,3 +5,23 @@
 h1{
     font-size: 16px;
 }
+
+.screen{
+    display: flex;
+    flex-direction: column;
+    width: 500px;
+    height: 500px;
+    margin: 0 auto;
+    .row{
+        display: flex;
+        flex-direction: row;
+        flex-grow: 1;
+        .panel{
+            flex-grow: 1;
+            border: 1px solid #2826ac;
+        }
+        .panel:hover{
+            background-color: #e6fbff;
+        }
+    }
+}
