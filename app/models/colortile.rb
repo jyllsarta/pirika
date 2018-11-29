@@ -1,0 +1,2 @@
+class Colortile < ApplicationRecord
+end

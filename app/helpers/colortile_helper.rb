@@ -1,0 +1,2 @@
+module ColortileHelper
+end
