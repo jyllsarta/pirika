@@ -27,8 +27,9 @@ function syncView() {
     $(".panel").each(function () {
         const x = parseInt(this.attributes.x.value)
         const y = parseInt(this.attributes.y.value)
+        console.log(x, y)
         // fill square if block exists
-        if (g_tile.panel(x, y).block) {
+        if (g_tile.board.panel(x, y).block) {
             $(this).addClass("filled");
         }
         // else blank
