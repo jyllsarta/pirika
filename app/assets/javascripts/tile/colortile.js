@@ -17,18 +17,70 @@ class Panel {
 // 概念 クリックされたところから上下左右に探したブロック4つ
 class Cross {
     constructor(board, x, y) {
-        this.up = board.panel(x, y - 1);
-        this.down = board.panel(x, y + 1);
-        this.left = board.panel(x - 1, y);
-        this.right = board.panel(x + 1, y);
+        this.board = board;
+        this.x = x;
+        this.y = y;
+        this.up = this.findFirstBlock(this.upPanels());
+        this.down = this.findFirstBlock(this.downPanels());
+        this.left = this.findFirstBlock(this.leftPanels());
+        this.right = this.findFirstBlock(this.rightPanels());
         this.destruct();
     }
 
     destruct() {
-        this.up.erase();
-        this.down.erase();
-        this.left.erase();
-        this.right.erase();
+        if (this.up) { this.up.erase() };
+        if (this.down) { this.down.erase() };
+        if (this.left) { this.left.erase() };
+        if (this.right) { this.right.erase() };
+    }
+
+    // private
+
+    // x, y から上方向にあるパネルを返す
+    upPanels() {
+        var panels = [];
+        for (var iy = this.y - 1; iy >= 0; iy--) {
+            panels.push(this.board.panel(this.x, iy));
+        }
+        return panels
+    }
+
+    // x, y から下方向にあるパネルを返す
+    downPanels() {
+        var panels = [];
+        for (var iy = this.y + 1; iy < this.board.h; iy++) {
+            panels.push(this.board.panel(this.x, iy));
+        }
+        return panels
+    }
+
+    // x, y から左方向にあるパネルを返す
+    leftPanels() {
+        var panels = [];
+        for (var ix = this.x - 1; ix >= 0; ix--) {
+            panels.push(this.board.panel(ix, this.y));
+        }
+        return panels
+    }
+
+    // x, y から右方向にあるパネルを返す
+    rightPanels() {
+        var panels = [];
+        for (var ix = this.x + 1; ix < this.board.w; ix++) {
+            panels.push(this.board.panel(ix, this.y));
+        }
+        return panels
+    }
+
+
+    // 引数のパネルから最初にブロックのあるパネルを返す
+    findFirstBlock(panels) {
+        for (var panel of panels) {
+            if (panel.block) {
+                return panel
+            }
+        }
+        return null;
     }
 }
 
@@ -40,7 +92,7 @@ class Board {
     }
 
     panel(x, y) {
-        return this.board[x][y];
+        return this.board[y][x];
     }
 
     click(x, y) {
@@ -73,4 +125,4 @@ class ColorTile {
     }
 };
 
-g_tile = new ColorTile(new Board(10, 15));
+g_tile = new ColorTile(new Board(15, 10));
