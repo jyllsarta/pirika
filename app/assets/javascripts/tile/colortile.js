@@ -5,7 +5,13 @@ class Panel {
     constructor(x, y) {
         this.x = x;
         this.y = y;
-        this.block = Math.random() > 0.5;
+        if (Math.random() > 0.5) {
+            this.block = true;
+            this.colorId = Math.floor(Math.random() * 4);
+        }
+        else {
+            this.block = false;
+        }
     }
 
     erase() {
@@ -24,17 +30,45 @@ class Cross {
         this.down = this.findFirstBlock(this.downPanels());
         this.left = this.findFirstBlock(this.leftPanels());
         this.right = this.findFirstBlock(this.rightPanels());
-        this.destruct();
     }
 
     destruct() {
-        if (this.up) { this.up.erase() };
-        if (this.down) { this.down.erase() };
-        if (this.left) { this.left.erase() };
-        if (this.right) { this.right.erase() };
+        var pairs = this.pairedBlocks()
+        for (var paired of pairs) {
+            paired.erase();
+        }
     }
 
     // private
+
+    pairedBlocks() {
+        var pairBlocks = []
+        for (var block of this.blocks()) {
+            if (this.countColorInBlocks(block.colorId) >= 2) {
+                pairBlocks.push(block);
+            }
+        }
+        return pairBlocks;
+    }
+
+    blocks() {
+        var availableBlocks = [];
+        if (this.up) { availableBlocks.push(this.up) };
+        if (this.down) { availableBlocks.push(this.down) };
+        if (this.left) { availableBlocks.push(this.left) };
+        if (this.right) { availableBlocks.push(this.right) };
+        return availableBlocks;
+    }
+
+    countColorInBlocks(color_id) {
+        var count = 0;
+        for (var block of this.blocks()) {
+            if (block.colorId === color_id) {
+                count++;
+            }
+        }
+        return count;
+    }
 
     // x, y から上方向にあるパネルを返す
     upPanels() {
