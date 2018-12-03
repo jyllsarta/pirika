@@ -23,18 +23,22 @@ function clickPanelHnadler(model) {
     syncView();
 }
 
+function paintPanel(panelObject, colorId) {
+    var color = g_colors[colorId] || "#FFFFFF";
+    $(panelObject).css("background-color", color);
+}
+
 function syncView() {
     $(".panel").each(function () {
         const x = parseInt(this.attributes.x.value)
         const y = parseInt(this.attributes.y.value)
-        console.log(x, y)
         // fill square if block exists
         if (g_tile.board.panel(x, y).block) {
-            $(this).addClass("filled");
+            paintPanel(this, g_tile.board.panel(x, y).colorId);
         }
         // else blank
         else {
-            $(this).removeClass("filled");
+            paintPanel(this, -1);
         }
     })
 }
