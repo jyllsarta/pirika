@@ -137,6 +137,10 @@ class Board {
     }
 
     click(x, y) {
+        // don't fire event if there are block
+        if (this.panel(x, y).block) {
+            return
+        }
         var cross = new Cross(this, x, y);
         cross.destruct();
     }
