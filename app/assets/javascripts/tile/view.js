@@ -17,28 +17,37 @@ function addClickEvent() {
 }
 
 function clickPanelHnadler(model) {
-    const x = parseInt(model.target.attributes.x.value)
-    const y = parseInt(model.target.attributes.y.value)
+    const x = parseInt(model.target.attributes.x.value);
+    const y = parseInt(model.target.attributes.y.value);
     g_tile.click(x, y);
-    syncView();
+    syncViewOnlyDirty();
 }
 
-function paintPanel(panelObject, colorId) {
-    var color = g_colors[colorId] || "#FFFFFF";
+function paintPanel(panelObject, panelModel) {
+    var color = panelModel && panelModel.block ? g_colors[panelModel.colorId] : "#FFFFFF";
     $(panelObject).css("background-color", color);
 }
 
 function syncView() {
     $(".panel").each(function () {
-        const x = parseInt(this.attributes.x.value)
-        const y = parseInt(this.attributes.y.value)
+        const x = parseInt(this.attributes.x.value);
+        const y = parseInt(this.attributes.y.value);
         // fill square if block exists
         if (g_tile.board.panel(x, y).block) {
-            paintPanel(this, g_tile.board.panel(x, y).colorId);
+            paintPanel(this, g_tile.board.panel(x, y));
         }
         // else blank
         else {
-            paintPanel(this, -1);
+            paintPanel(this, null);
         }
     })
+}
+
+function syncViewOnlyDirty() {
+    var dirtyPanels = g_tile.board.panels().filter(x => x.dirty);
+    for (var dirtyPanel of dirtyPanels) {
+        var panelObject = $(`.panel[x=${dirtyPanel.x}][y=${dirtyPanel.y}]`);
+        paintPanel(panelObject, null);
+        dirtyPanel.resetDirtyFlag();
+    }
 }

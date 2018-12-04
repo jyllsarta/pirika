@@ -12,6 +12,7 @@ class Panel {
     constructor(x, y) {
         this.x = x;
         this.y = y;
+        this.dirty = false;
         if (Math.random() > 0.5) {
             this.block = true;
             this.colorId = Math.floor(Math.random() * 4);
@@ -23,7 +24,12 @@ class Panel {
 
     erase() {
         this.block = false;
+        this.dirty = true;
         console.log(this);
+    }
+
+    resetDirtyFlag() {
+        this.dirty = false;
     }
 }
 
@@ -143,6 +149,10 @@ class Board {
         }
         var cross = new Cross(this, x, y);
         cross.destruct();
+    }
+
+    panels() {
+        return this.board.reduce((x, y) => (x.concat(y)));
     }
 
     // 以下 private (だということにする)
