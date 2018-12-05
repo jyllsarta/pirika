@@ -20,8 +20,8 @@ function addClickEvent() {
 }
 
 function clickPanelHnadler(model) {
-    const x = parseInt(model.target.attributes.x.value);
-    const y = parseInt(model.target.attributes.y.value);
+    const x = parseInt(model.currentTarget.attributes.x.value);
+    const y = parseInt(model.currentTarget.attributes.y.value);
     g_tile.click(x, y);
     syncViewOnlyDirty();
 }
