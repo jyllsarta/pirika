@@ -10,6 +10,12 @@ h1{
     font-size: 16px;
 }
 
+body{
+    background: no-repeat url("../images/illust_all/136.png");
+    background-size: 300px;
+    background-position: bottom 0px right 0px;
+}
+
 .board{
     display: flex;
     flex-direction: column;
