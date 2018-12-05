@@ -3,6 +3,9 @@
 // (このファイルがこんなに苦しいならフロントのライブラリを使うべきでは...?)
 //
 
+import g_colors from './colors';
+import g_tile from './colortile';
+
 // init
 $(function () {
     console.log("pi!");
