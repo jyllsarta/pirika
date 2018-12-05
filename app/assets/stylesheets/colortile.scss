@@ -2,6 +2,10 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+$panel_size: 40px;
+$row: 15;
+$column: 10;
+
 h1{
     font-size: 16px;
 }
@@ -9,15 +13,16 @@ h1{
 .board{
     display: flex;
     flex-direction: column;
-    width: 600px;
-    height: 400px;
+    width: $panel_size * $row;
+    height: $panel_size * $column;
     margin: 0 auto;
     .row{
         display: flex;
         flex-direction: row;
-        flex-grow: 1;
+        height: $panel_size;
         .panel{
-            flex-grow: 1;
+            width: $panel_size;
+            height: $panel_size;
             border: 1px solid #2826ac;
         }
         .panel:hover{
