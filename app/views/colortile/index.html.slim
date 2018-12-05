@@ -3,11 +3,11 @@
   h1
     | しろこのカラータイル
   .board
-    - (0..9).each do |y|
+    - (0..@column-1).each do |y|
       .row
-        - (0..14).each do |x|
+        - (0..@row-1).each do |x|
           .panel x=x y=y
-            = "#{x},#{y}"
+            .block.hidden
 
 = stylesheet_link_tag "colortile"
 = javascript_include_tag "jquery-3.3.1.min"

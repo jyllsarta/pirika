@@ -24,8 +24,14 @@ function clickPanelHnadler(model) {
 }
 
 function paintPanel(panelObject, panelModel) {
-    var color = panelModel && panelModel.block ? g_colors[panelModel.colorId] : "#FFFFFF";
-    $(panelObject).css("background-color", color);
+    if (panelModel) {
+        var color = g_colors[panelModel.colorId];
+        $(panelObject).find(".block").css("background", color);
+        $(panelObject).find(".block").removeClass("hidden");
+    }
+    else {
+        $(panelObject).find(".block").addClass("hidden");
+    }
 }
 
 function syncView() {
@@ -48,6 +54,6 @@ function syncViewOnlyDirty() {
     for (var dirtyPanel of dirtyPanels) {
         var panelObject = $(`.panel[x=${dirtyPanel.x}][y=${dirtyPanel.y}]`);
         paintPanel(panelObject, null);
-        dirtyPanel.resetDirtyFlag();
+        dirtyPanel.resetDirtyFlag(); // ここでmodelを触りに行くのはたぶん規約違反だけど高速化のために許容
     }
 }

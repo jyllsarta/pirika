@@ -23,13 +23,21 @@ h1{
         .panel{
             width: $panel_size;
             height: $panel_size;
-            border: 1px solid #2826ac;
+            border: 1px solid #fcfcff;
+            .block{
+                margin: 2px;
+                border: 1px solid #fffbd5;
+                border-radius: 3px;
+                width: $panel_size - 4px;
+                height: $panel_size - 4px;
+            }
         }
         .panel:hover{
-            background-color: #e6fbff;
-        }
-        .filled{
-            background-color: aquamarine;
+            filter:brightness(110%);
         }
     }
+}
+
+.hidden{
+    visibility: hidden;
 }
