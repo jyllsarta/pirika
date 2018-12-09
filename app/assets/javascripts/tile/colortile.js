@@ -3,12 +3,26 @@ import Board from './board';
 
 // ゲームロジック全般
 class ColorTile {
-    constructor(board) {
+    constructor(board, playTimeLengthSecond) {
         this.board = board;
+        this.playTimeLengthSecond = playTimeLengthSecond;
+        this.isPlaying = false;
     }
 
     click(x, y) {
         this.board.click(x, y);
+    }
+
+    frame() {
+        if (!this.isPlaying) {
+            return;
+        }
+
+    }
+
+    startGame() {
+        this.isPlaying = true;
+        this.startedTimePoint = Time.now();
     }
 };
 

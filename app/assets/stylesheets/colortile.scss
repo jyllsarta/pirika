@@ -16,12 +16,17 @@ body{
     background-position: bottom 0px right 0px;
 }
 
+
+.game_screen{
+    width: $panel_size * $row;
+    margin: 0 auto;
+}
+
 .board{
     display: flex;
     flex-direction: column;
     width: $panel_size * $row;
     height: $panel_size * $column;
-    margin: 0 auto;
     .row{
         display: flex;
         flex-direction: row;
@@ -45,6 +50,17 @@ body{
     }
 }
 
+.start{
+    background-color: white;
+    position: absolute;
+    width: ($panel_size+2) * $row;
+    height: ($panel_size+2) * $column;
+}
+
 .hidden{
     visibility: hidden;
+}
+
+.removed{
+    display: none;
 }

@@ -31,23 +31,39 @@ $(function () {
 
 function addClickEvent() {
     $(".panel").each(function () {
-        $(this).click(clickPanelHnadler);
-    })
+        $(this).click(clickPanelHandler);
+    });
+
+    $(".start").click(function () {
+        $(this).click(startGameHandler);
+    });
 }
 
 function startRemoveAnimation(panelObject) {
     panelObject
         .animate2({
             transform: 'rotate(30deg) scale(1.3)',
-            opacity: 0
+            opacity: 0,
         }, 200, "linear")
 }
 
-function clickPanelHnadler(model) {
+function clickPanelHandler(model) {
     const x = parseInt(model.currentTarget.attributes.x.value);
     const y = parseInt(model.currentTarget.attributes.y.value);
     g_tile.click(x, y);
     syncViewOnlyDirty();
+}
+
+function startGameHandler(model) {
+    $(".start")
+        .animate2({
+            opacity: 0,
+            transform: "translateY(-100px)",
+        }, 150, "linear")
+        .queue(function () {
+            $(this).addClass("removed")
+        })
+    g_tile.startGame();
 }
 
 function paintPanel(panelObject, panelModel) {
