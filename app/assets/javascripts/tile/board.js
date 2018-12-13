@@ -12,6 +12,16 @@ class Board {
         return this.board[y][x];
     }
 
+    // クリックを実行したら得られるスコアを返す
+    scoreByClick(x, y) {
+        // don't fire event if there are block
+        if (this.panel(x, y).block) {
+            return 0;
+        }
+        var cross = new Cross(this, x, y);
+        return cross.score();
+    }
+
     click(x, y) {
         // don't fire event if there are block
         if (this.panel(x, y).block) {

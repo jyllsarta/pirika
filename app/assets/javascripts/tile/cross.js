@@ -11,10 +11,15 @@ class Cross {
     }
 
     destruct() {
-        var pairs = this.pairedBlocks()
+        var pairs = this.pairedBlocks();
         for (var paired of pairs) {
             paired.erase();
         }
+    }
+
+    score() {
+        var pairs = this.pairedBlocks();
+        return pairs.length ** 2 * 2;
     }
 
     // private

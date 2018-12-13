@@ -34,9 +34,9 @@ function addClickEvent() {
         $(this).click(clickPanelHandler);
     });
 
-    $(".start").click(function () {
-        $(this).click(startGameHandler);
-    });
+    $(".start").click(startGameHandler);
+    $(".restart").click(startGameHandler);
+    $(".back_to_title").click(backToTitleHandler);
 }
 
 function startRemoveAnimation(panelObject) {
@@ -47,6 +47,13 @@ function startRemoveAnimation(panelObject) {
         }, 200, "linear")
 }
 
+function resetPanel() {
+    $(".panel").css({
+        transform: "none",
+        opacity: 1,
+    })
+}
+
 function clickPanelHandler(model) {
     const x = parseInt(model.currentTarget.attributes.x.value);
     const y = parseInt(model.currentTarget.attributes.y.value);
@@ -54,15 +61,35 @@ function clickPanelHandler(model) {
     syncViewOnlyDirty();
 }
 
+function backToTitleHandler() {
+    hideResult();
+    showTitle();
+    g_tile.backToTitle();
+}
+
+function showTitle() {
+    $(".start").removeClass("removed");
+    $(".start").css({
+        opacity: 1,
+        transform: "translateY(0px)",
+    });
+}
+
 function startGameHandler(model) {
+    console.log("start");
+    hideResult();
     $(".start")
         .animate2({
             opacity: 0,
             transform: "translateY(-100px)",
         }, 150, "linear")
         .queue(function () {
-            $(this).addClass("removed")
+            $(this).addClass("removed");
+            $(this).dequeue();
         })
+    g_tile.reset();
+    syncView();
+    resetPanel();
     g_tile.startGame();
 }
 
@@ -100,3 +127,36 @@ function syncViewOnlyDirty() {
         dirtyPanel.resetDirtyFlag(); // ここでmodelを触りに行くのはたぶん規約違反だけど高速化のために許容
     }
 }
+
+function updateTimeBar() {
+    // 横幅に結合あるの悔しい 起動時に取るほうが健全かも
+    $(".time").css("width", 300 * g_tile.timeLeftRatio());
+}
+
+function updateScore() {
+    $(".time").text(g_tile.getCurrentScore());
+}
+
+function finish() {
+    console.log("finish");
+    $(".end").removeClass("hidden");
+    $(".final_score").text(g_tile.getCurrentScore());
+}
+
+function hideResult() {
+    $(".end").addClass("hidden");
+}
+
+function update() {
+    g_tile.update();
+    if (g_tile.isPlaying()) {
+        updateTimeBar();
+        updateScore();
+    }
+    if (g_tile.isFinishing()) {
+        finish();
+    }
+    window.requestAnimationFrame(update);
+}
+window.requestAnimationFrame(update);
+

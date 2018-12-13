@@ -22,7 +22,9 @@ body{
     margin: 0 auto;
 }
 
+// z-index: 10 - 99
 .board{
+    z-index: 10;
     display: flex;
     flex-direction: column;
     width: $panel_size * $row;
@@ -50,11 +52,13 @@ body{
     }
 }
 
+// z-index: 1000 - 9999
 .start{
     background-color: white;
     position: absolute;
     width: ($panel_size+2) * $row;
     height: ($panel_size+2) * $column;
+    z-index: 1000;
 }
 
 .hidden{
@@ -73,4 +77,70 @@ body{
     something: linear-gradient(to bottom, #ffe693 0%,#ffec9f 53%,#ffe57e 57%,#f0ffb8 100%);
     something: linear-gradient(to bottom, #baf0a1 0%,#aeee97 53%,#92e274 57%,#9bfca9 100%);
     something: linear-gradient(to bottom, #ccbfff 0%,#d8caff 53%,#b39aff 57%,#de9bff 100%);
+}
+
+// z-index: 100 - 999
+.ui{
+    position: absolute;
+    width: $panel_size * $row;
+    height: $panel_size * $column;
+    pointer-events: none;
+    .time_base{
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        background-color: #123123;
+        width: 300px;
+        height: 2px;
+        z-index: 200;
+    }
+    .time{
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        background-color: #92e274;
+        width: 300px;
+        height: 2px;
+        z-index: 201;
+    }
+    .score{
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        z-index: 200;
+    }
+}
+
+// z-index: 10000 - 99999
+.end{
+    background-color: yellow;
+    position: absolute;
+    width: $panel_size * $row;
+    height: $panel_size * $column;
+    .final_score{
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        background-color: #92e274;
+        width: 300px;
+        height: 20px;
+        z-index: 10001;
+    }
+    .restart{
+        position: absolute;
+        bottom: 10px;
+        left: 10px;
+        background-color: #92e274;
+        width: 300px;
+        height: 20px;
+        z-index: 10001;
+    }
+    .back_to_title{
+        position: absolute;
+        bottom: 10px;
+        right: 10px;
+        width: 300px;
+        height: 20px;
+        z-index: 10001;
+    }
 }
