@@ -1,3 +1,6 @@
+import { log as log, warn as warn } from './logsystem';
+
+
 // 概念クラス クリックされたところから上下左右に探したブロック4つ
 class Cross {
     constructor(board, x, y) {

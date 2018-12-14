@@ -24,7 +24,7 @@ $.fn.animate2 = function (properties, duration, ease) {
 
 // init
 $(function () {
-    console.log("pi!");
+    log("document.ready invoked.");
     addClickEvent();
     syncView();
 });
@@ -76,7 +76,7 @@ function showTitle() {
 }
 
 function startGameHandler(model) {
-    console.log("start");
+    log("start");
     hideResult();
     $(".start")
         .animate2({
@@ -138,7 +138,7 @@ function updateScore() {
 }
 
 function finish() {
-    console.log("finish");
+    log("finish");
     $(".end").removeClass("hidden");
     $(".final_score").text(g_tile.getCurrentScore());
 }

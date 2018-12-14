@@ -1,5 +1,6 @@
 import Cross from './cross';
 import Panel from './panel';
+import { log as log, warn as warn } from './logsystem';
 
 class Board {
     constructor(w, h) {

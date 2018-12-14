@@ -1,3 +1,6 @@
+import { log as log, warn as warn } from './logsystem';
+
+
 // 床1マス
 class Panel {
     constructor(x, y) {
@@ -16,7 +19,6 @@ class Panel {
     erase() {
         this.block = false;
         this.dirty = true;
-        console.log(this);
     }
 
     resetDirtyFlag() {

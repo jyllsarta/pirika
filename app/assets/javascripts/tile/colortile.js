@@ -1,6 +1,7 @@
 
 import Board from './board';
 import GameMode from './gamemodes';
+import { log as log, warn as warn } from './logsystem';
 
 // ゲームロジック全般
 class ColorTile {
@@ -14,7 +15,7 @@ class ColorTile {
 
     reset(board) {
         if (!board) {
-            console.log("creating new board");
+            log("creating new board");
             this.board = new Board(15, 10);
         }
         else {
@@ -29,7 +30,7 @@ class ColorTile {
 
     click(x, y) {
         if (this.gameMode !== GameMode.PLAYING) {
-            console.log("returning~");
+            log("ゲーム中でないので処理しません");
             return;
         }
         this.score += this.board.scoreByClick(x, y);
