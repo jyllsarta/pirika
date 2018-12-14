@@ -5,6 +5,7 @@
 
 import g_colors from './colors';
 import g_tile from './colortile';
+import { log as log, warn as warn } from './logsystem';
 
 // qiitaのanimate謎拡張
 // https://qiita.com/waterada/items/bb73f3850f05d854dc6e
@@ -57,11 +58,13 @@ function resetPanel() {
 function clickPanelHandler(model) {
     const x = parseInt(model.currentTarget.attributes.x.value);
     const y = parseInt(model.currentTarget.attributes.y.value);
+    log(`clicked ${x}, ${y}`)
     g_tile.click(x, y);
     syncViewOnlyDirty();
 }
 
 function backToTitleHandler() {
+    log("back to title")
     hideResult();
     showTitle();
     g_tile.backToTitle();
