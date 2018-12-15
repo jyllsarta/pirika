@@ -1,7 +1,7 @@
 import { log as log, warn as warn } from './logsystem';
 
 
-// ???1??
+// ?1??
 class Panel {
     constructor(x, y) {
         this.x = x;
