@@ -3,10 +3,8 @@ import Panel from './panel';
 import { log as log, warn as warn } from './logsystem';
 
 class Board {
-    constructor(w, h) {
-        this.w = w;
-        this.h = h;
-        this.initBoard(w, h);
+    constructor(boardJSON) {
+        this.initBoard(boardJSON);
     }
 
     panel(x, y) {
@@ -26,10 +24,14 @@ class Board {
     click(x, y) {
         // don't fire event if there are block
         if (this.panel(x, y).block) {
-            return
+            log("it was block...");
+            return;
         }
         var cross = new Cross(this, x, y);
+        log("created cross");
+        log(cross);
         cross.destruct();
+        log(this);
     }
 
     panels() {
@@ -39,12 +41,14 @@ class Board {
     // 以下 private (だということにする)
     // Rails の Model のつもりで書きます
 
-    initBoard(w, h) {
-        this.board = new Array(h);
-        for (var y = 0; y < h; ++y) {
+    initBoard(boardJSON) {
+        this.w = 15;
+        this.h = 10;
+        this.board = new Array(this.h);
+        for (var y = 0; y < this.h; ++y) {
             this.board[y] = [];
-            for (var x = 0; x < w; ++x) {
-                this.board[y][x] = new Panel(x, y);
+            for (var x = 0; x < this.w; ++x) {
+                this.board[y][x] = new Panel(x, y, boardJSON ? boardJSON[y][x] : 0);
             }
         }
     }

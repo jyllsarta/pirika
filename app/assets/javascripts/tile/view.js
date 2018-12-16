@@ -23,143 +23,165 @@ $.fn.animate2 = function (properties, duration, ease) {
     });
 };
 
-// init
-$(function () {
-    log("document.ready invoked.");
-    addClickEvent();
-    syncView();
-});
+class View {
+    // init
+    constructor() {
+        log("document.ready invoked.");
+        this.addClickEvent();
+        this.syncView();
+    }
 
-function addClickEvent() {
-    $(".panel").each(function () {
-        $(this).click(clickPanelHandler);
-    });
+    addClickEvent() {
+        var self = this;
+        log("add click event")
+        $(".panel").each(function () {
+            $(this).click(self.clickPanelHandler.bind(self));
+        });
 
-    $(".start").click(startGameHandler);
-    $(".restart").click(startGameHandler);
-    $(".back_to_title").click(backToTitleHandler);
-}
+        $(".start").click(function () {
+            this.requestStartHandler();
+        }.bind(this));
+        $(".restart").click(function () {
+            this.requestStartHandler();
+        }.bind(this));
+        $(".back_to_title").click(function () {
+            this.backToTitleHandler();
+        }.bind(this));
+    }
 
-function startRemoveAnimation(panelObject) {
-    panelObject
-        .animate2({
-            transform: 'rotate(30deg) scale(1.3)',
-            opacity: 0,
-        }, 200, "linear")
-}
+    startRemoveAnimation(panelObject) {
+        panelObject
+            .animate2({
+                transform: 'rotate(30deg) scale(1.3)',
+                opacity: 0,
+            }, 200, "linear")
+    }
 
-function resetPanel() {
-    $(".panel").css({
-        transform: "none",
-        opacity: 1,
-    })
-}
-
-function clickPanelHandler(model) {
-    const x = parseInt(model.currentTarget.attributes.x.value);
-    const y = parseInt(model.currentTarget.attributes.y.value);
-    log(`clicked ${x}, ${y}`)
-    g_tile.click(x, y);
-    syncViewOnlyDirty();
-}
-
-function backToTitleHandler() {
-    log("back to title")
-    hideResult();
-    showTitle();
-    g_tile.backToTitle();
-}
-
-function showTitle() {
-    $(".start").removeClass("removed");
-    $(".start").css({
-        opacity: 1,
-        transform: "translateY(0px)",
-    });
-}
-
-function startGameHandler(model) {
-    log("start");
-    hideResult();
-    $(".start")
-        .animate2({
-            opacity: 0,
-            transform: "translateY(-100px)",
-        }, 150, "linear")
-        .queue(function () {
-            $(this).addClass("removed");
-            $(this).dequeue();
+    resetPanel() {
+        $(".panel").css({
+            transform: "none",
+            opacity: 1,
         })
-    g_tile.reset();
-    syncView();
-    resetPanel();
-    g_tile.startGame();
-}
-
-function paintPanel(panelObject, panelModel) {
-    if (panelModel) {
-        var color = g_colors[panelModel.colorId];
-        $(panelObject).find(".block").css("background", color);
-        $(panelObject).find(".block").removeClass("hidden");
     }
-    else {
-        $(panelObject).find(".block").addClass("hidden");
-    }
-}
 
-function syncView() {
-    $(".panel").each(function () {
-        const x = parseInt(this.attributes.x.value);
-        const y = parseInt(this.attributes.y.value);
-        // fill square if block exists
-        if (g_tile.board.panel(x, y).block) {
-            paintPanel(this, g_tile.board.panel(x, y));
+    clickPanelHandler(model) {
+        const x = parseInt(model.currentTarget.attributes.x.value);
+        const y = parseInt(model.currentTarget.attributes.y.value);
+        log(`clicked ${x}, ${y}`)
+        g_tile.click(x, y);
+        this.syncViewOnlyDirty();
+    }
+
+    backToTitleHandler() {
+        log("back to title")
+        this.hideResult();
+        this.showTitle();
+        g_tile.backToTitle();
+    }
+
+    showTitle() {
+        $(".start").removeClass("removed");
+        $(".start").css({
+            opacity: 1,
+            transform: "translateY(0px)",
+        });
+    }
+
+    requestStartHandler(model) {
+        log("start requested...")
+        g_tile.requestStart();
+    }
+
+    startGameHandler(model) {
+        log("start");
+        this.hideResult();
+        $(".start")
+            .animate2({
+                opacity: 0,
+                transform: "translateY(-100px)",
+            }, 150, "linear")
+            .queue(function () {
+                $(this).addClass("removed");
+                $(this).dequeue();
+            })
+        this.syncView();
+        this.resetPanel();
+    }
+
+    paintPanel(panelObject, panelModel) {
+        if (panelModel) {
+            var color = g_colors[panelModel.colorId];
+            $(panelObject).find(".block").css("background", color);
+            $(panelObject).find(".block").removeClass("hidden");
         }
-        // else blank
         else {
-            paintPanel(this, null);
+            $(panelObject).find(".block").addClass("hidden");
         }
-    })
-}
-
-function syncViewOnlyDirty() {
-    var dirtyPanels = g_tile.board.panels().filter(x => x.dirty);
-    for (var dirtyPanel of dirtyPanels) {
-        var panelObject = $(`.panel[x=${dirtyPanel.x}][y=${dirtyPanel.y}]`);
-        startRemoveAnimation(panelObject);
-        dirtyPanel.resetDirtyFlag(); // ここでmodelを触りに行くのはたぶん規約違反だけど高速化のために許容
     }
-}
 
-function updateTimeBar() {
-    // 横幅に結合あるの悔しい 起動時に取るほうが健全かも
-    $(".time").css("width", 300 * g_tile.timeLeftRatio());
-}
+    syncView() {
+        var self = this;
+        $(".panel").each(function () {
+            const x = parseInt(this.attributes.x.value);
+            const y = parseInt(this.attributes.y.value);
+            // fill square if block exists
+            if (g_tile.board.panel(x, y).block) {
+                self.paintPanel(this, g_tile.board.panel(x, y));
+            }
+            // else blank
+            else {
+                self.paintPanel(this, null);
+            }
+        })
+    }
 
-function updateScore() {
-    $(".time").text(g_tile.getCurrentScore());
-}
+    syncViewOnlyDirty() {
+        var dirtyPanels = g_tile.board.panels().filter(x => x.dirty);
+        log("remove dirty panels.");
+        log(dirtyPanels);
+        for (var dirtyPanel of dirtyPanels) {
+            var panelObject = $(`.panel[x=${dirtyPanel.x}][y=${dirtyPanel.y}]`);
+            this.startRemoveAnimation(panelObject);
+            dirtyPanel.resetDirtyFlag(); // ここでmodelを触りに行くのはたぶん規約違反だけど高速化のために許容
+        }
+    }
 
-function finish() {
-    log("finish");
-    $(".end").removeClass("hidden");
-    $(".final_score").text(g_tile.getCurrentScore());
-}
+    updateTimeBar() {
+        // 横幅に結合あるの悔しい 起動時に取るほうが健全かも
+        $(".time").css("width", 300 * g_tile.timeLeftRatio());
+    }
 
-function hideResult() {
-    $(".end").addClass("hidden");
-}
+    updateScore() {
+        $(".time").text(g_tile.getCurrentScore());
+    }
+
+    finish() {
+        log("finish");
+        $(".end").removeClass("hidden");
+        $(".final_score").text(g_tile.getCurrentScore());
+    }
+
+    hideResult() {
+        $(".end").addClass("hidden");
+    }
+
+    update() {
+        g_tile.update();
+        if (g_tile.isPlaying()) {
+            this.updateTimeBar();
+            this.updateScore();
+        }
+        if (g_tile.isFinishing()) {
+            this.finish();
+        }
+    }
+};
+
+var g_view = new View(); //viewは外に出す
+g_tile.setView(g_view);
 
 function update() {
-    g_tile.update();
-    if (g_tile.isPlaying()) {
-        updateTimeBar();
-        updateScore();
-    }
-    if (g_tile.isFinishing()) {
-        finish();
-    }
+    g_view.update();
     window.requestAnimationFrame(update);
 }
 window.requestAnimationFrame(update);
-

@@ -1,6 +1,7 @@
 
 import Board from './board';
 import GameMode from './gamemodes';
+import ColorTileAPI from './api';
 import { log as log, warn as warn } from './logsystem';
 
 // ゲームロジック全般
@@ -13,19 +14,8 @@ class ColorTile {
         this.gameMode = GameMode.TITLE;
     }
 
-    reset(board) {
-        if (!board) {
-            log("creating new board");
-            this.board = new Board(15, 10);
-        }
-        else {
-            this.board = board;
-        }
-        // this.playTimeLengthSecond は更新されない
-        // this.startedTimePointは開始時の時刻を参照するので更新不要
-        // mutable なものは別クラスに飛ばしたほうがいいかもなぁと思い始めました
-        this.gameMode = GameMode.TITLE;
-        this.score = 0;
+    setView(view) {
+        this.view = view;
     }
 
     click(x, y) {
@@ -33,6 +23,7 @@ class ColorTile {
             log("ゲーム中でないので処理しません");
             return;
         }
+        log("recieve click")
         this.score += this.board.scoreByClick(x, y);
         this.board.click(x, y);
     }
@@ -40,6 +31,8 @@ class ColorTile {
     update() {
         switch (this.gameMode) {
             case GameMode.TITLE:
+                break;
+            case GameMode.LOADING:
                 break;
             case GameMode.PLAYING:
                 if (this.timeLeft() < 0) {
@@ -62,9 +55,18 @@ class ColorTile {
         return this.gameMode == GameMode.FINISHING;
     }
 
-    startGame() {
+    requestStart() {
+        log("start requested")
+        this.gameMode = GameMode.LOADING;
+        ColorTileAPI.getNewBoard(this.startGame.bind(this));
+    }
+
+    startGame(boardJSON) {
+        this.board = new Board(boardJSON);
+        this.score = 0;
         this.gameMode = GameMode.PLAYING;
         this.startedTimePoint = Date.now();
+        this.view.startGameHandler();
     }
 
     backToTitle() {
@@ -92,5 +94,5 @@ class ColorTile {
     }
 };
 
-let g_tile = new ColorTile(new Board(15, 10), 3);
+let g_tile = new ColorTile(new Board(), 3);
 export default g_tile; // ここだけグローバル変数として公開してしまう

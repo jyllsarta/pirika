@@ -1,19 +1,14 @@
 import { log as log, warn as warn } from './logsystem';
 
 
-// ?1??
+// パネル1マス
 class Panel {
-    constructor(x, y) {
+    constructor(x, y, colorId) {
         this.x = x;
         this.y = y;
         this.dirty = false;
-        if (Math.random() > 0.5) {
-            this.block = true;
-            this.colorId = Math.floor(Math.random() * 6);
-        }
-        else {
-            this.block = false;
-        }
+        this.colorId = colorId;
+        this.block = !!colorId;
     }
 
     erase() {
