@@ -31,8 +31,21 @@ module ColorTileLogic
     # 別のとこ逃したほうがいいかも
     class SeededRandom
         def initialize(seed=rand(100000000000))
+            @x = 123456789
+            @y = 362436069
+            @z = 521288629
+            @w = seed
+            10000.times {self.next} # 初期値依存性を捨てるために最初の方の乱数値は捨てる
         end
+
         def next
+            t = (@x^(@x<<11))
+            t &= 0xFFFFFFFF # for emurating 32bit int 
+            @x = @y
+            @y = @z
+            @z = @w
+            @w=(@w^(@w>>19))^(t^(t>>8))
+            return @w
         end
     end
 end
