@@ -30,7 +30,7 @@ module ColorTileLogic
 
     # 別のとこ逃したほうがいいかも
     class SeededRandom
-        def initialize(seed=rand(100000000000))
+        def initialize(seed=rand(1000000))
             @x = 123456789
             @y = 362436069
             @z = 521288629
@@ -46,6 +46,12 @@ module ColorTileLogic
             @z = @w
             @w=(@w^(@w>>19))^(t^(t>>8))
             return @w
+        end
+
+        # rand_int(6) returns [0,1,2,3,4,5].example
+        def rand_int(max)
+            rand = self.next
+            return rand / (0xFFFFFFFF/max)
         end
     end
 end
