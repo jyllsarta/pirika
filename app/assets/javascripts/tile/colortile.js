@@ -7,10 +7,8 @@ import { log as log, warn as warn } from './logsystem';
 // ゲームロジック全般
 class ColorTile {
 
-    constructor(board, playTimeLengthSecond) {
-        this.board = board;
+    constructor(playTimeLengthSecond) {
         this.playTimeLengthSecond = playTimeLengthSecond;
-        this.score = 0;
         this.gameMode = GameMode.TITLE;
     }
 
@@ -32,15 +30,11 @@ class ColorTile {
         switch (this.gameMode) {
             case GameMode.TITLE:
                 break;
-            case GameMode.LOADING:
-                break;
             case GameMode.PLAYING:
                 if (this.timeLeft() < 0) {
-                    this.gameMode = GameMode.FINISHING;
+                    this.view.finish();
+                    this.gameMode = GameMode.RESULT;
                 }
-                break;
-            case GameMode.FINISHING:
-                this.gameMode = GameMode.RESULT;
                 break;
             case GameMode.RESULT:
                 break;
@@ -51,13 +45,8 @@ class ColorTile {
         return this.gameMode == GameMode.PLAYING;
     }
 
-    isFinishing() {
-        return this.gameMode == GameMode.FINISHING;
-    }
-
     requestStart() {
         log("start requested")
-        this.gameMode = GameMode.LOADING;
         ColorTileAPI.getNewBoard(this.startGame.bind(this));
     }
 
@@ -94,5 +83,5 @@ class ColorTile {
     }
 };
 
-let g_tile = new ColorTile(new Board(), 3);
+let g_tile = new ColorTile(3);
 export default g_tile; // ここだけグローバル変数として公開してしまう

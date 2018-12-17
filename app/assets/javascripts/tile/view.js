@@ -28,10 +28,10 @@ class View {
     constructor() {
         log("document.ready invoked.");
         this.addClickEvent();
-        this.syncView();
     }
 
     addClickEvent() {
+        // this地獄すぎるこの関数
         var self = this;
         log("add click event")
         $(".panel").each(function () {
@@ -50,11 +50,10 @@ class View {
     }
 
     startRemoveAnimation(panelObject) {
-        panelObject
-            .animate2({
-                transform: 'rotate(30deg) scale(1.3)',
-                opacity: 0,
-            }, 200, "linear")
+        panelObject.animate2({
+            transform: 'rotate(30deg) scale(1.3)',
+            opacity: 0,
+        }, 200, "linear")
     }
 
     resetPanel() {
@@ -171,13 +170,10 @@ class View {
             this.updateTimeBar();
             this.updateScore();
         }
-        if (g_tile.isFinishing()) {
-            this.finish();
-        }
     }
 };
 
-var g_view = new View(); //viewは外に出す
+var g_view = new View();
 g_tile.setView(g_view);
 
 function update() {
