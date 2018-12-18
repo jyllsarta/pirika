@@ -83,5 +83,5 @@ class ColorTile {
     }
 };
 
-let g_tile = new ColorTile(3);
+let g_tile = new ColorTile(180);
 export default g_tile; // ここだけグローバル変数として公開してしまう
