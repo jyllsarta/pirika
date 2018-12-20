@@ -28,6 +28,8 @@ class View {
     constructor() {
         log("document.ready invoked.");
         this.addClickEvent();
+        this.hitSFX = new Audio("/game/tile/sounds/sfx/hit.ogg");
+        this.hitSFX2 = new Audio("/game/tile/sounds/sfx/hit2.wav");
     }
 
     addClickEvent() {
@@ -136,12 +138,22 @@ class View {
 
     syncViewOnlyDirty() {
         var dirtyPanels = g_tile.board.panels().filter(x => x.dirty);
+        var panelsRemoved = 0;
         log("remove dirty panels.");
         log(dirtyPanels);
         for (var dirtyPanel of dirtyPanels) {
             var panelObject = $(`.panel[x=${dirtyPanel.x}][y=${dirtyPanel.y}]`);
             this.startRemoveAnimation(panelObject);
+            panelsRemoved++;
             dirtyPanel.resetDirtyFlag(); // ここでmodelを触りに行くのはたぶん規約違反だけど高速化のために許容
+        }
+        if (panelsRemoved > 2) {
+            log("play sound hit 2")
+            this.hitSFX2.play();
+        }
+        else if (panelsRemoved === 2) {
+            log("play sound hit")
+            this.hitSFX.play();
         }
     }
 
