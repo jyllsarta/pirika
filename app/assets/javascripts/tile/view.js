@@ -149,10 +149,12 @@ class View {
         }
         if (panelsRemoved > 2) {
             log("play sound hit 2")
+            this.hitSFX2.currentTime = 0;
             this.hitSFX2.play();
         }
         else if (panelsRemoved === 2) {
             log("play sound hit")
+            this.hitSFX.currentTime = 0;
             this.hitSFX.play();
         }
     }
