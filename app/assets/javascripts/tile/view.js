@@ -4,8 +4,9 @@
 //
 
 import g_colors from './colors';
-import g_tile from './colortile';
+import ColorTile from './colortile';
 import { log as log, warn as warn } from './logsystem';
+import ColorTileAPI from './api';
 
 // qiitaのanimate謎拡張
 // https://qiita.com/waterada/items/bb73f3850f05d854dc6e
@@ -90,7 +91,7 @@ class View {
 
     requestStartHandler(model) {
         log("start requested...")
-        g_tile.requestStart();
+        g_tile.startGame();
     }
 
     startGameHandler(model) {
@@ -187,6 +188,7 @@ class View {
     }
 };
 
+var g_tile = new ColorTile(10);
 var g_view = new View();
 g_tile.setView(g_view);
 

@@ -4,16 +4,23 @@ module ColorTileLogic
         class PositionAlreadySet < RuntimeError ;end
         class InsufficientPoints < RuntimeError ;end
 
-        def initialize(row, column, seed)
+        def initialize(row, column, colors, seed)
             @row = row
             @column = column
-            @seed = SeededRandom.new(114514)
+            @colors = colors
+            @seed = SeededRandom.new(seed)
             construct_board(@seed)
             # TODO 色数と密度
         end
 
         def to_json
-            @board.to_json
+            {
+                board: @board,
+                seed: @seed,
+                row: @row,
+                column: @column,
+                colors: @colors
+            }.to_json
         end
 
         private

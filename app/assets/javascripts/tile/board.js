@@ -48,7 +48,7 @@ class Board {
         for (var y = 0; y < this.h; ++y) {
             this.board[y] = [];
             for (var x = 0; x < this.w; ++x) {
-                this.board[y][x] = new Panel(x, y, boardJSON ? boardJSON[y][x] : 0);
+                this.board[y][x] = new Panel(x, y, boardJSON["board"] ? boardJSON["board"][y][x] : 0);
             }
         }
     }

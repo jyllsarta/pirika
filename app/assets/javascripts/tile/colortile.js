@@ -8,8 +8,10 @@ import { log as log, warn as warn } from './logsystem';
 class ColorTile {
 
     constructor(playTimeLengthSecond) {
+        log("creating ColotTile object")
         this.playTimeLengthSecond = playTimeLengthSecond;
         this.gameMode = GameMode.TITLE;
+        this.requestNextBoard();
     }
 
     setView(view) {
@@ -45,13 +47,29 @@ class ColorTile {
         return this.gameMode == GameMode.PLAYING;
     }
 
-    requestStart() {
-        log("start requested")
-        ColorTileAPI.getNewBoard(this.startGame.bind(this));
+    requestNextBoard() {
+        log("start requested");
+        ColorTileAPI.getNewBoard(this.storeNextBoard.bind(this));
     }
 
-    startGame(boardJSON) {
-        this.board = new Board(boardJSON);
+    storeNextBoard(boardJSON){
+        log("received new board");
+        this.nextBoard = new Board(boardJSON);
+        this.nextBoard.isPlayed = false;
+    }
+
+    startGame() {
+        if(!this.nextBoard){
+            log("まだ盤面ロード前なのよ");
+            return;
+        }
+        if(this.nextBoard.isPlayed){
+            log("もう使ったあとのボードなのよこれ");
+            return;
+        }
+        this.nextBoard.isPlayed = true;
+        this.requestNextBoard();
+        this.board = this.nextBoard;
         this.score = 0;
         this.gameMode = GameMode.PLAYING;
         this.startedTimePoint = Date.now();
@@ -83,5 +101,4 @@ class ColorTile {
     }
 };
 
-let g_tile = new ColorTile(180);
-export default g_tile; // ここだけグローバル変数として公開してしまう
+export default ColorTile;
