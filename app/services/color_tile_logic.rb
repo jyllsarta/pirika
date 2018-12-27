@@ -4,10 +4,11 @@ module ColorTileLogic
         class PositionAlreadySet < RuntimeError ;end
         class InsufficientPoints < RuntimeError ;end
 
-        def initialize(row, column, colors, seed)
+        def initialize(row, column, colors, pairs, seed)
             @row = row
             @column = column
             @colors = colors
+            @pairs = pairs
             @seed = SeededRandom.new(seed)
             construct_board(@seed)
             # TODO 色数と密度
@@ -19,7 +20,8 @@ module ColorTileLogic
                 seed: @seed,
                 row: @row,
                 column: @column,
-                colors: @colors
+                colors: @colors,
+                pairs: @pairs
             }.to_json
         end
 
@@ -32,7 +34,7 @@ module ColorTileLogic
             
 
             # 一旦雑に動作確認
-            20.times do
+            @pairs.times do
                 put_random_color_pair
             end
         end

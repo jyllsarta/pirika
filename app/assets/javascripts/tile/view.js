@@ -188,7 +188,7 @@ class View {
     }
 };
 
-var g_tile = new ColorTile(10);
+var g_tile = new ColorTile(100);
 var g_view = new View();
 g_tile.setView(g_view);
 

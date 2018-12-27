@@ -42,8 +42,8 @@ class Board {
     // Rails の Model のつもりで書きます
 
     initBoard(boardJSON) {
-        this.w = 15;
-        this.h = 10;
+        this.w = boardJSON["row"];
+        this.h = boardJSON["column"];
         this.board = new Array(this.h);
         for (var y = 0; y < this.h; ++y) {
             this.board[y] = [];
