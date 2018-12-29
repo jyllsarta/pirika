@@ -41,7 +41,7 @@ module ColorTileLogic
 
         def put_random_color_pair
             begin
-                color = @seed.rand_int(6)
+                color = @seed.rand_int(@colors) + 1 # colorid は1オリジン
                 x = @seed.rand_int(@row)
                 y = @seed.rand_int(@column)
                 raise PositionAlreadySet if @board[y][x]

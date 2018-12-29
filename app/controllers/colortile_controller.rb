@@ -10,7 +10,12 @@ class ColortileController < ApplicationController
 
     # returns new colortile board
     def new
-        board = ColorTileLogic::Board.new(25, 15, 6, 70, rand(1000000))
+        x = 25
+        y = 15
+        colors = 10
+        pairs = 70
+        seed = rand(1000)
+        board = ColorTileLogic::Board.new(x, y, colors, pairs, seed)
         render json: board.to_json
     end
 end
