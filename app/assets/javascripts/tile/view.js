@@ -38,16 +38,16 @@ class View {
         var self = this;
         log("add click event")
         $(".panel").each(function () {
-            $(this).click(self.clickPanelHandler.bind(self));
+            $(this).mousedown(self.clickPanelHandler.bind(self));
         });
 
-        $(".start").click(function () {
+        $(".start").mousedown(function () {
             this.requestStartHandler();
         }.bind(this));
-        $(".restart").click(function () {
+        $(".restart").mousedown(function () {
             this.requestStartHandler();
         }.bind(this));
-        $(".back_to_title").click(function () {
+        $(".back_to_title").mousedown(function () {
             this.backToTitleHandler();
         }.bind(this));
     }
