@@ -9,7 +9,7 @@ class ColorTileAPI {
         $(function () {
             $.ajax({
                 type: "GET",
-                url: "http://localhost:3000/tile/new",
+                url: "http://" + location.host + "/tile/new",
                 timeout: 10000,
             })
                 .done(function (response, textStatus, jqXHR) {

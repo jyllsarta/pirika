@@ -13,7 +13,7 @@ class ColortileController < ApplicationController
         x = 25
         y = 15
         colors = 10
-        pairs = 70
+        pairs = 100
         seed = rand(1000)
         board = ColorTileLogic::Board.new(x, y, colors, pairs, seed)
         render json: board.to_json
