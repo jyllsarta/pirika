@@ -26,6 +26,16 @@ class ColorTile {
         log("recieve click")
         this.score += this.board.scoreByClick(x, y);
         this.board.click(x, y);
+        this.checkEndGame();
+    }
+
+    checkEndGame() {
+        if (this.board.noMoreErase()) {
+            log("おしまい");
+            this.finish();
+            return;
+        }
+        log("まだ終わってない");
     }
 
     update() {
@@ -34,8 +44,7 @@ class ColorTile {
                 break;
             case GameMode.PLAYING:
                 if (this.timeLeft() < 0) {
-                    this.view.finish();
-                    this.gameMode = GameMode.RESULT;
+                    this.finish();
                 }
                 break;
             case GameMode.RESULT:
@@ -52,18 +61,18 @@ class ColorTile {
         ColorTileAPI.getNewBoard(this.storeNextBoard.bind(this));
     }
 
-    storeNextBoard(boardJSON){
+    storeNextBoard(boardJSON) {
         log("received new board");
         this.nextBoard = new Board(boardJSON);
         this.nextBoard.isPlayed = false;
     }
 
     startGame() {
-        if(!this.nextBoard){
+        if (!this.nextBoard) {
             log("まだ盤面ロード前なのよ");
             return;
         }
-        if(this.nextBoard.isPlayed){
+        if (this.nextBoard.isPlayed) {
             log("もう使ったあとのボードなのよこれ");
             return;
         }
@@ -97,6 +106,7 @@ class ColorTile {
     }
 
     finish() {
+        this.view.finish();
         this.gameMode = GameMode.RESULT;
     }
 };

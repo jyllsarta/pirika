@@ -38,6 +38,10 @@ class Board {
         return this.board.reduce((x, y) => (x.concat(y)));
     }
 
+    noMoreErase() {
+        return this.panels().every(panel => this.scoreByClick(panel.x, panel.y) == 0)
+    }
+
     // 以下 private (だということにする)
     // Rails の Model のつもりで書きます
 
