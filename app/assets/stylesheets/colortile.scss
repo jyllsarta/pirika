@@ -36,7 +36,7 @@ body{
         .panel{
             width: $panel_size;
             height: $panel_size;
-            border: 1px solid #fcfcff;
+            border: 1px solid #f3f3ff;
             .block{
                 margin: 1px;
                 border: 1px solid #fffbd5;
@@ -117,34 +117,40 @@ body{
 
 // z-index: 10000 - 99999
 .end{
-    background-color: yellow;
+    background-color: white;
+    opacity: 0.8;
     position: absolute;
-    width: $panel_size * $row;
+    width: ($panel_size+2) * $row;
     height: $panel_size * $column;
+    z-index: 10001;
     .final_score{
         position: absolute;
-        top: 10px;
-        left: 10px;
-        background-color: #92e274;
+        top: 100px;
+        left: 50px;
         width: 300px;
-        height: 20px;
-        z-index: 10001;
+        height: 60px;
+        font-size: 60px;
+        color: #92e274;
+    }
+    .button{
+        text-align: center;
+        font-size: 30px;
+        border-radius: 4px;
     }
     .restart{
         position: absolute;
-        bottom: 10px;
-        left: 10px;
+        bottom: 50px;
+        left: 50px;
         background-color: #92e274;
-        width: 300px;
-        height: 20px;
-        z-index: 10001;
+        width: 200px;
+        height: 50px;
     }
     .back_to_title{
+        background-color: #92e274;
         position: absolute;
-        bottom: 10px;
-        right: 10px;
-        width: 300px;
-        height: 20px;
-        z-index: 10001;
+        bottom: 50px;
+        right: 50px;
+        width: 200px;
+        height: 50px;
     }
 }
