@@ -22,6 +22,10 @@ Rails.application.routes.draw do
   get 'tile/',        to: "colortile#index"
   get 'tile/new',      to: "colortile#new"
 
+  get 'tile/results/', to: "results#index"
+  put 'tile/results/', to: "results#create"
+  get 'tile/results/:result_id', to: "results#show"
+
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
