@@ -11,7 +11,6 @@ module ColorTileLogic
             @pairs = pairs
             @seed = SeededRandom.new(seed)
             construct_board(@seed)
-            # TODO 色数と密度
         end
 
         def to_json
@@ -30,13 +29,19 @@ module ColorTileLogic
         def construct_board(seed)
             # 盤面生成
             @board = []
-            @column.times{ @board.append(Array.new(@row))}
-            
-
-            # 一旦雑に動作確認
-            @pairs.times do
-                put_random_color_pair
+            @column.times do |y|
+                row = []
+                @row.times do |x|
+                    row.append(Panel.new(x, y))
+                end
+                @board.append(row)
             end
+            # ペア生成
+            @board[7][4].color_id = 2
+            @board[4][8].color_id = 2
+
+            @board[10][4].color_id = 2
+            @board[12][4].color_id = 2
         end
 
         def put_random_color_pair
@@ -92,6 +97,25 @@ module ColorTileLogic
             end
             pp points
             return points
+        end
+    end
+
+    class Panel
+        attr_accessor :color_id
+        def initialize(x,y)
+            @x = x
+            @y = y
+            @color_id = nil
+        end
+
+        def to_json
+            @color_id
+        end
+    end
+
+    class Cross
+        def initialize(board, x, y)
+
         end
     end
 
