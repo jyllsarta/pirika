@@ -1,8 +1,9 @@
 module ColorTileLogic
     class Board
 
-        class PositionAlreadySet < RuntimeError ;end
-        class InsufficientPoints < RuntimeError ;end
+        class NoAvailablePoints < RuntimeError ;end
+
+        attr_accessor :row, :column, :board
 
         def initialize(row, column, colors, pairs, seed)
             @row = row
@@ -24,6 +25,25 @@ module ColorTileLogic
             }.to_json
         end
 
+        def panels
+            @board.reduce{ |parent, child| parent + child}
+        end
+
+        # 座標が存在するか
+        def exists?(x, y)
+            !!@board[y].try(:[], x)
+        end
+
+        # 座標が存在して、ブロックが置いてあるか
+        def block?(x, y)
+            exists?(x, y) &&  panel(x, y).block?
+        end
+
+        def panel(x, y)
+            return nil if !exists?(x, y)
+            @board[y][x]
+        end
+
         private
 
         def construct_board(seed)
@@ -42,66 +62,37 @@ module ColorTileLogic
 
             @board[10][4].color_id = 2
             @board[12][4].color_id = 2
+
+            10.times{put_block}
         end
 
-        def put_random_color_pair
-            begin
-                color = @seed.rand_int(@colors) + 1 # colorid は1オリジン
-                x = @seed.rand_int(@row)
-                y = @seed.rand_int(@column)
-                raise PositionAlreadySet if @board[y][x]
-                points = available_points(x, y)
-                raise InsufficientPoints if points.length < 2
-                r1 = @seed.rand_int(points.length)
-                p1 = points[r1]
-                @board[p1[1]][p1[0]] = color
-                points.delete_at(r1)
-                r2 = @seed.rand_int(points.length)
-                p2 = points[r2]
-                @board[p2[1]][p2[0]] = color
-            rescue PositionAlreadySet
-                puts "board #{x}, #{y} already set... retry"
-                retry
-            rescue InsufficientPoints
-                puts "board #{x}, #{y} has insufficient available points... retry" and put_random_color_pair if points.length < 2
-                retry
-            end
+        def puttable_panels
+            return panels.select{|panel| Cross.new(self, panel).puttable?}
         end
 
-        def pick_random_free_space
-            # みたいなので上のx=rand_int, y=rand_int をやめる
+        def put_block
+            panels = puttable_panels
+            raise NoAvailablePoints if panels.empty?
+
+            points = Cross.new(self, panels.sample).available_panels
+
+            p1 = points.sample
+            p2 = (panels - [p1]).sample
+
+            random_color = (1..@colors).to_a.sample
+
+            pp [p1,p2]
+            panel(p1.x, p1.y).color_id = random_color
+            panel(p2.x, p2.y).color_id = random_color
         end
 
         def set_pair_on(available_points)
             # r1, r2 にまかせている部分をここでまとめる
         end
-
-        # @boardに対して、(x,y) からみて上下左右にブロックのない座標一覧を返す
-        def available_points(x, y)
-            points = []
-            (0..(x-1)).to_a.reverse.each do |ix|
-                break if @board[y][ix]
-                points.append([ix,y])
-            end
-            (0..(y-1)).to_a.reverse.each do |iy|
-                break if @board[iy][x]
-                points.append([x,iy])
-            end
-            ((x+1)..(@row-1)).each do |ix|
-                break if @board[y][ix]
-                points.append([ix,y])
-            end
-            ((y+1)..(@column-1)).each do |iy|
-                break if @board[iy][x]
-                points.append([x,iy])
-            end
-            pp points
-            return points
-        end
     end
 
     class Panel
-        attr_accessor :color_id
+        attr_accessor :color_id, :x, :y
         def initialize(x,y)
             @x = x
             @y = y
@@ -111,11 +102,55 @@ module ColorTileLogic
         def to_json
             @color_id
         end
+
+        def block?
+            !@color_id.nil?
+        end
     end
 
     class Cross
-        def initialize(board, x, y)
+        def initialize(board, panel)
+            @board = board
+            @panel = panel
+        end
 
+        # ブロック設置ができる基準点かどうか
+        def puttable?
+            x = @panel.x
+            y = @panel.y
+            # 上下左右を見て、3つ以上埋まってたら置けない
+            [
+                @board.block?(x-1, y),
+                @board.block?(x, y-1),
+                @board.block?(x+1, y),
+                @board.block?(x, y+1),
+            ].select{|x| x}.length < 3
+        end
+
+        # ブロック設置候補になるパネルのリストをかえす
+        def available_panels
+            points = []
+            x = @panel.x
+            y = @panel.y
+            # 5マスまで奥にブロックを探しに行くが、画面端かブロックにぶつかったらそこでその方向の探索は終了
+            distance = 2
+            ((x-1-distance)..(x-1)).to_a.reverse.each do |ix|
+                break if !@board.exists?(ix, y) || @board.block?(ix, y)
+                points.append(@board.panel(ix, y))
+            end
+            ((y-1-distance)..(y-1)).to_a.reverse.each do |iy|
+                break if !@board.exists?(x, iy) || @board.block?(x, iy)
+                points.append(@board.panel(x, iy))
+            end
+            ((x+1)..(x+1+distance)).each do |ix|
+                break if !@board.exists?(ix, y) || @board.block?(ix, y)
+                points.append(@board.panel(ix, y))
+            end
+            ((y+1)..(y+1+distance)).each do |iy|
+                break if !@board.exists?(x, iy) || @board.block?(x, iy)
+                points.append(@board.panel(x, iy))
+            end
+            return points            
         end
     end
 
