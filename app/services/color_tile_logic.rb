@@ -2,6 +2,8 @@ module ColorTileLogic
     class Board
 
         class NoAvailablePoints < RuntimeError ;end
+        class InsufficientPoints < RuntimeError ;end
+        class PositionAlreadySet < RuntimeError ;end
 
         attr_accessor :row, :column, :board
 
@@ -36,7 +38,7 @@ module ColorTileLogic
 
         # 座標が存在して、ブロックが置いてあるか
         def block?(x, y)
-            exists?(x, y) &&  panel(x, y).block?
+            exists?(x, y) && panel(x, y).block?
         end
 
         def panel(x, y)
@@ -63,18 +65,35 @@ module ColorTileLogic
             @board[10][4].color_id = 2
             @board[12][4].color_id = 2
 
-            10.times{put_block}
+            100.times{put_block}
         end
 
-        def puttable_panels
-            return panels.select{|panel| Cross.new(self, panel).puttable?}
+        # 試しに座標一つ指定してみて、そこ基準でブロックのペアを置けないならもう一度繰り返す
+        def pick_available_panel_by_random
+            begin
+                x = @seed.rand_int(@row)
+                y = @seed.rand_int(@column)
+                raise PositionAlreadySet if block?(x, y)
+                raise InsufficientPoints unless Cross.new(self, panel(x,y)).puttable?
+            rescue PositionAlreadySet
+                puts "board #{x}, #{y} already set... retry"
+                retry
+            rescue InsufficientPoints
+                puts "board #{x}, #{y} has insufficient available points... retry"
+                retry
+            end
+            panel(x, y)
         end
+
+        # ブロックのペアを置ける場所をリストアップして、そこから一つ選ぶ
+        def pick_available_panel_by_scan_all
+            panels.select{|panel| Cross.new(self, panel).puttable?}.sample
+        end 
 
         def put_block
-            panels = puttable_panels
-            raise NoAvailablePoints if panels.empty?
+            panel = pick_available_panel_by_random
 
-            points = Cross.new(self, panels.sample).available_panels
+            points = Cross.new(self, panel).available_panels
 
             p1 = points.sample
             p2 = (panels - [p1]).sample
@@ -84,10 +103,6 @@ module ColorTileLogic
             pp [p1,p2]
             panel(p1.x, p1.y).color_id = random_color
             panel(p2.x, p2.y).color_id = random_color
-        end
-
-        def set_pair_on(available_points)
-            # r1, r2 にまかせている部分をここでまとめる
         end
     end
 
