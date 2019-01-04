@@ -1,6 +1,7 @@
 
 import Board from './board';
 import GameMode from './gamemodes';
+import PlayLog from './playlog';
 import ColorTileAPI from './api';
 import { log as log, warn as warn } from './logsystem';
 
@@ -12,6 +13,7 @@ class ColorTile {
         this.playTimeLengthSecond = playTimeLengthSecond;
         this.gameMode = GameMode.TITLE;
         this.requestNextBoard();
+        this.playlog = new PlayLog();
     }
 
     setView(view) {
@@ -27,6 +29,7 @@ class ColorTile {
         this.score += this.board.scoreByClick(x, y);
         this.board.click(x, y);
         this.checkEndGame();
+        this.playlog.log("click", `${x},${y}`);
     }
 
     checkEndGame() {
@@ -108,6 +111,7 @@ class ColorTile {
     finish() {
         this.view.finish();
         this.gameMode = GameMode.RESULT;
+        log(this.playlog.messages)
     }
 };
 
