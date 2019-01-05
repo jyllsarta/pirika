@@ -111,7 +111,8 @@ class ColorTile {
     finish() {
         this.view.finish();
         this.gameMode = GameMode.RESULT;
-        log(this.playlog.messages)
+        log(this.playlog.messages);
+        ColorTileAPI.sendResult(this.view.flashSavedTicker, this.playlog);
     }
 };
 

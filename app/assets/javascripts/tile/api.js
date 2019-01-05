@@ -13,12 +13,34 @@ class ColorTileAPI {
                 timeout: 10000,
             })
                 .done(function (response, textStatus, jqXHR) {
-                    log("request succeeded. response is:");
+                    log("request <getNewBoard> succeeded. response is:");
                     log(response);
                     callback(response);
                 })
                 .fail(function (jqXHR, textStatus, errorThrown) {
-                    log("だめ")
+                    log("だめ(盤面取得)")
+                });
+        });
+    };
+    static sendResult(callback, logjson) {
+        $(function () {
+            $.ajax({
+                type: "POST",
+                url: "http://" + location.host + "/tile/results/create",
+                timeout: 10000,
+                dataType: "json",
+                data: {
+                    authenticity_token: $("meta[name=csrf-token]").attr("content"),
+                    playlog: logjson,
+                },
+            })
+                .done(function (response, textStatus, jqXHR) {
+                    log("request <sendResult> succeeded. response is:");
+                    log(response);
+                    callback(response);
+                })
+                .fail(function (jqXHR, textStatus, errorThrown) {
+                    log("だめ(ランキング送信)")
                 });
         });
     };

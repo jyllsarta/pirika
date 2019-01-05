@@ -1,5 +1,6 @@
 class ResultsController < ApplicationController
     def create
+        pp params
         render json: {result: false}
     end
 

@@ -186,9 +186,13 @@ class View {
             this.updateScore();
         }
     }
+
+    flashSavedTicker() {
+        log("ランキング保存したよ！");
+    }
 };
 
-var g_tile = new ColorTile(100);
+var g_tile = new ColorTile(2);
 var g_view = new View();
 g_tile.setView(g_view);
 
