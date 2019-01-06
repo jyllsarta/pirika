@@ -3,10 +3,8 @@
 // (このファイルがこんなに苦しいならフロントのライブラリを使うべきでは...?)
 //
 
-import g_colors from './colors';
 import ColorTile from './colortile';
 import { log as log, warn as warn } from './logsystem';
-import ColorTileAPI from './api';
 
 // qiitaのanimate謎拡張
 // https://qiita.com/waterada/items/bb73f3850f05d854dc6e
@@ -112,7 +110,7 @@ class View {
 
     paintPanel(panelObject, panelModel) {
         if (panelModel) {
-            var color = $(`.color_sample_${panelModel.colorId}`).css("background");
+            var color = $(`.color_sample${panelModel.colorId}`).css("background");
             $(panelObject).find(".block").css("background", color);
             $(panelObject).find(".block").removeClass("hidden");
         }

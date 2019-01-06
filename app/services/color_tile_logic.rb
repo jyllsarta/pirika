@@ -110,7 +110,7 @@ module ColorTileLogic
 
             p1 = @seed.sample(points)
             p2 = @seed.sample(points - [p1])
-            random_color = @seed.rand_int(@colors)
+            random_color = @seed.rand_int(@colors) + 1 # jsだと0はfalsyなので、色IDは1オリジンとする
 
             panel(p1.x, p1.y).color_id = random_color
             panel(p2.x, p2.y).color_id = random_color

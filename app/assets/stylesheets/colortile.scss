@@ -69,19 +69,18 @@ body{
     display: none;
 }
 
-.color_sample{
-    // このスタイルが当てられることはなく、カラーピッカーを使って色を選ぶ用に保持されているだけ
-    something: linear-gradient(to bottom, #45a4f3 0%,#a1a7db 53%,#6c86ac 57%,#4a47ec 100%);
-    something: linear-gradient(to bottom, #f4d3f7 0%,#fccdff 53%,#ff9fff 57%,#d887b6 100%);
-    something: linear-gradient(to bottom, #e7d5c6 0%,#f1d26e 53%,#ffed4b 57%,#c9b4a2 100%);
-    something: linear-gradient(to bottom, #f7e6c7 0%,#fbfd67 53%,#ffe055 57%,#d8d658 100%);
-    something: linear-gradient(to bottom, #badbb7 0%,#62bd59 53%,#2daa42 57%,#a9ecc7 100%);
-    something: linear-gradient(to bottom, #a996f5 0%,#8e6de9 53%,#a268ee 57%,#be8cd6 100%);
-    something: linear-gradient(to bottom, #a4fff7 0%,#7abaeb 53%,#7fabfc 57%,#97aed8 100%);
-    something: linear-gradient(to bottom, #f191a6 0%,#f19fb1 53%,#eb5c92 57%,#c999ab 100%);
-    something: linear-gradient(to bottom, #d4f85e 0%,#c3f861 53%,#adf061 57%,#c4e47b 100%);
-    something: linear-gradient(to bottom, #bda294 0%,#c78e5a 53%,#e6905e 57%,#ffedb1 100%);
-}
+.color_sample1 { background: linear-gradient(to bottom, #81aed3 0%,#2d3fe0 53%,#1964d4 57%,#a2a1ec 100%);}
+.color_sample2 { background: linear-gradient(to bottom, #f8e6fa 0%,#fbbeff 53%,#f09ef0 57%,#e9c1d8 100%);}
+.color_sample3 { background: linear-gradient(to bottom, #ffbb83 0%,#ffb443 53%,#ff9822 57%,#fa936b 100%);}
+.color_sample4 { background: linear-gradient(to bottom, #ffe44b 0%,#fcff33 53%,#eccd3f 57%,#ebd097 100%);}
+.color_sample5 { background: linear-gradient(to bottom, #5ac068 0%,#3dc54f 53%,#1fd33d 57%,#c8e9d7 100%);}
+.color_sample6 { background: linear-gradient(to bottom, #a996f5 0%,#8e6de9 53%,#9a5bec 57%,#be8cd6 100%);}
+.color_sample7 { background: linear-gradient(to bottom, #a4fff7 0%,#7abaeb 53%,#7fabfc 57%,#97aed8 100%);}
+.color_sample8 { background: linear-gradient(to bottom, #f55b7f 0%,#ff636b 53%,#ff4a90 57%,#e4c6d1 100%);}
+.color_sample9 { background: linear-gradient(to bottom, #d0ee6e 0%,#c5e222 53%,#82e215 57%,#d3ee96 100%);}
+.color_sample10{ background: linear-gradient(to bottom, #8b6e5f 0%,#a36e3c 53%,#d37843 57%,#ebd48c 100%);}
+.color_sample11{ background: linear-gradient(to bottom, #615f64 0%,#737683 53%,#7a7f88 57%,#4f5153 100%);}
+.color_sample12{ background: linear-gradient(to bottom, #d2e8f0 0%,#cee6f0 53%,#c2c9d3 57%,#c1c7c7 100%);}
 
 // z-index: 100 - 999
 .ui{
