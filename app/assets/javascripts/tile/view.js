@@ -58,7 +58,7 @@ class View {
     }
 
     resetPanel() {
-        $(".panel").css({
+        $(".block").css({
             transform: "none",
             opacity: 1,
         })
@@ -141,7 +141,7 @@ class View {
         log("remove dirty panels.");
         log(dirtyPanels);
         for (var dirtyPanel of dirtyPanels) {
-            var panelObject = $(`.panel[x=${dirtyPanel.x}][y=${dirtyPanel.y}]`);
+            var panelObject = $(`.panel[x=${dirtyPanel.x}][y=${dirtyPanel.y}] .block`);
             this.startRemoveAnimation(panelObject);
             panelsRemoved++;
             dirtyPanel.resetDirtyFlag(); // ここでmodelを触りに行くのはたぶん規約違反だけど高速化のために許容
