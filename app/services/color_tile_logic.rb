@@ -64,13 +64,6 @@ module ColorTileLogic
                 end
                 @board.append(row)
             end
-            # ペア生成
-            @board[7][4].color_id = 2
-            @board[4][8].color_id = 2
-
-            @board[10][4].color_id = 2
-            @board[12][4].color_id = 2
-
             @pairs.times{put_block}
         end
 
