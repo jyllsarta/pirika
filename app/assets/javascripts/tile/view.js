@@ -112,7 +112,7 @@ class View {
 
     paintPanel(panelObject, panelModel) {
         if (panelModel) {
-            var color = g_colors[panelModel.colorId];
+            var color = $(`.color_sample_${panelModel.colorId}`).css("background");
             $(panelObject).find(".block").css("background", color);
             $(panelObject).find(".block").removeClass("hidden");
         }
@@ -192,7 +192,7 @@ class View {
     }
 };
 
-var g_tile = new ColorTile(2);
+var g_tile = new ColorTile(100);
 var g_view = new View();
 g_tile.setView(g_view);
 
