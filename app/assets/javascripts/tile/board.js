@@ -48,6 +48,9 @@ class Board {
     initBoard(boardJSON) {
         this.w = boardJSON["row"];
         this.h = boardJSON["column"];
+        this.seed = boardJSON["seed"];
+        this.colors = boardJSON["colors"];
+        this.pairs = boardJSON["pairs"];
         this.board = new Array(this.h);
         for (var y = 0; y < this.h; ++y) {
             this.board[y] = [];

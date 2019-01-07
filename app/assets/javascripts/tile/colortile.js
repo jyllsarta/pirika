@@ -13,7 +13,6 @@ class ColorTile {
         this.playTimeLengthSecond = playTimeLengthSecond;
         this.gameMode = GameMode.TITLE;
         this.requestNextBoard();
-        this.playlog = new PlayLog();
     }
 
     setView(view) {
@@ -86,6 +85,7 @@ class ColorTile {
         this.gameMode = GameMode.PLAYING;
         this.startedTimePoint = Date.now();
         this.view.startGameHandler();
+        this.playlog = new PlayLog(this.board);
     }
 
     backToTitle() {

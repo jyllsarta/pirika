@@ -20,7 +20,7 @@ module ColorTileLogic
         def to_json
             {
                 board: @board,
-                seed: @seed,
+                seed: @seed.seed,
                 row: @row,
                 column: @column,
                 colors: @colors,
@@ -50,6 +50,16 @@ module ColorTileLogic
         def panel(x, y)
             return nil if !exists?(x, y)
             @board[y][x]
+        end
+
+        def score_by_click(x, y)
+            return 0 if block?(x, y)
+            Cross.new(@board, panel(x, y)).score
+        end
+
+        def click!(x, y)
+            return if block?(x, y)
+            Cross.new(@board, panel(x, y)).destruct
         end
 
         private
@@ -171,17 +181,93 @@ module ColorTileLogic
                 break unless @board.free?(x, iy)
                 points.append(@board.panel(x, iy))
             end
-            return points            
+            return points
         end
+    end
+
+    class SimulatorCross
+        def initialize(board, panel)
+            @board = board
+            @panel = panel
+            @up = find_first_block(up_panels);
+            @down = find_first_block(down_panels);
+            @left = find_first_block(left_panels);
+            @right = find_first_block(right_panels);
+        end
+
+        def score
+            paired_blocks.length ** 2 * 2
+        end
+
+        private
+
+        def paired_blocks
+            blocks.select{|block| count_color_in_blocks(block.color_id) >= 2}
+        end
+
+        def count_color_in_blocks(color_id)
+            blocks.select{|block| block.color_id == color_id}.length
+        end
+
+        def blocks
+            block = []
+            block.append(@up) if @up
+            block.append(@down) if @down
+            block.append(@left) if @left
+            block.append(@right) if @right
+            block
+        end
+
+        def up_panels
+            panels = [];
+            (0..(@y-1)).to_a.reverse.each do |iy|
+                panels.append(@board.panel(@x, iy));
+            end
+            return panels
+        end
+
+        def down_panels
+            panels = [];
+            ((@y+1)..@board.row).to_a.reverse.each do |iy|
+                panels.append(@board.panel(@x, iy));
+            end
+            return panels
+        end
+
+        def left_panels
+            panels = [];
+            (0..(@x-1)).to_a.reverse.each do |ix|
+                panels.append(@board.panel(ix, @y));
+            end
+            return panels
+        end
+
+        def right_panels
+            panels = [];
+            ((@x+1)..@board.column).to_a.reverse.each do |ix|
+                panels.append(@board.panel(ix, @y));
+            end
+            return panels
+        end
+
+        def find_first_block(panels)
+            panels.each do |panel|
+                return panel if panel
+            end
+        end
+
     end
 
     # 別のとこ逃したほうがいいかも
     class SeededRandom
+        attr_accessor :seed
+
         def initialize(seed=rand(1000000))
             @x = 123456789
             @y = 362436069
             @z = 521288629
             @w = seed
+            @seed = seed
             10000.times {self.next} # 初期値依存性を捨てるために最初の方の乱数値は捨てる
         end
 
@@ -204,6 +290,22 @@ module ColorTileLogic
         # select random one from array
         def sample(array)
             array[rand_int(array.length)]
+        end
+    end
+
+    class ColorTileSimulator
+        def initialize(seed, clicklogs, x, y, colors, pairs)
+            @seed = seed
+            @clicklogs = clicklogs
+            @x = x
+            @y = y
+            @colors = colors
+            @pairs = pairs
+        end
+
+        def score
+            @board = Board.new(@x, @y, @colors, @pairs, @seed)
+            #TODO スコア計算
         end
     end
 end
