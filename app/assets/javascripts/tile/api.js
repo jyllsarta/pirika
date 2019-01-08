@@ -23,6 +23,8 @@ class ColorTileAPI {
         });
     };
     static sendResult(callback, logjson) {
+        log("sending result is");
+        log(logjson);
         $(function () {
             $.ajax({
                 type: "POST",

@@ -52,14 +52,32 @@ module ColorTileLogic
             @board[y][x]
         end
 
+        def destruct(x, y)
+            @board[y][x].color_id = nil
+        end
+
         def score_by_click(x, y)
             return 0 if block?(x, y)
-            Cross.new(@board, panel(x, y)).score
+            SimulatorCross.new(self, panel(x, y)).score
         end
 
         def click!(x, y)
             return if block?(x, y)
-            Cross.new(@board, panel(x, y)).destruct
+            SimulatorCross.new(self, panel(x, y)).destruct
+        end
+
+        def w
+            @row
+        end
+
+        def h
+            @column
+        end
+
+        def print_board
+            @board.each do |row|
+                puts row.map{|panel| panel.color_id || 0}.join(",")
+            end
         end
 
         private
@@ -88,10 +106,10 @@ module ColorTileLogic
                 raise PositionAlreadySet unless free?(x, y)
                 raise InsufficientPoints unless Cross.new(self, panel(x,y)).puttable?
             rescue PositionAlreadySet
-                puts "board #{x}, #{y} already set... retry"
+                #puts "board #{x}, #{y} already set... retry"
                 retry
             rescue InsufficientPoints
-                puts "board #{x}, #{y} has insufficient available points... retry"
+                #puts "board #{x}, #{y} has insufficient available points... retry"
                 retry
             end
             panel(x, y)
@@ -99,12 +117,12 @@ module ColorTileLogic
 
         # ブロックのペアを置ける場所をリストアップして、そこから一つ選ぶ
         def pick_available_panel_by_scan_all
-            puts "achieved retry max. start scan"
+            #puts "achieved retry max. start scan"
             all_puttable_points = panels.select{|panel| Cross.new(self, panel).puttable?}
             raise NoAvailablePoints if all_puttable_points.empty?
 
             @seed.sample(all_puttable_points)
-        end         
+        end
 
         def put_block
             panel = pick_puttable_panel
@@ -199,6 +217,10 @@ module ColorTileLogic
             paired_blocks.length ** 2 * 2
         end
 
+        def destruct
+            paired_blocks.map{|block| @board.destruct(block.x, block.y)}
+        end
+
         private
 
         def paired_blocks
@@ -206,7 +228,7 @@ module ColorTileLogic
         end
 
         def count_color_in_blocks(color_id)
-            blocks.select{|block| block.color_id == color_id}.length
+            blocks.select{|block| !block.color_id.nil? && block.color_id == color_id}.length
         end
 
         def blocks
@@ -220,49 +242,49 @@ module ColorTileLogic
 
         def up_panels
             panels = [];
-            (0..(@y-1)).to_a.reverse.each do |iy|
-                panels.append(@board.panel(@x, iy));
+            (0..(@panel.y-1)).to_a.reverse.each do |iy|
+                panels.append(@board.panel(@panel.x, iy));
             end
             return panels
         end
 
         def down_panels
             panels = [];
-            ((@y+1)..@board.row).to_a.reverse.each do |iy|
-                panels.append(@board.panel(@x, iy));
+            ((@panel.y+1)..@board.h).to_a.each do |iy|
+                panels.append(@board.panel(@panel.x, iy));
             end
             return panels
         end
 
         def left_panels
             panels = [];
-            (0..(@x-1)).to_a.reverse.each do |ix|
-                panels.append(@board.panel(ix, @y));
+            (0..(@panel.x-1)).to_a.reverse.each do |ix|
+                panels.append(@board.panel(ix, @panel.y));
             end
             return panels
         end
 
         def right_panels
             panels = [];
-            ((@x+1)..@board.column).to_a.reverse.each do |ix|
-                panels.append(@board.panel(ix, @y));
+            ((@panel.x+1)..@board.w).to_a.each do |ix|
+                panels.append(@board.panel(ix, @panel.y));
             end
             return panels
         end
 
         def find_first_block(panels)
             panels.each do |panel|
-                return panel if panel
+                return panel if !panel.try(:color_id).nil?
             end
+            nil
         end
-
     end
 
     # 別のとこ逃したほうがいいかも
     class SeededRandom
         attr_accessor :seed
 
-        def initialize(seed=rand(1000000))
+        def initialize(seed)
             @x = 123456789
             @y = 362436069
             @z = 521288629
@@ -294,18 +316,25 @@ module ColorTileLogic
     end
 
     class ColorTileSimulator
-        def initialize(seed, clicklogs, x, y, colors, pairs)
+        def initialize(seed, clicklogs, w, h, colors, pairs)
             @seed = seed
             @clicklogs = clicklogs
-            @x = x
-            @y = y
+            @w = w
+            @h = h
             @colors = colors
             @pairs = pairs
         end
 
         def score
-            @board = Board.new(@x, @y, @colors, @pairs, @seed)
-            #TODO スコア計算
+            @board = Board.new(@w, @h, @colors, @pairs, @seed)
+            sum = 0
+            @clicklogs.each do |_, click|
+                x,y = click[:message].split(",").map(&:to_i)
+                click_score = @board.score_by_click(x, y)
+                @board.click!(x, y) if click_score > 0
+                sum += click_score
+            end
+            sum
         end
     end
 end
