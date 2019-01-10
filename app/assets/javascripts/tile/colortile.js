@@ -19,6 +19,11 @@ class ColorTile {
         this.view = view;
     }
 
+    setUsername(username) {
+        log(`set username to ${username}`)
+        this.username = username;
+    }
+
     click(x, y) {
         if (this.gameMode !== GameMode.PLAYING) {
             log("ゲーム中でないので処理しません");
@@ -112,7 +117,7 @@ class ColorTile {
         this.view.finish();
         this.gameMode = GameMode.RESULT;
         log(this.playlog.messages);
-        ColorTileAPI.sendResult(this.view.flashSavedTicker, this.playlog);
+        ColorTileAPI.sendResult(this.view.flashSavedTicker, this.playlog, this.username);
     }
 };
 

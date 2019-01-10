@@ -7,7 +7,10 @@ class ResultsController < ApplicationController
         colors = params[:playlog][:colors].to_i
         pairs = params[:playlog][:pairs].to_i
         sim = ColorTileLogic::ColorTileSimulator.new(seed, clicklogs, w, h, colors, pairs)
+        username = params[:username]
         score = sim.score
+        
+        result = Result.create!(seed: seed, score: score, username: username, playlog: clicklogs)
         render json: {score: score}
     end
 

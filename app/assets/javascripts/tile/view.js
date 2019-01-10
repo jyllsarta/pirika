@@ -29,6 +29,7 @@ class View {
         this.addClickEvent();
         this.hitSFX = new Audio("/game/tile/sounds/sfx/hit.ogg");
         this.hitSFX2 = new Audio("/game/tile/sounds/sfx/hit2.wav");
+        this.setUsername();
     }
 
     addClickEvent() {
@@ -48,6 +49,13 @@ class View {
         $(".back_to_title").mousedown(function () {
             this.backToTitleHandler();
         }.bind(this));
+        $(".username").blur(function () {
+            this.setUsername();
+        }.bind(this));
+    }
+
+    setUsername() {
+        g_tile.setUsername($(".username").val());
     }
 
     startRemoveAnimation(panelObject) {

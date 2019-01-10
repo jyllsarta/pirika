@@ -22,9 +22,11 @@ class ColorTileAPI {
                 });
         });
     };
-    static sendResult(callback, logjson) {
+    static sendResult(callback, logjson, username) {
         log("sending result is");
         log(logjson);
+        log("username is");
+        log(username);
         $(function () {
             $.ajax({
                 type: "POST",
@@ -34,6 +36,7 @@ class ColorTileAPI {
                 data: {
                     authenticity_token: $("meta[name=csrf-token]").attr("content"),
                     playlog: logjson,
+                    username: username,
                 },
             })
                 .done(function (response, textStatus, jqXHR) {
