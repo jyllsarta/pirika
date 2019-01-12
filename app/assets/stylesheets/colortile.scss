@@ -74,16 +74,30 @@ body{
     }
     .click_to_start{
         position: absolute;
-        bottom: 10px;
-        right: 10px;
-        width: 150px;
-        height: 80px;
-        border:1px solid #7abaeb;
+        width: 120px;
+        height: 60px;
         display: flex;
         justify-content: center;
         align-items: center;
-        box-shadow: 1px 1px 3px 1px rgba(107, 125, 150, 0.8);
         animation: lets_click 1s linear infinite alternate;
+    }
+    #easy{
+        bottom: 10px;
+        right: 270px;
+        border:1px solid #4ca5e9;
+        box-shadow: 1px 1px 5px 1px rgba(102, 148, 212, 0.8);
+    }
+    #normal{
+        bottom: 10px;
+        right: 140px;
+        border:1px solid #eccc16;
+        box-shadow: 1px 1px 5px 1px rgba(238, 184, 85, 0.8);
+    }
+    #hard{
+        bottom: 10px;
+        right: 10px;
+        border:1px solid #f054a2;
+        box-shadow: 1px 1px 5px 1px rgba(177, 29, 66, 0.8);
     }
     .namelabel{
         position: absolute;
