@@ -29,7 +29,7 @@ class View {
         this.addEvent();
         this.hitSFX = new Audio("/game/tile/sounds/sfx/hit.ogg");
         this.hitSFX2 = new Audio("/game/tile/sounds/sfx/hit2.wav");
-        this.checkUsername();
+        this.setDefaultUsername();
     }
 
     addEvent() {
@@ -57,8 +57,18 @@ class View {
         }.bind(this));
     }
 
+    setDefaultUsername() {
+        const username = $.cookie("username");
+        if (username) {
+            $(".username").val(username);
+            this.setUsername();
+        }
+    }
+
     setUsername() {
-        g_tile.setUsername($(".username").val());
+        const username = $(".username").val();
+        g_tile.setUsername(username);
+        $.cookie("username", username, { expires: 10000 });
     }
 
     //textareaに入力されたユーザ名をステートに反映
