@@ -2,7 +2,7 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-$panel_size: 40px;
+$panel_size: 36px;
 $row: 20;
 $column: 10;
 
@@ -19,6 +19,7 @@ body{
 .game_screen{
     width: $panel_size * $row;
     margin: 0 auto;
+    box-shadow: 1px 1px 1px 1px rgba(38, 59, 88, 0.8);
 }
 
 // z-index: 10 - 99
@@ -50,12 +51,18 @@ body{
     }
     .row:nth-child(2n+1){
         .panel:nth-child(2n){
-            background-color: rgb(240, 240, 240);
+            background-color: rgba(240, 240, 240, 0.8);
+        }
+        .panel:nth-child(2n+1){
+            background-color: rgba(255, 255, 255, 0.8);
         }
     }
     .row:nth-child(2n){
+        .panel:nth-child(2n){
+            background-color: rgba(255, 255, 255, 0.8);
+        }
         .panel:nth-child(2n+1){
-            background-color: rgb(240, 240, 240);
+            background-color: rgba(240, 240, 240, 0.8);
         }
     }
 }
@@ -64,8 +71,8 @@ body{
 .start{
     background-color: white;
     position: absolute;
-    width: ($panel_size+2) * $row;
-    height: ($panel_size+2) * $column;
+    width: ($panel_size) * $row;
+    height: ($panel_size) * $column;
     z-index: 1000;
     display: flex;
     justify-content: center;
@@ -122,6 +129,7 @@ body{
         top: 35px;
         left: 10px;
         border-radius: 3px;
+        box-shadow: 1px 1px 1px 1px rgba(38, 59, 88, 0.8);
     }
 }
 
