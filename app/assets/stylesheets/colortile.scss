@@ -70,6 +70,16 @@ body{
     width: ($panel_size+2) * $row;
     height: ($panel_size+2) * $column;
     z-index: 1000;
+    display: flex;
+    justify-content: center;
+    .title_image{
+        height: $column * $panel_size;
+    }
+    .click_to_start{
+        position: absolute;
+        bottom: 10px;
+        right: 10px;
+    }
 }
 
 .hidden{
