@@ -214,6 +214,7 @@ class View {
             this.hitSFX.currentTime = 0;
             this.hitSFX.play();
         }
+        this.updateScore();
     }
 
     updateTimeBar() {
@@ -222,7 +223,12 @@ class View {
     }
 
     updateScore() {
-        $(".time").text(g_tile.getCurrentScore());
+        $(".score").numerator({
+            easing: 'linear',
+            duration: 400,
+            rounding: 0,
+            toValue: g_tile.getCurrentScore(),
+        });
     }
 
     finish() {
@@ -239,7 +245,6 @@ class View {
         g_tile.update();
         if (g_tile.isPlaying()) {
             this.updateTimeBar();
-            this.updateScore();
         }
     }
 
