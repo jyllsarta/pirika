@@ -30,6 +30,7 @@ class View {
         this.hitSFX = new Audio("/game/tile/sounds/sfx/hit.wav");
         this.hitSFX2 = new Audio("/game/tile/sounds/sfx/hit2.wav");
         this.setDefaultUsername();
+        this.defaultUsername = "ななしろこ";
     }
 
     addEvent() {
@@ -74,28 +75,45 @@ class View {
     //textareaに入力されたユーザ名をステートに反映
     checkUsername() {
         const username = $(".username").val().slice(0, 6)
-        const defaultUserName = "ななしろこ";
-        if (!username || username == defaultUserName) {
+        if (!username || username == this.defaultUsername) {
             //log("ユーザ名が空")
-            $(".username").val(defaultUserName)
-            $(".username").addClass("emphasise_name")
-            return
+            $(".username").val(this.defaultUsername);
+            $(".username").addClass("emphasise_name");
+            return;
         }
         else {
             this.setUsername();
-            $(".username").removeClass("emphasise_name")
+            $(".username").removeClass("emphasise_name");
         }
     }
 
     onFocusUsername() {
-        $(".username").val("")
+        if ($(".username").val() == this.defaultUsername) {
+            $(".username").val("");
+        }
     }
 
-    startRemoveAnimation(panelObject) {
+    startRemoveAnimation(panelObject, score) {
         panelObject.animate2({
-            transform: 'rotate(30deg) scale(1.3)',
+            transform: 'rotate(30deg) scale(1.5)',
             opacity: 0,
+        }, 250, "linear");
+        var score_flash = $(`<div class="score_effect score_${score}">+${score}</div>`).appendTo($("#effects"));
+        var offset = panelObject.offset();
+        offset.top -= 15;
+        offset.left += 8;
+        score_flash.offset(offset);
+        score_flash.animate2({
+            opacity: 0.8,
+            transform: "translateY(-5px) scale(1.3)",
         }, 200, "linear")
+            .animate2({
+                opacity: 0,
+                transform: "translateY(-10px) scale(1.7)",
+            }, 200, "linear")
+            .queue(function () {
+                $(this).remove();
+            });
     }
 
     resetPanel() {
@@ -179,21 +197,19 @@ class View {
 
     syncViewOnlyDirty() {
         var dirtyPanels = g_tile.board.panels().filter(x => x.dirty);
-        var panelsRemoved = 0;
         log("remove dirty panels.");
         log(dirtyPanels);
         for (var dirtyPanel of dirtyPanels) {
             var panelObject = $(`.panel[x=${dirtyPanel.x}][y=${dirtyPanel.y}] .block`);
-            this.startRemoveAnimation(panelObject);
-            panelsRemoved++;
+            this.startRemoveAnimation(panelObject, dirtyPanels.length ** 2 * 2 / dirtyPanels.length);
             dirtyPanel.resetDirtyFlag(); // ここでmodelを触りに行くのはたぶん規約違反だけど高速化のために許容
         }
-        if (panelsRemoved > 2) {
+        if (dirtyPanels.length > 2) {
             log("play sound hit 2")
             this.hitSFX2.currentTime = 0;
             this.hitSFX2.play();
         }
-        else if (panelsRemoved === 2) {
+        else if (dirtyPanels.length === 2) {
             log("play sound hit")
             this.hitSFX.currentTime = 0;
             this.hitSFX.play();
