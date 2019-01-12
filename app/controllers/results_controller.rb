@@ -9,8 +9,7 @@ class ResultsController < ApplicationController
         sim = ColorTileLogic::ColorTileSimulator.new(seed, clicklogs, w, h, colors, pairs)
         username = params[:username]
         score = sim.score
-        
-        result = Result.create!(seed: seed, score: score, username: username, playlog: clicklogs)
+        result = Result.create!(seed: seed, score: score, username: username, playlog: clicklogs.permit!.to_h)
         render json: {score: score}
     end
 
