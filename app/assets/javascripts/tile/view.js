@@ -27,7 +27,7 @@ class View {
     constructor() {
         log("document.ready invoked.");
         this.addEvent();
-        this.hitSFX = new Audio("/game/tile/sounds/sfx/hit.ogg");
+        this.hitSFX = new Audio("/game/tile/sounds/sfx/hit.wav");
         this.hitSFX2 = new Audio("/game/tile/sounds/sfx/hit2.wav");
         this.setDefaultUsername();
     }
