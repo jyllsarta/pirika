@@ -26,21 +26,21 @@ class View {
     // init
     constructor() {
         log("document.ready invoked.");
-        this.addClickEvent();
+        this.addEvent();
         this.hitSFX = new Audio("/game/tile/sounds/sfx/hit.ogg");
         this.hitSFX2 = new Audio("/game/tile/sounds/sfx/hit2.wav");
-        this.setUsername();
+        this.checkUsername();
     }
 
-    addClickEvent() {
+    addEvent() {
         // this地獄すぎるこの関数
         var self = this;
-        log("add click event")
+        log("add events")
         $(".panel").each(function () {
             $(this).mousedown(self.clickPanelHandler.bind(self));
         });
 
-        $(".start").mousedown(function () {
+        $(".click_to_start").mousedown(function () {
             this.requestStartHandler();
         }.bind(this));
         $(".restart").mousedown(function () {
@@ -50,12 +50,35 @@ class View {
             this.backToTitleHandler();
         }.bind(this));
         $(".username").blur(function () {
-            this.setUsername();
+            this.checkUsername();
+        }.bind(this));
+        $(".username").focus(function () {
+            this.onFocusUsername();
         }.bind(this));
     }
 
     setUsername() {
         g_tile.setUsername($(".username").val());
+    }
+
+    //textareaに入力されたユーザ名をステートに反映
+    checkUsername() {
+        const username = $(".username").val().slice(0, 6)
+        const defaultUserName = "ななしろこ";
+        if (!username || username == defaultUserName) {
+            //log("ユーザ名が空")
+            $(".username").val(defaultUserName)
+            $(".username").addClass("emphasise_name")
+            return
+        }
+        else {
+            this.setUsername();
+            $(".username").removeClass("emphasise_name")
+        }
+    }
+
+    onFocusUsername() {
+        $(".username").val("")
     }
 
     startRemoveAnimation(panelObject) {
@@ -111,9 +134,10 @@ class View {
             .queue(function () {
                 $(this).addClass("removed");
                 $(this).dequeue();
-            })
+            });
         this.syncView();
         this.resetPanel();
+        this.setUsername();
     }
 
     paintPanel(panelObject, panelModel) {
@@ -198,7 +222,7 @@ class View {
     }
 };
 
-var g_tile = new ColorTile(2);
+var g_tile = new ColorTile(100);
 var g_view = new View();
 g_tile.setView(g_view);
 

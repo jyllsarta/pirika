@@ -6,13 +6,17 @@ head
 .main
   h1
     | しろこのカラータイル
-  textarea.username name="username" cols="30" rows="1"
-    | 名前を入れてね
   .game_screen
     .start
-      img.title_image[src="images/tile/title.png"]
-      p.click_to_start
-        | クリックしてスタート
+      img.title_image src="images/tile/title.png"
+      .namearea
+        span.namelabel
+          | ユーザ名(最大6文字、ランキングに表示されます)
+        textarea.username name="username" cols="30" rows="1"
+          | ななしろこ
+      .click_to_start
+        .label
+          | はじめる
     .ui
       .time_base
       .time

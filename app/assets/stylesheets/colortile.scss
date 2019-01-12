@@ -16,7 +16,6 @@ body{
     background-position: bottom 0px right 0px;
 }
 
-
 .game_screen{
     width: $panel_size * $row;
     margin: 0 auto;
@@ -79,6 +78,38 @@ body{
         position: absolute;
         bottom: 10px;
         right: 10px;
+        width: 150px;
+        height: 80px;
+        border:1px solid #7abaeb;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        box-shadow: 1px 1px 3px 1px rgba(107, 125, 150, 0.8);
+        animation: lets_click 1s linear infinite alternate;
+    }
+    .namelabel{
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        background-color: rgba(255, 255, 255, 0.8);
+    }
+    .emphasise_name{
+        animation: color_red_loop 3s linear infinite alternate;
+    }
+    @keyframes color_red_loop{
+        0% {color: #000000;}
+        60% {color: #ff4221;}
+        100% {color: #c6891f;}
+    }
+    @keyframes lets_click{
+        0% {background-color: #ffffff;}
+        100% {background-color: #fff5bc;}
+    }
+    .username{
+        position: absolute;
+        top: 35px;
+        left: 10px;
+        border-radius: 3px;
     }
 }
 
@@ -174,3 +205,4 @@ body{
         height: 50px;
     }
 }
+
