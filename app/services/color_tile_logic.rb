@@ -92,7 +92,9 @@ module ColorTileLogic
                 end
                 @board.append(row)
             end
-            @pairs.times{put_block}
+            @pairs.times do |i|
+                put_block(i % (@colors + 1))
+            end
         end
 
         # 試しに座標一つ指定してみて、そこ基準でブロックのペアを置けないならもう一度繰り返す
@@ -124,17 +126,16 @@ module ColorTileLogic
             @seed.sample(all_puttable_points)
         end
 
-        def put_block
+        def put_block(color_id)
             panel = pick_puttable_panel
 
             points = Cross.new(self, panel).available_panels
 
             p1 = @seed.sample(points)
             p2 = @seed.sample(points - [p1])
-            random_color = @seed.rand_int(@colors) + 1 # jsだと0はfalsyなので、色IDは1オリジンとする
 
-            panel(p1.x, p1.y).color_id = random_color
-            panel(p2.x, p2.y).color_id = random_color
+            panel(p1.x, p1.y).color_id = color_id
+            panel(p2.x, p2.y).color_id = color_id
         end
     end
 
