@@ -131,6 +131,21 @@ body{
         border-radius: 3px;
         box-shadow: 1px 1px 1px 1px rgba(38, 59, 88, 0.8);
     }
+    .fixed_username{
+        position: absolute;
+        top: 35px;
+        left: 10px;
+        text-shadow: 1px 1px 1px 1px rgba(38, 59, 88, 0.8);
+    }
+    .change_username{
+        display: inline-block;
+        margin-left: 5px;
+        padding-left: 16px;
+        height: 20px;
+        width: 45px;
+        border-radius: 3px;
+        box-shadow: 1px 1px 1px 1px rgba(38, 59, 88, 0.8);
+    }
 }
 
 .hidden{

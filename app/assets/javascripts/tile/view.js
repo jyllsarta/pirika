@@ -50,8 +50,12 @@ class View {
         $(".back_to_title").mousedown(function () {
             this.backToTitleHandler();
         }.bind(this));
+        $(".change_username").click(function () {
+            this.showChangeUsernameField();
+        }.bind(this));
         $(".username").blur(function () {
             this.checkUsername();
+            this.hideChangeUsernameField();
         }.bind(this));
         $(".username").focus(function () {
             this.onFocusUsername();
@@ -68,6 +72,7 @@ class View {
 
     setUsername() {
         const username = $(".username").val();
+        $(".text_username").text(username);
         g_tile.setUsername(username);
         $.cookie("username", username, { expires: 10000 });
     }
@@ -91,6 +96,16 @@ class View {
         if ($(".username").val() == this.defaultUsername) {
             $(".username").val("");
         }
+    }
+
+    showChangeUsernameField() {
+        $(".username").removeClass("hidden").focus();
+        $(".fixed_username").addClass("hidden");
+    }
+
+    hideChangeUsernameField() {
+        $(".username").addClass("hidden");
+        $(".fixed_username").removeClass("hidden");
     }
 
     startRemoveAnimation(panelObject, score) {

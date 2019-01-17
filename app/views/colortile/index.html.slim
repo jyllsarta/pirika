@@ -11,8 +11,13 @@ head
       img.title_image src="images/tile/title.png"
       .namearea
         span.namelabel
-          | ユーザ名(最大6文字、ランキングに表示されます)
-        textarea.username name="username" cols="30" rows="1"
+          | おなまえ(なまえ#任意の文字列 の形式で入力するとトリップをつけられます)
+        div.fixed_username
+          span.text_username
+            | 　　　　
+          span.change_username
+            | 変更
+        textarea.username.hidden name="username" cols="30" rows="1" maxlength=20
           | ななしろこ
       .click_to_start#easy
         .label
