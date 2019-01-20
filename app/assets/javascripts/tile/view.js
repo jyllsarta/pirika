@@ -62,30 +62,40 @@ class View {
         }.bind(this));
     }
 
-    trip(tr) {
+    to_trip(tr) {
         var shaObj = new jsSHA("SHA-256", "TEXT");
         shaObj.update(tr);
-        return shaObj.getHash("B64").slice(0,10);
+        return shaObj.getHash("B64").slice(0, 10);
+    }
+
+    trip(rawUsername) {
+        const splitted = rawUsername.replace(/📛/g, "").split("#");
+        const displayName = splitted[0];
+        if (splitted.length == 1) {
+            return displayName;
+        }
+        const tripped = this.to_trip(splitted.slice(1).join(""));
+        return `${displayName}📛${tripped}`;
     }
 
     setDefaultUsername() {
-        const username = $.cookie("username") || this.defaultUsername;
-        $(".text_username").val(username);
+        const rawUsername = $.cookie("username") || this.defaultUsername;
+        $(".username").val(rawUsername);
         this.setUsername();
     }
 
     setUsername() {
-        const username = $(".username").val();
-        $(".text_username").text(username);
-        g_tile.setUsername(username);
-        $.cookie("username", username, { expires: 10000 });
+        const rawUsername = $(".username").val();
+        const trippedUsername = this.trip(rawUsername);
+        $(".text_username").text(trippedUsername);
+        g_tile.setUsername(trippedUsername);
+        $.cookie("username", rawUsername, { expires: 10000 });
     }
 
     //textareaに入力されたユーザ名をステートに反映
     checkUsername() {
         const username = $(".username").val();
         if (!username || username == this.defaultUsername) {
-            //log("ユーザ名が空")
             $(".username").val(this.defaultUsername);
             $(".username").addClass("emphasise_name");
             return;
