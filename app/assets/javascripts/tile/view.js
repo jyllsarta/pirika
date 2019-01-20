@@ -62,12 +62,16 @@ class View {
         }.bind(this));
     }
 
+    trip(tr) {
+        var shaObj = new jsSHA("SHA-256", "TEXT");
+        shaObj.update(tr);
+        return shaObj.getHash("B64").slice(0,10);
+    }
+
     setDefaultUsername() {
-        const username = $.cookie("username");
-        if (username) {
-            $(".username").val(username);
-            this.setUsername();
-        }
+        const username = $.cookie("username") || this.defaultUsername;
+        $(".text_username").val(username);
+        this.setUsername();
     }
 
     setUsername() {
@@ -79,7 +83,7 @@ class View {
 
     //textareaに入力されたユーザ名をステートに反映
     checkUsername() {
-        const username = $(".username").val().slice(0, 6)
+        const username = $(".username").val();
         if (!username || username == this.defaultUsername) {
             //log("ユーザ名が空")
             $(".username").val(this.defaultUsername);
