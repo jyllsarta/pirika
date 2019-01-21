@@ -53,7 +53,7 @@ module ColorTileLogic
         end
 
         def destruct(x, y)
-            @board[y][x].color_id = nil
+            @board[y][x].color_id = 0
         end
 
         def score_by_click(x, y)
@@ -144,7 +144,7 @@ module ColorTileLogic
         def initialize(x,y)
             @x = x
             @y = y
-            @color_id = nil
+            @color_id = 0
         end
 
         def to_json
@@ -152,7 +152,7 @@ module ColorTileLogic
         end
 
         def block?
-            !@color_id.nil?
+            @color_id != 0
         end
     end
 
@@ -275,7 +275,7 @@ module ColorTileLogic
 
         def find_first_block(panels)
             panels.each do |panel|
-                return panel if !panel.try(:color_id).nil?
+                return panel if !panel.try(:color_id).nil? && panel.try(:color_id) != 0
             end
             nil
         end
