@@ -25,6 +25,7 @@ Rails.application.routes.draw do
   get 'tile/results/', to: "results#index"
   post 'tile/results/create', to: "results#create"
   get 'tile/results/:result_id', to: "results#show"
+  get 'tile/:username/highscore', to: "results#highscore"
 
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html

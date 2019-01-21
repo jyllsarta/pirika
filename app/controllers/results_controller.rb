@@ -13,6 +13,13 @@ class ResultsController < ApplicationController
         render json: {score: score}
     end
 
+    def highscore
+        username = params[:username]
+        score = Result.where(username: username).order(score: "DESC")
+        render json: {result: false, reason: "no such user"} and return if score.empty?
+        render json: {score: score.first.score}
+    end
+
     def index
         render json: {result: false, endpoint: "index"}
     end

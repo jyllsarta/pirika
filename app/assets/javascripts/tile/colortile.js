@@ -20,8 +20,16 @@ class ColorTile {
     }
 
     setUsername(username) {
-        log(`set username to ${username}`)
+        log(`set username to ${username}`);
         this.username = username;
+        ColorTileAPI.getHighScore(function (response) { this.onRecieveHighScore(response) }.bind(this), username);
+    }
+
+    onRecieveHighScore(response) {
+        if (!response.result) {
+            this.view.updateHighScore(0);
+        }
+        this.view.updateHighScore(response.score);
     }
 
     click(x, y) {

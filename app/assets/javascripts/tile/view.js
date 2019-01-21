@@ -122,6 +122,10 @@ class View {
         $(".fixed_username").removeClass("hidden");
     }
 
+    updateHighScore(score) {
+        $(".highscore").text(score);
+    }
+
     startRemoveAnimation(panelObject, score) {
         panelObject.animate2({
             transform: 'rotate(30deg) scale(1.5)',

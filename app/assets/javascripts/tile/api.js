@@ -49,5 +49,29 @@ class ColorTileAPI {
                 });
         });
     };
+    static getHighScore(callback, username) {
+        log("username is");
+        log(username);
+        $(function () {
+            $.ajax({
+                type: "GET",
+                url: `http://${location.host}/tile/${username}/highscore`,
+                timeout: 10000,
+                dataType: "json",
+                data: {
+                    authenticity_token: $("meta[name=csrf-token]").attr("content"),
+                    username: username,
+                },
+            })
+                .done(function (response, textStatus, jqXHR) {
+                    log("request <getHighScore> succeeded. response is:");
+                    log(response);
+                    callback(response);
+                })
+                .fail(function (jqXHR, textStatus, errorThrown) {
+                    log("だめ(ランキング送信)")
+                });
+        });
+    };
 }
 export default ColorTileAPI;
