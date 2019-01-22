@@ -19,6 +19,22 @@ class ColorTile {
         this.view = view;
     }
 
+    setDifficulty(difficulty) {
+        log(`set difficulty to ${difficulty}`);
+        this.difficulty = difficulty;
+    }
+
+    difficultyScoreRate() {
+        switch (this.difficulty) {
+            case "easy":
+                return 1.0;
+            case "normal":
+                return 1.5;
+            case "hard":
+                return 2.0;
+        }
+    }
+
     setUsername(username) {
         log(`set username to ${username}`);
         this.username = username;
@@ -38,7 +54,7 @@ class ColorTile {
             return;
         }
         log("recieve click")
-        this.score += this.board.scoreByClick(x, y);
+        this.score += this.board.scoreByClick(x, y) * this.difficultyScoreRate();
         this.board.click(x, y);
         this.checkEndGame();
         this.playlog.log("click", `${x},${y}`);
@@ -94,6 +110,7 @@ class ColorTile {
         this.nextBoard.isPlayed = true;
         this.requestNextBoard();
         this.board = this.nextBoard;
+        this.board.applyDifficulty(this.difficulty);
         this.score = 0;
         this.gameMode = GameMode.PLAYING;
         this.startedTimePoint = Date.now();

@@ -42,10 +42,11 @@ class View {
         });
 
         $(".click_to_start").mousedown(function () {
-            this.requestStartHandler();
-        }.bind(this));
+            const difficulty = $(this).attr("id");
+            self.requestStartHandler(difficulty);
+        });
         $(".restart").mousedown(function () {
-            this.requestStartHandler();
+            this.requestReStartHandler();
         }.bind(this));
         $(".back_to_title").mousedown(function () {
             this.backToTitleHandler();
@@ -179,8 +180,14 @@ class View {
         });
     }
 
-    requestStartHandler(model) {
-        log("start requested...")
+    requestStartHandler(difficulty) {
+        log("start requested...");
+        g_tile.setDifficulty(difficulty);
+        g_tile.startGame();
+    }
+
+    requestReStartHandler(model) {
+        log("start requested...");
         g_tile.startGame();
     }
 
@@ -201,9 +208,9 @@ class View {
         this.setUsername();
     }
 
-    paintPanel(panelObject, panelModel) {
-        if (panelModel) {
-            var color = $(`.color_sample${panelModel.colorId}`).css("background");
+    paintPanel(panelObject, colorId) {
+        if (colorId) {
+            var color = $(`.color_sample${colorId}`).css("background");
             $(panelObject).find(".block").css("background", color);
             $(panelObject).find(".block").removeClass("hidden");
         }
@@ -217,14 +224,7 @@ class View {
         $(".panel").each(function () {
             const x = parseInt(this.attributes.x.value);
             const y = parseInt(this.attributes.y.value);
-            // fill square if block exists
-            if (g_tile.board.panel(x, y).block) {
-                self.paintPanel(this, g_tile.board.panel(x, y));
-            }
-            // else blank
-            else {
-                self.paintPanel(this, null);
-            }
+            self.paintPanel(this, g_tile.board.panel(x, y).colorId);
         })
     }
 
@@ -234,7 +234,7 @@ class View {
         log(dirtyPanels);
         for (var dirtyPanel of dirtyPanels) {
             var panelObject = $(`.panel[x=${dirtyPanel.x}][y=${dirtyPanel.y}] .block`);
-            this.startRemoveAnimation(panelObject, dirtyPanels.length ** 2 * 2 / dirtyPanels.length);
+            this.startRemoveAnimation(panelObject, dirtyPanels.length ** 2 * 2 * g_tile.difficultyScoreRate() / dirtyPanels.length);
             dirtyPanel.resetDirtyFlag(); // ここでmodelを触りに行くのはたぶん規約違反だけど高速化のために許容
         }
         if (dirtyPanels.length > 2) {

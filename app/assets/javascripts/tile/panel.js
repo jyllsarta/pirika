@@ -8,7 +8,7 @@ class Panel {
         this.y = y;
         this.dirty = false;
         this.colorId = colorId;
-        this.block = !!colorId;
+        this.block = !!this.colorId;
     }
 
     erase() {

@@ -42,6 +42,35 @@ class Board {
         return this.panels().every(panel => this.scoreByClick(panel.x, panel.y) == 0)
     }
 
+    applyDifficulty(difficulty) {
+        switch (difficulty) {
+            // 9~12のパネルを間引き、さらに色数も半分にする
+            case "easy":
+                for (var panel of this.panels()) {
+                    if (panel.colorId > 9) {
+                        panel.colorId = 0;
+                        panel.block = false;
+                    }
+                    else if (panel.colorId % 2 == 1) {
+                        panel.colorId++;
+                    }
+                }
+                break;
+            case "normal":
+                // 1~8 の 8色にする
+                for (var panel of this.panels()) {
+                    if (panel.colorId > 9) {
+                        panel.colorId = 0;
+                        panel.block = false;
+                    }
+                }
+                break;
+            case "hard":
+                // そのままの値を使う
+                break;
+        }
+    }
+
     // 以下 private (だということにする)
     // Rails の Model のつもりで書きます
 
