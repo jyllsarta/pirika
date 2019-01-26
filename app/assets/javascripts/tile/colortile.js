@@ -47,7 +47,7 @@ class ColorTile {
     if (!response.result) {
       this.view.updateHighScore(0);
     }
-    this.view.updateHighScore(response.score);
+    // TODO 全難易度
   }
 
   click(x, y) {

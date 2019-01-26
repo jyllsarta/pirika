@@ -19,19 +19,42 @@ head
             | 変更
         textarea.username.hidden name="username" cols="30" rows="1" maxlength=20
           | ななしろこ
-      .highscore_area
-        span.highscore_label
-          | ハイスコア：
-        span.highscore
       .click_to_start#easy
-        .label
-          | かんたん
+        .difficulty
+          .label
+            | かんたん
+        .highscore
+          img.score_icon src="images/tile/highscore.png"
+          span.highscore_time
+            | 456
+        .time
+          img.score_icon src="images/tile/time.png"
+          span.highscore_value
+            | 86.5
       .click_to_start#normal
-        .label
-          | ふつう
+        .difficulty
+          .label
+            | ふつう
+        .highscore
+          img.score_icon src="images/tile/highscore.png"
+          span.highscore_time
+            | 456
+        .time
+          img.score_icon src="images/tile/time.png"
+          span.highscore_value
+            | 86.5
       .click_to_start#hard
-        .label
-          | やばみ
+        .difficulty
+          .label
+            | やばみ
+        .highscore
+          img.score_icon src="images/tile/highscore.png"
+          span.highscore_time
+            | 456
+        .time
+          img.score_icon src="images/tile/time.png"
+          span.highscore_value
+            | 86.5
     .ui
       .time_base
       .time
