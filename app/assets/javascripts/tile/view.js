@@ -185,6 +185,7 @@ class View {
     log("back to title")
     this.hideResult();
     this.showTitle();
+    g_tile.updateHighScore();
     g_tile.backToTitle();
   }
 
