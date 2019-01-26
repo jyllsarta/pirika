@@ -317,13 +317,14 @@ module ColorTileLogic
     end
 
     class ColorTileSimulator
-        def initialize(seed, clicklogs, w, h, colors, pairs)
+        def initialize(seed, clicklogs, w, h, colors, pairs, difficulty)
             @seed = seed
             @clicklogs = clicklogs
             @w = w
             @h = h
             @colors = colors
             @pairs = pairs
+            @difficulty = difficulty
         end
 
         def score

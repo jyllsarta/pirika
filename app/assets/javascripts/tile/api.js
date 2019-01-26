@@ -22,7 +22,7 @@ class ColorTileAPI {
                 });
         });
     };
-    static sendResult(callback, logjson, username) {
+    static sendResult(callback, logjson, username, difficulty, remainTime) {
         log("sending result is");
         log(logjson);
         log("username is");
@@ -37,6 +37,8 @@ class ColorTileAPI {
                     authenticity_token: $("meta[name=csrf-token]").attr("content"),
                     playlog: logjson,
                     username: username,
+                    difficulty: difficulty,
+                    remain_time: remainTime,
                 },
             })
                 .done(function (response, textStatus, jqXHR) {

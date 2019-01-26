@@ -43,7 +43,12 @@ class View {
 
         $(".click_to_start").mousedown(function () {
             const difficulty = $(this).attr("id");
-            self.requestStartHandler(difficulty);
+            const difficultyIds = {
+                easy: 1,
+                normal: 2,
+                hard: 3,
+            }
+            self.requestStartHandler(difficultyIds[difficulty]);
         });
         $(".restart").mousedown(function () {
             this.requestReStartHandler();
@@ -286,7 +291,7 @@ class View {
     }
 };
 
-var g_tile = new ColorTile(100);
+var g_tile = new ColorTile(3);
 var g_view = new View();
 g_tile.setView(g_view);
 

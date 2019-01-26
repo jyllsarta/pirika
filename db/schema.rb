@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190105112121) do
+ActiveRecord::Schema.define(version: 2019_01_26_044329) do
 
   create_table "colortiles", force: :cascade do |t|
     t.datetime "created_at", null: false
@@ -32,6 +32,9 @@ ActiveRecord::Schema.define(version: 20190105112121) do
     t.integer "score"
     t.string "username"
     t.text "playlog"
+    t.float "remain_time"
+    t.integer "difficulty"
+    t.boolean "extinct"
   end
 
   create_table "users", force: :cascade do |t|

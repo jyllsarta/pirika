@@ -25,14 +25,12 @@ class ColorTile {
     }
 
     difficultyScoreRate() {
-        switch (this.difficulty) {
-            case "easy":
-                return 1.0;
-            case "normal":
-                return 1.5;
-            case "hard":
-                return 2.0;
+        const rates = {
+            1: 1.0,
+            2: 1.5,
+            3: 2.0,
         }
+        return rates[this.difficulty];
     }
 
     setUsername(username) {
@@ -123,11 +121,14 @@ class ColorTile {
     }
 
     // 「残り時間」を表すクラスがあったほうがいいのかも
-    timeLeft() {
+    timeLeft(floor = true) {
         if (!this.gameMode == GameMode.PLAYING) {
             return this.playTimeLengthSecond;
         }
-        return this.playTimeLengthSecond - Math.floor((Date.now() - this.startedTimePoint) / 1000);
+        if　(floor) {
+            return this.playTimeLengthSecond - Math.floor((Date.now() - this.startedTimePoint) / 1000);
+        }
+        return this.playTimeLengthSecond - (Date.now() - this.startedTimePoint) / 1000;
     }
 
     timeLeftRatio() {
@@ -142,7 +143,7 @@ class ColorTile {
         this.view.finish();
         this.gameMode = GameMode.RESULT;
         log(this.playlog.messages);
-        ColorTileAPI.sendResult(this.view.flashSavedTicker, this.playlog, this.username);
+        ColorTileAPI.sendResult(this.view.flashSavedTicker, this.playlog, this.username, this.difficulty, this.timeLeft(false));
     }
 };
 

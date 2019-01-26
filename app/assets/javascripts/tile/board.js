@@ -45,7 +45,7 @@ class Board {
     applyDifficulty(difficulty) {
         switch (difficulty) {
             // 9~12のパネルを間引き、さらに色数も半分にする
-            case "easy":
+            case 1:
                 for (var panel of this.panels()) {
                     if (panel.colorId > 9) {
                         panel.colorId = 0;
@@ -56,7 +56,7 @@ class Board {
                     }
                 }
                 break;
-            case "normal":
+            case 2:
                 // 1~8 の 8色にする
                 for (var panel of this.panels()) {
                     if (panel.colorId > 9) {
@@ -65,7 +65,7 @@ class Board {
                     }
                 }
                 break;
-            case "hard":
+            case 3:
                 // そのままの値を使う
                 break;
         }
