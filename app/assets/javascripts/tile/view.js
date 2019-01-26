@@ -134,6 +134,14 @@ class View {
     $(".fixed_username").removeClass("hidden");
   }
 
+  updateHighScore(response) {
+    $("#easy .highscore_value").text(response.score_easy || "-");
+    $("#normal .highscore_value").text(response.score_normal || "-");
+    $("#hard .highscore_value").text(response.score_hard || "-");
+    $("#easy .highscore_time").text(response.time_easy || "-");
+    $("#normal .highscore_time").text(response.time_normal || "-");
+    $("#hard .highscore_time").text(response.time_hard || "-");
+  }
 
   startRemoveAnimation(panelObject, score) {
     panelObject.animate2({

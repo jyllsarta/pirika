@@ -27,9 +27,25 @@ class ResultsController < ApplicationController
 
   def highscore
     username = params[:username]
-    score = Result.where(username: username).order(score: "DESC")
-    render(json: {result: false, reason: "no such user"}) && return if score.empty?
-    render json: {score: score.first.score}
+    scores = Result.where(username: username).order(score: "DESC")
+    times = Result.where(username: username).order(remain_time: "DESC")
+
+    # SQL 6本が重かったら一度に取得してうまいことフィルタリングする
+    score_easy = scores.where(difficulty: 1).try(:first).try(:score)
+    score_normal = scores.where(difficulty: 2).try(:first).try(:score)
+    score_hard = scores.where(difficulty: 3).try(:first).try(:score)
+    time_easy = times.where(difficulty: 1, extinct: true).try(:first).try(:remain_time)
+    time_normal = times.where(difficulty: 2, extinct: true).try(:first).try(:remain_time)
+    time_hard = times.where(difficulty: 3, extinct: true).try(:first).try(:remain_time)
+
+    render json: {
+      score_easy: score_easy,
+      score_normal: score_normal,
+      score_hard: score_hard,
+      time_easy: time_easy,
+      time_normal: time_normal,
+      time_hard: time_hard
+    }
   end
 
   def index
