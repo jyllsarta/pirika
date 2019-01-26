@@ -71,6 +71,14 @@ class View {
     $(".username").focus(function () {
       this.onFocusUsername();
     }.bind(this));
+
+    // enterでblurさせる
+    $(".username").keypress(function (e) {
+      if (e.which == 13) {
+        $(".username").blur();
+        return false;
+      }
+    })
   }
 
   to_trip(tr) {
