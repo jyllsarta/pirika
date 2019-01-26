@@ -80,6 +80,20 @@ module ColorTileLogic
             end
         end
 
+        def apply_difficulty(difficulty_id)
+            case difficulty_id
+            when 1
+                self.panels.map{|panel| panel.color_id = 0 if panel.color_id > 9}
+                self.panels.map{|panel| panel.color_id += 1 if panel.color_id.odd?}
+            when 2
+                self.panels.map{|panel| panel.color_id = 0 if panel.color_id > 9}
+            when 3
+                # do nothing
+            else
+                raise NotImplementedError
+            end
+        end
+
         private
 
         def construct_board(seed)
@@ -327,16 +341,41 @@ module ColorTileLogic
             @difficulty = difficulty
         end
 
+        def score_rate(difficulty_id)
+            case difficulty_id
+            when 1
+                return 1
+            when 2
+                return 1.5
+            when 3
+                return 2
+            else
+                raise NotImplementedError
+            end
+        end
+
         def score
             @board = Board.new(@w, @h, @colors, @pairs, @seed)
+            @board.apply_difficulty(@difficulty)
             sum = 0
             @clicklogs.each do |_, click|
                 x,y = click[:message].split(",").map(&:to_i)
-                click_score = @board.score_by_click(x, y)
+                click_score = @board.score_by_click(x, y) * score_rate(@difficulty)
                 @board.click!(x, y) if click_score > 0
                 sum += click_score
             end
             sum
+        end
+
+        def extinct?
+            @board = Board.new(@w, @h, @colors, @pairs, @seed)
+            @board.apply_difficulty(@difficulty)
+            @clicklogs.each do |_, click|
+                x,y = click[:message].split(",").map(&:to_i)
+                click_score = @board.score_by_click(x, y)
+                @board.click!(x, y) if click_score > 0
+            end
+            @board.panels.all?{|panel| panel.color_id == 0}
         end
     end
 end

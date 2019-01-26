@@ -6,11 +6,12 @@ class ResultsController < ApplicationController
         h = params[:playlog][:h].to_i
         colors = params[:playlog][:colors].to_i
         pairs = params[:playlog][:pairs].to_i
-        difficulty = params[:difficulty]
-        remain_time = params[:remain_time]
+        difficulty = params[:difficulty].to_i
+        remain_time = params[:remain_time].to_f.round(3)
         username = params[:username]
         sim = ColorTileLogic::ColorTileSimulator.new(seed, clicklogs, w, h, colors, pairs, difficulty)
         score = sim.score
+        extinct = sim.extinct?
 
         Result.create!({
           seed: seed,
@@ -19,7 +20,7 @@ class ResultsController < ApplicationController
           playlog: clicklogs.try(:permit!).try(:to_h) || {},
           difficulty: difficulty,
           remain_time: remain_time,
-          extinct: false #todo 全滅判定
+          extinct: extinct
         })
         render json: {score: score}
     end
