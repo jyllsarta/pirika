@@ -14,7 +14,6 @@ head
           | おなまえ(なまえ#任意の文字列 の形式で入力すると名札📛がつきます)
         div.fixed_username
           span.text_username
-            | 　　　　
           span.change_username
             | 変更
         input.username.hidden type="text" name="username" cols="30" rows="1" maxlength=20
@@ -62,6 +61,10 @@ head
         | 0
       #effects
     .end.hidden
+      .background
+      img.result_siroko.siroko_good.hidden src="images/tile/good.png"
+      img.result_siroko.siroko_normal.hidden src="images/tile/normal.png"
+      img.result_siroko.siroko_bad.hidden src="images/tile/bad.png"
       .final_score
       .restart.button
         | リスタート

@@ -349,12 +349,27 @@ body {
 
 // z-index: 10000 - 99999
 .end {
-  background-color: white;
-  opacity: 0.8;
   position: absolute;
-  width: ($panel_size+2) * $row;
+  width: ($panel_size) * $row;
   height: $panel_size * $column;
   z-index: 10001;
+  .background{
+    position: absolute;
+    background-color: white;
+    opacity: 0.3;
+    width: ($panel_size) * $row;
+    height: $panel_size * $column;
+    z-index: 10001;
+    overflow: hidden;
+  }
+  .result_siroko{
+    position: absolute;
+    bottom: 0px;
+    left: 200px;
+    width: 300px;
+    height: 300px;
+    z-index: 10002;
+  }
 
   .final_score {
     position: absolute;

@@ -162,9 +162,9 @@ class View {
     offset.left += 8;
     score_flash.offset(offset);
     score_flash.animate2({
-        opacity: 0.8,
-        transform: "translateY(-5px) scale(1.3)",
-      }, 200, "linear")
+      opacity: 0.8,
+      transform: "translateY(-5px) scale(1.3)",
+    }, 200, "linear")
       .animate2({
         opacity: 0,
         transform: "translateY(-10px) scale(1.7)",
@@ -309,7 +309,7 @@ class View {
   }
 };
 
-var g_tile = new ColorTile(100);
+var g_tile = new ColorTile(1);
 var g_view = new View();
 g_tile.setView(g_view);
 
