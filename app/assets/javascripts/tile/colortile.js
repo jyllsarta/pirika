@@ -77,7 +77,7 @@ class ColorTile {
       case GameMode.TITLE:
         break;
       case GameMode.PLAYING:
-        if (this.timeLeft() < 0) {
+        if (this.timeLeft() <= 0) {
           this.finish();
         }
         break;
