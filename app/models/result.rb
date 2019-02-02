@@ -29,4 +29,16 @@ class Result < ApplicationRecord
       time_hard: time_hard,
     }
   end
+
+  def self.high_score?(username, difficulty, compare_score)
+    high_score = self.where(username: username, difficulty: difficulty).order(score: "DESC").try(:first).try(:score)
+    return true if high_score.nil?
+    return compare_score > high_score
+  end
+
+  def self.best_time?(username, difficulty, compare_time)
+    best_time = self.where(username: username, difficulty: difficulty).order(score: "DESC").try(:first).try(:remain_time)
+    return true if best_time.nil?
+    return compare_time > best_time
+  end
 end

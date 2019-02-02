@@ -13,6 +13,9 @@ class ResultsController < ApplicationController
     score = sim.score
     extinct = sim.extinct?
 
+    is_high_score = Result.high_score?(username, difficulty, score)
+    is_best_time = extinct && Result.best_time?(username, difficulty, remain_time)
+
     Result.create!(
       seed: seed,
       score: score,
@@ -22,7 +25,7 @@ class ResultsController < ApplicationController
       remain_time: remain_time,
       extinct: extinct
     )
-    render json: {score: score}
+    render json: {score: score, is_high_score: is_high_score, is_best_time: is_best_time}
   end
 
   def highscore
