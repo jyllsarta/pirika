@@ -339,6 +339,7 @@ class View {
 
   hideResult() {
     $(".end").addClass("hidden");
+    $(".result_siroko").addClass("hidden");
   }
 
   update() {
