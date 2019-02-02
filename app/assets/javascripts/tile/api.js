@@ -44,7 +44,7 @@ class ColorTileAPI {
       .done(function (response, textStatus, jqXHR) {
         log("request <sendResult> succeeded. response is:");
         log(response);
-        callback(response);
+        callback(response.is_high_score, response.is_best_time);
       })
       .fail(function (jqXHR, textStatus, errorThrown) {
         log("だめ(ランキング送信)")

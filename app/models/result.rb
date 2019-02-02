@@ -31,6 +31,7 @@ class Result < ApplicationRecord
   end
 
   def self.high_score?(username, difficulty, compare_score)
+    return false if compare_score == 0
     high_score = self.where(username: username, difficulty: difficulty).order(score: "DESC").try(:first).try(:score)
     return true if high_score.nil?
     return compare_score > high_score

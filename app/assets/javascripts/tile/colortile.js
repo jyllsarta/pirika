@@ -148,7 +148,7 @@ class ColorTile {
     this.view.finish();
     this.gameMode = GameMode.RESULT;
     log(this.playlog.messages);
-    ColorTileAPI.sendResult(this.view.flashSavedTicker, this.playlog, this.username, this.difficulty, this.timeLeft(false));
+    ColorTileAPI.sendResult(this.view.onReceiveResult.bind(this), this.playlog, this.username, this.difficulty, this.timeLeft(false));
   }
 };
 

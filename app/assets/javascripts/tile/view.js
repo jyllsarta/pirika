@@ -293,6 +293,50 @@ class View {
     $(".final_score").text(g_tile.getCurrentScore());
   }
 
+  onReceiveResult(isHighScore, isBestTime) {
+    if(isHighScore || isBestTime){
+        log("good!")
+        this.view.showGoodSiroko();
+    }
+    else{
+        this.view.showRandomSiroko();
+    }
+  }
+
+  showGoodSiroko(){
+    $(".siroko_good")
+    .removeClass("hidden")
+    .css({
+        opacity:0
+    })
+    .animate2({
+        opacity:1,
+        transform: "translateY(-40px)",
+    }, 300, "linear")
+    .animate2({
+        opacity:1,
+        transform: "translateY(0px)",
+    }, 100, "linear")
+  }
+
+  showRandomSiroko(){
+
+    const target = Math.random() > 0.2 ? $(".siroko_normal") : $(".siroko_bad")
+
+    target.removeClass("hidden")
+    .css({
+        opacity:0
+    })
+    .animate2({
+        opacity:1,
+        transform: "translateY(-40px)",
+    }, 300, "linear")
+    .animate2({
+        opacity:1,
+        transform: "translateY(0px)",
+    }, 100, "linear")
+  }
+
   hideResult() {
     $(".end").addClass("hidden");
   }
