@@ -115,7 +115,11 @@ body {
   }
 
   .click_to_start{
-    background-color: rgba($color: #ffffff, $alpha: 0.8)
+    background-color: rgba($color: #ffffff, $alpha: 0.8);
+    font-size: 16px;
+    .label{
+      margin: 1px;
+    }
   }
 
   .click_to_start:hover{
@@ -352,7 +356,7 @@ body {
   width: ($panel_size) * $row;
   height: $panel_size * $column;
   z-index: 10001;
-  .background{
+  .background {
     position: absolute;
     pointer-events: none;
     background-color: white;
@@ -362,13 +366,45 @@ body {
     z-index: 10001;
     overflow: hidden;
   }
-  .result_siroko{
+  .result_siroko {
     position: absolute;
     bottom: 0px;
     left: 200px;
     width: 300px;
     height: 300px;
     z-index: 10002;
+  }
+
+  .final_score_label{
+    position: absolute;
+    top: 70px;
+    left: 40px;
+    font-size: 20px;
+    z-index: 10003;
+  }
+  .remain_time_label{
+    position: absolute;
+    top: 70px;
+    right: 130px;
+    font-size: 20px;
+    z-index: 10003;
+    text-align: right;
+  }
+  .final_score_updated_label{
+    position: absolute;
+    top: 70px;
+    left: 170px;
+    font-size: 20px;
+    z-index: 10003;
+    color: #e99e48;
+  }
+  .remain_time_updated_label{
+    position: absolute;
+    top: 70px;
+    right: 30px;
+    font-size: 20px;
+    z-index: 10003;
+    color: #e99e48;
   }
 
   .final_score {
@@ -390,6 +426,7 @@ body {
     font-size: 60px;
     color: #547c8b;
     z-index: 10002;
+    text-align: right;
   }
 
   .button {
@@ -405,7 +442,7 @@ body {
     z-index: 10003;
     opacity: 0.95;
   }
-  .button:hover{
+  .button:hover {
     filter: brightness(120%);
   }
 
@@ -421,7 +458,22 @@ body {
     right: 50px;
   }
 
-  .updated{
-    color: #ffa358;
+  .updated {
+    animation: color_red_loop 2s linear infinite alternate;
   }
+
+  @keyframes color_red_loop {
+    0% {
+      color: #f0df46;
+    }
+
+    60% {
+      color: #ff7c65;
+    }
+
+    100% {
+      color: #f1ae3a;
+    }
+  }
+
 }

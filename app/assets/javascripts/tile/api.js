@@ -12,14 +12,14 @@ class ColorTileAPI {
         url: "http://" + location.host + "/tile/new",
         timeout: 10000,
       })
-      .done(function (response, textStatus, jqXHR) {
-        log("request <getNewBoard> succeeded. response is:");
-        log(response);
-        callback(response);
-      })
-      .fail(function (jqXHR, textStatus, errorThrown) {
-        log("だめ(盤面取得)")
-      });
+        .done(function (response, textStatus, jqXHR) {
+          log("request <getNewBoard> succeeded. response is:");
+          log(response);
+          callback(response);
+        })
+        .fail(function (jqXHR, textStatus, errorThrown) {
+          log("だめ(盤面取得)")
+        });
     });
   };
   static sendResult(callback, logjson, username, difficulty, remainTime) {
@@ -41,14 +41,14 @@ class ColorTileAPI {
           remain_time: remainTime,
         },
       })
-      .done(function (response, textStatus, jqXHR) {
-        log("request <sendResult> succeeded. response is:");
-        log(response);
-        callback(response.is_high_score, response.is_best_time);
-      })
-      .fail(function (jqXHR, textStatus, errorThrown) {
-        log("だめ(ランキング送信)")
-      });
+        .done(function (response, textStatus, jqXHR) {
+          log("request <sendResult> succeeded. response is:");
+          log(response);
+          callback(response.is_high_score, response.is_best_time, response.extinct, response.time);
+        })
+        .fail(function (jqXHR, textStatus, errorThrown) {
+          log("だめ(ランキング送信)")
+        });
     });
   };
   static getHighScore(callback, username) {
@@ -65,14 +65,14 @@ class ColorTileAPI {
           username: username,
         },
       })
-      .done(function (response, textStatus, jqXHR) {
-        log("request <getHighScore> succeeded. response is:");
-        log(response);
-        callback(response);
-      })
-      .fail(function (jqXHR, textStatus, errorThrown) {
-        log("だめ(ランキング送信)")
-      });
+        .done(function (response, textStatus, jqXHR) {
+          log("request <getHighScore> succeeded. response is:");
+          log(response);
+          callback(response);
+        })
+        .fail(function (jqXHR, textStatus, errorThrown) {
+          log("だめ(ランキング送信)")
+        });
     });
   };
 }

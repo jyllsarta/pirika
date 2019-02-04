@@ -25,7 +25,7 @@ class ResultsController < ApplicationController
       remain_time: remain_time,
       extinct: extinct
     )
-    render json: {score: score, is_high_score: is_high_score, is_best_time: is_best_time}
+    render json: {score: score, is_high_score: is_high_score, is_best_time: is_best_time, time: remain_time, extinct: extinct}
   end
 
   def highscore

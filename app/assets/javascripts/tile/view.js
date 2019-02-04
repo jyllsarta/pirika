@@ -293,13 +293,29 @@ class View {
     $(".final_score").text(g_tile.getCurrentScore());
   }
 
-  onReceiveResult(isHighScore, isBestTime, isExtinct) {
+  onReceiveResult(isHighScore, isBestTime, isExtinct, time) {
     if (isHighScore || isBestTime || isExtinct) {
       log("good!")
       this.view.showGoodSiroko();
     }
     else {
       this.view.showRandomSiroko();
+    }
+
+    if (isExtinct) {
+      $(".remain_time_label").removeClass("hidden");
+      $(".remain_time").removeClass("hidden");
+      $(".remain_time").text(time);
+    }
+
+    if (isHighScore) {
+      $(".final_score").addClass("updated");
+      $(".final_score_updated_label").removeClass("hidden");
+    }
+
+    if (isBestTime) {
+      $(".remain_time").addClass("updated");
+      $(".remain_time_updated_label").removeClass("hidden");
     }
   }
 
@@ -340,6 +356,13 @@ class View {
   hideResult() {
     $(".end").addClass("hidden");
     $(".result_siroko").addClass("hidden");
+    $(".remain_time_label").addClass("hidden");
+    $(".remain_time").addClass("hidden");
+    $(".final_score").removeClass("updated");
+    $(".remain_time").removeClass("updated")
+    $(".final_score_updated_label").addClass("hidden");
+    $(".remain_time_updated_label").addClass("hidden");
+    ;
   }
 
   update() {
@@ -354,7 +377,7 @@ class View {
   }
 };
 
-var g_tile = new ColorTile(1);
+var g_tile = new ColorTile(10);
 var g_view = new View();
 g_tile.setView(g_view);
 

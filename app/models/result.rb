@@ -38,7 +38,7 @@ class Result < ApplicationRecord
   end
 
   def self.best_time?(username, difficulty, compare_time)
-    best_time = self.where(username: username, difficulty: difficulty).order(score: "DESC").try(:first).try(:remain_time)
+    best_time = self.where(username: username, difficulty: difficulty, extinct: true).order(score: "DESC").try(:first).try(:remain_time)
     return true if best_time.nil?
     return compare_time > best_time
   end
