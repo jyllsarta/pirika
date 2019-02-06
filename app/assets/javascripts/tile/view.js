@@ -235,8 +235,8 @@ class View {
 
   paintPanel(panelObject, colorId) {
     if (colorId) {
-      var color = $(`.color_sample${colorId}`).css("background");
-      $(panelObject).find(".block").css("background", color);
+      $(panelObject).find(".block").removeClass(/color_sample.*/);
+      $(panelObject).find(".block").addClass(`color_sample${colorId}`);
       $(panelObject).find(".block").removeClass("hidden");
     } else {
       $(panelObject).find(".block").addClass("hidden");
