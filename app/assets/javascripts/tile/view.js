@@ -234,12 +234,13 @@ class View {
   }
 
   paintPanel(panelObject, colorId) {
+    const panel = $(panelObject).find(".block");
+    panel.removeClass((_, className) => (className.match(/\bcolor_sample\S+/g) || []).join(' '));
     if (colorId) {
-      $(panelObject).find(".block").removeClass(/color_sample.*/);
-      $(panelObject).find(".block").addClass(`color_sample${colorId}`);
-      $(panelObject).find(".block").removeClass("hidden");
+      panel.addClass(`color_sample${colorId}`);
+      panel.removeClass("hidden");
     } else {
-      $(panelObject).find(".block").addClass("hidden");
+      panel.addClass("hidden");
     }
   }
 
@@ -377,7 +378,7 @@ class View {
   }
 };
 
-var g_tile = new ColorTile(100);
+var g_tile = new ColorTile(4);
 var g_view = new View();
 g_tile.setView(g_view);
 
