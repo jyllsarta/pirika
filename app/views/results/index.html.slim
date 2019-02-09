@@ -12,21 +12,26 @@ head
     .score_ranking.rank_table
         .indice
             .header
-                | 順位
+                .cell
+                    | 順位
             - (1..10).each do |i|
                 .rank
-                    = i
+                    .cell
+                        = i
         .ranking
             .header
-                | かんたん
+                .cell
+                    | かんたん
             = render partial: "ranking" 
         .ranking
             .header
-                | ふつう
+                .cell
+                    | ふつう
             = render partial: "ranking" 
         .ranking
             .header
-                | やばみ
+                .cell
+                    | やばみ
             = render partial: "ranking"
 
     h2
@@ -34,22 +39,26 @@ head
     .time_ranking.rank_table
         .indice
             .header
-                | 順位
+                .cell
+                    | 順位
             - (1..10).each do |i|
                 .rank
-                    = i
+                    .cell
+                        = i
         .ranking
             .header
-                | かんたん
+                .cell
+                    | かんたん
             = render partial: "ranking" 
         .ranking
             .header
-                | ふつう
+                .cell
+                    | ふつう
             = render partial: "ranking" 
         .ranking
             .header
-                | やばみ
-            = render partial: "ranking" 
-
+                .cell
+                    | やばみ
+            = render partial: "ranking"
 
 = stylesheet_link_tag "colortile"
