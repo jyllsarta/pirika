@@ -126,6 +126,29 @@ body {
     filter: brightness(120%);
   }
 
+  .to_ranking{
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    text-align: center;
+    font-size: 20px;
+    width: 120px;
+    padding-top: 10px;
+    height: 30px;
+    border: 1px solid #e9a04c;
+    background-color: #fffde6;
+    box-shadow: 1px 1px 5px 1px rgba(255, 233, 32, 0.8);
+    opacity: 0.95;
+  }
+  .to_ranking:link{
+    color: #4b575c;
+    text-decoration: none;
+  }
+  .to_ranking:hover{
+    filter: brightness(120%);
+  }
+
+
   #easy {
     bottom: 10px;
     right: 270px;
@@ -475,5 +498,55 @@ body {
       color: #f1ae3a;
     }
   }
+}
 
+
+// ランキング画面
+
+.rank_table{
+  display: flex;
+  flex-direction: row;
+  width: 90%;
+  height: 400px;
+  margin-left: auto;
+  margin-right: auto;
+  .ranking{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 30%;
+    height: 400px;
+    .rank{
+      height: 30px;
+      width: 100%;
+      text-align: center;
+      .value{
+        display: inline-block;
+        width: 50%;
+        text-align: center;
+      }
+      .name{
+        display: inline-block;
+        width: 50%;
+      }
+    }
+    .rank:nth-child(odd){
+      background-color: #d8e1e9;
+    }
+    .header{
+      background-color: #c2d9ee;
+      height: 30px;
+    }
+  }
+
+  .indice{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 10%;
+    height: 400px;
+    .rank{
+      height: 30px;
+    }
+  }
 }

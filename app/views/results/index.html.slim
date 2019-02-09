@@ -1,0 +1,55 @@
+head
+    title
+        | ランキング | しろこのカラータイル
+    meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"
+    link href="https://fonts.googleapis.com/css?family=Kosugi+Maru&amp;subset=japanese" rel="stylesheet"
+
+.main
+    h1
+        | ランキング
+    h2
+        | スコアランキング
+    .score_ranking.rank_table
+        .indice
+            .header
+                | 順位
+            - (1..10).each do |i|
+                .rank
+                    = i
+        .ranking
+            .header
+                | かんたん
+            = render partial: "ranking" 
+        .ranking
+            .header
+                | ふつう
+            = render partial: "ranking" 
+        .ranking
+            .header
+                | やばみ
+            = render partial: "ranking"
+
+    h2
+        | クリアタイム(全消し時に記録されます)
+    .time_ranking.rank_table
+        .indice
+            .header
+                | 順位
+            - (1..10).each do |i|
+                .rank
+                    = i
+        .ranking
+            .header
+                | かんたん
+            = render partial: "ranking" 
+        .ranking
+            .header
+                | ふつう
+            = render partial: "ranking" 
+        .ranking
+            .header
+                | やばみ
+            = render partial: "ranking" 
+
+
+= stylesheet_link_tag "colortile"

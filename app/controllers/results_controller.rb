@@ -35,7 +35,8 @@ class ResultsController < ApplicationController
   end
 
   def index
-    render json: {result: false, endpoint: "index"}
+    @results = Result.all
+    render :index, layout: false
   end
 
   def show
