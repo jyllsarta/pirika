@@ -31,11 +31,23 @@ class Result < ApplicationRecord
   end
 
   def self.ranking(difficulty, limit)
-    Result.order(score: "DESC").where(difficulty: difficulty).limit(limit).group(:username)
+    scores = Result.order(score: :desc).where(difficulty: difficulty)
+    ranking = []
+    scores.each do |score|
+      ranking.append(score) if ranking.all?{|rank| rank.username != score.username}
+      break if ranking.length == limit
+    end
+    ranking
   end
 
   def self.time_ranking(difficulty, limit)
-    Result.order(remain_time: "DESC").where(difficulty: difficulty, extinct: true).limit(limit).group(:username)
+    scores = Result.order(remain_time: :desc).where(difficulty: difficulty, extinct: true)
+    ranking = []
+    scores.each do |score|
+      ranking.append(score) if ranking.all?{|rank| rank.username != score.username}
+      break if ranking.length == limit
+    end
+    ranking
   end
 
   def self.high_score?(username, difficulty, compare_score)
