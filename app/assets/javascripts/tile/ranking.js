@@ -26,12 +26,7 @@ $(function () {
     const tripped = trip(username);
     for (var r of $(".rank")) {
         if ($(r).find(".name").text() == tripped) {
-            console.log("name!");
             $(r).css("background-color", "#ffe8cc").css("border-radius", "20px");
-        }
-        else {
-            console.log($(r).find(".name").text());
-            console.log(tripped);
         }
     }
 });
