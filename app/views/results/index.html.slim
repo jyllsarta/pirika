@@ -22,17 +22,17 @@ head
             .header
                 .cell
                     | かんたん
-            = render partial: "ranking" 
+            = render partial: "ranking", locals: {ranks: @score_rank_easy}
         .ranking
             .header
                 .cell
                     | ふつう
-            = render partial: "ranking" 
+            = render partial: "ranking", locals: {ranks: @score_rank_normal}
         .ranking
             .header
                 .cell
                     | やばみ
-            = render partial: "ranking"
+            = render partial: "ranking", locals: {ranks: @score_rank_hard}
 
     h2
         | クリアタイム(全消し時に記録されます)
@@ -49,16 +49,16 @@ head
             .header
                 .cell
                     | かんたん
-            = render partial: "ranking" 
+            = render partial: "time_ranking", locals: {ranks: @time_rank_easy}
         .ranking
             .header
                 .cell
                     | ふつう
-            = render partial: "ranking" 
+            = render partial: "time_ranking", locals: {ranks: @time_rank_normal}
         .ranking
             .header
                 .cell
                     | やばみ
-            = render partial: "ranking"
+            = render partial: "time_ranking", locals: {ranks: @time_rank_normal}
 
 = stylesheet_link_tag "colortile"

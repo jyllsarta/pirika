@@ -35,7 +35,12 @@ class ResultsController < ApplicationController
   end
 
   def index
-    @results = Result.all
+    @score_rank_easy = Result.ranking(1,10)
+    @score_rank_normal = Result.ranking(2,10)
+    @score_rank_hard = Result.ranking(3,10)
+    @time_rank_easy = Result.time_ranking(1,10)
+    @time_rank_normal = Result.time_ranking(2,10)
+    @time_rank_hard = Result.time_ranking(3,10)
     render :index, layout: false
   end
 

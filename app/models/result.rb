@@ -30,6 +30,14 @@ class Result < ApplicationRecord
     }
   end
 
+  def self.ranking(difficulty, limit)
+    Result.order(score: "DESC").where(difficulty: difficulty).limit(limit).group(:username)
+  end
+
+  def self.time_ranking(difficulty, limit)
+    Result.order(remain_time: "DESC").where(difficulty: difficulty, extinct: true).limit(limit).group(:username)
+  end
+
   def self.high_score?(username, difficulty, compare_score)
     return false if compare_score == 0
     high_score = self.where(username: username, difficulty: difficulty).order(score: "DESC").try(:first).try(:score)
@@ -42,4 +50,16 @@ class Result < ApplicationRecord
     return true if best_time.nil?
     return compare_time > best_time
   end
+
+  def self.create_default_rank
+    10.times do |i|
+      Result.create!(seed: 100000000, score: i*50, username: "ななしろこ#{i+1}号", playlog: "{}", remain_time: 5 - i*0.5, difficulty: 1, extinct: false)
+      Result.create!(seed: 100000000, score: i*50, username: "ななしろこ#{i+1}号", playlog: "{}", remain_time: 5 - i*0.5, difficulty: 2, extinct: false)
+      Result.create!(seed: 100000000, score: i*50, username: "ななしろこ#{i+1}号", playlog: "{}", remain_time: 5 - i*0.5, difficulty: 3, extinct: false)
+      Result.create!(seed: 100000000, score: i*50, username: "ななしろこ#{i+1}号", playlog: "{}", remain_time: 5 - i*0.5, difficulty: 1, extinct: true)
+      Result.create!(seed: 100000000, score: i*50, username: "ななしろこ#{i+1}号", playlog: "{}", remain_time: 5 - i*0.5, difficulty: 2, extinct: true)
+      Result.create!(seed: 100000000, score: i*50, username: "ななしろこ#{i+1}号", playlog: "{}", remain_time: 5 - i*0.5, difficulty: 3, extinct: true)
+    end
+  end
+
 end
