@@ -7,6 +7,9 @@ head
 .main
     h1
         | ランキング
+    p
+        a href="/tile"
+            | しろこのカラータイルにもどる
     h2
         | スコアランキング
     .score_ranking.rank_table
@@ -59,6 +62,6 @@ head
             .header
                 .cell
                     | やばみ
-            = render partial: "time_ranking", locals: {ranks: @time_rank_normal}
+            = render partial: "time_ranking", locals: {ranks: @time_rank_hard}
 
 = stylesheet_link_tag "colortile"
