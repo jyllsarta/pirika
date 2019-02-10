@@ -1,9 +1,7 @@
 //
-// view.js modelとviewを頑張ってつなぐ係
-// (このファイルがこんなに苦しいならフロントのライブラリを使うべきでは...?)
+// ranking.js ランキングページで読み込む
+// cookieから自分のユーザ名を取ってきて、それを光らせる
 //
-
-
 
 function to_trip(tr) {
     var shaObj = new jsSHA("SHA-256", "TEXT");
