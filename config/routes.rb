@@ -21,6 +21,7 @@ Rails.application.routes.draw do
 
   get 'tile/',        to: "colortile#index"
   get 'tile/new',      to: "colortile#new"
+  get 'tile/howto',      to: "colortile#howto"
 
   get 'tile/results/', to: "results#index"
   post 'tile/results/create', to: "results#create"

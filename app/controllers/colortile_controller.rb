@@ -17,4 +17,8 @@ class ColortileController < ApplicationController
     board = ColorTileLogic::Board.new(x, y, colors, pairs, seed)
     render json: board.to_json
   end
+
+  def howto
+    render :howto, layout: false
+  end
 end
