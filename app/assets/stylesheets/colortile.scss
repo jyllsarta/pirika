@@ -457,7 +457,6 @@ body {
     font-size: 30px;
     border-radius: 4px;
     box-shadow: 1px 1px 1px 1px rgba(38, 59, 88, 0.8);
-    width: 200px;
     padding-top: 10px;
     height: 40px;
     color: #eaf3ef;
@@ -470,6 +469,7 @@ body {
   }
 
   .restart {
+    width: 200px;
     position: absolute;
     bottom: 50px;
     left: 50px;
@@ -477,6 +477,7 @@ body {
 
   .back_to_title {
     position: absolute;
+    width: 140px;
     bottom: 50px;
     right: 50px;
   }
@@ -498,6 +499,21 @@ body {
       color: #f1ae3a;
     }
   }
+
+  .tweet{ 
+    position: absolute;
+    bottom: 48px;
+    right: 200px;
+    z-index: 10003;
+    .twitter{
+      width: 52px;
+      height: 52px;;
+    }
+    .twitter:hover{
+      filter: brightness(120%);
+    }
+  }
+
 }
 
 

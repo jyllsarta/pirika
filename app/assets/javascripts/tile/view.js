@@ -71,6 +71,9 @@ class View {
     $(".username").focus(function () {
       this.onFocusUsername();
     }.bind(this));
+    $(".twitter").click(function () {
+      this.tweet();
+    }.bind(this));
 
     // enterでblurさせる
     $(".username").keypress(function (e) {
@@ -79,6 +82,29 @@ class View {
         return false;
       }
     })
+  }
+
+  tweet() {
+    const tag = encodeURI("しろこのカラータイル");
+    const tweetContent = this.makeTweetContent();
+    const url = encodeURI("http://jyllsarta.net/tile")
+    const fullurl = `https://twitter.com/intent/tweet?url=${url}&text=${tweetContent}&hashtags=${tag}`;
+    window.open(fullurl);
+  }
+
+  makeTweetContent() {
+    const difficulies = {
+      1: "かんたん",
+      2: "ふつう",
+      3: "やばみ"
+    };
+    if (g_tile.board.extinct()) {
+      // 0d0aは改行コードね
+      return `しろこのカラータイル ${difficulies[g_tile.difficulty]}モードで全消ししたよ！%0d%0aのこりタイム：${g_tile.clearTime}%0d%0aスコア：${g_tile.score}%0d%0a`
+    }
+    else {
+      return `しろこのカラータイル ${difficulies[g_tile.difficulty]}モードでスコア${g_tile.score}でした！%0d%0a`
+    }
   }
 
   to_trip(tr) {

@@ -119,6 +119,7 @@ class ColorTile {
     this.startedTimePoint = Date.now();
     this.view.startGameHandler();
     this.playlog = new PlayLog(this.board);
+    this.clearTime = 0;
   }
 
   backToTitle() {
@@ -146,6 +147,7 @@ class ColorTile {
 
   finish() {
     this.view.finish();
+    this.clearTime = this.timeLeft(false);
     this.gameMode = GameMode.RESULT;
     log(this.playlog.messages);
     ColorTileAPI.sendResult(this.view.onReceiveResult.bind(this), this.playlog, this.username, this.difficulty, this.timeLeft(false));
