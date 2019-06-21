@@ -16,7 +16,7 @@
     h4
       | #{attribute}: {{player.#{attribute}}}
     input.slider type="range" v-model.number="player.#{attribute}"
-  button v-on:click="showAnswer"
+  button.show_answer v-on:click="showAnswer"
     | 答え合わせ
 
   table.answer v-if="showingAnswer"

@@ -17,7 +17,7 @@ var app = new Vue({
     },
     created: function(){
         this.target.blur = parseInt(Math.random() * 100);
-        this.target.brightness = parseInt(Math.random() * 100);
+        this.target.brightness = parseInt( 10 + Math.random() * 90); // br < 10 は人間にはみえない
         this.target.saturate = parseInt(Math.random() * 100);
         this.target.hueRotate = parseInt(Math.random() * 100);
     },
