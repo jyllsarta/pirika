@@ -1,0 +1,49 @@
+#app
+  h1
+    | css filterプロパティ完全に理解した
+  p
+    |
+  .illust_area
+    .item
+      div
+        | さくひん
+      img.main_image src="/images/match_illust/cal.png" v-bind:style="{filter: playerFilter}"
+    .item
+      div
+        | みほん
+      img.main_image src="/images/match_illust/cal.png" v-bind:style="{filter: targetFilter}"
+  - %w(blur brightness saturate hueRotate).each do |attribute|
+    h4
+      | #{attribute}: {{player.#{attribute}}}
+    input.slider type="range" v-model.number="player.#{attribute}"
+  button v-on:click="showAnswer"
+    | 答え合わせ
+
+  table.answer v-if="showingAnswer"
+    th
+      td
+        | さくひん
+      td
+        | こたえ
+      td
+        | 評価
+    - %w(blur brightness saturate hueRotate).each do |attribute|
+      tr
+        td
+          | #{attribute}
+        td
+          | {{player.#{attribute}}}
+        td
+          | {{target.#{attribute}}}
+        td
+          | {{grade("#{attribute}")}}
+  h2 v-if="showingAnswer"
+    | 理解度： {{score}} %
+  button v-on:click="reload" v-if="showingAnswer"
+    | もう一回
+  img.tweet src="/images/match_illust/twitter.jpg" v-on:click="tweet" v-if="showingAnswer"
+
+script src="https://unpkg.com/vue"
+= javascript_include_tag "match_illust"
+= stylesheet_link_tag "match_illust"
+

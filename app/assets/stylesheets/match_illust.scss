@@ -1,0 +1,109 @@
+// Place all the styles related to the static_pages controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.illust_area{
+  display: flex;
+  width: 100%;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.item{
+  width: 45%;
+}
+
+.main_image{
+  width: 100%;
+}
+
+.tweet{
+  margin-left: 50px;
+}
+
+// ジェネレータからまるまる持ってきた
+input[type=range] {
+  -webkit-appearance: none;
+  width: 100%;
+  margin: -0.15px 0;
+}
+input[type=range]:focus {
+  outline: none;
+}
+input[type=range]::-webkit-slider-runnable-track {
+  width: 100%;
+  height: 30.3px;
+  cursor: pointer;
+  box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+  background: #fffaff;
+  border-radius: 6.7px;
+  border: 0px solid #010101;
+}
+input[type=range]::-webkit-slider-thumb {
+  box-shadow: 0px 0px 0px #000000, 0px 0px 0px #0d0d0d;
+  border: 2.9px solid #d35aae;
+  height: 30px;
+  width: 30px;
+  border-radius: 12px;
+  background: #ffffff;
+  cursor: pointer;
+  -webkit-appearance: none;
+  margin-top: 0.15px;
+}
+input[type=range]:focus::-webkit-slider-runnable-track {
+  background: #ffffff;
+}
+input[type=range]::-moz-range-track {
+  width: 100%;
+  height: 30.3px;
+  cursor: pointer;
+  box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+  background: #fffaff;
+  border-radius: 6.7px;
+  border: 0px solid #010101;
+}
+input[type=range]::-moz-range-thumb {
+  box-shadow: 0px 0px 0px #000000, 0px 0px 0px #0d0d0d;
+  border: 2.9px solid #d35aae;
+  height: 30px;
+  width: 30px;
+  border-radius: 12px;
+  background: #ffffff;
+  cursor: pointer;
+}
+input[type=range]::-ms-track {
+  width: 100%;
+  height: 30.3px;
+  cursor: pointer;
+  background: transparent;
+  border-color: transparent;
+  color: transparent;
+}
+input[type=range]::-ms-fill-lower {
+  background: #ffe1ff;
+  border: 0px solid #010101;
+  border-radius: 13.4px;
+  box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+}
+input[type=range]::-ms-fill-upper {
+  background: #fffaff;
+  border: 0px solid #010101;
+  border-radius: 13.4px;
+  box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+}
+input[type=range]::-ms-thumb {
+  box-shadow: 0px 0px 0px #000000, 0px 0px 0px #0d0d0d;
+  border: 2.9px solid #d35aae;
+  width: 30px;
+  border-radius: 12px;
+  background: #ffffff;
+  cursor: pointer;
+  height: 30px;
+}
+input[type=range]:focus::-ms-fill-lower {
+  background: #fffaff;
+}
+input[type=range]:focus::-ms-fill-upper {
+  background: #ffffff;
+}
+

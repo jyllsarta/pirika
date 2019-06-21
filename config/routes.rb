@@ -27,6 +27,7 @@ Rails.application.routes.draw do
   post 'tile/results/create', to: "results#create"
   get 'tile/:username/highscore', to: "results#highscore"
 
+  get 'match_illusts/index'
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
