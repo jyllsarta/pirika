@@ -22,3 +22,5 @@
 
 .byebug_history
 config/pirika_secrets.yml
+.ruby-version
+.idea/
