@@ -1,0 +1,22 @@
+
+.frames{
+  display: flex;
+  flex-direction: column-reverse;
+  width: 100%;
+  transform: scaleY(1.6) perspective(40px) rotateX(5deg);
+  transform-origin: bottom center;
+
+  .frame{
+    display: flex;
+    flex-direction: row;
+    height: 30px;
+    width: 100%;
+    .note{
+      width: 25%;
+      height: 100%;
+    }
+    .active{
+      background-color: #0f0f0f;
+    }
+  }
+}

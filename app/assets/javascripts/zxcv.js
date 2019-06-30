@@ -19,11 +19,20 @@ var app = new Vue({
         this.initKeyboard();
     },
     computed: {
+      recentNotes: function(){
+        return this.notes.slice(0,16);
+      }
     },
     methods: {
+      // initializers
       initNotes: function () {
         for (let i = 0; i < 100; ++i){
-          this.notes.push(parseInt(Math.random() * 4));
+          this.notes.push(
+            {
+              id: i,
+              note: parseInt(Math.random() * 4),
+            }
+          );
         }
       },
       initKeyboard: function () {
@@ -32,6 +41,7 @@ var app = new Vue({
         }
       },
 
+      // handlers
       handleKeydown: function (e) {
         this.keyboard[e.key] = 1;
         this.updateNotes();
@@ -40,12 +50,13 @@ var app = new Vue({
         this.keyboard[e.key] = 0;
       },
 
+      // logic
       updateNotes: function(){
-        if(this.keyboard[G_NOTES[this.notes[0]]]){
+        if(this.keyboard[G_NOTES[this.notes[0].note]]){
           console.log(this.notes[0]);
           this.notes.shift();
         }
-      }
+      },
     }
 });
 
