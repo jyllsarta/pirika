@@ -12,6 +12,7 @@ var app = new Vue({
     data: {
       notes: [],
       keyboard: [],
+      score: 0,
     },
     created: function(){
         console.log("pong!");
@@ -55,6 +56,7 @@ var app = new Vue({
         if(this.keyboard[G_NOTES[this.notes[0].note]]){
           console.log(this.notes[0]);
           this.notes.shift();
+          this.score++;
         }
       },
     }
