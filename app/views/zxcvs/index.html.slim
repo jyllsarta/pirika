@@ -4,6 +4,9 @@
   .window
     .score
       | {{score}}
+    .life v-bind:style="{width: lifeLength}"
+    .dead v-if="!alive"
+      | GAME OVER
     .frames
       .frame v-for="note in recentNotes" v-bind:key="note.id"
         // いったんviewに0123とzxcvの結合ができちゃったけど保留
