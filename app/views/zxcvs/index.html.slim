@@ -20,8 +20,10 @@
         .c.note v-bind:class="{active: note.note == 2 }"
         .v.note v-bind:class="{active: note.note == 3 }"
 
-//開発版だけど許して
-script src="https://unpkg.com/vue"
+- if ENV["RAILS_ENV"] == "production"
+  script src="https://unpkg.com/vue/dist/vue.min.js"
+- else
+  script src="https://unpkg.com/vue"
 = javascript_include_tag "zxcv"
 = stylesheet_link_tag "zxcv"
 
