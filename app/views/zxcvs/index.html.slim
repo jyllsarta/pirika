@@ -2,11 +2,16 @@
   h1
     | zxcv
   .window
-    .score
+    .score v-if="gameState != this.constants.gameStates.title"
       | {{score}}
     .life v-bind:style="{width: lifeLength}"
-    .dead v-if="!alive"
-      | GAME OVER
+    .dead v-if="gameState == this.constants.gameStates.gameOver"
+      | GAME OVER (r to reset)
+    .title v-if="gameState == this.constants.gameStates.title"
+      | Z X C V
+        kick zxcv to start
+    .win v-if="gameState == this.constants.gameStates.cleared"
+      | WIN (r to reset)
     .frames
       .frame v-for="note in recentNotes" v-bind:key="note.id"
         // いったんviewに0123とzxcvの結合ができちゃったけど保留

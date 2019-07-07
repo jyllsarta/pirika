@@ -31,6 +31,29 @@
   color: #B00100;
 }
 
+.title{
+  white-space: pre;
+  position: absolute;
+  left: 10%;
+  bottom: 15%;
+  width: 80%;
+  opacity: 0.8;
+  font-size: 60px;
+  text-align: center;
+  color: #5169b0;
+}
+
+.win{
+  position: absolute;
+  left: 20%;
+  bottom: 35%;
+  width: 60%;
+  opacity: 0.8;
+  font-size: 40px;
+  text-align: center;
+  color: #5366e1;
+}
+
 .frames{
   display: flex;
   flex-direction: column-reverse;

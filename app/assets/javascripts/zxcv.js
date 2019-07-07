@@ -1,90 +1,167 @@
-// global constants
-const G_NOTES = {
-  0: "z",
-  1: "x",
-  2: "c",
-  3: "v",
-};
-
-const G_MAX_LIFE = 10000;
-const G_DAMAGE_PER_FRAME = 10;
-const G_RECOVER_PER_NOTE = 100;
-const G_DISPLAY_NOTES = 16;
-const G_INITIAL_NOTES = 100;
 
 var app = new Vue({
-    el: '#app',
-    data: {
-      notes: [],
-      keyboard: [],
-      score: 0,
-      life: 0,
+  el: '#app',
+  data: {
+    notes: [],
+    keyboard: [],
+    score: 0,
+    life: 0,
+    gameState: 0,
+  },
+  created: function(){
+    this.reset();
+    this.invokeUpdate();
+  },
+  computed: {
+    recentNotes: function(){
+      return this.notes.slice(0, this.constants.displayNotes);
     },
-    created: function(){
-        this.initNotes();
-        this.initKeyboard();
-        this.life = G_MAX_LIFE;
-        this.invokeUpdate();
+    lifeLength: function(){
+      return (this.life / this.constants.maxLife * 100) + "%"
     },
-    computed: {
-      recentNotes: function(){
-        return this.notes.slice(0, G_DISPLAY_NOTES);
-      },
-      lifeLength: function(){
-        return (this.life / G_MAX_LIFE * 100) + "%"
-      },
-      alive: function(){
-        return this.life > 0;
+    alive: function() {
+      return this.life > 0;
+    },
+    constants: function(){
+      return {
+        notes: {
+          0: "z",
+          1: "x",
+          2: "c",
+          3: "v",
+        },
+
+        maxLife: 10000,
+        minDamagePerLife: 10,
+        recoverPerNote: 100,
+        displayNotes: 16,
+        initialNotes: 1000,
+        gameStates: {
+          title: 0,
+          inGame: 1,
+          gameOver: 2,
+          cleared: 3,
+        },
       }
     },
-    methods: {
-      // initializers
-      initNotes: function () {
-        for (let i = 0; i < G_INITIAL_NOTES; ++i){
-          this.notes.push(
-            {
-              id: i,
-              note: parseInt(Math.random() * 4),
-            }
-          );
-        }
-      },
-      initKeyboard: function () {
-        for(let i = "a".charCodeAt(0); i <= "z".charCodeAt(0); i++) {
-          this.keyboard[String.fromCharCode(i)] = 0;
-        }
-      },
+  },
+  methods: {
+    // initializers
+    initNotes: function () {
+      this.notes = [];
+      for (let i = 0; i < this.constants.initialNotes; ++i){
+        this.notes.push(
+          {
+            id: i,
+            note: parseInt(Math.random() * 4),
+          }
+        );
+      }
+    },
+    initKeyboard: function () {
+      for(let i = "a".charCodeAt(0); i <= "z".charCodeAt(0); i++) {
+        this.keyboard[String.fromCharCode(i)] = 0;
+      }
+    },
 
-      // handlers
-      handleKeydown: function (e) {
-        this.keyboard[e.key] = 1;
-        this.updateNotes();
-      },
-      handleKeyup: function (e) {
-        this.keyboard[e.key] = 0;
-      },
+    reset: function(){
+      this.gameState = this.constants.gameStates.title;
+      this.initNotes();
+      this.initKeyboard();
+      this.score = 0;
+      this.life = this.constants.maxLife;
+    },
 
-      // logic
-      invokeUpdate: function(){
-        // TODO: ライフの減算量をフレームレート非依存にする
-        this.life -= G_INITIAL_NOTES - this.notes.length;
-        requestAnimationFrame(this.invokeUpdate);
-      },
+    // handlers
+    handleKeydown: function (e) {
+      this.keyboard[e.key] = 1;
+      this.triggerKeyboardEvents();
+    },
+    handleKeyup: function (e) {
+      this.keyboard[e.key] = 0;
+    },
 
-      updateNotes: function(){
-        // 死んでたらキーの処理をしない
-        if(!this.alive){
-          return;
-        }
+    invokeUpdate: function(){
+      switch (this.gameState) {
+        case this.constants.gameStates.title:
+          break;
+        case this.constants.gameStates.inGame:
+          this.updateInGame();
+          break;
+        case this.constants.gameStates.gameOver:
+          break;
+        case this.constants.gameStates.cleared:
+          break;
+        default:
+          console.error(`undefined game mode set: ${this.gameState} on update`);
+          break;
+      }
+      requestAnimationFrame(this.invokeUpdate);
+    },
 
-        if(this.keyboard[G_NOTES[this.notes[0].note]]){
-          console.log(this.notes[0]);
-          this.notes.shift();
-          this.score++;
-          this.life += G_RECOVER_PER_NOTE;
-        }
-      },
-    }
+    updateInGame: function(){
+      // TODO: ライフの減算量をフレームレート非依存にする
+      this.life -= Math.max((this.constants.initialNotes - this.notes.length) / 3, this.constants.minDamagePerLife);
+    },
+
+    triggerKeyboardEvents: function(){
+      switch (this.gameState) {
+        case this.constants.gameStates.title:
+          this.handleKeyTitle();
+          break;
+        case this.constants.gameStates.inGame:
+          this.handleKeyInGame();
+          break;
+        case this.constants.gameStates.gameOver:
+          this.handleKeyGameOver();
+          break;
+        case this.constants.gameStates.cleared:
+          this.handleKeyCleared();
+          break;
+        default:
+          console.error(`undefined game mode set: ${this.gameState} on trigger Key Event`);
+          break;
+      }
+    },
+
+    handleKeyTitle: function(){
+      if(this.keyboard["z"] || this.keyboard["x"] || this.keyboard["c"] || this.keyboard["v"]){
+        this.gameState = this.constants.gameStates.inGame;
+      }
+    },
+
+    handleKeyInGame: function(){
+      // 死んでたらキーの処理をしない
+      if(!this.alive){
+        this.gameState = this.constants.gameStates.gameOver;
+        return;
+      }
+
+      if(this.keyboard[this.constants.notes[this.notes[0].note]]){
+        console.log(this.notes[0]);
+        this.notes.shift();
+        this.score++;
+        this.life += this.constants.recoverPerNote;
+      }
+
+      // クリア判定
+      if(this.notes.length === 0){
+        this.gameState = this.constants.gameStates.cleared;
+      }
+    },
+
+    handleKeyGameOver: function(){
+      if(this.keyboard["r"]){
+        this.reset();
+      }
+    },
+
+    handleKeyCleared: function(){
+      if(this.keyboard["r"]){
+        this.reset();
+      }
+    },
+  }
 });
 
 // init global key event
