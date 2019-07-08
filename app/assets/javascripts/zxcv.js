@@ -14,7 +14,7 @@ var app = new Vue({
   },
   computed: {
     recentNotes: function(){
-      return this.notes.slice(0, this.constants.displayNotes);
+      return this.notes.slice(0, this.constants.displayNotes).reverse();
     },
     lifeLength: function(){
       return (this.life / this.constants.maxLife * 100) + "%"
@@ -101,7 +101,7 @@ var app = new Vue({
 
     updateInGame: function(){
       // TODO: ライフの減算量をフレームレート非依存にする
-      this.life -= Math.max((this.constants.initialNotes - this.notes.length) / 3, this.constants.minDamagePerLife);
+      this.life -= Math.max((this.constants.initialNotes - this.notes.length) / 10, this.constants.minDamagePerLife);
     },
 
     triggerKeyboardEvents: function(){

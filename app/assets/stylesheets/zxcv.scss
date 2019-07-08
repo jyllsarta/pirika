@@ -1,8 +1,14 @@
+$note_width: 180px;
+$note_height: 30px;
+$note_count: 16;
+
 .window{
   display: block;
   position: relative;
-  width: 100%;
-  height: 100%;
+  width: $note_width * 4 + 50;
+  height: $note_height * $note_count + 50;
+  padding: 0px 25px 50px 25px;
+  margin: auto;
 }
 
 .score{
@@ -16,8 +22,10 @@
 }
 
 .life{
-  height: 2px;
+  height: 20px;
   background-color: #0b5daa;
+  transform: translateY(300px);
+  opacity: 0.4;
 }
 
 .dead{
@@ -54,21 +62,35 @@
   color: #5366e1;
 }
 
-.frames{
-  display: flex;
-  flex-direction: column-reverse;
-  width: 100%;
+.frame_window{
   transform: scaleY(1.6) perspective(40px) rotateX(5deg);
   transform-origin: bottom center;
+  width: $note_width * 4;
+  height: $note_height * $note_count;
+}
+
+.notes-item{
+  transition: all 0.3s;
+}
+.notes-enter, .notes-leave-to{
+  opacity: 0;
+  transform: scale(0.2);
+}
+
+.frames{
+  display: flex;
+  flex-direction: column;
+  width: $note_width * 4;
+  height: $note_height * $note_count;
 
   .frame{
     display: flex;
     flex-direction: row;
-    height: 30px;
-    width: 100%;
+    width: $note_width * 4;
+    height: $note_height;
     .note{
-      width: 25%;
-      height: 100%;
+      width: $note_width;
+      height: $note_height;
     }
     .active{
       background-color: #0f0f0f;
