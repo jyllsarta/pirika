@@ -7,10 +7,12 @@ var app = new Vue({
     score: 0,
     life: 0,
     gameState: 0,
+    sounds: {},
   },
   created: function(){
     this.reset();
     this.invokeUpdate();
+    this.loadSounds();
   },
   computed: {
     recentNotes: function(){
@@ -70,6 +72,13 @@ var app = new Vue({
       this.initKeyboard();
       this.score = 0;
       this.life = this.constants.maxLife;
+    },
+
+    loadSounds: function(){
+      this.sounds.z = new Audio("/game/zxcv/sounds/z.wav");
+      this.sounds.x = new Audio("/game/zxcv/sounds/x.wav");
+      this.sounds.c = new Audio("/game/zxcv/sounds/c.wav");
+      this.sounds.v = new Audio("/game/zxcv/sounds/v.wav");
     },
 
     // handlers
@@ -137,8 +146,10 @@ var app = new Vue({
         return;
       }
 
-      if(this.keyboard[this.constants.notes[this.notes[0].note]]){
-        console.log(this.notes[0]);
+      const hitKey = this.constants.notes[this.notes[0].note];
+      if(this.keyboard[hitKey]){
+        this.sounds[hitKey].currentTime = 0;
+        this.sounds[hitKey].play();
         this.notes.shift();
         this.score++;
         this.life += this.constants.recoverPerNote;
