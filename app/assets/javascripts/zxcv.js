@@ -24,6 +24,9 @@ var app = new Vue({
     alive: function() {
       return this.life > 0;
     },
+    isDanger: function(){
+      return this.life < this.constants.dangerLine;
+    },
     constants: function(){
       return {
         notes: {
@@ -34,8 +37,10 @@ var app = new Vue({
         },
 
         maxLife: 10000,
+        dangerLine: 3333,
         minDamagePerLife: 10,
-        recoverPerNote: 100,
+        recoverPerNote: 250,
+        badDamage: 100,
         displayNotes: 16,
         initialNotes: 1000,
         gameStates: {
@@ -51,13 +56,22 @@ var app = new Vue({
     // initializers
     initNotes: function () {
       this.notes = [];
-      for (let i = 0; i < this.constants.initialNotes; ++i){
-        this.notes.push(
-          {
-            id: i,
-            note: parseInt(Math.random() * 16),
-          }
-        );
+      for (let i = 0; i < 100; ++i){
+        let notes = [0b0001, 0b0010, 0b0100, 0b1000];
+        for(let i = notes.length - 1; i > 0; i--){
+          let r = Math.floor(Math.random() * (i + 1));
+          let tmp = notes[i];
+          notes[i] = notes[r];
+          notes[r] = tmp;
+        }
+        for(let note of notes){
+          this.notes.push(
+            {
+              id: this.notes.length,
+              note: note,
+            }
+          );
+        }
       }
     },
     initKeyboard: function () {
@@ -83,6 +97,12 @@ var app = new Vue({
 
     // handlers
     handleKeydown: function (e) {
+      // keyboard は 押されたら1 押しっぱなしだとそれ以上 の値が入っている
+      for (let key of this.keyboard.keys()) {
+        if(this.keyboard[key]){
+          this.keyboard[key] += 1;
+        }
+      }
       this.keyboard[e.key] = 1;
       this.triggerKeyboardEvents();
     },
@@ -110,7 +130,12 @@ var app = new Vue({
 
     updateInGame: function(){
       // TODO: ライフの減算量をフレームレート非依存にする
-      this.life -= Math.max((this.constants.initialNotes - this.notes.length) / 10, this.constants.minDamagePerLife);
+      let damage = Math.max(this.score/ 2, this.constants.minDamagePerLife);
+      if(this.isDanger){
+        damage /= 2;
+      }
+      console.log(damage);
+      this.life -= parseInt(damage);
     },
 
     triggerKeyboardEvents: function(){
@@ -143,6 +168,16 @@ var app = new Vue({
       return result;
     },
 
+    // zxcvと1248の相互変換がめんどいでござる
+    lastKey: function(){
+      for (let [key, _] of Object.entries(this.constants.notes)) {
+        if(this.keyboard[key] === 1){
+          return key;
+        }
+      }
+      return "";
+    },
+
     handleKeyTitle: function(){
       if(this.keyboardStatus()){
         this.gameState = this.constants.gameStates.inGame;
@@ -156,11 +191,20 @@ var app = new Vue({
         return;
       }
 
-      const key = this.keyboardStatus();
-      if((key & this.notes[0].note) == this.notes[0].note){
+      const keyStatus = this.keyboardStatus();
+      const lastKey = this.lastKey();
+
+      // 「今」押されたキーが次のノーツと一切関係がなかったらBAD
+      if((keyStatus & this.notes[0].note) === 0) {
+        // ここで対応するbadの演出出せると良いなあ
+        this.score -= 1;
+        this.life -= this.constants.badDamage;
+      }
+
+      if((keyStatus & this.notes[0].note) === this.notes[0].note){
         // 現状の構造だとキーが押されているかどうかしか判定されないので
-        //this.sounds[hitKey].currentTime = 0;
-        //this.sounds[hitKey].play();
+        this.sounds[lastKey].currentTime = 0;
+        this.sounds[lastKey].play();
         this.notes.shift();
         this.score++;
         this.life += this.constants.recoverPerNote;

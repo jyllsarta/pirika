@@ -11,6 +11,10 @@ $note_count: 16;
   margin: auto;
 }
 
+.ui{
+  z-index: 100;
+}
+
 .score{
   position: absolute;
   left: 20%;
@@ -23,15 +27,22 @@ $note_count: 16;
 
 .life{
   height: 20px;
-  background-color: #0b5daa;
-  transform: translateY(300px);
+  transform: translateY(-100px);
   opacity: 0.4;
+}
+
+.normal{
+  background-color: #0b5daa;
+}
+
+.danger{
+  background-color: #aa3a0d;
 }
 
 .dead{
   position: absolute;
   left: 20%;
-  bottom: 35%;
+  bottom: 40%;
   width: 60%;
   opacity: 0.8;
   font-size: 40px;
@@ -43,7 +54,7 @@ $note_count: 16;
   white-space: pre;
   position: absolute;
   left: 10%;
-  bottom: 15%;
+  bottom: 40%;
   width: 80%;
   opacity: 0.8;
   font-size: 60px;
@@ -54,7 +65,7 @@ $note_count: 16;
 .win{
   position: absolute;
   left: 20%;
-  bottom: 35%;
+  bottom: 40%;
   width: 60%;
   opacity: 0.8;
   font-size: 40px;
@@ -63,6 +74,7 @@ $note_count: 16;
 }
 
 .frame_window{
+  z-index: 10;
   transform: scaleY(1.6) perspective(40px) rotateX(5deg);
   transform-origin: bottom center;
   width: $note_width * 4;
