@@ -35,7 +35,8 @@ var app = new Vue({
           "c": 0b0100,
           "v": 0b1000,
         },
-
+        currentTime: 0,
+        timeDelta: 0,
         maxLife: 10000,
         dangerLine: 3333,
         minDamagePerLife: 10,
@@ -86,6 +87,8 @@ var app = new Vue({
       this.initKeyboard();
       this.score = 0;
       this.life = this.constants.maxLife;
+      this.currentTime = 0;
+      this.timeDelta = 0;
     },
 
     loadSounds: function(){
@@ -111,6 +114,7 @@ var app = new Vue({
     },
 
     invokeUpdate: function(){
+      this.updateTime();
       switch (this.gameState) {
         case this.constants.gameStates.title:
           break;
@@ -128,9 +132,17 @@ var app = new Vue({
       requestAnimationFrame(this.invokeUpdate);
     },
 
+    updateTime: function(){
+      const prevTime = this.currentTime;
+      const now = new Date().getTime();
+      this.timeDelta = now - prevTime;
+      this.currentTime = now;
+    },
+
     updateInGame: function(){
       // TODO: ライフの減算量をフレームレート非依存にする
       let damage = Math.max(this.score/ 2, this.constants.minDamagePerLife);
+      damage *= this.timeDelta / 17; // 1F=17msに合わせて補正する
       if(this.isDanger){
         damage /= 2;
       }
