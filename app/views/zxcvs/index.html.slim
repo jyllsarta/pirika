@@ -15,11 +15,10 @@
     .frame_window
       transition-group.frames name="notes" tag="div"
         .frame.notes-item v-for="note in recentNotes" v-bind:key="note.id"
-          // いったんviewに0123とzxcvの結合ができちゃったけど保留
-          .z.note v-bind:class="{active: note.note == 0 }"
-          .x.note v-bind:class="{active: note.note == 1 }"
-          .c.note v-bind:class="{active: note.note == 2 }"
-          .v.note v-bind:class="{active: note.note == 3 }"
+          .z.note v-bind:class="{active: note.note & constants.notes.z }"
+          .x.note v-bind:class="{active: note.note & constants.notes.x }"
+          .c.note v-bind:class="{active: note.note & constants.notes.c }"
+          .v.note v-bind:class="{active: note.note & constants.notes.v }"
 
 - if ENV["RAILS_ENV"] == "production"
   script src="https://unpkg.com/vue/dist/vue.min.js"

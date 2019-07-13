@@ -27,10 +27,10 @@ var app = new Vue({
     constants: function(){
       return {
         notes: {
-          0: "z",
-          1: "x",
-          2: "c",
-          3: "v",
+          "z": 0b0001,
+          "x": 0b0010,
+          "c": 0b0100,
+          "v": 0b1000,
         },
 
         maxLife: 10000,
@@ -55,7 +55,7 @@ var app = new Vue({
         this.notes.push(
           {
             id: i,
-            note: parseInt(Math.random() * 4),
+            note: parseInt(Math.random() * 16),
           }
         );
       }
@@ -133,8 +133,18 @@ var app = new Vue({
       }
     },
 
+    keyboardStatus: function(){
+      result = 0;
+      for (let [key, value] of Object.entries(this.constants.notes)) {
+        if(this.keyboard[key]){
+          result += value;
+        }
+      }
+      return result;
+    },
+
     handleKeyTitle: function(){
-      if(this.keyboard["z"] || this.keyboard["x"] || this.keyboard["c"] || this.keyboard["v"]){
+      if(this.keyboardStatus()){
         this.gameState = this.constants.gameStates.inGame;
       }
     },
@@ -146,10 +156,11 @@ var app = new Vue({
         return;
       }
 
-      const hitKey = this.constants.notes[this.notes[0].note];
-      if(this.keyboard[hitKey]){
-        this.sounds[hitKey].currentTime = 0;
-        this.sounds[hitKey].play();
+      const key = this.keyboardStatus();
+      if((key & this.notes[0].note) == this.notes[0].note){
+        // 現状の構造だとキーが押されているかどうかしか判定されないので
+        //this.sounds[hitKey].currentTime = 0;
+        //this.sounds[hitKey].play();
         this.notes.shift();
         this.score++;
         this.life += this.constants.recoverPerNote;
