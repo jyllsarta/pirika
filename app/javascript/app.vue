@@ -32,6 +32,7 @@
         score: 0,
         life: 0,
         gameState: 0,
+        currentTime: 0,
         timeDelta: 0,
         sounds: {},
       };
@@ -72,7 +73,6 @@
             "c": 0b0100,
             "v": 0b1000,
           },
-          currentTime: 0,
           maxLife: 10000,
           dangerLine: 3333,
           safeLine: 9950,
@@ -187,10 +187,10 @@
       },
 
       loadSounds: function(){
-        //this.sounds.z = new Audio("/game/zxcv/sounds/z.wav");
-        //this.sounds.x = new Audio("/game/zxcv/sounds/x.wav");
-        //this.sounds.c = new Audio("/game/zxcv/sounds/c.wav");
-        //this.sounds.v = new Audio("/game/zxcv/sounds/v.wav");
+        this.sounds.z = new Audio("/game/zxcv/sounds/z.wav");
+        this.sounds.x = new Audio("/game/zxcv/sounds/x.wav");
+        this.sounds.c = new Audio("/game/zxcv/sounds/c.wav");
+        this.sounds.v = new Audio("/game/zxcv/sounds/v.wav");
       },
 
       mountKeyboardEvent: function(){
@@ -318,8 +318,8 @@
 
         if((keyStatus & this.notes[0].note) === this.notes[0].note){
           // 現状の構造だとキーが押されているかどうかしか判定されないので
-          //this.sounds[lastKey].currentTime = 0;
-          //this.sounds[lastKey].play();
+          this.sounds[lastKey].currentTime = 0;
+          this.sounds[lastKey].play();
           this.score++;
           this.life += this.notes[0].heal ? this.constants.recoverPerHealNote : this.constants.recoverPerNote;
           this.life = Math.min(this.life, this.constants.maxLife);
@@ -467,5 +467,4 @@
       background-color: #B00100;
     }
   }
-
 </style>
