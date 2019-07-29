@@ -352,6 +352,19 @@
   $note_height: 30px;
   $note_count: 16;
 
+  $primary_color: #91a1d7;
+  $negative_color: #d75d42;
+  $accent_color: #cee7d8;
+  $black: #2a2c28;
+  $white: #f4f5ec;
+  $gray: #babbbe;
+
+  $transparent_normal: 0.8;
+  $transparent_pale: 0.4;
+
+  $title_font_size: 40px;
+
+
   .window{
     display: block;
     position: relative;
@@ -371,26 +384,26 @@
     bottom: 30%;
     width: 60%;
     text-align: center;
-    opacity: 0.8;
-    font-size: 40px;
+    opacity: $transparent_normal;
+    font-size: $title_font_size;
   }
 
   .life{
     height: 20px;
     transform: translateY(-100px);
-    opacity: 0.4;
+    opacity: $transparent_pale;
   }
 
   .normal{
-    background-color: #0b5daa;
+    background-color: $primary_color;
   }
 
   .danger{
-    background-color: #aa3a0d;
+    background-color: $negative_color;
   }
 
   .max{
-    background-color: #81aa00;
+    background-color: $accent_color;
   }
 
   .dead{
@@ -398,21 +411,22 @@
     left: 20%;
     bottom: 40%;
     width: 60%;
-    opacity: 0.8;
-    font-size: 40px;
+    opacity: $transparent_normal;
+    font-size: $title_font_size;
     text-align: center;
-    color: #B00100;
+    color: $negative_color;
   }
 
   .title{
+    white-space: pre;
     position: absolute;
     left: 10%;
     bottom: 40%;
     width: 80%;
-    opacity: 0.8;
-    font-size: 60px;
+    opacity: $transparent_normal;
+    font-size: $title_font_size;
     text-align: center;
-    color: #5169b0;
+    color: $black;
   }
 
   .win{
@@ -420,10 +434,10 @@
     left: 20%;
     bottom: 40%;
     width: 60%;
-    opacity: 0.8;
-    font-size: 40px;
+    opacity: $transparent_normal;
+    font-size: $title_font_size;
     text-align: center;
-    color: #5366e1;
+    color: $primary_color;
   }
 
   .frame_window{
@@ -458,13 +472,13 @@
       height: $note_height;
     }
     .heal{
-      background-color: rgba(22, 176, 0, 0.38);
+      background-color: $accent_color;
     }
     .active{
-      background-color: rgba(5, 0, 255, 0.82);
+      background-color: $primary_color;
     }
     .bad{
-      background-color: #B00100;
+      background-color: $negative_color;
     }
   }
 </style>
