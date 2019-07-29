@@ -11,15 +11,15 @@
           .c.note(v-bind:class='{active: note.c, bad: note.bad && note.c, heal: note.heal}')
           .v.note(v-bind:class='{active: note.v, bad: note.bad && note.v, heal: note.heal}')
     .ui
-      .score(v-if='gameState !== this.constants.gameStates.title')
+      .score(v-if='gameState !== constants.gameStates.title')
         | {{score}}
-      .life(v-bind:class='[lifeState]', v-bind:style='{width: lifeLength}', v-if='gameState !== this.constants.gameStates.title')
-      .dead(v-if='gameState === this.constants.gameStates.gameOver')
+      .life(v-bind:class='[lifeState]', v-bind:style='{width: lifeLength}', v-if='gameState !== constants.gameStates.title')
+      .dead(v-if='gameState === constants.gameStates.gameOver')
         | GAME OVER (r to reset)
-      .title(v-if='gameState === this.constants.gameStates.title')
+      .title(v-if='gameState === constants.gameStates.title')
         | Z X C V
         | kick zxcv to start
-      .win(v-if='gameState === this.constants.gameStates.cleared')
+      .win(v-if='gameState === constants.gameStates.cleared')
         | WIN (r to reset)
 </template>
 
