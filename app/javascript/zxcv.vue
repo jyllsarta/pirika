@@ -191,6 +191,11 @@
         this.sounds.x = new Audio("/game/zxcv/sounds/x.wav");
         this.sounds.c = new Audio("/game/zxcv/sounds/c.wav");
         this.sounds.v = new Audio("/game/zxcv/sounds/v.wav");
+        this.sounds.miss = new Audio("/game/zxcv/sounds/miss.wav");
+        this.sounds.heal = new Audio("/game/zxcv/sounds/heal.wav");
+        this.sounds.dead = new Audio("/game/zxcv/sounds/dead.wav");
+        this.sounds.clear = new Audio("/game/zxcv/sounds/clear.wav");
+        this.sounds.reset = new Audio("/game/zxcv/sounds/reset.wav");
       },
 
       mountKeyboardEvent: function(){
@@ -244,6 +249,13 @@
       },
 
       updateInGame: function(){
+        // 死亡判定
+        if(!this.alive){
+          this.sounds.dead.play();
+          this.gameState = this.constants.gameStates.gameOver;
+          return;
+        }
+
         let damage = Math.max(this.score * this.constants.damageIncreaseSpeed, this.constants.minDamagePerLife);
         damage *= this.timeDelta / 17; // 1F=17msに合わせて補正する
         if(this.isDanger){
@@ -301,7 +313,6 @@
       handleKeyInGame: function(){
         // 死んでたらキーの処理をしない
         if(!this.alive){
-          this.gameState = this.constants.gameStates.gameOver;
           return;
         }
 
@@ -314,6 +325,7 @@
           this.score -= 1;
           this.life -= this.constants.badDamage;
           this.notes[0].bad = true;
+          this.sounds.miss.play();
         }
 
         if((keyStatus & this.notes[0].note) === this.notes[0].note){
@@ -321,25 +333,34 @@
           this.sounds[lastKey].currentTime = 0;
           this.sounds[lastKey].play();
           this.score++;
-          this.life += this.notes[0].heal ? this.constants.recoverPerHealNote : this.constants.recoverPerNote;
+          if(this.notes[0].heal){
+            this.life += this.constants.recoverPerHealNote
+            this.sounds.heal.play();
+          }
+          else{
+            this.life += this.constants.recoverPerNote;
+          }
           this.life = Math.min(this.life, this.constants.maxLife);
           this.notes.shift();
         }
 
         // クリア判定
         if(this.notes.length === 0){
+          this.sounds.clear.play();
           this.gameState = this.constants.gameStates.cleared;
         }
       },
 
       handleKeyGameOver: function(){
         if(this.keyboard["r"]){
+          this.sounds.reset.play();
           this.reset();
         }
       },
 
       handleKeyCleared: function(){
         if(this.keyboard["r"]){
+          this.sounds.reset.play();
           this.reset();
         }
       },
@@ -363,7 +384,6 @@
   $transparent_pale: 0.4;
 
   $title_font_size: 40px;
-
 
   .window{
     display: block;
