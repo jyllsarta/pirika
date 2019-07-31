@@ -31,3 +31,4 @@ config/pirika_secrets.yml
 /yarn-error.log
 yarn-debug.log*
 .yarn-integrity
+/public/assets
