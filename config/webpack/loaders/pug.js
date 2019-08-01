@@ -1,6 +1,6 @@
 module.exports = {
     test: /\.pug$/,
     use: [{
-      loader: 'pug-loader'
+      loader: 'pug-plain-loader'
     }]
   } 
