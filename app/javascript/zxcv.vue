@@ -3,28 +3,18 @@
   h1
     | zxcv
   .window
-    .frame_window
-      transition-group.frames(name='notes', tag='div')
-        .frame.notes-item(v-bind:key='note.id', v-for='note in recentNotes')
-          .z.note(v-bind:class='{active: note.z, bad: note.bad && note.z, heal: note.heal}')
-          .x.note(v-bind:class='{active: note.x, bad: note.bad && note.x, heal: note.heal}')
-          .c.note(v-bind:class='{active: note.c, bad: note.bad && note.c, heal: note.heal}')
-          .v.note(v-bind:class='{active: note.v, bad: note.bad && note.v, heal: note.heal}')
-    .ui
-      .score(v-if='gameState !== constants.gameStates.title')
-        | {{score}}
-      .life(v-bind:class='[lifeState]', v-bind:style='{width: lifeLength}', v-if='gameState !== constants.gameStates.title')
-      .dead(v-if='gameState === constants.gameStates.gameOver')
-        | GAME OVER (r to reset)
-      .title(v-if='gameState === constants.gameStates.title')
-        | Z X C V
-        | kick zxcv to start
-      .win(v-if='gameState === constants.gameStates.cleared')
-        | WIN (r to reset)
+    notes(v-bind:notes="recentNotes")
+    ui(v-bind:life="life", v-bind:constants="constants", v-bind:gameState="gameState", v-bind:score="score")
 </template>
 
 <script>
+  import notes from './zxcv/notes.vue'
+  import ui from './zxcv/ui.vue'
   export default {
+    components: {
+      notes,
+      ui,
+    },
     data: function(){
       return {
         notes: [],
@@ -46,18 +36,6 @@
     computed: {
       recentNotes: function(){
         return this.notes.slice(0, this.constants.displayNotes).reverse();
-      },
-      lifeLength: function(){
-        return (this.life / this.constants.maxLife * 100) + "%"
-      },
-      lifeState: function(){
-        if(this.life >= this.constants.safeLine){
-          return "max";
-        }
-        if(this.life >= this.constants.dangerLine){
-          return "normal";
-        }
-        return "danger";
       },
       isDanger: function(){
         return this.life < this.constants.dangerLine;
@@ -396,109 +374,5 @@
 
   .ui{
     z-index: 100;
-  }
-
-  .score{
-    position: absolute;
-    left: 20%;
-    bottom: 30%;
-    width: 60%;
-    text-align: center;
-    opacity: $transparent_normal;
-    font-size: $title_font_size;
-  }
-
-  .life{
-    height: 20px;
-    transform: translateY(-100px);
-    opacity: $transparent_pale;
-  }
-
-  .normal{
-    background-color: $primary_color;
-  }
-
-  .danger{
-    background-color: $negative_color;
-  }
-
-  .max{
-    background-color: $accent_color;
-  }
-
-  .dead{
-    position: absolute;
-    left: 20%;
-    bottom: 40%;
-    width: 60%;
-    opacity: $transparent_normal;
-    font-size: $title_font_size;
-    text-align: center;
-    color: $negative_color;
-  }
-
-  .title{
-    white-space: pre;
-    position: absolute;
-    left: 10%;
-    bottom: 40%;
-    width: 80%;
-    opacity: $transparent_normal;
-    font-size: $title_font_size;
-    text-align: center;
-    color: $black;
-  }
-
-  .win{
-    position: absolute;
-    left: 20%;
-    bottom: 40%;
-    width: 60%;
-    opacity: $transparent_normal;
-    font-size: $title_font_size;
-    text-align: center;
-    color: $primary_color;
-  }
-
-  .frame_window{
-    z-index: 10;
-    transform: scaleY(1.6) perspective(40px) rotateX(5deg);
-    transform-origin: bottom center;
-    width: $note_width * 4;
-    height: $note_height * $note_count;
-  }
-
-  .notes-item{
-    transition: all 0.3s;
-  }
-  .notes-enter, .notes-leave-to{
-    opacity: 0;
-    transform: scale(0.2);
-  }
-
-  .frames{
-    display: flex;
-    flex-direction: column;
-    width: $note_width * 4;
-    height: $note_height * $note_count;
-  }
-  .frame{
-    display: flex;
-    flex-direction: row;
-    width: $note_width * 4;
-    height: $note_height;
-    .note{
-      width: $note_width;
-      height: $note_height;
-    }
-    .heal{
-      background-color: $accent_color;
-    }
-    .active{
-      background-color: $primary_color;
-    }
-    .bad{
-      background-color: $negative_color;
-    }
   }
 </style>
