@@ -10,6 +10,7 @@
         | kick zxcv to start
       .win(v-if='gameState === constants.gameStates.cleared')
         | WIN (r to reset)
+      img.tweet(src="/images/zxcv/twitter.jpg", v-on:click="tweet", v-if='showingTweetButton')
 </template>
 
 <script>
@@ -41,8 +42,20 @@
         }
         return "danger";
       },
+      tweetingMessage: function(){
+        return `ZXCVで ${this.score}点取ったよ！`;
+      },
+      showingTweetButton: function(){
+        return [this.constants.gameStates.cleared , this.constants.gameStates.gameOver].includes(this.gameState);
+      }
     },
     methods: {
+      tweet: function(){
+        const tweetContent = encodeURI(this.tweetingMessage);
+        const url = encodeURI("http://jyllsarta.net/zxcvs");
+        const fullUrl = `https://twitter.com/intent/tweet?url=${url}&text=${tweetContent}`;
+        window.open(fullUrl);
+      },
     },
   }
 </script>
@@ -126,5 +139,11 @@
     font-size: $title_font_size;
     text-align: center;
     color: $primary_color;
+  }
+
+  .tweet{
+    position: absolute;
+    right: 10%;
+    bottom: 10%;
   }
 </style>
