@@ -61,23 +61,7 @@
 </script>
 
 <style lang='scss' scoped>
-    // TODO: この定数定義の完全コピペは絶対回避法があると思うので探す
-    $note_width: 180px;
-    $note_height: 30px;
-    $note_count: 16;
-
-    $primary_color: #91a1d7;
-    $negative_color: #d75d42;
-    $accent_color: #cee7d8;
-    $black: #2a2c28;
-    $white: #f4f5ec;
-    $gray: #babbbe;
-
-    $transparent_normal: 0.8;
-    $transparent_pale: 0.4;
-
-    $title_font_size: 40px;
-
+    @import "../stylesheets/constants";
 
   .score{
     position: absolute;
