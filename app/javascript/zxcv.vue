@@ -1,10 +1,10 @@
 <template lang="pug">
-#app
-  h1
-    | zxcv
-  .window
-    notes(v-bind:notes="recentNotes")
-    ui(v-bind:life="life", v-bind:constants="constants", v-bind:gameState="gameState", v-bind:score="score")
+  #app
+    h1
+      | zxcv
+    .window
+      notes(v-bind:notes="recentNotes")
+      ui(v-bind:life="life", v-bind:constants="constants", v-bind:gameState="gameState", v-bind:score="score")
 </template>
 
 <script>
@@ -349,7 +349,7 @@
 <style lang='scss' scoped>
   @import "stylesheets/constants";
   .menu_item{
-      font-size: 100px;
+    font-size: 100px;
   }
 
   .window{
