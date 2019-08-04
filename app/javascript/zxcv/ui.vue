@@ -2,6 +2,9 @@
   .ui
     .score(v-if='gameState !== constants.gameStates.title')
       | {{score}}
+    .volume_area(v-if='gameState === constants.gameStates.title')
+      img.volume_icon(src="/images/zxcv/volume.png")
+      input.volume(type="range" v-model.number="localVolume" min="0" max="1" step="any")
     .life(v-bind:class='[lifeState]', v-bind:style='{width: lifeLength}', v-if='gameState !== constants.gameStates.title')
     .dead(v-if='gameState === constants.gameStates.gameOver')
       | GAME OVER (r to reset)
@@ -18,6 +21,7 @@
     name: "ui",
     data: function(){
       return {
+        localVolume: 1,
       };
     },
     props: [
@@ -25,9 +29,17 @@
       "life",
       "score",
       "constants", // TODO: 全然関係ない別モジュールに切り出すのが正解かもしれない
+      "volume",
     ],
-    created: function(){
+    watch: {
+      localVolume: function() {
+        this.$emit("setVolume", this.localVolume);
+      },
+    },
+    mounted: function(){
       console.log("loaded ui!");
+      this.localVolume = this.volume;
+      console.log(this.volume);
     },
     computed: {
       lifeLength: function(){
@@ -129,5 +141,106 @@
     position: absolute;
     right: 10%;
     bottom: 10%;
+  }
+
+  .volume_area{
+    position: absolute;
+    top: 10%;
+    left: 0;
+    width: 50%;
+    display: flex;
+    .volume_icon{
+      width: 48px;
+      height: 48px;
+      padding: 10px;
+    }
+    .volume {
+      padding: 10px;
+    }
+
+    input[type=range] {
+      -webkit-appearance: none;
+      width: 100%;
+      margin: 0px 0;
+    }
+    input[type=range]:focus {
+      outline: none;
+    }
+    input[type=range]::-webkit-slider-runnable-track {
+      width: 100%;
+      height: 16px;
+      cursor: pointer;
+      box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+      background: #8a89a9;
+      border-radius: 1.3px;
+      border: 0.2px solid #010101;
+    }
+    input[type=range]::-webkit-slider-thumb {
+      box-shadow: 1px 1px 1px rgba(0, 0, 0, 0), 0px 0px 1px rgba(13, 13, 13, 0);
+      border: 0px solid rgba(0, 0, 0, 0);
+      height: 16px;
+      width: 32px;
+      border-radius: 0px;
+      background: #f4f4f4;
+      cursor: pointer;
+      -webkit-appearance: none;
+      margin-top: -0.2px;
+    }
+    input[type=range]:focus::-webkit-slider-runnable-track {
+      background: #b9b8cb;
+    }
+    input[type=range]::-moz-range-track {
+      width: 100%;
+      height: 16px;
+      cursor: pointer;
+      box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+      background: #8a89a9;
+      border-radius: 1.3px;
+      border: 0.2px solid #010101;
+    }
+    input[type=range]::-moz-range-thumb {
+      box-shadow: 1px 1px 1px rgba(0, 0, 0, 0), 0px 0px 1px rgba(13, 13, 13, 0);
+      border: 0px solid rgba(0, 0, 0, 0);
+      height: 16px;
+      width: 32px;
+      border-radius: 0px;
+      background: #f4f4f4;
+      cursor: pointer;
+    }
+    input[type=range]::-ms-track {
+      width: 100%;
+      height: 16px;
+      cursor: pointer;
+      background: transparent;
+      border-color: transparent;
+      color: transparent;
+    }
+    input[type=range]::-ms-fill-lower {
+      background: #605f82;
+      border: 0.2px solid #010101;
+      border-radius: 2.6px;
+      box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+    }
+    input[type=range]::-ms-fill-upper {
+      background: #8a89a9;
+      border: 0.2px solid #010101;
+      border-radius: 2.6px;
+      box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+    }
+    input[type=range]::-ms-thumb {
+      box-shadow: 1px 1px 1px rgba(0, 0, 0, 0), 0px 0px 1px rgba(13, 13, 13, 0);
+      border: 0px solid rgba(0, 0, 0, 0);
+      width: 32px;
+      border-radius: 0px;
+      background: #f4f4f4;
+      cursor: pointer;
+      height: 16px;
+    }
+    input[type=range]:focus::-ms-fill-lower {
+      background: #8a89a9;
+    }
+    input[type=range]:focus::-ms-fill-upper {
+      background: #b9b8cb;
+    }
   }
 </style>

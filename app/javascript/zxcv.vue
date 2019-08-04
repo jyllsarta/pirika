@@ -4,7 +4,7 @@
       | zxcv
     .window
       notes(v-bind:notes="recentNotes")
-      ui(v-bind:life="life", v-bind:constants="constants", v-bind:gameState="gameState", v-bind:score="score")
+      ui(v-bind:life="life", v-bind:constants="constants", v-bind:gameState="gameState", v-bind:score="score", v-bind:volume="volume" v-on:setVolume="setVolume")
 </template>
 
 <script>
@@ -25,6 +25,7 @@
         currentTime: 0,
         timeDelta: 0,
         sounds: {},
+        volume: 1,
       };
     },
     created: function(){
@@ -32,6 +33,15 @@
       this.invokeUpdate();
       this.loadSounds();
       this.mountKeyboardEvent();
+      if (localStorage.volume) {
+        this.volume = localStorage.volume;
+      }
+    },
+    watch: {
+      volume(altered) {
+        localStorage.volume = altered;
+        console.log("changed volume");
+      },
     },
     computed: {
       recentNotes: function(){
@@ -176,6 +186,14 @@
         this.sounds.reset = new Audio("/game/zxcv/sounds/reset.wav");
       },
 
+      playSound: function(soundId, interruptPreviousSound=true){
+        if(interruptPreviousSound){
+          this.sounds[soundId].currentTime = 0;
+        }
+        this.sounds[soundId].volume = this.volume;
+        this.sounds[soundId].play();
+      },
+
       mountKeyboardEvent: function(){
         document.onkeydown = function (e) {
           this.handleKeydown(e);
@@ -229,7 +247,7 @@
       updateInGame: function(){
         // 死亡判定
         if(!this.alive){
-          this.sounds.dead.play();
+          this.playSound("dead", false);
           this.gameState = this.constants.gameStates.gameOver;
           return;
         }
@@ -303,17 +321,16 @@
           this.score -= 1;
           this.life -= this.constants.badDamage;
           this.notes[0].bad = true;
-          this.sounds.miss.play();
+          this.playSound("miss");
         }
 
         if((keyStatus & this.notes[0].note) === this.notes[0].note){
           // 現状の構造だとキーが押されているかどうかしか判定されないので
-          this.sounds[lastKey].currentTime = 0;
-          this.sounds[lastKey].play();
+          this.playSound(lastKey);
           this.score++;
           if(this.notes[0].heal){
             this.life += this.constants.recoverPerHealNote
-            this.sounds.heal.play();
+            this.playSound("heal", false);
           }
           else{
             this.life += this.constants.recoverPerNote;
@@ -324,24 +341,29 @@
 
         // クリア判定
         if(this.notes.length === 0){
-          this.sounds.clear.play();
+          this.playSound("clear", false);
           this.gameState = this.constants.gameStates.cleared;
         }
       },
 
       handleKeyGameOver: function(){
         if(this.keyboard["r"]){
-          this.sounds.reset.play();
+          this.playSound("reset", false);
           this.reset();
         }
       },
 
       handleKeyCleared: function(){
         if(this.keyboard["r"]){
-          this.sounds.reset.play();
+          this.playSound("reset", false);
           this.reset();
         }
       },
+
+      setVolume: function(vol){
+        this.volume = vol;
+        console.log(this.volume);
+      }
     }
   }
 </script>
