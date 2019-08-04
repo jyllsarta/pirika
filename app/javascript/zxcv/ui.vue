@@ -2,6 +2,10 @@
   .ui
     .score(v-if='gameState !== constants.gameStates.title')
       | {{score}}
+    .bpm(v-if='gameState === constants.gameStates.cleared')
+      |   BPM: {{bpm}}
+    .total_score(v-if='gameState === constants.gameStates.cleared')
+      | TOTAL: {{totalScore}}
     volume(
       v-if='gameState === constants.gameStates.title',
       v-bind:volume="volume",
@@ -35,6 +39,8 @@
       "constants", // TODO: 全然関係ない別モジュールに切り出すのが正解かもしれない
       "volume",
       "minuses",
+      "bpm",
+      "totalScore",
     ],
     mounted: function(){
       console.log("loaded ui!");
@@ -53,7 +59,7 @@
         return "danger";
       },
       tweetingMessage: function(){
-        return `ZXCVで ${this.score}点取ったよ！`;
+        return `ZXCVで ${this.totalScore}点取ったよ！`;
       },
       showingTweetButton: function(){
         return [this.constants.gameStates.cleared , this.constants.gameStates.gameOver].includes(this.gameState);
@@ -81,6 +87,24 @@
     position: absolute;
     left: 20%;
     bottom: 30%;
+    width: 60%;
+    text-align: center;
+    opacity: $transparent_normal;
+    font-size: $title_font_size;
+  }
+  .bpm{
+    position: absolute;
+    left: 20%;
+    bottom: 20%;
+    width: 60%;
+    text-align: center;
+    opacity: $transparent_normal;
+    font-size: $title_font_size;
+  }
+  .total_score{
+    position: absolute;
+    left: 20%;
+    bottom: 10%;
     width: 60%;
     text-align: center;
     opacity: $transparent_normal;

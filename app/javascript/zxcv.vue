@@ -11,6 +11,8 @@
         v-bind:score="score",
         v-bind:volume="volume",
         v-bind:minuses="minuses",
+        v-bind:bpm="bpm",
+        v-bind:totalScore="totalScore",
         v-on:setVolume="setVolume"
         )
 </template>
@@ -30,11 +32,14 @@
         score: 0,
         life: 0,
         gameState: 0,
+        startedTime: 0,
+        clearedTime: 0,
         currentTime: 0,
         timeDelta: 0,
         sounds: {},
         volume: 1,
         minuses: [],
+        initialNoteCount: 0,
       };
     },
     created: function(){
@@ -61,6 +66,12 @@
       alive: function() {
         return this.life > 0;
       },
+      bpm: function(){
+        return Math.floor((this.clearedTime - this.startedTime) / 1000);
+      },
+      totalScore: function(){
+        return this.bpm + this.score;
+      },
       constants: function(){
         return {
           notes: {
@@ -79,7 +90,6 @@
           damageIncreaseSpeed: 0.16,
           badDamage: 300,
           displayNotes: 16,
-          initialNotes: 1000,
           gameStates: {
             title: 0,
             inGame: 1,
@@ -118,6 +128,7 @@
             this.notes[i].heal = true;
           }
         }
+        this.initialNoteCount = this.notes.length;
       },
       initKeyboard: function () {
         for(let i = "a".charCodeAt(0); i <= "z".charCodeAt(0); i++) {
@@ -190,6 +201,8 @@
         this.life = this.constants.maxLife;
         this.currentTime = 0;
         this.timeDelta = 0;
+        this.startedTime = 0;
+        this.clearedTime = 0;
       },
 
       loadSounds: function(){
@@ -323,6 +336,7 @@
 
       handleKeyTitle: function(){
         if(this.keyboardStatus()){
+          this.startedTime = new Date().getTime();
           this.gameState = this.constants.gameStates.inGame;
         }
       },
@@ -350,7 +364,7 @@
           this.playSound(lastKey);
           this.score++;
           if(this.notes[0].heal){
-            this.life += this.constants.recoverPerHealNote
+            this.life += this.constants.recoverPerHealNote;
             this.playSound("heal", false);
           }
           else{
@@ -363,6 +377,7 @@
         // クリア判定
         if(this.notes.length === 0){
           this.playSound("clear", false);
+          this.clearedTime = new Date().getTime();
           this.gameState = this.constants.gameStates.cleared;
         }
       },
