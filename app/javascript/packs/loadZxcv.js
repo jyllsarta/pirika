@@ -11,11 +11,9 @@ import App from '../zxcv.vue'
 document.addEventListener('DOMContentLoaded', () => {
   const app = new Vue({
     render: h => h(App)
-  }).$mount()
-  document.body.appendChild(app.$el)
-
-  console.log(app)
-})
+  }).$mount();
+  document.body.appendChild(app.$el);
+});
 
 
 // The above code uses Vue without the compiler, which means you cannot
