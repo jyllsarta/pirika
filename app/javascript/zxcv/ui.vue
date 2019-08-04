@@ -2,9 +2,11 @@
   .ui
     .score(v-if='gameState !== constants.gameStates.title')
       | {{score}}
-    .volume_area(v-if='gameState === constants.gameStates.title')
-      img.volume_icon(src="/images/zxcv/volume.png")
-      input.volume(type="range" v-model.number="localVolume" min="0" max="1" step="any")
+    volume(
+      v-if='gameState === constants.gameStates.title',
+      v-bind:volume="volume",
+      v-on:setVolume="setVolume",
+    )
     .life(v-bind:class='[lifeState]', v-bind:style='{width: lifeLength}', v-if='gameState !== constants.gameStates.title')
     .dead(v-if='gameState === constants.gameStates.gameOver')
       | GAME OVER (r to reset)
@@ -20,13 +22,12 @@
 </template>
 
 <script>
+  import volume from './volume.vue'
   export default {
-    name: "ui",
-    data: function(){
-      return {
-        localVolume: 1,
-      };
+    components: {
+      volume,
     },
+    name: "ui",
     props: [
       "gameState",
       "life",
@@ -35,15 +36,8 @@
       "volume",
       "minuses",
     ],
-    watch: {
-      localVolume: function() {
-        this.$emit("setVolume", this.localVolume);
-      },
-    },
     mounted: function(){
       console.log("loaded ui!");
-      this.localVolume = this.volume;
-      console.log(this.volume);
     },
     computed: {
       lifeLength: function(){
@@ -72,6 +66,10 @@
         const fullUrl = `https://twitter.com/intent/tweet?url=${url}&text=${tweetContent}`;
         window.open(fullUrl);
       },
+      setVolume: function(v){
+        // 最上位のzxcvにvolumeをリレーする
+        this.$emit("setVolume", v);
+      }
     },
   }
 </script>

@@ -49,7 +49,6 @@
     watch: {
       volume(altered) {
         localStorage.volume = altered;
-        console.log("changed volume");
       },
     },
     computed: {
@@ -384,8 +383,7 @@
 
       setVolume: function(vol){
         this.volume = vol;
-        console.log(this.volume);
-      }
+      },
     }
   }
 </script>
