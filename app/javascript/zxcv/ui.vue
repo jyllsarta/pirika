@@ -14,6 +14,9 @@
     .win(v-if='gameState === constants.gameStates.cleared')
       | WIN (r to reset)
     img.tweet(src="/images/zxcv/twitter.jpg", v-on:click="tweet", v-if='showingTweetButton')
+    transition-group.minus-list(name="minus-list")
+      .minus(v-for="minus in minuses" v-bind:key="minus.id")
+        | -1
 </template>
 
 <script>
@@ -30,6 +33,7 @@
       "score",
       "constants", // TODO: 全然関係ない別モジュールに切り出すのが正解かもしれない
       "volume",
+      "minuses",
     ],
     watch: {
       localVolume: function() {
@@ -106,7 +110,7 @@
   .dead{
     position: absolute;
     left: 20%;
-    bottom: 40%;
+    bottom: 44%;
     width: 60%;
     opacity: $transparent_normal;
     font-size: $title_font_size;
@@ -171,7 +175,7 @@
       height: 16px;
       cursor: pointer;
       box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
-      background: #8a89a9;
+      background: $primary_color;
       border-radius: 1.3px;
       border: 0.2px solid #010101;
     }
@@ -194,7 +198,7 @@
       height: 16px;
       cursor: pointer;
       box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
-      background: #8a89a9;
+      background: $primary_color;
       border-radius: 1.3px;
       border: 0.2px solid #010101;
     }
@@ -222,7 +226,7 @@
       box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
     }
     input[type=range]::-ms-fill-upper {
-      background: #8a89a9;
+      background: $primary_color;
       border: 0.2px solid #010101;
       border-radius: 2.6px;
       box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
@@ -237,10 +241,35 @@
       height: 16px;
     }
     input[type=range]:focus::-ms-fill-lower {
-      background: #8a89a9;
+      background: $primary_color;
     }
     input[type=range]:focus::-ms-fill-upper {
       background: #b9b8cb;
+    }
+  }
+
+  .minus-list{
+    position: absolute;
+    left: 25%;
+    bottom: 30%;
+    width: 60%;
+    text-align: center;
+    opacity: $transparent_normal;
+    font-size: $title_font_size;
+    color: $negative_color;
+
+    &-leave-active{
+      opacity: 0.4;
+      transform: translateY(0);
+      transition: {
+        property       : transform, opacity;
+        duration       : 0.3s;
+        delay          : 0s;
+      }
+    }
+    &-leave-to{
+      opacity: 0;
+      transform: translateY(-20px);
     }
   }
 </style>

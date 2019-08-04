@@ -4,7 +4,15 @@
       | zxcv
     .window
       notes(v-bind:notes="recentNotes")
-      ui(v-bind:life="life", v-bind:constants="constants", v-bind:gameState="gameState", v-bind:score="score", v-bind:volume="volume" v-on:setVolume="setVolume")
+      ui(
+        v-bind:life="life",
+        v-bind:constants="constants",
+        v-bind:gameState="gameState",
+        v-bind:score="score",
+        v-bind:volume="volume",
+        v-bind:minuses="minuses",
+        v-on:setVolume="setVolume"
+        )
 </template>
 
 <script>
@@ -26,6 +34,7 @@
         timeDelta: 0,
         sounds: {},
         volume: 1,
+        minuses: [],
       };
     },
     created: function(){
@@ -164,6 +173,16 @@
         };
       },
 
+      createMinusEffect: function(){
+        this.minuses.push({
+          id: Math.floor(Math.random() * 100000000000),
+        });
+      },
+
+      flushMinusEffects: function(){
+        this.minuses = [];
+      },
+
       reset: function(){
         this.gameState = this.constants.gameStates.title;
         this.initNotes();
@@ -252,6 +271,9 @@
           return;
         }
 
+        // 既存のマイナスエフェクトをすべて飛ばす
+        this.flushMinusEffects();
+
         let damage = Math.max(this.score * this.constants.damageIncreaseSpeed, this.constants.minDamagePerLife);
         damage *= this.timeDelta / 17; // 1F=17msに合わせて補正する
         if(this.isDanger){
@@ -317,11 +339,11 @@
 
         // 「今」押されたキーが次のノーツと一切関係がなかったらBAD
         if((keyStatus & this.notes[0].note) === 0) {
-          // ここで対応するbadの演出出せると良いなあ
           this.score -= 1;
           this.life -= this.constants.badDamage;
           this.notes[0].bad = true;
           this.playSound("miss");
+          this.createMinusEffect();
         }
 
         if((keyStatus & this.notes[0].note) === this.notes[0].note){
@@ -386,4 +408,5 @@
   .ui{
     z-index: 100;
   }
+
 </style>
