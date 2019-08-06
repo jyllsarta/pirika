@@ -1,6 +1,6 @@
 <template lang="pug">
   .volume_area
-      img.volume_icon(src="/images/zxcv/volume.png")
+      img.volume_icon(v-bind:src="currentImage")
       input.volume(type="range" v-model.number="localVolume" min="0" max="1" step="any")
 </template>
 
@@ -21,8 +21,20 @@
       },
     },
     mounted: function(){
+      console.log("loaded volume!!");
       this.localVolume = this.volume;
     },
+    computed: {
+      currentImage: function () {
+        if(0.5 < this.localVolume){
+          return "/images/zxcv/volume.png";
+        }
+        if(0 < this.localVolume){
+          return "/images/zxcv/volume_low.png";
+        }
+        return "/images/zxcv/volume_muted.png";
+      },
+    }
   }
 </script>
 
