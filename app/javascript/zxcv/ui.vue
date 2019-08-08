@@ -169,22 +169,6 @@
     bottom: 10%;
   }
 
-  .volume_area{
-    position: absolute;
-    top: 10%;
-    left: 0;
-    width: 50%;
-    display: flex;
-    .volume_icon{
-      width: 48px;
-      height: 48px;
-      padding: 10px;
-    }
-    .volume {
-      padding: 10px;
-    }
-  }
-
   .minus-list{
     position: absolute;
     left: 25%;
