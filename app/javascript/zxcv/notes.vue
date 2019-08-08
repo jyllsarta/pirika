@@ -45,6 +45,7 @@
     transform-origin: bottom center;
     width: $note_width * 4;
     height: $note_height * $note_count;
+    background: linear-gradient(to bottom, $white 40%, $background_light_gray);
   }
 
   .frames{
@@ -63,13 +64,13 @@
       height: $note_height;
     }
     .heal{
-      background-color: $accent_color;
+      background: linear-gradient(to bottom, $accent_color 20%, $accent_shadow_color);
     }
     .active{
-      background-color: $primary_color;
+      background: linear-gradient(to bottom, $primary_color 70%, $primary_shadow_color);
     }
     .bad{
-      background-color: $negative_color;
+      background: linear-gradient(to bottom, $negative_color 70%, $negative_shadow_color);
     }
   }
 </style>
