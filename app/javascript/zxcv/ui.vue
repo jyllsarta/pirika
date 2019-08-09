@@ -14,7 +14,7 @@
     .life(v-bind:class='[lifeState]', v-bind:style='{width: lifeLength}', v-if='gameState !== constants.gameStates.title')
     .dead(v-if='gameState === constants.gameStates.gameOver')
       | GAME OVER (r to reset)
-    .title(v-if='gameState === constants.gameStates.title')
+    .title(v-if='gameState === constants.gameStates.title' v-bind:class='{"faint-zoom": titleZoomState}')
       | Z X C V
       | kick zxcv to start
     .win(v-if='gameState === constants.gameStates.cleared')
@@ -32,6 +32,11 @@
       volume,
     },
     name: "ui",
+    data: function(){
+      return {
+        titleZoomState: false,
+      }
+    },
     props: [
       "gameState",
       "life",
@@ -44,6 +49,7 @@
     ],
     mounted: function(){
       console.log("loaded ui!");
+      this.titleZoomState = true;
     },
     computed: {
       lifeLength: function(){
@@ -191,6 +197,21 @@
     &-leave-to{
       opacity: 0;
       transform: translateY(-20px);
+    }
+  }
+
+  .faint-zoom{
+    animation: faint-zoom-animation 0.5s;
+  }
+  @keyframes faint-zoom-animation {
+    0% {
+      transform: scale(1);
+    }
+    10% {
+      transform: scale(1.2);
+    }
+    100% {
+      transform: scale(1);
     }
   }
 </style>
