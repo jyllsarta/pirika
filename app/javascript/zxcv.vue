@@ -67,10 +67,14 @@
         return this.life > 0;
       },
       bpm: function(){
-        return Math.floor((this.clearedTime - this.startedTime) / 1000);
+        return Math.floor(this.initialNoteCount / (this.clearedTime - this.startedTime) * 60 * 1000);
       },
       totalScore: function(){
-        return this.bpm + this.score;
+        let score = this.score;
+        if(this.gameState === this.constants.gameStates.cleared){
+          score += Math.floor(this.bpm /10);
+        }
+        return score;
       },
       constants: function(){
         return {
