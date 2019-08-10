@@ -1,24 +1,45 @@
 <template lang="pug">
   .ui
-    .score(v-if='gameState !== constants.gameStates.title')
+    .score(v-if='gameState === constants.gameStates.inGame || gameState === constants.gameStates.gameOver')
       | {{score}}
-    .bpm(v-if='gameState === constants.gameStates.cleared')
-      |   BPM: {{bpm}}
-    .total_score(v-if='gameState === constants.gameStates.cleared')
-      | TOTAL: {{totalScore}}
+    transition(name="result")
+      .result(v-if='gameState === constants.gameStates.cleared')
+        .win
+          | win!
+        .hit_score.result_row
+          span.index
+            | HIT
+          span.delimiter
+            | :
+          span.value
+            | {{score}}
+        .speed_score.result_row
+          span.index
+            | SPEED
+          span.delimiter
+            | :
+          span.value
+            | {{speedScore}}
+        .total_score.result_row
+          span.index
+            | TOTAL
+          span.delimiter
+            | :
+          span.value
+            | {{totalScore}}
+    .r_to_reset(v-if='gameState === constants.gameStates.cleared || gameState === constants.gameStates.gameOver')
+      | (r to reset)
     volume(
       v-if='gameState === constants.gameStates.title',
       v-bind:volume="volume",
       v-on:setVolume="setVolume",
     )
     .life(v-bind:class='[lifeState]', v-bind:style='{width: lifeLength}', v-if='gameState !== constants.gameStates.title')
-    .dead(v-if='gameState === constants.gameStates.gameOver')
-      | GAME OVER (r to reset)
+    .game_over(v-if='gameState === constants.gameStates.gameOver')
+      | GAME OVER
     .title(v-if='gameState === constants.gameStates.title' v-bind:class='{"faint-zoom": titleZoomState}')
       | Z X C V
       | kick zxcv to start
-    .win(v-if='gameState === constants.gameStates.cleared')
-      | WIN (r to reset)
     img.tweet(src="/images/zxcv/twitter.jpg", v-on:click="tweet", v-if='showingTweetButton')
     transition-group.minus-list(name="minus-list")
       .minus(v-for="minus in minuses" v-bind:key="minus.id")
@@ -44,7 +65,7 @@
       "constants", // TODO: 全然関係ない別モジュールに切り出すのが正解かもしれない
       "volume",
       "minuses",
-      "bpm",
+      "speedScore",
       "totalScore",
     ],
     mounted: function(){
@@ -89,32 +110,8 @@
 <style lang='scss' scoped>
   @import "../stylesheets/constants";
 
-  .score{
-    position: absolute;
-    left: 20%;
-    bottom: 30%;
-    width: 60%;
-    text-align: center;
-    opacity: $transparent_normal;
-    font-size: $title_font_size;
-  }
-  .bpm{
-    position: absolute;
-    left: 20%;
-    bottom: 20%;
-    width: 60%;
-    text-align: center;
-    opacity: $transparent_normal;
-    font-size: $title_font_size;
-  }
-  .total_score{
-    position: absolute;
-    left: 20%;
-    bottom: 10%;
-    width: 60%;
-    text-align: center;
-    opacity: $transparent_normal;
-    font-size: $title_font_size;
+  div{
+    font-family: 'Kanit', sans-serif;
   }
 
   .life{
@@ -135,17 +132,6 @@
     background-color: $accent_color;
   }
 
-  .dead{
-    position: absolute;
-    left: 20%;
-    bottom: 44%;
-    width: 60%;
-    opacity: $transparent_normal;
-    font-size: $title_font_size;
-    text-align: center;
-    color: $negative_color;
-  }
-
   .title{
     white-space: pre;
     position: absolute;
@@ -158,15 +144,83 @@
     color: $black;
   }
 
-  .win{
+  .game_over{
     position: absolute;
     left: 20%;
-    bottom: 40%;
+    bottom: 44%;
     width: 60%;
     opacity: $transparent_normal;
     font-size: $title_font_size;
     text-align: center;
+    color: $negative_color;
+  }
+
+  .score{
+    position: absolute;
+    left: 20%;
+    bottom: 30%;
+    width: 60%;
+    text-align: center;
+    opacity: $transparent_normal;
+    font-size: $title_font_size;
+  }
+
+  .win{
+    position: absolute;
+    left: 10%;
+    bottom: 110%;
+    width: 80%;
+    opacity: $transparent_normal;
+    font-size: $title_font_size;
+    text-align: center;
     color: $primary_color;
+  }
+
+  .result{
+    position: absolute;
+    left: 20%;
+    bottom: 30%;
+    width: 60%;
+    height: $title_font_size * 4;
+    display: flex;
+    flex-direction: column;
+    .result_row{
+      width: 100%;
+      height: 1em;
+      text-align: left;
+      font-size: $title_font_size;
+      span{
+        display: inline-block;
+      }
+      .index{
+        width: 28%;
+      }
+      .delimiter{
+        width: 2%;
+      }
+      .value{
+        width: 18%;
+        text-align: right;
+      }
+    }
+  }
+
+  .result-enter-active {
+    transition: all .3s;
+  }
+  .result-enter{
+    transform: translateX(10px);
+    opacity: 0;
+  }
+
+  .r_to_reset{
+    position: absolute;
+    left: 20%;
+    bottom: 15%;
+    width: 60%;
+    text-align: center;
+    opacity: $transparent_normal;
+    font-size: $title_font_size;
   }
 
   .tweet{

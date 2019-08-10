@@ -11,7 +11,7 @@
         v-bind:score="score",
         v-bind:volume="volume",
         v-bind:minuses="minuses",
-        v-bind:bpm="bpm",
+        v-bind:speedScore="speedScore",
         v-bind:totalScore="totalScore",
         v-on:setVolume="setVolume"
         )
@@ -69,10 +69,13 @@
       bpm: function(){
         return Math.floor(this.initialNoteCount / (this.clearedTime - this.startedTime) * 60 * 1000);
       },
+      speedScore: function(){
+        return Math.floor(this.bpm /10);
+      },
       totalScore: function(){
         let score = this.score;
         if(this.gameState === this.constants.gameStates.cleared){
-          score += Math.floor(this.bpm /10);
+          score += this.speedScore;
         }
         return score;
       },
