@@ -54,7 +54,7 @@
     transform-origin: bottom center;
     width: $note_width * 4;
     height: $note_height * $note_count;
-    background: linear-gradient(to bottom, $white 40%, $background_light_gray);
+    background: radial-gradient(farthest-corner at 50% 100%, $background_light_gray 40%, #FFFFFF 70%);
   }
 
   .frames{
