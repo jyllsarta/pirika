@@ -405,6 +405,7 @@
 
       setVolume: function(vol){
         this.volume = vol;
+        this.playSound("z");
       },
     }
   }

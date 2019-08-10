@@ -1,7 +1,7 @@
 <template lang="pug">
   .volume_area
       img.volume_icon(v-bind:src="currentImage")
-      input.volume(type="range" v-model.number="localVolume" min="0" max="1" step="any")
+      input.volume(type="range" v-model.number="localVolume" min="0" max="1" step="any", @change="setVolume")
 </template>
 
 <script>
@@ -15,11 +15,6 @@
     props: [
       "volume",
     ],
-    watch: {
-      localVolume: function() {
-        this.$emit("setVolume", this.localVolume);
-      },
-    },
     mounted: function(){
       console.log("loaded volume!!");
       this.localVolume = this.volume;
@@ -34,6 +29,11 @@
         }
         return "/images/zxcv/volume_muted.png";
       },
+    },
+    methods: {
+      setVolume: function(){
+        this.$emit("setVolume", this.localVolume);
+      }
     }
   }
 </script>
