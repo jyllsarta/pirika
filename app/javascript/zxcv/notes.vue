@@ -1,5 +1,6 @@
 <template lang="pug">
   .frame_window
+    .whiteout_cover
     transition-group.frames(name='notes', tag='div')
       .frame.notes-item(v-bind:key='note.id', v-for='note in notes')
         .z.note(v-bind:class='{active: note.z, bad: note.bad && note.z, heal: note.heal}')
@@ -37,6 +38,14 @@
   .notes-enter, .notes-leave-to{
     opacity: 0;
     transform: scale(0.2);
+  }
+
+  .whiteout_cover{
+    position: absolute;
+    z-index: 100;
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0.8) 0%, rgba(0, 0, 0, 0) 60%);
+    width: $note_width * 4;
+    height: $note_height * $note_count;
   }
 
   .frame_window{
