@@ -43,7 +43,7 @@
   .whiteout_cover{
     position: absolute;
     z-index: 100;
-    background: linear-gradient(to bottom, rgba(255, 255, 255, 0.8) 0%, rgba(0, 0, 0, 0) 60%);
+    background: linear-gradient(to bottom, white 0%, rgba(0, 0, 0, 0) 60%);
     width: $note_width * 4;
     height: $note_height * $note_count;
   }
