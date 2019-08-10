@@ -2,7 +2,7 @@
   .ui
     .score(v-if='gameState === constants.gameStates.inGame || gameState === constants.gameStates.gameOver')
       | {{score}}
-    transition(name="result")
+    transition(name="left-show-in")
       .result(v-if='gameState === constants.gameStates.cleared')
         .win
           | win!
@@ -27,19 +27,22 @@
             | :
           span.value
             | {{totalScore}}
-    .r_to_reset(v-if='gameState === constants.gameStates.cleared || gameState === constants.gameStates.gameOver')
-      | (r to reset)
+    transition(name="delay")
+      .r_to_reset.delay(v-if='gameState === constants.gameStates.cleared || gameState === constants.gameStates.gameOver')
+        | (r to reset)
     volume(
       v-if='gameState === constants.gameStates.title',
       v-bind:volume="volume",
       v-on:setVolume="setVolume",
     )
     .life(v-bind:class='[lifeState]', v-bind:style='{width: lifeLength}', v-if='gameState !== constants.gameStates.title')
-    .game_over(v-if='gameState === constants.gameStates.gameOver')
-      | GAME OVER
-    .title(v-if='gameState === constants.gameStates.title' v-bind:class='{"faint-zoom": titleZoomState}')
-      | Z X C V
-      | kick zxcv to start
+    transition(name="left-show-in")
+      .game_over(v-if='gameState === constants.gameStates.gameOver')
+        | GAME OVER
+    transition(name="bounce")
+      .title(v-if='gameState === constants.gameStates.title && loadCompleted')
+        | Z X C V
+        | kick zxcv to start
     img.tweet(src="/images/zxcv/twitter.jpg", v-on:click="tweet", v-if='showingTweetButton')
     transition-group.minus-list(name="minus-list")
       .minus(v-for="minus in minuses" v-bind:key="minus.id")
@@ -52,12 +55,12 @@
     components: {
       volume,
     },
-    name: "ui",
     data: function(){
       return {
-        titleZoomState: false,
-      }
+        loadCompleted: false,
+      };
     },
+    name: "ui",
     props: [
       "gameState",
       "life",
@@ -70,7 +73,7 @@
     ],
     mounted: function(){
       console.log("loaded ui!");
-      this.titleZoomState = true;
+      this.loadCompleted = true;
     },
     computed: {
       lifeLength: function(){
@@ -205,12 +208,30 @@
     }
   }
 
-  .result-enter-active {
+  .left-show-in-enter-active {
     transition: all .3s;
   }
-  .result-enter{
+  .left-show-in-enter{
     transform: translateX(10px);
     opacity: 0;
+  }
+
+  .delay-enter-active {
+    animation: delay 1.5s;
+  }
+  @keyframes delay {
+    0% {
+      transform: translateX(0px);
+      opacity: 0;
+    }
+    90% {
+      transform: translateX(10px);
+      opacity: 0;
+    }
+    100% {
+      transform: translateX(0px);
+      opacity: $transparent_normal;
+    }
   }
 
   .r_to_reset{
@@ -254,10 +275,10 @@
     }
   }
 
-  .faint-zoom{
-    animation: faint-zoom-animation 0.5s;
+  .bounce-enter-active{
+    animation: bounce 0.5s;
   }
-  @keyframes faint-zoom-animation {
+  @keyframes bounce {
     0% {
       transform: scale(1);
     }
