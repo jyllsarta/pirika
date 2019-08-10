@@ -9,12 +9,12 @@ import Vue from 'vue'
 import App from '../zxcv.vue'
 
 document.addEventListener('DOMContentLoaded', () => {
-  const app = new Vue({
+  // デバッグの簡略化のため、グローバルに代入してしまう
+  window.zxcv = new Vue({
     render: h => h(App)
   }).$mount();
-  document.body.appendChild(app.$el);
+  document.body.appendChild(zxcv.$el);
 });
-
 
 // The above code uses Vue without the compiler, which means you cannot
 // use Vue to target elements in your existing html templates. You would
