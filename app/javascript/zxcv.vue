@@ -210,6 +210,7 @@
         this.timeDelta = 0;
         this.startedTime = 0;
         this.clearedTime = 0;
+        this.flushMinusEffects();
       },
 
       loadSounds: function(){
@@ -283,15 +284,15 @@
       },
 
       updateInGame: function(){
+        // 既存のマイナスエフェクトをすべて飛ばす
+        this.flushMinusEffects();
+
         // 死亡判定
         if(!this.alive){
           this.playSound("dead", false);
           this.gameState = this.constants.gameStates.gameOver;
           return;
         }
-
-        // 既存のマイナスエフェクトをすべて飛ばす
-        this.flushMinusEffects();
 
         let damage = Math.max(this.score * this.constants.damageIncreaseSpeed, this.constants.minDamagePerLife);
         damage *= this.timeDelta / 17; // 1F=17msに合わせて補正する
