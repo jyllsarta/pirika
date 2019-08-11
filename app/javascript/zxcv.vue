@@ -198,7 +198,7 @@
         });
       },
 
-      createSparkEffect: function(note){
+      createSparkEffect: function(){
         this.sparks.push({
           id: Math.floor(Math.random() * 100000000000),
         });
@@ -393,7 +393,7 @@
             this.life += this.constants.recoverPerNote;
           }
           this.life = Math.min(this.life, this.constants.maxLife);
-          this.createSparkEffect(this.notes[0]);
+          this.createSparkEffect();
           this.notes.shift();
         }
 
