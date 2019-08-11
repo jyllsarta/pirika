@@ -11,6 +11,7 @@
         v-bind:score="score",
         v-bind:volume="volume",
         v-bind:minuses="minuses",
+        v-bind:sparks="sparks",
         v-bind:speedScore="speedScore",
         v-bind:totalScore="totalScore",
         v-on:setVolume="setVolume"
@@ -39,6 +40,7 @@
         sounds: {},
         volume: 1,
         minuses: [],
+        sparks: [],
         initialNoteCount: 0,
       };
     },
@@ -196,8 +198,23 @@
         });
       },
 
+      createSparkEffect: function(note){
+        for (let value of Object.values(this.constants.notes)) {
+          if(note.note & value){
+            this.sparks.push({
+              id: Math.floor(Math.random() * 100000000000),
+              note: value,
+            });
+          }
+        }
+      },
+
       flushMinusEffects: function(){
         this.minuses = [];
+      },
+
+      flushSparkEffects: function(){
+        this.sparks = [];
       },
 
       reset: function(){
@@ -211,6 +228,7 @@
         this.startedTime = 0;
         this.clearedTime = 0;
         this.flushMinusEffects();
+        this.flushSparkEffects();
       },
 
       loadSounds: function(){
@@ -284,8 +302,9 @@
       },
 
       updateInGame: function(){
-        // 既存のマイナスエフェクトをすべて飛ばす
+        // 既存のエフェクトをすべて飛ばす
         this.flushMinusEffects();
+        this.flushSparkEffects();
 
         // 死亡判定
         if(!this.alive){
@@ -379,6 +398,7 @@
             this.life += this.constants.recoverPerNote;
           }
           this.life = Math.min(this.life, this.constants.maxLife);
+          this.createSparkEffect(this.notes[0]);
           this.notes.shift();
         }
 

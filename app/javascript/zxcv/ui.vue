@@ -34,6 +34,7 @@
     transition(name="bounce")
       img.tweet(src="/images/zxcv/twitter.png", v-on:click="tweet", v-if='showingTweetButton')
     minus-list(v-bind:minuses="minuses")
+    spark-list(v-bind:sparks="sparks", v-bind:constants="constants")
 </template>
 
 <script>
@@ -41,12 +42,14 @@
   import result from './result.vue'
   import lifeGauge from './lifeGauge.vue'
   import minusList from './minusList.vue'
+  import sparkList from './sparkList.vue'
   export default {
     components: {
       volume,
       result,
       lifeGauge,
       minusList,
+      sparkList,
     },
     data: function(){
       return {
@@ -61,6 +64,7 @@
       "constants", // TODO: 全然関係ない別モジュールに切り出すのが正解かもしれない
       "volume",
       "minuses",
+      "sparks",
       "speedScore",
       "totalScore",
     ],
