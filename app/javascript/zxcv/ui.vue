@@ -3,39 +3,27 @@
     .score(v-if='gameState === constants.gameStates.inGame || gameState === constants.gameStates.gameOver')
       | {{score}}
     transition(name="left-show-in")
-      .result(v-if='gameState === constants.gameStates.cleared')
-        .win
-          | win!
-        .hit_score.result_row
-          span.index
-            | HIT
-          span.delimiter
-            | :
-          span.value
-            | {{score}}
-        .speed_score.result_row
-          span.index
-            | SPEED
-          span.delimiter
-            | :
-          span.value
-            | {{speedScore}}
-        .total_score.result_row
-          span.index
-            | TOTAL
-          span.delimiter
-            | :
-          span.value
-            | {{totalScore}}
+      result(
+        v-if='gameState === constants.gameStates.cleared'
+        v-bind:score="score",
+        v-bind:speedScore="speedScore",
+        v-bind:totalScore="totalScore",
+        v-bind:constants="constants",
+      )
     transition(name="delay")
       .r_to_reset.delay(v-if='gameState === constants.gameStates.cleared || gameState === constants.gameStates.gameOver')
         | (r to reset)
-    volume(
-      v-if='gameState === constants.gameStates.title',
-      v-bind:volume="volume",
-      v-on:setVolume="setVolume",
+    transition(name="left-show-in")
+      volume(
+        v-if='gameState === constants.gameStates.title',
+        v-bind:volume="volume",
+        v-on:setVolume="setVolume",
+      )
+    life-gauge(
+      v-if='gameState !== constants.gameStates.title',
+      v-bind:life="life",
+      v-bind:constants="constants",
     )
-    .life(v-bind:class='[lifeState]', v-bind:style='{width: lifeLength}', v-if='gameState !== constants.gameStates.title')
     transition(name="left-show-in")
       .game_over(v-if='gameState === constants.gameStates.gameOver')
         | GAME OVER
@@ -44,16 +32,20 @@
         | Z X C V
         | kick zxcv to start
     img.tweet(src="/images/zxcv/twitter.jpg", v-on:click="tweet", v-if='showingTweetButton')
-    transition-group.minus-list(name="minus-list")
-      .minus(v-for="minus in minuses" v-bind:key="minus.id")
-        | -1
+    minus-list(v-bind:minuses="minuses")
 </template>
 
 <script>
   import volume from './volume.vue'
+  import result from './result.vue'
+  import lifeGauge from './lifeGauge.vue'
+  import minusList from './minusList.vue'
   export default {
     components: {
       volume,
+      result,
+      lifeGauge,
+      minusList,
     },
     data: function(){
       return {
@@ -76,18 +68,6 @@
       this.loadCompleted = true;
     },
     computed: {
-      lifeLength: function(){
-        return (this.life / this.constants.maxLife * 100) + "%"
-      },
-      lifeState: function(){
-        if(this.life >= this.constants.safeLine){
-          return "max";
-        }
-        if(this.life >= this.constants.dangerLine){
-          return "normal";
-        }
-        return "danger";
-      },
       tweetingMessage: function(){
         return `ZXCVで ${this.totalScore}点取ったよ！`;
       },
@@ -115,24 +95,6 @@
 
   div{
     font-family: 'Kanit', sans-serif;
-  }
-
-  .life{
-    height: 20px;
-    transform: translateY(-100px);
-    opacity: $transparent_pale;
-  }
-
-  .normal{
-    background-color: $primary_color;
-  }
-
-  .danger{
-    background-color: $negative_color;
-  }
-
-  .max{
-    background-color: $accent_color;
   }
 
   .title{
@@ -168,56 +130,26 @@
     font-size: $title_font_size;
   }
 
-  .win{
-    position: absolute;
-    left: 10%;
-    bottom: 110%;
-    width: 80%;
-    opacity: $transparent_normal;
-    font-size: $title_font_size;
-    text-align: center;
-    color: $primary_color;
-  }
-
-  .result{
-    position: absolute;
-    left: 20%;
-    bottom: 30%;
-    width: 60%;
-    height: $title_font_size * 4;
-    display: flex;
-    flex-direction: column;
-    .result_row{
-      width: 100%;
-      height: 1em;
-      text-align: left;
-      font-size: $title_font_size;
-      span{
-        display: inline-block;
-      }
-      .index{
-        width: 28%;
-      }
-      .delimiter{
-        width: 2%;
-      }
-      .value{
-        width: 18%;
-        text-align: right;
-      }
-    }
-  }
-
   .left-show-in-enter-active {
+    transition: all .3s;
+  }
+  .left-show-in-leave-active {
     transition: all .3s;
   }
   .left-show-in-enter{
     transform: translateX(10px);
     opacity: 0;
   }
+  .left-show-in-leave-to{
+    transform: translateX(-10px);
+    opacity: 0;
+  }
 
   .delay-enter-active {
     animation: delay 1.5s;
+  }
+  .delay-leave-active {
+    animation: delay 1.5s reverse;
   }
   @keyframes delay {
     0% {
@@ -248,31 +180,6 @@
     position: absolute;
     right: 10%;
     bottom: 10%;
-  }
-
-  .minus-list{
-    position: absolute;
-    left: 25%;
-    bottom: 30%;
-    width: 60%;
-    text-align: center;
-    opacity: $transparent_normal;
-    font-size: $title_font_size;
-    color: $negative_color;
-
-    &-leave-active{
-      opacity: 0.4;
-      transform: translateY(0);
-      transition: {
-        property       : transform, opacity;
-        duration       : 0.3s;
-        delay          : 0s;
-      }
-    }
-    &-leave-to{
-      opacity: 0;
-      transform: translateY(-20px);
-    }
   }
 
   .bounce-enter-active{
