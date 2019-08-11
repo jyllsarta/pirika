@@ -199,14 +199,9 @@
       },
 
       createSparkEffect: function(note){
-        for (let value of Object.values(this.constants.notes)) {
-          if(note.note & value){
-            this.sparks.push({
-              id: Math.floor(Math.random() * 100000000000),
-              note: value,
-            });
-          }
-        }
+        this.sparks.push({
+          id: Math.floor(Math.random() * 100000000000),
+        });
       },
 
       flushMinusEffects: function(){
