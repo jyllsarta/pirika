@@ -31,7 +31,8 @@
       .title(v-if='gameState === constants.gameStates.title && loadCompleted')
         | Z X C V
         | kick zxcv to start
-    img.tweet(src="/images/zxcv/twitter.jpg", v-on:click="tweet", v-if='showingTweetButton')
+    transition(name="bounce")
+      img.tweet(src="/images/zxcv/twitter.png", v-on:click="tweet", v-if='showingTweetButton')
     minus-list(v-bind:minuses="minuses")
 </template>
 
@@ -130,6 +131,24 @@
     font-size: $title_font_size;
   }
 
+  .r_to_reset{
+    position: absolute;
+    left: 20%;
+    bottom: 15%;
+    width: 60%;
+    text-align: center;
+    opacity: $transparent_normal;
+    font-size: $title_font_size;
+  }
+
+  .tweet{
+    position: absolute;
+    right: 10%;
+    bottom: 10%;
+    width: 64px;
+    height: 64px;
+  }
+
   .left-show-in-enter-active {
     transition: all .3s;
   }
@@ -166,22 +185,6 @@
     }
   }
 
-  .r_to_reset{
-    position: absolute;
-    left: 20%;
-    bottom: 15%;
-    width: 60%;
-    text-align: center;
-    opacity: $transparent_normal;
-    font-size: $title_font_size;
-  }
-
-  .tweet{
-    position: absolute;
-    right: 10%;
-    bottom: 10%;
-  }
-
   .bounce-enter-active{
     animation: bounce 0.5s;
   }
@@ -196,4 +199,5 @@
       transform: scale(1);
     }
   }
+
 </style>
