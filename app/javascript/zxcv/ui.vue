@@ -8,7 +8,6 @@
         v-bind:score="score",
         v-bind:speedScore="speedScore",
         v-bind:totalScore="totalScore",
-        v-bind:constants="constants",
       )
     transition(name="delay")
       .r_to_reset.delay(v-if='gameState === constants.gameStates.cleared || gameState === constants.gameStates.gameOver')
@@ -22,7 +21,6 @@
     life-gauge(
       v-if='gameState !== constants.gameStates.title',
       v-bind:life="life",
-      v-bind:constants="constants",
     )
     transition(name="left-show-in")
       .game_over(v-if='gameState === constants.gameStates.gameOver')
@@ -34,10 +32,11 @@
     transition(name="bounce")
       img.tweet(src="/images/zxcv/twitter.png", v-on:click="tweet", v-if='showingTweetButton')
     minus-list(v-bind:minuses="minuses")
-    spark-list(v-bind:sparks="sparks", v-bind:constants="constants")
+    spark-list(v-bind:sparks="sparks")
 </template>
 
 <script>
+  import Constants from '../packs/constants.js'
   import volume from './volume.vue'
   import result from './result.vue'
   import lifeGauge from './lifeGauge.vue'
@@ -61,7 +60,6 @@
       "gameState",
       "life",
       "score",
-      "constants", // TODO: 全然関係ない別モジュールに切り出すのが正解かもしれない
       "volume",
       "minuses",
       "sparks",
@@ -73,6 +71,9 @@
       this.loadCompleted = true;
     },
     computed: {
+      constants: function(){
+        return Constants;
+      },
       tweetingMessage: function(){
         return `ZXCVで ${this.totalScore}点取ったよ！`;
       },

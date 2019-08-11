@@ -8,7 +8,6 @@
   export default {
     name: "sparkList",
     props: [
-      "constants", // TODO: 全然関係ない別モジュールに切り出すのが正解かもしれない
       "sparks",
     ],
   }

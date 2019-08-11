@@ -3,21 +3,21 @@
 </template>
 
 <script>
+  import Constants from '../packs/constants.js'
   export default {
     name: "lifeGauge",
     props: [
-      "constants", // TODO: 全然関係ない別モジュールに切り出すのが正解かもしれない
       "life",
     ],
     computed: {
       lifeLength: function(){
-        return (this.life / this.constants.maxLife * 100) + "%"
+        return (this.life / Constants.maxLife * 100) + "%"
       },
       lifeState: function(){
-        if(this.life >= this.constants.safeLine){
+        if(this.life >= Constants.safeLine){
           return "max";
         }
-        if(this.life >= this.constants.dangerLine){
+        if(this.life >= Constants.dangerLine){
           return "normal";
         }
         return "danger";

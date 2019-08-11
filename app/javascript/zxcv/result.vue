@@ -30,7 +30,6 @@
     name: "result",
     props: [
       "score",
-      "constants", // TODO: 全然関係ない別モジュールに切り出すのが正解かもしれない
       "speedScore",
       "totalScore",
     ],

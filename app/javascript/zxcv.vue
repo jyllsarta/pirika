@@ -6,7 +6,6 @@
       notes(v-bind:notes="recentNotes")
       ui(
         v-bind:life="life",
-        v-bind:constants="constants",
         v-bind:gameState="gameState",
         v-bind:score="score",
         v-bind:volume="volume",
@@ -22,6 +21,7 @@
   import notes from './zxcv/notes.vue'
   import ui from './zxcv/ui.vue'
   import DefaultNotePattern from './packs/defaultNotePattern.js'
+  import Constants from './packs/constants.js'
   export default {
     components: {
       notes,
@@ -61,10 +61,10 @@
     },
     computed: {
       recentNotes: function(){
-        return this.notes.slice(0, this.constants.displayNotes).reverse();
+        return this.notes.slice(0, Constants.displayNotes).reverse();
       },
       isDanger: function(){
-        return this.life < this.constants.dangerLine;
+        return this.life < Constants.dangerLine;
       },
       alive: function() {
         return this.life > 0;
@@ -77,37 +77,10 @@
       },
       totalScore: function(){
         let score = this.score;
-        if(this.gameState === this.constants.gameStates.cleared){
+        if(this.gameState === Constants.gameStates.cleared){
           score += this.speedScore;
         }
         return score;
-      },
-      constants: function(){
-        return {
-          notes: {
-            "z": 0b0001,
-            "x": 0b0010,
-            "c": 0b0100,
-            "v": 0b1000,
-          },
-          maxLife: 10000,
-          dangerLine: 3333,
-          safeLine: 9950,
-          minDamagePerLife: 10,
-          recoverPerNote: 130,
-          recoverPerHealNote: 4000,
-          dangerDamageReduceRate: 0.60,
-          damageIncreaseSpeed: 0.16,
-          badDamage: 300,
-          displayNotes: 16,
-          gameStates: {
-            title: 0,
-            inGame: 1,
-            gameOver: 2,
-            cleared: 3,
-          },
-          healNotesInterval: 25,
-        }
       },
     },
     methods: {
@@ -121,7 +94,7 @@
         }
         // 40ノーツごとに回復ノーツにする
         for(let i = 0; i < this.notes.length - 1; i++){
-          if(i % this.constants.healNotesInterval === 0){
+          if(i % Constants.healNotesInterval === 0){
             this.notes[i].heal = true;
           }
         }
@@ -132,10 +105,10 @@
         return {
           id: Math.floor(Math.random() * 100000000000),
           note: note,
-          z: note & this.constants.notes.z,
-          x: note & this.constants.notes.x,
-          c: note & this.constants.notes.c,
-          v: note & this.constants.notes.v,
+          z: note & Constants.notes.z,
+          x: note & Constants.notes.x,
+          c: note & Constants.notes.c,
+          v: note & Constants.notes.v,
           bad: false,
           heal: false,
         };
@@ -162,11 +135,11 @@
       },
 
       reset: function(){
-        this.gameState = this.constants.gameStates.title;
+        this.gameState = Constants.gameStates.title;
         this.initNotes();
         this.initKeyboard();
         this.score = 0;
-        this.life = this.constants.maxLife;
+        this.life = Constants.maxLife;
         this.currentTime = 0;
         this.timeDelta = 0;
         this.startedTime = 0;
@@ -228,14 +201,14 @@
       invokeUpdate: function(){
         this.updateTime();
         switch (this.gameState) {
-          case this.constants.gameStates.title:
+          case Constants.gameStates.title:
             break;
-          case this.constants.gameStates.inGame:
+          case Constants.gameStates.inGame:
             this.updateInGame();
             break;
-          case this.constants.gameStates.gameOver:
+          case Constants.gameStates.gameOver:
             break;
-          case this.constants.gameStates.cleared:
+          case Constants.gameStates.cleared:
             break;
           default:
             console.error(`undefined game mode set: ${this.gameState} on update`);
@@ -259,30 +232,30 @@
         // 死亡判定
         if(!this.alive){
           this.playSound("dead", false);
-          this.gameState = this.constants.gameStates.gameOver;
+          this.gameState = Constants.gameStates.gameOver;
           return;
         }
 
-        let damage = Math.max(this.score * this.constants.damageIncreaseSpeed, this.constants.minDamagePerLife);
+        let damage = Math.max(this.score * Constants.damageIncreaseSpeed, Constants.minDamagePerLife);
         damage *= this.timeDelta / 17; // 1F=17msに合わせて補正する
         if(this.isDanger){
-          damage *= (1 - this.constants.dangerDamageReduceRate);
+          damage *= (1 - Constants.dangerDamageReduceRate);
         }
         this.life -= damage;
       },
 
       triggerKeyboardEvents: function(){
         switch (this.gameState) {
-          case this.constants.gameStates.title:
+          case Constants.gameStates.title:
             this.handleKeyTitle();
             break;
-          case this.constants.gameStates.inGame:
+          case Constants.gameStates.inGame:
             this.handleKeyInGame();
             break;
-          case this.constants.gameStates.gameOver:
+          case Constants.gameStates.gameOver:
             this.handleKeyGameOver();
             break;
-          case this.constants.gameStates.cleared:
+          case Constants.gameStates.cleared:
             this.handleKeyCleared();
             break;
           default:
@@ -293,7 +266,7 @@
 
       keyboardStatus: function(){
         let result = 0;
-        for (let [key, value] of Object.entries(this.constants.notes)) {
+        for (let [key, value] of Object.entries(Constants.notes)) {
           if(this.keyboard[key]){
             result += value;
           }
@@ -303,7 +276,7 @@
 
       // zxcvと1248の相互変換がめんどいでござる
       lastKey: function(){
-        for (let key of Object.keys(this.constants.notes)) {
+        for (let key of Object.keys(Constants.notes)) {
           if(this.keyboard[key] === 1){
             return key;
           }
@@ -314,7 +287,7 @@
       handleKeyTitle: function(){
         if(this.keyboardStatus()){
           this.startedTime = new Date().getTime();
-          this.gameState = this.constants.gameStates.inGame;
+          this.gameState = Constants.gameStates.inGame;
         }
       },
 
@@ -330,7 +303,7 @@
         // 「今」押されたキーが次のノーツと一切関係がなかったらBAD
         if((keyStatus & this.notes[0].note) === 0) {
           this.score -= 1;
-          this.life -= this.constants.badDamage;
+          this.life -= Constants.badDamage;
           this.notes[0].bad = true;
           this.playSound("miss");
           this.createMinusEffect();
@@ -341,13 +314,13 @@
           this.playSound(lastKey);
           this.score++;
           if(this.notes[0].heal){
-            this.life += this.constants.recoverPerHealNote;
+            this.life += Constants.recoverPerHealNote;
             this.playSound("heal", false);
           }
           else{
-            this.life += this.constants.recoverPerNote;
+            this.life += Constants.recoverPerNote;
           }
-          this.life = Math.min(this.life, this.constants.maxLife);
+          this.life = Math.min(this.life, Constants.maxLife);
           this.createSparkEffect();
           this.notes.shift();
         }
@@ -356,7 +329,7 @@
         if(this.notes.length === 0){
           this.playSound("clear", false);
           this.clearedTime = new Date().getTime();
-          this.gameState = this.constants.gameStates.cleared;
+          this.gameState = Constants.gameStates.cleared;
         }
       },
 
