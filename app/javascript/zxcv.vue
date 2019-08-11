@@ -21,6 +21,7 @@
   import notes from './zxcv/notes.vue'
   import ui from './zxcv/ui.vue'
   import DefaultNotePattern from './packs/defaultNotePattern.js'
+  import RandaNotePattern from './packs/randaNotePattern.js'
   import Constants from './packs/constants.js'
   export default {
     components: {

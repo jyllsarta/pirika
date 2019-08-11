@@ -11,50 +11,81 @@ class DefaultNotePattern{
       notePatterns: [
         [0b0001, 0b0010, 0b0100, 0b1000],
         [0b1000, 0b0100, 0b0010, 0b0001],
-        //[0b1001, 0b0110, 0b1001, 0b0110],
-        [0b1000, 0b0001, 0b1100, 0b0011],
-        [0b0001, 0b0010, 0b0100, 0b1000],
+
         [0b0010, 0b0100, 0b0010, 0b0100],
         [0b0100, 0b0010, 0b0100, 0b0010],
+
         [0b1000, 0b0001, 0b1000, 0b0001],
         [0b0001, 0b1000, 0b0001, 0b1000],
+
         [0b0001, 0b1000, 0b0100, 0b0010],
         [0b1000, 0b0001, 0b0010, 0b0100],
+
         [0b0010, 0b0100, 0b1000, 0b0001],
         [0b0100, 0b0010, 0b0001, 0b1000],
-        //[0b0001, 0b0010, 0b0100, 0b0111],
-        //[0b1000, 0b0100, 0b0010, 0b1110],
+
+        [0b0001, 0b0010, 0b1100, 0b0010],
+        [0b1000, 0b0100, 0b0011, 0b0100],
+
+        [0b0100, 0b0011, 0b1000, 0b0001],
+        [0b0010, 0b1100, 0b0001, 0b1000],
+
+        [0b1000, 0b0001, 0b0100, 0b0010],
+        [0b0001, 0b1000, 0b0010, 0b0100],
+
+        [0b0100, 0b0010, 0b1000, 0b0001],
+        [0b0010, 0b0100, 0b0001, 0b1000],
+
+        [0b0100, 0b0011, 0b1000, 0b0011],
+        [0b0010, 0b1100, 0b0001, 0b1100],
       ],
     }
   }
 
+  static sampleIndex(array){
+    return Math.floor(Math.random() * array.length);
+  }
+
+
   static generateNotes(){
     let notes = [];
-    for (let i = 0; i < 50; ++i){
-      notes = notes.concat(this.getRandomMeasure());
-      notes = notes.concat(this.getPatternedMeasure());
+    for (let i = 0; i < 75; ++i){
+      notes = notes.concat(this.getRandomMeasure(notes));
+      notes = notes.concat(this.getPatternedMeasure(notes));
     }
     return notes;
   }
 
-  static getRandomMeasure(){
+  static getRandomMeasure(currentNotes){
     let measure = [];
     const notes = Object.values(this.constants().notes);
-    for(let i = notes.length - 1; i > 0; i--){
-      let r = Math.floor(Math.random() * (i + 1));
-      let tmp = notes[i];
-      notes[i] = notes[r];
-      notes[r] = tmp;
+    const lastNote = currentNotes[currentNotes.length - 1] || 0;
+    let availableNotes = notes.filter(x=> (lastNote & x) === 0);
+    console.log(availableNotes)
+    const firstNoteIndex = this.sampleIndex(availableNotes);
+
+    // 最初の1ノーツ
+    measure.push(availableNotes.splice(firstNoteIndex, 1)[0]);
+
+    // 最初の1ノーツ用に避けていたノーツを戻し
+    if(lastNote !== 0){
+      availableNotes.push(lastNote);
     }
-    for(let note of notes){
-      measure.push(note);
+
+    // なくなるまでランダムに設置
+    while(availableNotes.length > 0){
+      measure.push(availableNotes.splice(this.sampleIndex(availableNotes), 1)[0]);
     }
+
     return measure;
   }
 
-  static getPatternedMeasure(){
-    const rand = Math.floor(Math.random() * this.constants().notePatterns.length);
-    const pattern = this.constants().notePatterns[rand];
+  static getPatternedMeasure(currentNotes){
+    const lastNote = currentNotes[currentNotes.length - 1] || 0;
+    const availableNotePatterns = this.constants().notePatterns.filter(x=> x[0] !== lastNote);
+
+    const rand = Math.floor(Math.random() * availableNotePatterns.length);
+    const pattern = availableNotePatterns[rand];
     let measure = [];
     for(let note of pattern){
       measure.push(note);
