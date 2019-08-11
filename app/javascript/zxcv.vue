@@ -21,6 +21,7 @@
 <script>
   import notes from './zxcv/notes.vue'
   import ui from './zxcv/ui.vue'
+  import DefaultNotePattern from './packs/defaultNotePattern.js'
   export default {
     components: {
       notes,
@@ -106,31 +107,18 @@
             cleared: 3,
           },
           healNotesInterval: 25,
-          notePatterns: [
-            [0b0001, 0b0010, 0b0100, 0b1000],
-            [0b1000, 0b0100, 0b0010, 0b0001],
-            //[0b1001, 0b0110, 0b1001, 0b0110],
-            [0b1000, 0b0001, 0b1100, 0b0011],
-            [0b0001, 0b0010, 0b0100, 0b1000],
-            [0b0010, 0b0100, 0b0010, 0b0100],
-            [0b0100, 0b0010, 0b0100, 0b0010],
-            [0b1000, 0b0001, 0b1000, 0b0001],
-            [0b0001, 0b1000, 0b0001, 0b1000],
-            [0b0001, 0b1000, 0b0100, 0b0010],
-            [0b1000, 0b0001, 0b0010, 0b0100],
-            [0b0010, 0b0100, 0b1000, 0b0001],
-            [0b0100, 0b0010, 0b0001, 0b1000],
-            //[0b0001, 0b0010, 0b0100, 0b0111],
-            //[0b1000, 0b0100, 0b0010, 0b1110],
-          ],
         }
       },
     },
     methods: {
       // initializers
       initNotes: function () {
-        // this.notes を埋める
-        this.notes = this.generateNotes();
+        // ノーツ列を取得
+        const notePattern = DefaultNotePattern.generateNotes();
+        this.notes = [];
+        for(let note of notePattern){
+          this.notes.push(this.newNote(note));
+        }
         // 40ノーツごとに回復ノーツにする
         for(let i = 0; i < this.notes.length - 1; i++){
           if(i % this.constants.healNotesInterval === 0){
@@ -138,45 +126,6 @@
           }
         }
         this.initialNoteCount = this.notes.length;
-      },
-      initKeyboard: function () {
-        for(let i = "a".charCodeAt(0); i <= "z".charCodeAt(0); i++) {
-          this.keyboard[String.fromCharCode(i)] = 0;
-        }
-      },
-
-      generateNotes: function(){
-        let notes = [];
-        for (let i = 0; i < 50; ++i){
-          notes = notes.concat(this.getRandomMeasure());
-          notes = notes.concat(this.getPatternedMeasure());
-        }
-        return notes;
-      },
-
-      getRandomMeasure: function(){
-        let measure = [];
-        const notes = Object.values(this.constants.notes);
-        for(let i = notes.length - 1; i > 0; i--){
-          let r = Math.floor(Math.random() * (i + 1));
-          let tmp = notes[i];
-          notes[i] = notes[r];
-          notes[r] = tmp;
-        }
-        for(let note of notes){
-          measure.push(this.newNote(note));
-        }
-        return measure;
-      },
-
-      getPatternedMeasure: function(){
-        const rand = Math.floor(Math.random() * this.constants.notePatterns.length);
-        const pattern = this.constants.notePatterns[rand];
-        let measure = [];
-        for(let note of pattern){
-          measure.push(this.newNote(note));
-        }
-        return measure;
       },
 
       newNote: function(note){
@@ -244,6 +193,12 @@
         }
         this.sounds[soundId].volume = this.volume;
         this.sounds[soundId].play();
+      },
+
+      initKeyboard: function () {
+        for(let i = "a".charCodeAt(0); i <= "z".charCodeAt(0); i++) {
+          this.keyboard[String.fromCharCode(i)] = 0;
+        }
       },
 
       mountKeyboardEvent: function(){
@@ -445,5 +400,4 @@
   .ui{
     z-index: 100;
   }
-
 </style>
