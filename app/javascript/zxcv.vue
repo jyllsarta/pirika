@@ -13,6 +13,7 @@
         v-bind:sparks="sparks",
         v-bind:speedScore="speedScore",
         v-bind:totalScore="totalScore",
+        v-bind:highScore="highScore",
         v-on:setVolume="setVolume"
         v-on:setName="setName"
         )
@@ -35,6 +36,7 @@
         notes: [],
         keyboard: [],
         username: "",
+        highScore: 0,
         score: 0,
         life: 0,
         gameState: 0,
@@ -57,6 +59,9 @@
       if (localStorage.volume) {
         this.volume = localStorage.volume;
       }
+    },
+    mounted: function(){
+      this.getHighScore();
     },
     watch: {
       volume(altered) {
@@ -150,6 +155,7 @@
         this.clearedTime = 0;
         this.flushMinusEffects();
         this.flushSparkEffects();
+        this.getHighScore();
       },
 
       loadSounds: function(){
@@ -372,6 +378,19 @@
         })
       },
 
+      getHighScore: function(){
+        axios.get(location.href + `/high_score?username=${this.username}`
+        ).then((results) => {
+          window.res = results;
+          console.log(results);
+          this.highScore = results.data.high_score;
+          console.log("OK");
+        }).catch((results) => {
+          console.warn(results);
+          console.warn("NG");
+        })
+      },
+
       setVolume: function(vol){
         this.volume = vol;
         this.playSound("z");
@@ -379,6 +398,7 @@
       setName: function(name){
         this.username = name;
         console.log("name set!");
+        this.getHighScore();
       },
     }
   }

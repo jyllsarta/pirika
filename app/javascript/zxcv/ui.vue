@@ -37,6 +37,8 @@
         v-bind:volume="volume",
         @setName="setName",
       )
+    .high_score
+      | ハイスコア： {{highScore}}
     minus-list(v-bind:minuses="minuses")
     spark-list(v-bind:sparks="sparks")
 </template>
@@ -73,6 +75,7 @@
       "sparks",
       "speedScore",
       "totalScore",
+      "highScore",
     ],
     mounted: function(){
       console.log("loaded ui!");
@@ -166,7 +169,14 @@
     height: 64px;
   }
 
-  .left-show-in-enter-active {
+  .high_score{
+    position: absolute;
+    top: 25%;
+    left: 0;
+    width: 50%;
+  }
+
+    .left-show-in-enter-active {
     transition: all .3s;
   }
   .left-show-in-leave-active {

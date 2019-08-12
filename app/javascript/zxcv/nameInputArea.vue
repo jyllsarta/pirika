@@ -26,12 +26,6 @@ export default {
     console.log("loaded name!");
     this.setName();
   },
-  watch: {
-    rawName(altered) {
-      localStorage.rawName = altered;
-      this.setName();
-    },
-  },
   computed: {
     fullName: function(){
       const splitted = this.rawName.replace(/📛/g, "").split("#");
@@ -49,6 +43,8 @@ export default {
   methods: {
     onBlur: function(){
       this.inputting = false;
+      localStorage.rawName = this.rawName;
+      this.setName();
       console.log("blured!");
     },
     setInputMode: function(){
