@@ -31,6 +31,12 @@
         | kick zxcv to start
     transition(name="bounce")
       img.tweet(src="/images/zxcv/twitter.png", v-on:click="tweet", v-if='showingTweetButton')
+    transition(name="left-show-in")
+      name-input-area(
+        v-if='gameState === constants.gameStates.title',
+        v-bind:volume="volume",
+        @setName="setName",
+      )
     minus-list(v-bind:minuses="minuses")
     spark-list(v-bind:sparks="sparks")
 </template>
@@ -42,6 +48,7 @@
   import lifeGauge from './lifeGauge.vue'
   import minusList from './minusList.vue'
   import sparkList from './sparkList.vue'
+  import nameInputArea from './nameInputArea.vue'
   export default {
     components: {
       volume,
@@ -49,6 +56,7 @@
       lifeGauge,
       minusList,
       sparkList,
+      nameInputArea,
     },
     data: function(){
       return {
@@ -91,7 +99,11 @@
       setVolume: function(v){
         // 最上位のzxcvにvolumeをリレーする
         this.$emit("setVolume", v);
-      }
+      },
+      setName: function(n){
+        // 最上位のzxcvにnameをリレーする
+        this.$emit("setName", n);
+      },
     },
   }
 </script>

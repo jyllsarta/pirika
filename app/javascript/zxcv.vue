@@ -14,6 +14,7 @@
         v-bind:speedScore="speedScore",
         v-bind:totalScore="totalScore",
         v-on:setVolume="setVolume"
+        v-on:setName="setName"
         )
 </template>
 
@@ -33,6 +34,7 @@
       return {
         notes: [],
         keyboard: [],
+        username: "",
         score: 0,
         life: 0,
         gameState: 0,
@@ -355,7 +357,7 @@
         axios.post(location.href,
           {
             authenticity_token: $("meta[name=csrf-token]").attr("content"),
-            username: "hifumi",
+            username: this.username,
             speed_score: this.speedScore,
             score: this.score,
             total_score: this.totalScore,
@@ -373,6 +375,10 @@
       setVolume: function(vol){
         this.volume = vol;
         this.playSound("z");
+      },
+      setName: function(name){
+        this.username = name;
+        console.log("name set!");
       },
     }
   }
