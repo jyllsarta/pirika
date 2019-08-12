@@ -23,6 +23,7 @@
   import DefaultNotePattern from './packs/defaultNotePattern.js'
   import RandaNotePattern from './packs/randaNotePattern.js'
   import Constants from './packs/constants.js'
+  import axios from 'axios'
   export default {
     components: {
       notes,
@@ -74,7 +75,7 @@
         return Math.floor(this.initialNoteCount / (this.clearedTime - this.startedTime) * 60 * 1000);
       },
       speedScore: function(){
-        return Math.floor(this.bpm /10);
+        return Math.floor(this.bpm /10) || 0;
       },
       totalScore: function(){
         let score = this.score;
@@ -233,6 +234,7 @@
         // 死亡判定
         if(!this.alive){
           this.playSound("dead", false);
+          this.sendResult();
           this.gameState = Constants.gameStates.gameOver;
           return;
         }
@@ -330,6 +332,7 @@
         if(this.notes.length === 0){
           this.playSound("clear", false);
           this.clearedTime = new Date().getTime();
+          this.sendResult();
           this.gameState = Constants.gameStates.cleared;
         }
       },
@@ -346,6 +349,25 @@
           this.playSound("reset", false);
           this.reset();
         }
+      },
+
+      sendResult: function(){
+        axios.post(location.href,
+          {
+            authenticity_token: $("meta[name=csrf-token]").attr("content"),
+            username: "hifumi",
+            speed_score: this.speedScore,
+            score: this.score,
+            total_score: this.totalScore,
+          }
+        ).then((results) => {
+          // TODO: ハイスコア更新とかがここで処理される
+          console.log(results);
+          console.log("OK");
+        }).catch((results) => {
+          console.warn(results);
+          console.warn("NG");
+        })
       },
 
       setVolume: function(vol){

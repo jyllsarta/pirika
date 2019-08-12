@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_01_26_044329) do
+ActiveRecord::Schema.define(version: 2019_08_11_182400) do
 
   create_table "colortiles", force: :cascade do |t|
     t.datetime "created_at", null: false
@@ -38,6 +38,15 @@ ActiveRecord::Schema.define(version: 2019_01_26_044329) do
   end
 
   create_table "users", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "zxcv_scores", force: :cascade do |t|
+    t.integer "score", default: 0, null: false
+    t.integer "speed_score", default: 0, null: false
+    t.integer "total_score", default: 0, null: false
+    t.string "username", default: "", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
