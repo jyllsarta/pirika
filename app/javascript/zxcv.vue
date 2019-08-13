@@ -311,6 +311,14 @@
           return;
         }
 
+        // rでいつでもリトライ可能(でもプレイログ送信はする)
+        if(this.keyboard["r"]){
+          this.playSound("reset", false);
+          this.sendResult();
+          this.reset();
+          return;
+        }
+
         const keyStatus = this.keyboardStatus();
         const lastKey = this.lastKey();
 
