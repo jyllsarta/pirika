@@ -36,6 +36,7 @@
         v-if='gameState === constants.gameStates.title',
         v-bind:volume="volume",
         @setName="setName",
+        @inputStateChanged="(state)=>{this.$emit('inputStateChanged', state)}",
       )
     transition(name="left-show-in")
       .high_score(v-if='gameState === constants.gameStates.title')

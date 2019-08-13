@@ -44,11 +44,12 @@ export default {
     onBlur: function(){
       this.inputting = false;
       localStorage.rawName = this.rawName;
+      this.$emit("inputStateChanged", false);
       this.setName();
-      console.log("blured!");
     },
     setInputMode: function(){
       this.inputting = true;
+      this.$emit("inputStateChanged", true);
       // inputtingをオンにしても次のフレームまで待たないとまだ入力欄は作られない
       Vue.nextTick(function (){
         $(".name_input_box")[0].focus();

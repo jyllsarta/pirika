@@ -16,6 +16,7 @@
         v-bind:highScore="highScore",
         v-on:setVolume="setVolume"
         v-on:setName="setName"
+        v-on:inputStateChanged="(state)=>{this.inputtingName = state}"
         )
 </template>
 
@@ -49,6 +50,7 @@
         minuses: [],
         sparks: [],
         initialNoteCount: 0,
+        inputtingName: false,
       };
     },
     created: function(){
@@ -156,6 +158,7 @@
         this.flushMinusEffects();
         this.flushSparkEffects();
         this.getHighScore();
+        this.inputtingName = false;
       },
 
       loadSounds: function(){
@@ -296,7 +299,7 @@
       },
 
       handleKeyTitle: function(){
-        if(this.keyboardStatus()){
+        if(this.keyboardStatus() && !this.inputtingName){
           this.startedTime = new Date().getTime();
           this.gameState = Constants.gameStates.inGame;
         }
