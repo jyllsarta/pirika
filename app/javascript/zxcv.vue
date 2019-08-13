@@ -340,8 +340,8 @@
         if(this.notes.length === 0){
           this.playSound("clear", false);
           this.clearedTime = new Date().getTime();
-          this.sendResult();
           this.gameState = Constants.gameStates.cleared;
+          this.sendResult();
         }
       },
 
