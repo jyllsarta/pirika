@@ -37,8 +37,9 @@
         v-bind:volume="volume",
         @setName="setName",
       )
-    .high_score
-      | ハイスコア： {{highScore}}
+    transition(name="left-show-in")
+      .high_score(v-if='gameState === constants.gameStates.title')
+        | ハイスコア： {{highScore}}
     minus-list(v-bind:minuses="minuses")
     spark-list(v-bind:sparks="sparks")
 </template>
