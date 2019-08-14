@@ -61,7 +61,7 @@ var app = new Vue({
         },
         tweet: function(){
             const tweetContent = encodeURI(this.tweetingMessage);
-            const url = encodeURI("http://jyllsarta.net/match_illust")
+            const url = encodeURI("http://jyllsarta.net/match_illusts/index");
             const fullurl = `https://twitter.com/intent/tweet?url=${url}&text=${tweetContent}`;
             window.open(fullurl);
         },
