@@ -16,13 +16,15 @@
         | :
       span.value
         | {{speedScore}}
-    .total_score.result_row
+    .total_score.result_row(v-bind:class="[isHighScoreUpdated ? 'high_score_updated' : '']")
       span.index
         | TOTAL
       span.delimiter
         | :
       span.value
         | {{totalScore}}
+      span.high_score_text(v-if="isHighScoreUpdated")
+        | high score!
 </template>
 
 <script>
@@ -32,6 +34,7 @@
       "score",
       "speedScore",
       "totalScore",
+      "isHighScoreUpdated",
     ],
   }
 </script>
@@ -76,6 +79,16 @@
         width: 18%;
         text-align: right;
       }
+      .high_score_text{
+        width: 30%;
+        padding-left: 5%;
+        text-align: left;
+        font-size: $title_font_size / 2;
+        color: $primary_color;
+      }
+    }
+    .high_score_updated{
+      color: $primary_color;
     }
   }
 </style>

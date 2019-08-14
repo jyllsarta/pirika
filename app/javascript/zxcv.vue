@@ -14,9 +14,10 @@
         v-bind:speedScore="speedScore",
         v-bind:totalScore="totalScore",
         v-bind:highScore="highScore",
-        v-on:setVolume="setVolume"
-        v-on:setName="setName"
-        v-on:inputStateChanged="(state)=>{this.inputtingName = state}"
+        v-bind:isHighScoreUpdated="isHighScoreUpdated",
+        v-on:setVolume="setVolume",
+        v-on:setName="setName",
+        v-on:inputStateChanged="(state)=>{this.inputtingName = state}",
         )
 </template>
 
@@ -51,6 +52,7 @@
         sparks: [],
         initialNoteCount: 0,
         inputtingName: false,
+        isHighScoreUpdated: false,
       };
     },
     created: function(){
@@ -159,6 +161,7 @@
         this.flushSparkEffects();
         this.getHighScore();
         this.inputtingName = false;
+        this.isHighScoreUpdated = false;
       },
 
       loadSounds: function(){
@@ -171,6 +174,8 @@
         this.sounds.dead = new Audio("/game/zxcv/sounds/dead.wav");
         this.sounds.clear = new Audio("/game/zxcv/sounds/clear.wav");
         this.sounds.reset = new Audio("/game/zxcv/sounds/reset.wav");
+        this.sounds.start = new Audio("/game/zxcv/sounds/start.wav");
+        this.sounds.high_score = new Audio("/game/zxcv/sounds/high_score.wav");
       },
 
       playSound: function(soundId, interruptPreviousSound=true){
@@ -300,6 +305,7 @@
 
       handleKeyTitle: function(){
         if(this.keyboardStatus() && !this.inputtingName){
+          this.playSound("start", false);
           this.startedTime = new Date().getTime();
           this.gameState = Constants.gameStates.inGame;
         }
@@ -380,7 +386,10 @@
             total_score: this.totalScore,
           }
         ).then((results) => {
-          // TODO: ハイスコア更新とかがここで処理される
+          if(results.data.is_high_score && this.gameState !== Constants.gameStates.title){
+            this.isHighScoreUpdated = true;
+            this.playSound("high_score", false);
+          }
           console.log(results);
           console.log("OK");
         }).catch((results) => {
@@ -392,7 +401,6 @@
       getHighScore: function(){
         axios.get(location.href + `/high_score?username=${this.username}`
         ).then((results) => {
-          window.res = results;
           console.log(results);
           this.highScore = results.data.high_score;
           console.log("OK");

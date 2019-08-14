@@ -1,12 +1,19 @@
 <template lang="pug">
   .ui
-    .score(v-if='gameState === constants.gameStates.inGame || gameState === constants.gameStates.gameOver')
+    .score(
+      v-if='gameState === constants.gameStates.inGame || gameState === constants.gameStates.gameOver',
+      v-bind:class="[isHighScoreUpdated ? 'high_score_updated' : '']",
+      )
       | {{score}}
+    transition(name="left-show-in")
+      .high_score_text(v-if="isHighScoreUpdated")
+        | high score!
     transition(name="left-show-in")
       result(
         v-if='gameState === constants.gameStates.cleared'
         v-bind:score="score",
         v-bind:speedScore="speedScore",
+        v-bind:isHighScoreUpdated="isHighScoreUpdated",
         v-bind:totalScore="totalScore",
       )
     transition(name="delay")
@@ -78,6 +85,7 @@
       "speedScore",
       "totalScore",
       "highScore",
+      "isHighScoreUpdated",
     ],
     mounted: function(){
       console.log("loaded ui!");
@@ -178,7 +186,22 @@
     width: 50%;
   }
 
-    .left-show-in-enter-active {
+  .high_score_updated{
+    color: $primary_color;
+  }
+
+  .high_score_text{
+    position: absolute;
+    left: 30%;
+    bottom: 30%;
+    width: 60%;
+    text-align: center;
+    opacity: $transparent_normal;
+    font-size: $title_font_size / 2;
+    color: $primary_color;
+  }
+
+  .left-show-in-enter-active {
     transition: all .3s;
   }
   .left-show-in-leave-active {
