@@ -103,7 +103,7 @@
         const notePattern = DefaultNotePattern.generateNotes();
         this.notes = [];
         for(let note of notePattern){
-          this.notes.push(this.newNote(note));
+          this.notes.push(this.newNote(note, 2));
         }
         // 40ノーツごとに回復ノーツにする
         for(let i = 0; i < this.notes.length - 1; i++){
@@ -111,6 +111,12 @@
             this.notes[i].heal = true;
           }
         }
+
+        //100ノーツごとに色を変える
+        for(let i = 0; i < this.notes.length - 1; i++){
+          this.notes[i].colorId = Math.floor(i / 100) + 1;
+        }
+
         this.initialNoteCount = this.notes.length;
       },
 
@@ -124,6 +130,7 @@
           v: note & Constants.notes.v,
           bad: false,
           heal: false,
+          colorId: 1,
         };
       },
 

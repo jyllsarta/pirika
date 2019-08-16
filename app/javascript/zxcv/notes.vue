@@ -3,10 +3,10 @@
     .whiteout_cover
     transition-group.frames(name='notes', tag='div')
       .frame.notes-item(v-bind:key='note.id', v-for='note in notes')
-        .z.note(v-bind:class='{active: note.z, bad: note.bad && note.z, heal: note.heal}')
-        .x.note(v-bind:class='{active: note.x, bad: note.bad && note.x, heal: note.heal}')
-        .c.note(v-bind:class='{active: note.c, bad: note.bad && note.c, heal: note.heal}')
-        .v.note(v-bind:class='{active: note.v, bad: note.bad && note.v, heal: note.heal}')
+        .z.note(v-bind:class='[noteBackground(note, 0b0001)]')
+        .x.note(v-bind:class='[noteBackground(note, 0b0010)]')
+        .c.note(v-bind:class='[noteBackground(note, 0b0100)]')
+        .v.note(v-bind:class='[noteBackground(note, 0b1000)]')
 </template>
 
 <script>
@@ -25,6 +25,16 @@
     computed: {
     },
     methods: {
+      // noteをコンポーネントに切り出してcomputedにねじこみたい
+      noteBackground(note, position){
+        if((note.note & position) > 0){
+          return note.bad ? "bad" : `color_${note.colorId}`;
+        }
+        if(note.heal){
+          return "heal";
+        }
+        return "";
+      },
     },
   }
 </script>
@@ -63,23 +73,58 @@
     width: $note_width * 4;
     height: $note_height * $note_count;
   }
-  .frame{
+  .frame {
     display: flex;
     flex-direction: row;
     width: $note_width * 4;
     height: $note_height;
-    .note{
+
+    .note {
       width: $note_width;
       height: $note_height;
     }
-    .heal{
+
+    .heal {
       background: linear-gradient(to bottom, $accent_color 20%, $accent_shadow_color);
     }
-    .active{
+
+    .active {
       background: linear-gradient(to bottom, $primary_color 70%, $primary_shadow_color);
     }
-    .bad{
+
+    .bad {
       background: linear-gradient(to bottom, $negative_color 70%, $negative_shadow_color);
+    }
+  }
+  $note_colors: (
+          1: (
+                  main_color:   #123123,
+                  shadow_color: #000000,
+          ),
+          2: (
+                  main_color:   #216c20,
+                  shadow_color: #c36c2b,
+          ),
+          3: (
+                  main_color:   #123123,
+                  shadow_color: #000000,
+          ),
+          4: (
+                  main_color:   #123123,
+                  shadow_color: #000000,
+          ),
+          5: (
+                  main_color:   #123123,
+                  shadow_color: #000000,
+          ),
+          6: (
+                  main_color:   #123123,
+                  shadow_color: #000000,
+          ),
+  );
+  @each $idx, $property in $note_colors{
+    .color_#{$idx} {
+      background: linear-gradient(to bottom, map-get($property, main_color) 70%, map-get($property, shadow_color));
     }
   }
 </style>
