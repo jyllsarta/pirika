@@ -27,6 +27,7 @@
   import DefaultNotePattern from './packs/defaultNotePattern.js'
   import RandaNotePattern from './packs/randaNotePattern.js'
   import Constants from './packs/constants.js'
+  import Keyboard from './packs/keyboard.js'
   import axios from 'axios'
   export default {
     components: {
@@ -36,7 +37,7 @@
     data: function(){
       return {
         notes: [],
-        keyboard: [],
+        keyboard: null,
         username: "",
         highScore: 0,
         score: 0,
@@ -59,10 +60,8 @@
       this.reset();
       this.invokeUpdate();
       this.loadSounds();
-      this.mountKeyboardEvent();
-      if (localStorage.volume) {
-        this.volume = localStorage.volume;
-      }
+      this.mountKeyboard();
+      this.loadCookieSoundVolume();
     },
     mounted: function(){
       this.getHighScore();
@@ -157,9 +156,9 @@
       reset: function(){
         this.gameState = Constants.gameStates.title;
         this.initNotes();
-        this.initKeyboard();
         this.score = 0;
         this.life = Constants.maxLife;
+        this.currentTime = 0;
         this.currentTime = 0;
         this.timeDelta = 0;
         this.startedTime = 0;
@@ -185,6 +184,18 @@
         this.sounds.high_score = new Audio("/game/zxcv/sounds/high_score.wav");
       },
 
+      loadCookieSoundVolume: function(){
+        if (localStorage.volume) {
+          this.volume = localStorage.volume;
+        }
+      },
+
+      mountKeyboard: function(){
+        this.keyboard = new Keyboard();
+        this.keyboard.mount();
+        this.keyboard.addKeyboardEvent(this.triggerKeyboardEvents);
+      },
+
       playSound: function(soundId, interruptPreviousSound=true){
         if(interruptPreviousSound){
           this.sounds[soundId].currentTime = 0;
@@ -193,35 +204,6 @@
         this.sounds[soundId].play();
       },
 
-      initKeyboard: function () {
-        for(let i = "a".charCodeAt(0); i <= "z".charCodeAt(0); i++) {
-          this.keyboard[String.fromCharCode(i)] = 0;
-        }
-      },
-
-      mountKeyboardEvent: function(){
-        document.onkeydown = function (e) {
-          this.handleKeydown(e);
-        }.bind(this);
-        document.onkeyup = function (e) {
-          this.handleKeyup(e);
-        }.bind(this);
-      },
-
-      // handlers
-      handleKeydown: function (e) {
-        // keyboard は 押されたら1 押しっぱなしだとそれ以上 の値が入っている
-        for (let key of this.keyboard.keys()) {
-          if(this.keyboard[key]){
-            this.keyboard[key] += 1;
-          }
-        }
-        this.keyboard[e.key] = 1;
-        this.triggerKeyboardEvents();
-      },
-      handleKeyup: function (e) {
-        this.keyboard[e.key] = 0;
-      },
 
       invokeUpdate: function(){
         this.updateTime();
@@ -293,7 +275,7 @@
       keyboardStatus: function(){
         let result = 0;
         for (let [key, value] of Object.entries(Constants.notes)) {
-          if(this.keyboard[key]){
+          if(this.keyboard.get(key)){
             result += value;
           }
         }
@@ -303,7 +285,7 @@
       // zxcvと1248の相互変換がめんどいでござる
       lastKey: function(){
         for (let key of Object.keys(Constants.notes)) {
-          if(this.keyboard[key] === 1){
+          if(this.keyboard.get(key) === 1){
             return key;
           }
         }
@@ -325,7 +307,7 @@
         }
 
         // rでいつでもリトライ可能(でもプレイログ送信はする)
-        if(this.keyboard["r"]){
+        if(this.keyboard.get("r")){
           this.playSound("reset", false);
           this.sendResult();
           this.reset();
@@ -370,14 +352,14 @@
       },
 
       handleKeyGameOver: function(){
-        if(this.keyboard["r"]){
+        if(this.keyboard.get("r")){
           this.playSound("reset", false);
           this.reset();
         }
       },
 
       handleKeyCleared: function(){
-        if(this.keyboard["r"]){
+        if(this.keyboard.get("r")){
           this.playSound("reset", false);
           this.reset();
         }
