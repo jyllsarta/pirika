@@ -97,34 +97,46 @@
     }
   }
   $note_colors: (
-          1: (
-                  main_color:   #123123,
-                  shadow_color: #000000,
+          1:  (
+                  color1: #81aed3,
+                  color2: #5261c1,
+                  color3: #1964d4,
+                  color4: #d6d3ec,
           ),
-          2: (
-                  main_color:   #216c20,
-                  shadow_color: #c36c2b,
+          2:  (
+                  color1: #6ed6d1,
+                  color2: #17a229,
+                  color3: #07c126,
+                  color4: #71f9af,
           ),
-          3: (
-                  main_color:   #123123,
-                  shadow_color: #000000,
+          3:  (
+                  color1: #f6adff,
+                  color2: #e820d7,
+                  color3: #fc6aff,
+                  color4: #ffdeee,
           ),
-          4: (
-                  main_color:   #123123,
-                  shadow_color: #000000,
+          4:  (
+                  color1: #ffe6ad,
+                  color2: #f79c10,
+                  color3: #e8be21,
+                  color4: #fdf4d9,
           ),
-          5: (
-                  main_color:   #123123,
-                  shadow_color: #000000,
+          5:  (
+                  color1: #e682f7,
+                  color2: #b72caa,
+                  color3: #ad1cb7,
+                  color4: #e9e6e1,
           ),
-          6: (
-                  main_color:   #123123,
-                  shadow_color: #000000,
+          6:  (
+                  color1: #615f64,
+                  color2: #737683,
+                  color3: #7a7f88,
+                  color4: #4f5153,
           ),
   );
   @each $idx, $property in $note_colors{
     .color_#{$idx} {
-      background: linear-gradient(to bottom, map-get($property, main_color) 70%, map-get($property, shadow_color));
+      background: linear-gradient(to bottom, map-get($property, color1) 0%, map-get($property, color2) 63%, map-get($property, color3) 75%, map-get($property, color4) 100%);
     }
   }
 </style>
