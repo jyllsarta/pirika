@@ -82,7 +82,7 @@
   );
   @each $idx, $property in $note_colors{
     .color_#{$idx} {
-      background: linear-gradient(to bottom, map-get($property, color1) 0%, map-get($property, color2) 63%, map-get($property, color3) 75%, map-get($property, color4) 100%);
+      background: linear-gradient(to bottom, map-get($property, color1) 83%, map-get($property, color2) 85%);
     }
   }
 </style>
