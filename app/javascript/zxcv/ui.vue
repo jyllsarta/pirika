@@ -19,12 +19,6 @@
     transition(name="delay")
       .r_to_reset.delay(v-if='gameState === constants.gameStates.cleared || gameState === constants.gameStates.gameOver')
         | (r to reset)
-    transition(name="left-show-in")
-      volume(
-        v-if='gameState === constants.gameStates.title',
-        v-bind:volume="volume",
-        v-on:setVolume="setVolume",
-      )
     life-gauge(
       v-if='gameState !== constants.gameStates.title',
       v-bind:life="life",
@@ -38,6 +32,16 @@
         | kick zxcv to start
     transition(name="bounce")
       img.tweet(src="/images/zxcv/twitter.png", v-on:click="tweet", v-if='showingTweetButton')
+    transition(name="left-show-in")
+      .ui_background_panel(
+        v-if='gameState === constants.gameStates.title'
+      )
+    transition(name="left-show-in")
+      volume(
+        v-if='gameState === constants.gameStates.title',
+        v-bind:volume="volume",
+        v-on:setVolume="setVolume",
+      )
     transition(name="left-show-in")
       name-input-area(
         v-if='gameState === constants.gameStates.title',
@@ -181,7 +185,7 @@
 
   .high_score{
     position: absolute;
-    top: 25%;
+    top: 24%;
     left: 0;
     width: 50%;
   }
@@ -199,6 +203,17 @@
     opacity: $transparent_normal;
     font-size: $title_font_size / 2;
     color: $primary_color;
+  }
+
+  .ui_background_panel{
+    position: absolute;
+    top: 10%;
+    left: -1%;
+    width: 52%;
+    height: 19%;
+    background-color: $white;
+    opacity: 0.2;
+    border-radius: 8px;
   }
 
   .left-show-in-enter-active {

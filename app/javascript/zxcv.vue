@@ -2,6 +2,7 @@
   #app
     h1
       | zxcv
+    back(v-bind:notes="notes", v-bind:initialNoteCount="initialNoteCount")
     .window
       notes(v-bind:notes="recentNotes")
       ui(
@@ -23,6 +24,7 @@
 
 <script>
   import notes from './zxcv/notes.vue'
+  import back from './zxcv/back.vue'
   import ui from './zxcv/ui.vue'
   import DefaultNotePattern from './packs/defaultNotePattern.js'
   import RandaNotePattern from './packs/randaNotePattern.js'
@@ -33,6 +35,7 @@
     components: {
       notes,
       ui,
+      back,
     },
     data: function(){
       return {
@@ -423,11 +426,12 @@
     position: relative;
     width: $note_width * 4 + 50;
     height: $note_height * $note_count + 50;
-    padding: 0 25px 50px 25px;
+    padding: 0 25px 100px 25px;
     margin: auto;
   }
 
   .ui{
     z-index: 100;
   }
+
 </style>

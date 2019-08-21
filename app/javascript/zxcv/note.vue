@@ -1,5 +1,5 @@
 <template lang="pug">
-  .note(v-bind:class='[noteBackground]')
+  .note(:class='[noteBackground]' :style="{opacity: opacity}")
 </template>
 
 <script>
@@ -8,6 +8,7 @@
     props: [
       "note",
       "position",
+      "index",
     ],
     computed: {
       noteBackground(){
@@ -19,6 +20,9 @@
         }
         return "";
       },
+      opacity(){
+        return 0.2 + (this.index * 0.05);
+      }
     },
   }
 </script>

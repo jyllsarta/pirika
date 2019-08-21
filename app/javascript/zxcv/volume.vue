@@ -47,25 +47,21 @@
     width: 50%;
     display: flex;
     .volume_icon{
-      width: 48px;
-      height: 48px;
-      padding: 10px;
-    }
-    .volume {
-      padding: 10px;
+      width: 32px;
+      height: 32px;
+      margin-right: 20px;
     }
 
     input[type=range] {
-      -webkit-appearance: none;
       width: 100%;
-      margin: 0px 0;
+      margin: 0;
     }
     input[type=range]:focus {
       outline: none;
     }
     input[type=range]::-webkit-slider-runnable-track {
       width: 100%;
-      height: 16px;
+      height: 21px;
       cursor: pointer;
       box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
       background: $primary_color;
@@ -78,7 +74,6 @@
       height: 16px;
       width: 32px;
       border-radius: 0px;
-      background: #f4f4f4;
       cursor: pointer;
       -webkit-appearance: none;
       margin-top: -0.2px;
@@ -88,7 +83,7 @@
     }
     input[type=range]::-moz-range-track {
       width: 100%;
-      height: 16px;
+      height: 21px;
       cursor: pointer;
       box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
       background: $primary_color;
@@ -98,15 +93,14 @@
     input[type=range]::-moz-range-thumb {
       box-shadow: 1px 1px 1px rgba(0, 0, 0, 0), 0px 0px 1px rgba(13, 13, 13, 0);
       border: 0px solid rgba(0, 0, 0, 0);
-      height: 16px;
+      height: 21px;
       width: 32px;
       border-radius: 0px;
-      background: #f4f4f4;
       cursor: pointer;
     }
     input[type=range]::-ms-track {
       width: 100%;
-      height: 16px;
+      height: 21px;
       cursor: pointer;
       background: transparent;
       border-color: transparent;
@@ -129,9 +123,8 @@
       border: 0px solid rgba(0, 0, 0, 0);
       width: 32px;
       border-radius: 0px;
-      background: #f4f4f4;
       cursor: pointer;
-      height: 16px;
+      height: 21px;
     }
     input[type=range]:focus::-ms-fill-lower {
       background: $primary_color;

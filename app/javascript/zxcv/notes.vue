@@ -1,12 +1,11 @@
 <template lang="pug">
   .frame_window
-    .whiteout_cover
     transition-group.frames(name='notes', tag='div')
       .frame.notes-item(v-bind:key='note.id', v-for='note in notes')
-        note(v-bind:note='note', v-bind:position='0b0001')
-        note(v-bind:note='note', v-bind:position='0b0010')
-        note(v-bind:note='note', v-bind:position='0b0100')
-        note(v-bind:note='note', v-bind:position='0b1000')
+        note(v-bind:note='note', :position='0b0001', :index='notes.indexOf(note)')
+        note(v-bind:note='note', :position='0b0010', :index='notes.indexOf(note)')
+        note(v-bind:note='note', :position='0b0100', :index='notes.indexOf(note)')
+        note(v-bind:note='note', :position='0b1000', :index='notes.indexOf(note)')
 </template>
 
 <script>
@@ -68,7 +67,7 @@
     transform-origin: bottom center;
     width: $note_width * 4;
     height: $note_height * $note_count;
-    background: radial-gradient(farthest-corner at 50% 100%, $background_light_gray 40%, #FFFFFF 70%);
+    background: radial-gradient(farthest-corner at 50% 100%, $background_light_gray 40%, rgba(0,0,0,0) 70%);
   }
 
   .frames{

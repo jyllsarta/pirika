@@ -68,7 +68,7 @@ export default {
 
   .name_input_area {
     position: absolute;
-    top: 20%;
+    top: 18%;
     left: 0;
     width: 50%;
     .fixed_name{
