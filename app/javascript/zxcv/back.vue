@@ -20,8 +20,8 @@
 <style lang='scss' scoped>
   @import "../stylesheets/constants";
   // 素直にnoteと同じ宣言にしたほうが行儀良かったかもなあ
-  $colors       : #565f71 #5f7170 #707141 #71515e #597148 #8c8a93;
-  $shadow_colors: #3c3c4a #31444a #403b22 #332a33 #182f30 #686269;
+  $colors       : #414755 #324136 #555447 #554e53 #292a2d #e6e4ee;
+  $shadow_colors: #2a2a34 #233134 #2b2616 #282128 #0b0b0c #7d7a81;
 
   @for $i from 1 through length($colors) {
     .color_#{$i} {

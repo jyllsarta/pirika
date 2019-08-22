@@ -11,8 +11,11 @@
       "index",
     ],
     computed: {
+      active(){
+        return (this.note.note & this.position) > 0;
+      },
       noteBackground(){
-        if((this.note.note & this.position) > 0){
+        if(this.active){
           return this.note.bad ? "bad" : `color_${this.note.colorId}`;
         }
         if(this.note.heal){
@@ -21,6 +24,9 @@
         return "";
       },
       opacity(){
+        if(!this.active && this.note.heal){
+          return 0.4;
+        }
         return 0.2 + (this.index * 0.05);
       }
     },
@@ -35,53 +41,39 @@
     }
 
   .heal {
-    background: linear-gradient(to bottom, $accent_color 20%, $accent_shadow_color);
-  }
-
-  .active {
-    background: linear-gradient(to bottom, $primary_color 70%, $primary_shadow_color);
+    mix-blend-mode: lighten;
+    opacity: 0.2;
+    background: linear-gradient(to bottom, #a1d6af 20%, #a7e9e6);
   }
 
   .bad {
-    background: linear-gradient(to bottom, $negative_color 70%, $negative_shadow_color);
+    background: linear-gradient(to bottom, $negative_color 83%, $negative_shadow_color 85%);
   }
 
   $note_colors: (
           1:  (
-                  color1: #81aed3,
-                  color2: #5261c1,
-                  color3: #1964d4,
-                  color4: #d6d3ec,
+                  color1: #c7dbe6,
+                  color2: #5d6279,
           ),
           2:  (
-                  color1: #6ed6d1,
-                  color2: #17a229,
-                  color3: #07c126,
-                  color4: #71f9af,
+                  color1: #d3e3d9,
+                  color2: #48534c,
           ),
           3:  (
-                  color1: #f6adff,
-                  color2: #e820d7,
-                  color3: #fc6aff,
-                  color4: #ffdeee,
+                  color1: #d9d3cf,
+                  color2: #664c46,
           ),
           4:  (
-                  color1: #ffe6ad,
-                  color2: #f79c10,
-                  color3: #e8be21,
-                  color4: #fdf4d9,
+                  color1: #d0ceca,
+                  color2: #7f6b7c,
           ),
           5:  (
-                  color1: #e682f7,
-                  color2: #b72caa,
-                  color3: #ad1cb7,
-                  color4: #e9e6e1,
+                  color1: #eaecf3,
+                  color2: #363438,
           ),
           6:  (
-                  color1: #615f64,
-                  color2: #737683,
-                  color3: #7a7f88,
-                  color4: #4f5153,
+                  color1: #494b4f,
+                  color2: #c4cadc,
           ),
   );
   @each $idx, $property in $note_colors{
