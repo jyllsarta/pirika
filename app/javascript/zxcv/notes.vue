@@ -46,11 +46,11 @@
   @import "../stylesheets/constants";
 
   .notes-item{
-    transition: all 0.3s;
+    transition: all 0.2s;
   }
   .notes-enter, .notes-leave-to{
     opacity: 0;
-    transform: scale(0.2);
+    transform: scale(0.1) translateY(-20px);
   }
 
   .whiteout_cover{
