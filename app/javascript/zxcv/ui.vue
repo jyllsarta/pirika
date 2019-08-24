@@ -6,7 +6,7 @@
       )
       | {{score}}
     transition(name="left-show-in")
-      .high_score_text(v-if="isHighScoreUpdated")
+      .high_score_text(v-if="isHighScoreUpdated && gameState === constants.gameStates.gameOver")
         | high score!
     transition(name="left-show-in")
       result(
@@ -244,7 +244,7 @@
   .high_score_text{
     position: absolute;
     left: 30%;
-    bottom: 30%;
+    bottom: 28%;
     width: 60%;
     text-align: center;
     opacity: $transparent_normal;

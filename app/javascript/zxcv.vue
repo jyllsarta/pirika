@@ -80,6 +80,9 @@
       volume(altered) {
         localStorage.volume = altered;
       },
+      showingRanking(altered) {
+        this.playSound("heal", true);
+      },
     },
     computed: {
       recentNotes: function(){
