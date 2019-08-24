@@ -95,7 +95,7 @@
         return Math.floor(this.initialNoteCount / (this.clearedTime - this.startedTime) * 60 * 1000);
       },
       speedScore: function(){
-        return Math.floor(this.bpm /10) || 0;
+        return Math.floor(this.bpm / 5) || 0;
       },
       totalScore: function(){
         let score = this.score;

@@ -38,6 +38,15 @@ class DefaultNotePattern{
 
         [0b0100, 0b0011, 0b1000, 0b0011],
         [0b0010, 0b1100, 0b0001, 0b1100],
+
+        [0b0110, 0b0001, 0b1000, 0b0001],
+        [0b0110, 0b1000, 0b0001, 0b1000],
+
+        [0b0001, 0b0010, 0b0001, 0b1000],
+        [0b1000, 0b0100, 0b1000, 0b0001],
+
+        [0b0001, 0b0010, 0b0001, 0b0100],
+        [0b1000, 0b0100, 0b1000, 0b0010],
       ],
     }
   }
@@ -80,7 +89,7 @@ class DefaultNotePattern{
 
   static getPatternedMeasure(currentNotes){
     const lastNote = currentNotes[currentNotes.length - 1] || 0;
-    const availableNotePatterns = this.constants().notePatterns.filter(x=> x[0] !== lastNote);
+    const availableNotePatterns = this.constants().notePatterns.filter(x=> (lastNote & x[0]) === 0);
 
     const rand = Math.floor(Math.random() * availableNotePatterns.length);
     const pattern = availableNotePatterns[rand];
