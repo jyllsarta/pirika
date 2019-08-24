@@ -1,6 +1,7 @@
 <template lang="pug">
   .name_input_area
-    | 名前：
+    span.prefix
+      | 名前：
     .fixed_name( v-if="!inputting")
       | {{fullName}}
     button.change_button(@click="setInputMode", v-if="!inputting")
@@ -71,7 +72,11 @@ export default {
     top: 18%;
     left: 0;
     width: 50%;
+    .prefix{
+      color: $white;
+    }
     .fixed_name{
+      color: $white;
       position: absolute;
       top: 0;
       left: 55px;

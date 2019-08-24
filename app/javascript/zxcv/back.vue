@@ -32,7 +32,7 @@
   .back{
     position: absolute;
     width: 100%;
-    height: $note_height * $note_count + 100;
+    height: $note_height * $note_count + 150;
   }
 
 </style>

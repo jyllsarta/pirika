@@ -52,6 +52,15 @@
     transition(name="left-show-in")
       .high_score(v-if='gameState === constants.gameStates.title')
         | ハイスコア： {{highScore}}
+    transition(name="left-show-in")
+      ranking(v-if='showingRanking', v-bind:ranking="ranking")
+    .hide_ranking_area(v-if='showingRanking', @click="$emit('hideRanking')")
+    transition(name="left-show-in")
+      img.show_ranking_button(
+        v-if='gameState === constants.gameStates.title && !showingRanking',
+        @click="$emit('showRanking')",
+        src="/images/zxcv/ranking.png"
+      )
     minus-list(v-bind:minuses="minuses")
     spark-list(v-bind:sparks="sparks")
 </template>
@@ -60,6 +69,7 @@
   import Constants from '../packs/constants.js'
   import volume from './volume.vue'
   import result from './result.vue'
+  import ranking from './ranking.vue'
   import lifeGauge from './lifeGauge.vue'
   import minusList from './minusList.vue'
   import sparkList from './sparkList.vue'
@@ -68,6 +78,7 @@
     components: {
       volume,
       result,
+      ranking,
       lifeGauge,
       minusList,
       sparkList,
@@ -90,6 +101,8 @@
       "totalScore",
       "highScore",
       "isHighScoreUpdated",
+      "showingRanking",
+      "ranking",
     ],
     mounted: function(){
       console.log("loaded ui!");
@@ -183,7 +196,41 @@
     height: 64px;
   }
 
+  .show_ranking_button{
+    position: absolute;
+    top: 30%;
+    left: -1%;
+    width: 64px;
+    height: 64px;
+    padding: 10px;
+    opacity: $transparent_normal;
+    background-color: $black;
+    border-radius: 8px;
+  }
+
+  .ranking{
+    position: absolute;
+    top: 35%;
+    left: 10%;
+    width: 80%;
+    height: 60%;
+    color: $white;
+    background-color: $black;
+    opacity: $transparent_normal;
+    border-radius: 8px;
+  }
+
+  .hide_ranking_area{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+  }
+
   .high_score{
+    color: $white;
     position: absolute;
     top: 24%;
     left: 0;
@@ -211,8 +258,8 @@
     left: -1%;
     width: 52%;
     height: 19%;
-    background-color: $white;
-    opacity: 0.2;
+    background-color: $black;
+    opacity: $transparent_normal;
     border-radius: 8px;
   }
 

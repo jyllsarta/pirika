@@ -16,8 +16,12 @@
         v-bind:totalScore="totalScore",
         v-bind:highScore="highScore",
         v-bind:isHighScoreUpdated="isHighScoreUpdated",
+        v-bind:showingRanking="showingRanking",
+        v-bind:ranking="ranking",
         v-on:setVolume="setVolume",
         v-on:setName="setName",
+        v-on:hideRanking="showingRanking = false",
+        v-on:showRanking="showingRanking = true",
         v-on:inputStateChanged="(state)=>{this.inputtingName = state}",
         )
 </template>
@@ -57,6 +61,8 @@
         initialNoteCount: 0,
         inputtingName: false,
         isHighScoreUpdated: false,
+        showingRanking: false,
+        ranking: [],
       };
     },
     created: function(){
@@ -68,6 +74,7 @@
     },
     mounted: function(){
       this.getHighScore();
+      this.getRanking();
     },
     watch: {
       volume(altered) {
@@ -169,8 +176,10 @@
         this.flushMinusEffects();
         this.flushSparkEffects();
         this.getHighScore();
+        this.getRanking();
         this.inputtingName = false;
         this.isHighScoreUpdated = false;
+        this.showingRanking = false;
       },
 
       loadSounds: function(){
@@ -299,6 +308,7 @@
         if(this.keyboardStatus() && !this.inputtingName){
           this.playSound("start", false);
           this.startedTime = new Date().getTime();
+          this.showingRanking = false;
           this.gameState = Constants.gameStates.inGame;
         }
       },
@@ -402,6 +412,18 @@
         })
       },
 
+      getRanking: function(){
+        axios.get(location.href + `/ranking`
+        ).then((results) => {
+          console.log(results);
+          this.ranking = results.data.ranking;
+          console.log("OK");
+        }).catch((results) => {
+          console.warn(results);
+          console.warn("NG");
+        })
+      },
+
       setVolume: function(vol){
         this.volume = vol;
         this.playSound("z");
@@ -425,8 +447,8 @@
     display: block;
     position: relative;
     width: $note_width * 4 + 50;
-    height: $note_height * $note_count + 50;
-    padding: 0 25px 100px 25px;
+    height: $note_height * $note_count + 100;
+    padding: 50px 25px 150px 25px;
     margin: auto;
   }
 
