@@ -9,6 +9,10 @@ class ZxcvsController < ApplicationController
     high_score = ZxcvScore.high_score(params[:username])
     render json: {high_score: high_score}.to_json
   end
+  def ranking
+    ranking = ZxcvScore.ranking(10)
+    render json: {ranking: ranking}.to_json
+  end
 
 private
   def parameter
