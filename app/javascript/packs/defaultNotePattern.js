@@ -61,15 +61,14 @@ class DefaultNotePattern{
     const notes = Object.values(this.constants().notes);
     const lastNote = currentNotes[currentNotes.length - 1] || 0;
     let availableNotes = notes.filter(x=> (lastNote & x) === 0);
+    let ngNotes = notes.filter(x=> (lastNote & x) !== 0);
     const firstNoteIndex = this.sampleIndex(availableNotes);
 
     // 最初の1ノーツ
     measure.push(availableNotes.splice(firstNoteIndex, 1)[0]);
 
     // 最初の1ノーツ用に避けていたノーツを戻し
-    if(lastNote !== 0){
-      availableNotes.push(lastNote);
-    }
+    availableNotes = availableNotes.concat(ngNotes);
 
     // なくなるまでランダムに設置
     while(availableNotes.length > 0){
