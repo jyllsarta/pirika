@@ -118,14 +118,14 @@
           this.notes.push(this.newNote(note, 2));
         }
         // 40ノーツごとに回復ノーツにする
-        for(let i = 0; i < this.notes.length - 1; i++){
+        for(let i = 0; i < this.notes.length; i++){
           if(i % Constants.healNotesInterval === 0){
             this.notes[i].heal = true;
           }
         }
 
         //100ノーツごとに色を変える
-        for(let i = 0; i < this.notes.length - 1; i++){
+        for(let i = 0; i < this.notes.length; i++){
           this.notes[i].colorId = Math.floor(i / 100) + 1;
         }
 
