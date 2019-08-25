@@ -407,7 +407,12 @@
         axios.get(location.href + `/high_score?username=${this.username}`
         ).then((results) => {
           console.log(results);
-          this.highScore = results.data.high_score;
+          if(this.username !== ""){
+            this.highScore = results.data.high_score;
+          }
+          else{
+            console.warn("ユーザ名未設定のためハイスコアは埋めません");
+          }
           console.log("OK");
         }).catch((results) => {
           console.warn(results);

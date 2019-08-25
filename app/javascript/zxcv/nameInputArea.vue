@@ -3,7 +3,7 @@
     span.prefix
       | 名前：
     .fixed_name( v-if="!inputting")
-      | {{fullName}}
+      | {{fullName === "" ? "ななし(ランキング登録されません)" : fullName}}
     button.change_button(@click="setInputMode", v-if="!inputting")
       | 変更
     input.name_input_box(type="text", @blur="onBlur", v-model="rawName", v-if="inputting")

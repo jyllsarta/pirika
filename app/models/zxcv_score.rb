@@ -12,7 +12,8 @@ class ZxcvScore < ApplicationRecord
     ranking = []
     # order by group by なので多少ダサいが愚直に全件取得からのしちゃう
     ZxcvScore.order(total_score: :desc).each do |score|
-      ranking.append(score) if ranking.all?{|rank| rank.username != score.username}
+      # ユーザ名空はランキング登録しないことにした
+      ranking.append(score) if ranking.all?{|rank| rank.username != score.username} && !score.username.blank?
       break if ranking.length == limit
     end
     ranking
