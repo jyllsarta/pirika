@@ -1,0 +1,16 @@
+header
+  a href="/"
+    #top_banner
+      .left_siroko
+        = image_tag  "/images/top_siroko.png"
+      .top_banner_text
+        = image_tag "/images/top_banner_text.png"
+      .right_siroko
+        = image_tag "/images/top_siroko_right.png"
+  #nav_menu
+    = link_to "Top", index_path , class:"menu_item"
+    = link_to "About", "\#{index_path}#about" , class:"menu_item"
+    = link_to "Text", "\#{index_path}#text" , class:"menu_item"
+    = link_to "Illust", illusts_path , class:"menu_item"
+    = link_to "Works", works_path , class:"menu_item"
+    = link_to "Contact", contact_path , class:"menu_item"
