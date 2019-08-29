@@ -48,7 +48,10 @@ class StaticPagesController < ApplicationController
   def works
   end
 
-private
+  def games
+  end
+
+  private
   def image_paths(dirname)
     paths = Dir.glob("public/images/#{dirname}/*", base: Rails.root)
     paths.map{|x| x[(7..-1)]} #trim "public/"

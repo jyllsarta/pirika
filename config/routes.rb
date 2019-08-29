@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   get 'index/',       to: "static_pages#index"
   get 'samusugi/',    to: "static_pages#samusugi"
   get 'works/',       to: "static_pages#works"
+  get 'games/',       to: "static_pages#games"
   get 'illusts/',     to: "static_pages#illusts"
   get 'rakugaki/',    to: "static_pages#rakugaki"
   get 'sainokawara/', to: "static_pages#sainokawara"
