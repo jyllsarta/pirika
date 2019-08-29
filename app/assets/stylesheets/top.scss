@@ -1,12 +1,18 @@
 
-$main-color: #3b3947;
+$main-color: #4b4f61;
 $sub-color: #9dbcf7;
 $accent-color: #50fff6;
 $link-color: #5e3aff;
 $link-color-visited: #8229b6;
 
+$content-min-width: 600px;
+$content-max-width: 1200px;
+$infinity: 100000px;
+
 .main{
-  width: 800px;
+  min-width: $content-min-width;
+  max-width: $content-max-width;
+  width: 100%;
   margin: 0px auto;
   border-left: 1px dashed $main-color;
   border-right: 1px dashed $main-color;
@@ -22,9 +28,10 @@ li{
 }
 
 #top_banner{
-  width: 1000px;
+  min-width: $content-min-width;
+  max-width: $infinity;
+  width: 100%;
   height: 192px;
-  margin: 0px auto;
   font-size: 0;
   display: flex;
   flex-direction: row;
@@ -32,16 +39,16 @@ li{
   align-items: flex-end;
   background: linear-gradient(to bottom, white 80%, #d3e2ed);
   .right_siroko, .left_siroko{
-    img{
-      width: 192px;
-      height: 192px;
-    }
+    max-width: 192px;
+    min-width: 0;
+    width: 20%;
+    height: auto;
   }
   .top_banner_text{
-    img{
-      width: 450px;
-      height: 75px;
-    }
+    max-width: 600px;
+    min-width: 0;
+    width: 60%;
+    height: auto;
   }
 }
 
@@ -50,6 +57,8 @@ li{
 }
 
 #nav_menu{
+  min-width: $content-min-width;
+  max-width: $infinity;
   width: 100%;
   height: 34px;
   display: flex;
