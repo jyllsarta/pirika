@@ -1,0 +1,25 @@
+- provide :title, "Contact"
+h1
+  | Contact:(連絡フォーム)
+section
+  p
+    | じぃるに連絡ができるフォームです。
+  p
+    | 絵のリクエストでも、有償無償を問わずなにか正式な依頼でも、匿名で伝えたいことでもなんでも受け付けます。お気軽にどうぞ。
+  p
+    | 返信が必要な内容の場合、返信用アドレスに24時間以内に連絡します。
+  - flash.each do |message_type, message|
+    = content_tag(:div, message, class: "alert alert-#{message_type}")
+  = form_for( @contact , url: "/contact", html: {class: :contact_form}) do |f|
+      = f.label "お名前"
+      = f.text_field :name
+      br
+      = f.label "メールアドレス(返信用)"
+      = f.text_field :email
+      br
+      = f.label "内容"
+      = f.text_area :content, cols: 50, rows: 10
+      br
+      = f.submit "送信"
+
+= stylesheet_link_tag "contact"

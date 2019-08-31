@@ -1,0 +1,14 @@
+- provide :title, "ピリカちゃんwebコンソール"
+= stylesheet_link_tag "pirika_console"
+
+h1 
+  | ピリカちゃんwebコンソール
+
+h2
+  | 扇風機のボタン
+
+= button_to  "ぴ", {action: :update, remote:true, data:{ signal: :fan_on}} , form_class: "btn btn-primary"
+
+h2
+  | 電気のボタン
+= button_to  "ぽち", {action: :update, remote:true, data:{ signal: :light_off}}, form_class: "btn btn-primary"
