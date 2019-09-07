@@ -40,6 +40,7 @@ class StaticPagesController < ApplicationController
   end
 
   def touzoku
+    render 'static_pages/touzoku', :layout => nil
   end
 
   def twitter_webhook
