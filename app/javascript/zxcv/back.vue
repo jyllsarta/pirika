@@ -18,14 +18,14 @@
 </script>
 
 <style lang='scss' scoped>
-  @import "../stylesheets/constants";
+  @import "stylesheets/constants";
   // 素直にnoteと同じ宣言にしたほうが行儀良かったかもなあ
   $colors       : #414755 #324136 #555447 #554e53 #292a2d #e6e4ee;
   $shadow_colors: #2a2a34 #233134 #2b2616 #282128 #0b0b0c #7d7a81;
 
   @for $i from 1 through length($colors) {
     .color_#{$i} {
-      background: linear-gradient(to bottom, nth($colors, $i) 60%, nth($shadow_colors, $i));
+      background: linear-gradient(to bottom, nth($colors, $i) 66%, nth($shadow_colors, $i));
     }
   }
 

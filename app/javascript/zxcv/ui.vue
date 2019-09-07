@@ -66,7 +66,7 @@
 </template>
 
 <script>
-  import Constants from '../packs/constants.js'
+  import Constants from './packs/constants.js'
   import volume from './volume.vue'
   import result from './result.vue'
   import ranking from './ranking.vue'
@@ -139,7 +139,7 @@
 </script>
 
 <style lang='scss' scoped>
-  @import "../stylesheets/constants";
+  @import "stylesheets/constants";
 
   div{
     font-family: 'Kanit', sans-serif;

@@ -27,9 +27,9 @@
 </template>
 
 <script>
-  import notes from './zxcv/notes.vue'
-  import back from './zxcv/back.vue'
-  import ui from './zxcv/ui.vue'
+  import notes from './notes.vue'
+  import back from './back.vue'
+  import ui from './ui.vue'
   import DefaultNotePattern from './packs/defaultNotePattern.js'
   import RandaNotePattern from './packs/randaNotePattern.js'
   import Constants from './packs/constants.js'

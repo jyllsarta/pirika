@@ -39,7 +39,7 @@
 </script>
 
 <style lang='scss' scoped>
-  @import "../stylesheets/constants";
+  @import "stylesheets/constants";
   .volume_area{
     position: absolute;
     top: 10%;

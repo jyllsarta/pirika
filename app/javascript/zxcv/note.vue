@@ -34,7 +34,7 @@
 </script>
 
 <style lang='scss' scoped>
-  @import "../stylesheets/constants";
+  @import "stylesheets/constants";
   .note {
       width: $note_width;
       height: $note_height;

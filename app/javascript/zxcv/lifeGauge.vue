@@ -3,7 +3,7 @@
 </template>
 
 <script>
-  import Constants from '../packs/constants.js'
+  import Constants from '../zxcv/packs/constants.js'
   export default {
     name: "lifeGauge",
     props: [
@@ -27,7 +27,7 @@
 </script>
 
 <style lang='scss' scoped>
-  @import "../stylesheets/constants";
+  @import "stylesheets/constants";
 
   .life{
     height: 20px;

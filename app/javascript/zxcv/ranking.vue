@@ -45,7 +45,7 @@
 </script>
 
 <style lang='scss' scoped>
-  @import "../stylesheets/constants";
+  @import "stylesheets/constants";
   table{
     display: table;
   }

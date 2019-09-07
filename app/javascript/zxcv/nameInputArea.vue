@@ -65,7 +65,7 @@ export default {
 </script>
 
 <style lang='scss' scoped>
-  @import "../stylesheets/constants";
+  @import "stylesheets/constants";
 
   .name_input_area {
     position: absolute;

@@ -14,7 +14,7 @@
 </script>
 
 <style lang='scss' scoped>
-  @import "../stylesheets/constants";
+  @import "stylesheets/constants";
 
   .spark-list{
     position: absolute;

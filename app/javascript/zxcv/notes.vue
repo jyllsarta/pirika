@@ -43,7 +43,7 @@
 </script>
 
 <style lang='scss' scoped>
-  @import "../stylesheets/constants";
+  @import "stylesheets/constants";
 
   .notes-item{
     transition: all 0.2s;
