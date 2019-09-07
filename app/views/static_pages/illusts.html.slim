@@ -1,12 +1,11 @@
 - provide :title, "Illusts"
-.main
-  h2
-    | イラスト
-  p
-    a[href="/rakugaki"]
-      | らくがき
-    | もあります。そちらは眠いときにちゃちゃっと描いたものです。
-  #illustBox
-    - (1..@image_count).to_a.reverse.each do |n|
-      = render 'illust_thumbnail', {n: n}
+h2
+  | イラスト
+p
+  a[href="/rakugaki"]
+    | らくがき
+  | もあります。そちらは眠いときにちゃちゃっと描いたものです。
+#illustBox
+  - (1..@image_count).to_a.reverse.each do |n|
+    = render 'illust_thumbnail', {n: n}
 = stylesheet_link_tag "illusts"
