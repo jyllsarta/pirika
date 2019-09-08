@@ -37,6 +37,7 @@ default: &default
     - .vue
     - .mjs
     - .js
+    - .ts
     - .sass
     - .scss
     - .css
