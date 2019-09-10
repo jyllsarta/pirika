@@ -10,15 +10,16 @@
   export default {
     data(){
       return {
-        logic: {},
-        input: {},
+        logic: null,
+        input: null,
       };
     },
     mounted(){
       console.log("loaded arrow!");
       this.logic = new ArrowLogic();
       this.input = new Input();
-      this.logic.update();
+      this.input.registerUpdateEvent(this.logic.update);
+      this.input.registerLeftClickEvent(this.logic.onLeftClick);
     },
   }
 </script>

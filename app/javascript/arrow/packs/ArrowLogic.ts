@@ -4,7 +4,11 @@ class ArrowLogic{
   }
 
   update(){
-    console.log("update called");
+    //console.log("update called");
+  }
+
+  onLeftClick(){
+    console.log("left clicked!");
   }
 }
 export default ArrowLogic;
