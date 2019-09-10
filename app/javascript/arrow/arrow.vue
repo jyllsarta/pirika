@@ -2,6 +2,8 @@
   #app
     h1
       | ふーん
+    p
+      | {{logic.balls}}
 </template>
 
 <script lang="ts">
@@ -14,12 +16,12 @@
         input: null,
       };
     },
-    mounted(){
+    created(){
       console.log("loaded arrow!");
       this.logic = new ArrowLogic();
       this.input = new Input();
       this.input.registerUpdateEvent(this.logic.update);
-      this.input.registerLeftClickEvent(this.logic.onLeftClick);
+      this.input.registerLeftClickEvent(() => {this.logic.sendMessage("onLeftClick")});
     },
   }
 </script>
