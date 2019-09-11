@@ -1,13 +1,15 @@
+import Ball from "./Ball"
+
 class ArrowLogic{
 
-  private messageReceivers: {};
-  private _balls: string[];
+  _messageReceivers: {};
+  _balls: Ball[];
 
   constructor(){
     console.log("instantiated logic!");
-    this.messageReceivers = {};
+    this._messageReceivers = {};
     this.registerMethods();
-    this._balls = ["ほへ"];
+    this._balls = [new Ball(Math.random(), Math.random())];
   }
 
   // 今この時代こんなgetter書くの!? みたいな気持ちもあるけど、まあ一旦お手本通りに書いてみる
@@ -23,11 +25,11 @@ class ArrowLogic{
 
   public sendMessage(message: string){
     console.log(`got message: ${message}`);
-    if(this.messageReceivers[message] === undefined){
+    if(this._messageReceivers[message] === undefined){
       console.warn(`undefined message "${message}" has been received!`);
       return;
     }
-    this.messageReceivers[message].call();
+    this._messageReceivers[message].call();
   }
 
   private stubAction(){
@@ -40,8 +42,8 @@ class ArrowLogic{
 
   private registerMethods(){
     // これの登録を自動化したいけどどうやってもうまく行かないので一旦このまま受け取るメッセージ一覧を作ろうと思う...
-    this.messageReceivers["stubAction"] = this.stubAction;
-    this.messageReceivers["onLeftClick"] = this.onLeftClick;
+    this._messageReceivers["stubAction"] = this.stubAction;
+    this._messageReceivers["onLeftClick"] = this.onLeftClick;
   }
 }
 export default ArrowLogic;
