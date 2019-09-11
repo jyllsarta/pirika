@@ -334,14 +334,17 @@
         const lastKey = this.lastKey();
 
         // 「今」押されたキーが次のノーツと一切関係がなかったらBAD
-        if((keyStatus & this.notes[0].note) === 0) {
+        // 全押しは想定外だった... 全押し扱いになってもBADとします
+        // https://twitter.com/shuymn/status/1171479428267794433
+        if((keyStatus & this.notes[0].note) === 0 || keyStatus === 0b1111) {
           this.score -= 1;
           this.life -= Constants.badDamage;
           this.notes[0].bad = true;
           this.playSound("miss");
           this.createMinusEffect();
+          return;
         }
-
+        
         if((keyStatus & this.notes[0].note) === this.notes[0].note){
           // 現状の構造だとキーが押されているかどうかしか判定されないので
           this.playSound(lastKey);
