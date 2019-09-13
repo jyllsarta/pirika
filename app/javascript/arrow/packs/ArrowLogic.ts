@@ -6,7 +6,13 @@ class ArrowLogic{
 
   constructor(){
     console.log("instantiated logic!");
-    this._balls = [new Ball(Math.random(), Math.random())];
+    this._balls = [];
+    // サンプル とりあえず5個ランダムにコロコロさせておく
+    this.createRandomBall();
+    this.createRandomBall();
+    this.createRandomBall();
+    this.createRandomBall();
+    this.createRandomBall();
   }
 
   // 今この時代こんなgetter書くの!? みたいな気持ちもあるけど、まあ一旦お手本通りに書いてみる
@@ -24,8 +30,14 @@ class ArrowLogic{
 
   private moveBall(){
     for(let ball of this._balls){
-      ball.x += 0.01;
+      ball.x += ball.vx;
+      ball.y += ball.vy;
+      ball.reflect();
     }
+  }
+
+  private createRandomBall(){
+    this._balls.push(new Ball(Math.random(), Math.random(), Math.random() * 0.01, Math.random() * 0.01));
   }
 
   private onLeftClick(){
