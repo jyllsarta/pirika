@@ -1,6 +1,6 @@
 class Ball{
-  id: Number;
-  constructor(public x: Number, public y: Number){
+  id: number;
+  constructor(public x: number, public y: number){
     this.id = Math.floor(Math.random() * 10000000000);
   }
 }
