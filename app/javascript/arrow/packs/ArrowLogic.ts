@@ -1,33 +1,34 @@
 import Ball from "./Ball"
+import Pointer from "./Pointer"
 
 class ArrowLogic{
 
-  _balls: Ball[];
+  balls: Ball[];
+  pointer: Pointer;
 
   constructor(){
     console.log("instantiated logic!");
-    this._balls = [];
-    // サンプル とりあえず5個ランダムにコロコロさせておく
+    this.balls = [];
+    this.pointer = new Pointer(0.0, 0.0);
+    // サンプル とりあえず50個ランダムにコロコロさせておく
     for(let i=0; i< 50; ++i){
       this.createRandomBall();
     }
   }
 
-  // 今この時代こんなgetter書くの!? みたいな気持ちもあるけど、まあ一旦お手本通りに書いてみる
-  // C# っぽくかけると嬉しいところですねこれ
-  get balls(){
-    return this._balls;
+  // update だけは受信する回数が他と比べて圧倒的に多いはずなので、ログに載る sendMessage から実行しない
+  public update(){
+    this.moveBall();
   }
 
-  // update だけは受信する回数が他と比べて圧倒的に多いはずなので、ログに載る sendMessage から実行しない
-  update(){
-    this.moveBall();
+  public setPointerPosition(x: number, y: number){
+    this.pointer.setPosition(x, y);
   }
 
   // -- private --
 
   private moveBall(){
-    for(let ball of this._balls){
+    for(let ball of this.balls){
       ball.x += ball.vx;
       ball.y += ball.vy;
       ball.reflect();
@@ -35,7 +36,7 @@ class ArrowLogic{
   }
 
   private createRandomBall(){
-    this._balls.push(new Ball(Math.random(), Math.random(), Math.random() * 0.003, Math.random() * 0.008));
+    this.balls.push(new Ball(Math.random(), Math.random(), Math.random() * 0.003, Math.random() * 0.008));
   }
 
   private onLeftClick(){

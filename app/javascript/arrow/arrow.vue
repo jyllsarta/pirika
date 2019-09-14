@@ -2,7 +2,7 @@
   #app
     h1
       | ふーん
-    .game
+    .game(@mousemove="updatePointerPosition")
       .balls
         // 関数型コンポーネントにすると明確に軽くなるので x, y は本来子側の computed で展開して計算したかったけど
         // こちら側で渡すタイミングの時点で計算を完了させておく
@@ -11,18 +11,25 @@
           :x="Math.floor(ball.x * 600)",
           :y="Math.floor(ball.y * 600)",
         )
+      Pointer(
+        :x="Math.floor(logic.pointer.x * 600)",
+        :y="Math.floor(logic.pointer.y * 600)",
+      )
 </template>
 
 <script lang="ts">
   import ArrowLogic from "./packs/ArrowLogic";
   import Ball from "./Ball.vue";
+  import Pointer from "./Pointer.vue";
   export default {
     components: {
         Ball,
+        Pointer,
     },
     data(){
       return {
         logic: null,
+        latestMouseMoveEvent: null,
       };
     },
     created(){
@@ -35,8 +42,16 @@
         this.update();
       },
       update(){
+        // TODO: constantsに定義を逃がす
+        let e = this.latestMouseMoveEvent;
+        if(e !== null){
+          this.logic.setPointerPosition(e.offsetX / 600.0, e.offsetY / 600.0);
+        }
         this.logic.update();
         requestAnimationFrame(() => {this.update();});
+      },
+      updatePointerPosition(e: MouseEvent){
+        this.latestMouseMoveEvent = e;
       }
     },
   }
