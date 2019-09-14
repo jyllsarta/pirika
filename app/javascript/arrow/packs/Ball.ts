@@ -21,8 +21,7 @@ class Ball{
       this.y = 0;
     }
     if(this.y > 1){
-      this.vy *= -1;
-      this.y = 1;
+      this.y = 0;
     }
   }
 }

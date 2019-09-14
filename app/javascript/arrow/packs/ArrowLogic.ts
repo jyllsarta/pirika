@@ -8,11 +8,9 @@ class ArrowLogic{
     console.log("instantiated logic!");
     this._balls = [];
     // サンプル とりあえず5個ランダムにコロコロさせておく
-    this.createRandomBall();
-    this.createRandomBall();
-    this.createRandomBall();
-    this.createRandomBall();
-    this.createRandomBall();
+    for(let i=0; i< 50; ++i){
+      this.createRandomBall();
+    }
   }
 
   // 今この時代こんなgetter書くの!? みたいな気持ちもあるけど、まあ一旦お手本通りに書いてみる
@@ -37,7 +35,7 @@ class ArrowLogic{
   }
 
   private createRandomBall(){
-    this._balls.push(new Ball(Math.random(), Math.random(), Math.random() * 0.01, Math.random() * 0.01));
+    this._balls.push(new Ball(Math.random(), Math.random(), Math.random() * 0.003, Math.random() * 0.008));
   }
 
   private onLeftClick(){

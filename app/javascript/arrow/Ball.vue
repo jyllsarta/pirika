@@ -32,8 +32,10 @@
   .ball{
     position: absolute;
     background-color: #0d0d0d;
-    width: 10px;
-    height: 10px;
-    border-radius: 5px;
+    width: $ball-size;
+    height: $ball-size;
+    border-radius: $ball-size / 2;
+    top: -$ball-size / 2;
+    left: -$ball-size / 2;
   }
 </style>

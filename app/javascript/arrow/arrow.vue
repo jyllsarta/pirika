@@ -3,8 +3,9 @@
     h1
       | ふーん
     .game
-      .balls(v-for="ball in logic.balls" v-bind:key="ball.id")
+      .balls
         Ball(
+          v-for="ball in logic.balls" v-bind:key="ball.id",
           :x="ball.x",
           :y="ball.y",
         )
@@ -43,10 +44,9 @@
   @import "stylesheets/constants";
 
   .game{
-    // TODO: 600px 決め打ちをconstantsかなんかにずらす
-    width: 600px;
-    height: 600px;
-    margin: 0 auto;
+    width: $field-width;
+    height: $field-height;
+    margin: 50px auto 50px auto;
     background-color: #ededf5;
     position: relative;
     top: 0;
