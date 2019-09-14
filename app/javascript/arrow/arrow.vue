@@ -4,10 +4,12 @@
       | ふーん
     .game
       .balls
+        // 関数型コンポーネントにすると明確に軽くなるので x, y は本来子側の computed で展開して計算したかったけど
+        // こちら側で渡すタイミングの時点で計算を完了させておく
         Ball(
           v-for="ball in logic.balls" v-bind:key="ball.id",
-          :x="ball.x",
-          :y="ball.y",
+          :x="Math.floor(ball.x * 600)",
+          :y="Math.floor(ball.y * 600)",
         )
 </template>
 
