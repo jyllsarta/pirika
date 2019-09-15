@@ -3,7 +3,8 @@ import GameState from "./packs/GameState";
   #app
     h1
       | ふーん
-    .game(@mousemove="updatePointerPosition")
+    .game
+      .background(@mousemove="updatePointerPosition")
       .balls
         // 関数型コンポーネントにすると明確に軽くなるので x, y は本来子側の computed で展開して計算したかったけど
         // こちら側で渡すタイミングの時点で計算を完了させておく
@@ -60,7 +61,8 @@ import GameState from "./packs/GameState";
         requestAnimationFrame(() => {this.update();});
       },
       updatePointerPosition(e: MouseEvent){
-        this.latestMouseMoveEvent = e;
+          console.log(e);
+          this.latestMouseMoveEvent = e;
       },
       startGame(){
         this.logic.startGame();
@@ -81,14 +83,20 @@ import GameState from "./packs/GameState";
     width: $field-width;
     height: $field-height;
     margin: 50px auto 50px auto;
-    background-color: #ededf5;
     position: relative;
     top: 0;
     left: 0;
+    .background{
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background-color: #ededf5;
+    }
     .balls{
       position: absolute;
       width: 100%;
       height: 100%;
+      pointer-events: none;
     }
     .game_start_button{
       position: absolute;
