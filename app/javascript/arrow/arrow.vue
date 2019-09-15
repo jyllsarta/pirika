@@ -18,7 +18,7 @@ import GameState from "./packs/GameState";
       )
       GameStartButton(
         @startGame="startGame",
-        v-if="st"
+        v-if="isTitleScene"
       )
 </template>
 
@@ -67,7 +67,7 @@ import GameState from "./packs/GameState";
       },
     },
     computed: {
-      st(){
+      isTitleScene(){
         return this.logic.gameState === GameState.Title;
       }
     }
