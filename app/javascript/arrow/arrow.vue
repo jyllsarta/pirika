@@ -1,3 +1,4 @@
+import GameState from "./packs/GameState";
 <template lang="pug">
   #app
     h1
@@ -15,16 +16,24 @@
         :x="Math.floor(logic.pointer.x * 600)",
         :y="Math.floor(logic.pointer.y * 600)",
       )
+      GameStartButton(
+        @startGame="startGame",
+        v-if="st"
+      )
 </template>
 
 <script lang="ts">
-  import ArrowLogic from "./packs/ArrowLogic";
-  import Ball from "./Ball.vue";
-  import Pointer from "./Pointer.vue";
-  export default {
+    import ArrowLogic from "./packs/ArrowLogic";
+    import GameState from "./packs/GameState";
+    import Ball from "./Ball.vue";
+    import Pointer from "./Pointer.vue";
+    import GameStartButton from "./GameStartButton.vue";
+
+    export default {
     components: {
         Ball,
         Pointer,
+        GameStartButton,
     },
     data(){
       return {
@@ -52,8 +61,16 @@
       },
       updatePointerPosition(e: MouseEvent){
         this.latestMouseMoveEvent = e;
-      }
+      },
+      startGame(){
+        this.logic.startGame();
+      },
     },
+    computed: {
+      st(){
+        return this.logic.gameState === GameState.Title;
+      }
+    }
   }
 </script>
 
@@ -72,6 +89,13 @@
       position: absolute;
       width: 100%;
       height: 100%;
+    }
+    .game_start_button{
+      position: absolute;
+      width: 10%;
+      height: 10%;
+      left: 45%;
+      top: 45%;
     }
   }
 </style>
