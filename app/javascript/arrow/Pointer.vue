@@ -1,6 +1,6 @@
 <template functional lang="pug">
   .pointer(
-    :style="{ transform: 'translate(' + props.x + 'px,' + props.y + 'px)' }"
+    :style="{ transform: 'translate(' + props.x + 'px,' + props.y + 'px) scale('+ props.hpRate +')' }"
   )
 </template>
 
@@ -10,6 +10,7 @@
     props: [
       "x",
       "y",
+      "hpRate",
     ],
   }
 </script>

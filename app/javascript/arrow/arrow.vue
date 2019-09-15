@@ -14,8 +14,9 @@ import GameState from "./packs/GameState";
           :y="Math.floor(ball.y * 600)",
         )
       Pointer(
-        :x="Math.floor(logic.pointer.x * 600)",
-        :y="Math.floor(logic.pointer.y * 600)",
+        :x= "Math.floor(logic.pointer.x * 600)",
+        :y= "Math.floor(logic.pointer.y * 600)",
+        :hpRate="logic.hpRate()",
       )
       GameStartButton(
         @startGame="startGame",
@@ -32,9 +33,9 @@ import GameState from "./packs/GameState";
 
     export default {
     components: {
-        Ball,
-        Pointer,
-        GameStartButton,
+      Ball,
+      Pointer,
+      GameStartButton,
     },
     data(){
       return {
@@ -61,8 +62,7 @@ import GameState from "./packs/GameState";
         requestAnimationFrame(() => {this.update();});
       },
       updatePointerPosition(e: MouseEvent){
-          console.log(e);
-          this.latestMouseMoveEvent = e;
+        this.latestMouseMoveEvent = e;
       },
       startGame(){
         this.logic.startGame();
