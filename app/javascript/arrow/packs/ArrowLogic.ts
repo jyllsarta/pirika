@@ -36,7 +36,7 @@ class ArrowLogic{
   }
 
   private createRandomBall(){
-    this.balls.push(new Ball(Math.random(), Math.random(), Math.random() * 0.003, Math.random() * 0.008));
+    this.balls.push(new Ball(Math.random(), Math.random(), Math.random() * 0.004 - 0.002, Math.random() * 0.008 - 0.004));
   }
 
   private onLeftClick(){
