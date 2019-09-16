@@ -1,6 +1,7 @@
 import Ball from "./Ball"
 import Pointer from "./Pointer"
 import GameState from "./GameState"
+import SoundManager from "./SoundManager"
 
 
 class ArrowLogic{
@@ -8,8 +9,10 @@ class ArrowLogic{
   balls: Ball[];
   pointer: Pointer;
   gameState: GameState;
+  soundManager: SoundManager;
   hp: number;
   initialHp: number;
+  frame: number;
 
   constructor(){
     console.log("instantiated logic!");
@@ -18,8 +21,11 @@ class ArrowLogic{
     this.gameState = GameState.Title;
     this.hp = 50; // TODO: constants化
     this.initialHp = this.hp;
+    this.frame = 0;
+    this.soundManager = new SoundManager();
+    this.loadSounds();
     // サンプル とりあえず5個ランダムにコロコロさせておく
-    for(let i=0; i< 5; ++i){
+    for(let i=0; i< 20; ++i){
       this.createRandomBall();
     }
   }
@@ -33,6 +39,8 @@ class ArrowLogic{
       case GameState.InGame:
         this.checkDamage();
         this.moveBall();
+        this.spawnNewBall();
+        this.frame ++;
         break;
       case GameState.GameOver:
         break;
@@ -78,13 +86,24 @@ class ArrowLogic{
     }
   }
 
+  private spawnNewBall(){
+    if(this.frame % 60 == 0){ // TODO: constants
+      this.soundManager.play("spawn");
+      this.createRandomBall();
+    }
+  }
+
   private createRandomBall(): void{
     // TODO: constants化
-    this.balls.push(new Ball(Math.random(), Math.random(), Math.random() * 0.004 - 0.002, Math.random() * 0.008 - 0.004));
+    this.balls.push(new Ball(Math.random(), 0, Math.random() * 0.004 - 0.002, Math.random() * 0.008 - 0.004));
   }
 
   private onLeftClick(){
     console.log("left clicked!");
+  }
+
+  private loadSounds(){
+    this.soundManager.register("spawn", "/game/arrow/sounds/spawn.wav");
   }
 }
 
