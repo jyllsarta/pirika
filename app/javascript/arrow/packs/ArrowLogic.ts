@@ -40,6 +40,9 @@ class ArrowLogic{
         this.checkDamage();
         this.moveBall();
         this.spawnNewBall();
+        if(this.frame % 60 === 0){
+          this.heal(1);
+        }
         this.frame ++;
         break;
       case GameState.GameOver:
@@ -77,6 +80,7 @@ class ArrowLogic{
       let distance = Math.sqrt((this.pointer.x - ball.x) ** 2 + (this.pointer.y - ball.y) ** 2);
       if(distance < 0.08){ // TODO: 当たり判定サイズの検討とconstants化
         this.hp -= 1;
+        this.soundManager.play("damage");
       }
     }
 
@@ -84,6 +88,21 @@ class ArrowLogic{
       console.log("死んだ");
       this.gameState = GameState.GameOver;
     }
+  }
+
+  private heal(value: number){
+    // すでに全快のときには音を鳴らさない
+    if(this.hp >= this.initialHp){
+      return;
+    }
+
+    this.hp += value;
+    if(this.hp > this.initialHp){
+      this.hp = this.initialHp;
+    }
+    // sound の登録数と依存あるけどまあいいかな...
+    const rand = Math.floor(Math.random() * 5) + 1;
+    this.soundManager.play("heal" + rand);
   }
 
   private spawnNewBall(){
@@ -104,6 +123,12 @@ class ArrowLogic{
 
   private loadSounds(){
     this.soundManager.register("spawn", "/game/arrow/sounds/spawn.wav");
+    this.soundManager.register("damage", "/game/arrow/sounds/damage.wav");
+    this.soundManager.register("heal1", "/game/arrow/sounds/heal1.wav");
+    this.soundManager.register("heal2", "/game/arrow/sounds/heal2.wav");
+    this.soundManager.register("heal3", "/game/arrow/sounds/heal3.wav");
+    this.soundManager.register("heal4", "/game/arrow/sounds/heal4.wav");
+    this.soundManager.register("heal5", "/game/arrow/sounds/heal5.wav");
   }
 }
 
