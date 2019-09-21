@@ -3,7 +3,7 @@ import GameState from "./packs/GameState";
   #app
     h1
       | ふーん
-    .game
+    .game(:class="{remove_cursor: !isTitleScene}")
       .background(@mousemove="updatePointerPosition")
       .balls
         // 関数型コンポーネントにすると明確に軽くなるので x, y は本来子側の computed で展開して計算したかったけど
@@ -107,5 +107,8 @@ import GameState from "./packs/GameState";
       left: 45%;
       top: 45%;
     }
+  }
+  .remove_cursor{
+    cursor: none;
   }
 </style>
