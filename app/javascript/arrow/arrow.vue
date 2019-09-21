@@ -87,6 +87,7 @@ import GameState from "./packs/GameState";
     position: relative;
     top: 0;
     left: 0;
+    overflow: hidden;
     .background{
       position: absolute;
       width: 100%;
