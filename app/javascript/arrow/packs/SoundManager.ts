@@ -19,7 +19,6 @@ class SoundManager{
     this.sounds[soundName].volume = this.volume;
     this.sounds[soundName].play();
   }
-
 }
 
 export default SoundManager;

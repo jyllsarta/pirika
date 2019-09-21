@@ -18,6 +18,7 @@
 <style lang='scss' scoped>
   @import "stylesheets/constants";
   .pointer{
+    pointer-events: none;
     will-change: transform;
     position: absolute;
     background-color: #0d0d0d;

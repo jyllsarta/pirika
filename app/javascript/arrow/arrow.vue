@@ -17,6 +17,7 @@ import GameState from "./packs/GameState";
         :x= "Math.floor(logic.pointer.x * 600)",
         :y= "Math.floor(logic.pointer.y * 600)",
         :hpRate="logic.hpRate()",
+        v-if="!isTitleScene",
       )
       GameStartButton(
         @startGame="startGame",

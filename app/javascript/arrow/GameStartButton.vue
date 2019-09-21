@@ -1,5 +1,5 @@
 <template lang="pug">
-  .game_start_button(@mouseover="$emit('startGame')")
+  .game_start_button(@click="$emit('startGame')")
 </template>
 
 <script lang="ts">
