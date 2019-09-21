@@ -14,6 +14,7 @@
     transform: rotateZ(45deg);
     background-color: #0d0d0d;
     border-radius: $ball-size / 2;
+    transition: 0.2s;
     &:hover{
       transform: scale(1.1);
       opacity: 0.3;
