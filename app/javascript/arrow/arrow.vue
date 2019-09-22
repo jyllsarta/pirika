@@ -14,6 +14,8 @@
         :x= "Math.floor(logic.pointer.x * 600)",
         :y= "Math.floor(logic.pointer.y * 600)",
         :hpRate="logic.hpRate()",
+        :hp="logic.hp",
+        :initialHp="logic.initialHp",
         v-if="!isTitleScene",
       )
       GameStartButton(
