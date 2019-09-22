@@ -1,7 +1,7 @@
-<template functional lang="pug">
+<template lang="pug">
   // この文字列結合でtranslateするのもうちょいスマートにやりたいなあ
   .ball(
-    :style="{ transform: 'translate(' + props.x + 'px,' + props.y + 'px)' }"
+    :style="{ transform: 'translate(' + x + 'px,' + y + 'px)' }"
   )
 </template>
 

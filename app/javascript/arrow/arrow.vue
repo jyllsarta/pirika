@@ -1,13 +1,10 @@
-import GameState from "./packs/GameState";
 <template lang="pug">
   #app
     h1
       | ふーん
     .game(:class="{remove_cursor: !isTitleScene}")
       .background(@mousemove="updatePointerPosition")
-      .balls
-        // 関数型コンポーネントにすると明確に軽くなるので x, y は本来子側の computed で展開して計算したかったけど
-        // こちら側で渡すタイミングの時点で計算を完了させておく
+      transition-group(class="balls" name="delay")
         Ball(
           v-for="ball in logic.balls" v-bind:key="ball.id",
           :x="Math.floor(ball.x * 600)",
@@ -110,5 +107,20 @@ import GameState from "./packs/GameState";
   }
   .remove_cursor{
     cursor: none;
+  }
+  .delay-enter-active {
+    animation: delay 1.5s;
+  }
+  .delay-leave-active {
+    animation: delay 1.5s reverse;
+  }
+  @keyframes delay {
+    0% {
+      background-color: #87c3e1;
+      opacity: 0.5;
+    }
+    100% {
+      opacity: 1;
+    }
   }
 </style>
