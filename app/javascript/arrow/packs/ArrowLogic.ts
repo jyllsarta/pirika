@@ -78,11 +78,11 @@ class ArrowLogic{
     // パフォーマンスによる問題が出たら枝刈りを頑張る
     for(let ball of this.balls){
       let distance = Math.sqrt((this.pointer.x - ball.x) ** 2 + (this.pointer.y - ball.y) ** 2);
-      if(distance < 0.08){ // TODO: 当たり判定サイズの検討とconstants化
+      if(distance < 0.08 * (this.hpRate() + 0.5 )){ // TODO: 当たり判定サイズの検討とconstants化
         this.hp -= 1;
         this.soundManager.play("damage");
       }
-      if(distance < 0.04){ // TODO: 当たり判定サイズの検討とconstants化
+      if(distance < 0.04* (this.hpRate() + 0.5 )){ // TODO: 当たり判定サイズの検討とconstants化
         this.hp -= 75;
         this.soundManager.play("damage2");
       }
