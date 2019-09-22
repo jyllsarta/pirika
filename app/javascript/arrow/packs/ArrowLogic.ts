@@ -19,7 +19,7 @@ class ArrowLogic{
     this.balls = [];
     this.pointer = new Pointer(0.0, 0.0);
     this.gameState = GameState.Title;
-    this.hp = 50; // TODO: constants化
+    this.hp = 500; // TODO: constants化
     this.initialHp = this.hp;
     this.frame = 0;
     this.soundManager = new SoundManager();
@@ -40,8 +40,8 @@ class ArrowLogic{
         this.checkDamage();
         this.moveBall();
         this.spawnNewBall();
-        if(this.frame % 60 === 0){
-          this.heal(1);
+        if(this.frame % 10 === 0){
+          this.heal(2);
         }
         this.frame ++;
         break;
@@ -81,6 +81,10 @@ class ArrowLogic{
       if(distance < 0.08){ // TODO: 当たり判定サイズの検討とconstants化
         this.hp -= 1;
         this.soundManager.play("damage");
+      }
+      if(distance < 0.04){ // TODO: 当たり判定サイズの検討とconstants化
+        this.hp -= 75;
+        this.soundManager.play("damage2");
       }
     }
 
@@ -122,13 +126,14 @@ class ArrowLogic{
   }
 
   private loadSounds(){
-    this.soundManager.register("spawn", "/game/arrow/sounds/spawn.wav");
-    this.soundManager.register("damage", "/game/arrow/sounds/damage.wav");
-    this.soundManager.register("heal1", "/game/arrow/sounds/heal1.wav");
-    this.soundManager.register("heal2", "/game/arrow/sounds/heal2.wav");
-    this.soundManager.register("heal3", "/game/arrow/sounds/heal3.wav");
-    this.soundManager.register("heal4", "/game/arrow/sounds/heal4.wav");
-    this.soundManager.register("heal5", "/game/arrow/sounds/heal5.wav");
+    this.soundManager.register("spawn", "/game/arrow/sounds/spawn.wav", 0.04);
+    this.soundManager.register("damage", "/game/arrow/sounds/damage.wav", 0.05);
+    this.soundManager.register("damage2", "/game/arrow/sounds/damage.wav");
+    this.soundManager.register("heal1", "/game/arrow/sounds/heal1.wav",0.1);
+    this.soundManager.register("heal2", "/game/arrow/sounds/heal2.wav",0.1);
+    this.soundManager.register("heal3", "/game/arrow/sounds/heal3.wav",0.1);
+    this.soundManager.register("heal4", "/game/arrow/sounds/heal4.wav",0.1);
+    this.soundManager.register("heal5", "/game/arrow/sounds/heal5.wav",0.1);
   }
 }
 
