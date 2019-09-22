@@ -33,14 +33,14 @@
     pointer-events: none;
     will-change: transform;
     position: absolute;
+    top: -$pointer-size / 2;
+    left: -$pointer-size / 2;
     .player{
       will-change: transform;
       background-color: #0d0d0d;
       width: $pointer-size;
       height: $pointer-size;
       border-radius: $pointer-size / 2;
-      top: -$pointer-size / 2;
-      left: -$pointer-size / 2;
     }
     .hp_area{
       position: absolute;
