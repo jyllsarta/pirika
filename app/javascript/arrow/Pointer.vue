@@ -12,6 +12,14 @@
         | /
       span.initial_hp
         | {{props.initialHp}}
+      span.sep
+        | /
+      span.energy
+        | {{props.energy}}
+      span.sep
+        | /
+      span.charge
+        | {{props.charge}}
 </template>
 
 <script lang="ts">
@@ -23,6 +31,8 @@
       "hpRate",
       "hp",
       "initialHp",
+      "energy",
+      "charge",
     ],
   }
 </script>

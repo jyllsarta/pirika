@@ -12,6 +12,9 @@ class ArrowLogic{
   soundManager: SoundManager;
   hp: number;
   initialHp: number;
+  energy: number;
+  charge: number;
+  isCharging: boolean;
   frame: number;
 
   constructor(){
@@ -23,6 +26,9 @@ class ArrowLogic{
     this.initialHp = this.hp;
     this.frame = 0;
     this.soundManager = new SoundManager();
+    this.energy = 0;
+    this.charge = 0;
+    this.isCharging = false;
     this.loadSounds();
     // サンプル とりあえず5個ランダムにコロコロさせておく
     for(let i=0; i< 20; ++i){
@@ -40,8 +46,12 @@ class ArrowLogic{
         this.checkDamage();
         this.moveBall();
         this.spawnNewBall();
+        if(this.isCharging){
+          this.charge += 1;
+        }
         if(this.frame % 10 === 0){
           this.heal(2);
+          this.energy += 2;
         }
         this.frame ++;
         break;
@@ -63,6 +73,33 @@ class ArrowLogic{
     return this.hp / this.initialHp;
   }
 
+  public resetCharge(){
+    this.charge = 0;
+    this.isCharging = false;
+  }
+
+  public onMouseDown(){
+    // 必殺ゲージ溜め
+    this.resetCharge();
+    this.isCharging = true;
+  }
+
+  public onMouseUp(){
+    if(this.isChargeFull() && this.hasSufficientEnergy()){
+      this.removeBallsCircle(this.pointer.x, this.pointer.y, 0.15);
+      this.energy = 0;
+    }
+    this.isCharging = false;
+  }
+
+  public isChargeFull(){
+    return this.charge > 60;
+  }
+
+  public hasSufficientEnergy(){
+    return this.energy > 100;
+  }
+
   // -- private --
 
   private moveBall(): void{
@@ -77,7 +114,7 @@ class ArrowLogic{
     // 全部の弾と当たり判定チェックするのは普通にO(n)なんで遅い
     // パフォーマンスによる問題が出たら枝刈りを頑張る
     for(let ball of this.balls){
-      let distance = Math.sqrt((this.pointer.x - ball.x) ** 2 + (this.pointer.y - ball.y) ** 2);
+      let distance = this.distance(this.pointer.x, this.pointer.y, ball.x, ball.y);
       if(distance < 0.08 * (this.hpRate() + 0.5 )){ // TODO: 当たり判定サイズの検討とconstants化
         this.hp -= 1;
         this.soundManager.play("damage");
@@ -92,6 +129,10 @@ class ArrowLogic{
       console.log("死んだ");
       this.gameState = GameState.GameOver;
     }
+  }
+
+  private distance(x1:number, y1:number ,x2:number ,y2:number){
+    return Math.sqrt((x1 - x2) ** 2 + (y1 - y2) ** 2);
   }
 
   private heal(value: number){
@@ -121,8 +162,15 @@ class ArrowLogic{
     this.balls.push(new Ball(Math.random(), 0, Math.random() * 0.004 - 0.002, Math.random() * 0.008 - 0.004));
   }
 
-  private onLeftClick(){
-    console.log("left clicked!");
+  private removeBallsCircle(x: number,y: number,r: number){
+    let not_removed = [];
+    for(let ball of this.balls){
+      let distance = this.distance(x, y, ball.x, ball.y);
+      if(distance > r){ // TODO: 当たり判定サイズの検討とconstants化
+        not_removed.push(ball);
+      }
+    }
+    this.balls = not_removed;
   }
 
   private loadSounds(){

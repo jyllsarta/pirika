@@ -16,6 +16,8 @@
         :hpRate="logic.hpRate()",
         :hp="logic.hp",
         :initialHp="logic.initialHp",
+        :energy="logic.energy",
+        :charge="logic.charge",
         v-if="!isTitleScene",
       )
       GameStartButton(
@@ -41,6 +43,7 @@
       return {
         logic: null,
         latestMouseMoveEvent: null,
+        prevFrameMouseMoveEvent: null,
       };
     },
     created(){
@@ -50,13 +53,17 @@
     },
     methods: {
       registerEvents(){
+        window.onmousedown= this.onMouseDown;
+        window.onmouseup= this.onMouseUp;
         this.update();
       },
       update(){
         // TODO: constantsに定義を逃がす
         let e = this.latestMouseMoveEvent;
-        if(e !== null){
+        if(e !== this.prevFrameMouseMoveEvent){
           this.logic.setPointerPosition(e.offsetX / 600.0, e.offsetY / 600.0);
+          this.logic.resetCharge(); // 動いたらチャージはリセットされる ... はロジックに書くべきかなあ
+          this.prevFrameMouseMoveEvent = e;
         }
         this.logic.update();
         requestAnimationFrame(() => {this.update();});
@@ -66,6 +73,12 @@
       },
       startGame(){
         this.logic.startGame();
+      },
+      onMouseDown(){
+          this.logic.onMouseDown();
+      },
+      onMouseUp(){
+          this.logic.onMouseUp();
       },
     },
     computed: {
