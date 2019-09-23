@@ -2,7 +2,7 @@
   #app
     h1
       | ふーん
-    .game(:class="{remove_cursor: !isTitleScene}")
+    .game(:class="{remove_cursor: isInGameScene}")
       .background(@mousemove="updatePointerPosition")
       transition-group(class="balls" name="delay")
         Ball(
@@ -18,7 +18,7 @@
         :initialHp="logic.initialHp",
         :energy="logic.energy",
         :charge="logic.charge",
-        v-if="!isTitleScene",
+        v-if="isInGameScene",
       )
       GameStartButton(
         @startGame="startGame",
@@ -75,16 +75,19 @@
         this.logic.startGame();
       },
       onMouseDown(){
-          this.logic.onMouseDown();
+        this.logic.onMouseDown();
       },
       onMouseUp(){
-          this.logic.onMouseUp();
+        this.logic.onMouseUp();
       },
     },
     computed: {
       isTitleScene(){
         return this.logic.gameState === GameState.Title;
-      }
+      },
+      isInGameScene(){
+        return this.logic.gameState === GameState.InGame;
+      },
     }
   }
 </script>
