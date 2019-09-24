@@ -130,7 +130,7 @@
     animation: delay 1.5s;
   }
   .delay-leave-active {
-    animation: delay 1.5s reverse;
+    animation: delay 0.6s reverse;
   }
   @keyframes delay {
     0% {
