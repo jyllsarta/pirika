@@ -7,12 +7,12 @@
       transition-group(class="balls" name="delay")
         Ball(
           v-for="ball in logic.balls" v-bind:key="ball.id",
-          :x="Math.floor(ball.x * 600)",
-          :y="Math.floor(ball.y * 600)",
+          :x="Math.floor(ball.x * gameWindowWidth)",
+          :y="Math.floor(ball.y * gameWindowHeight)",
         )
       Pointer(
-        :x= "Math.floor(logic.pointer.x * 600)",
-        :y= "Math.floor(logic.pointer.y * 600)",
+        :x= "Math.floor(logic.pointer.x * gameWindowWidth)",
+        :y= "Math.floor(logic.pointer.y * gameWindowHeight)",
         :hpRate="logic.hpRate()",
         :hp="logic.hp",
         :initialHp="logic.initialHp",
@@ -32,6 +32,7 @@
     import Ball from "./Ball.vue";
     import Pointer from "./Pointer.vue";
     import GameStartButton from "./GameStartButton.vue";
+    import Constants from "./packs/Constants"
 
     export default {
     components: {
@@ -58,10 +59,9 @@
         this.update();
       },
       update(){
-        // TODO: constantsに定義を逃がす
         let e = this.latestMouseMoveEvent;
         if(e !== this.prevFrameMouseMoveEvent){
-          this.logic.setPointerPosition(e.offsetX / 600.0, e.offsetY / 600.0);
+          this.logic.setPointerPosition(e.offsetX / Constants.gameWindowPixelSizeX, e.offsetY / Constants.gameWindowPixelSizeY);
           this.logic.resetCharge(); // 動いたらチャージはリセットされる ... はロジックに書くべきかなあ
           this.prevFrameMouseMoveEvent = e;
         }
@@ -87,6 +87,12 @@
       },
       isInGameScene(){
         return this.logic.gameState === GameState.InGame;
+      },
+      gameWindowWidth(){
+        return Constants.gameWindowPixelSizeX;
+      },
+      gameWindowHeight(){
+        return Constants.gameWindowPixelSizeY;
       },
     }
   }

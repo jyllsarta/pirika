@@ -2,6 +2,7 @@ import Ball from "./Ball"
 import Pointer from "./Pointer"
 import GameState from "./GameState"
 import SoundManager from "./SoundManager"
+import Constants from "./Constants"
 
 
 class ArrowLogic{
@@ -22,16 +23,16 @@ class ArrowLogic{
     this.balls = [];
     this.pointer = new Pointer(0.0, 0.0);
     this.gameState = GameState.Title;
-    this.hp = 500; // TODO: constants化
-    this.initialHp = this.hp;
+    this.hp = Constants.initialHp;
+    this.initialHp = Constants.initialHp;
     this.frame = 0;
     this.soundManager = new SoundManager();
     this.energy = 0;
     this.charge = 0;
     this.isCharging = false;
     this.loadSounds();
-    // サンプル とりあえず5個ランダムにコロコロさせておく
-    for(let i=0; i< 20; ++i){
+
+    for(let i=0; i< Constants.initialBallCount; ++i){
       this.createRandomBall();
     }
   }
@@ -47,11 +48,11 @@ class ArrowLogic{
         this.moveBall();
         this.spawnNewBall();
         if(this.isCharging){
-          this.charge += 1;
+          this.charge += Constants.chargeAmountPerEvent;
         }
-        if(this.frame % 10 === 0){
-          this.heal(2);
-          this.energy += 2;
+        if(this.frame % Constants.healIntervalFrameCount === 0){
+          this.heal(Constants.healAmountPerEvent);
+          this.energy += Constants.addEnergyAmountPerEvent;
         }
         this.frame ++;
         break;
@@ -65,7 +66,6 @@ class ArrowLogic{
   }
 
   public startGame(): void{
-    console.log("changed gamestate!");
     this.gameState = GameState.InGame;
   }
 
@@ -86,18 +86,18 @@ class ArrowLogic{
 
   public onMouseUp(){
     if(this.isChargeFull() && this.hasSufficientEnergy()){
-      this.removeBallsCircle(this.pointer.x, this.pointer.y, 0.15);
+      this.discharge(this.pointer.x, this.pointer.y, Constants.dischargeRadius);
       this.energy = 0;
     }
     this.isCharging = false;
   }
 
   public isChargeFull(){
-    return this.charge > 60;
+    return this.charge > Constants.chargeMax;
   }
 
   public hasSufficientEnergy(){
-    return this.energy > 100;
+    return this.energy > Constants.energyMax;
   }
 
   // -- private --
@@ -113,14 +113,15 @@ class ArrowLogic{
   private checkDamage(): void{
     // 全部の弾と当たり判定チェックするのは普通にO(n)なんで遅い
     // パフォーマンスによる問題が出たら枝刈りを頑張る
+    // 時刻ベースにしたらここもダメージ量をTimeDeltaに比例させること
     for(let ball of this.balls){
       let distance = this.distance(this.pointer.x, this.pointer.y, ball.x, ball.y);
-      if(distance < 0.08 * (this.hpRate() + 0.5 )){ // TODO: 当たり判定サイズの検討とconstants化
-        this.hp -= 1;
+      if(distance < Constants.shaveDamageRadius * (this.hpRate() * Constants.ratioOfHpRateToHitBox + Constants.minimumHitBoxSizeRate)){
+        this.hp -= Constants.shaveDamageRate;
         this.soundManager.play("damage");
       }
-      if(distance < 0.04* (this.hpRate() + 0.5 )){ // TODO: 当たり判定サイズの検討とconstants化
-        this.hp -= 75;
+      if(distance < Constants.hitDamageRadius * (this.hpRate() * Constants.ratioOfHpRateToHitBox + Constants.minimumHitBoxSizeRate)){
+        this.hp -= Constants.hitDamageRate;
         this.soundManager.play("damage2");
       }
     }
@@ -151,22 +152,24 @@ class ArrowLogic{
   }
 
   private spawnNewBall(){
-    if(this.frame % 60 == 0){ // TODO: constants
+    // TODO: timedeltaベースにする
+    if(this.frame % Constants.spawnBallIntervalFrameCount == 0){
       this.soundManager.play("spawn");
       this.createRandomBall();
     }
   }
 
   private createRandomBall(): void{
-    // TODO: constants化
-    this.balls.push(new Ball(Math.random(), 0, Math.random() * 0.004 - 0.002, Math.random() * 0.008 - 0.004));
+    const vx = Math.random() * Constants.maxBallVelocityX - Constants.maxBallVelocityX / 2;
+    const vy = Math.random() * Constants.maxBallVelocityY - Constants.maxBallVelocityY / 2;
+    this.balls.push(new Ball(Math.random(), 0, vx, vy));
   }
 
-  private removeBallsCircle(x: number,y: number,r: number){
+  private discharge(x: number,y: number,r: number){
     let not_removed = [];
     for(let ball of this.balls){
       let distance = this.distance(x, y, ball.x, ball.y);
-      if(distance > r){ // TODO: 当たり判定サイズの検討とconstants化
+      if(distance > r){
         not_removed.push(ball);
       }
     }
