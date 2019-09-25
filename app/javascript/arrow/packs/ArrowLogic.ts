@@ -49,10 +49,18 @@ class ArrowLogic{
         this.spawnNewBall();
         if(this.isCharging){
           this.charge += Constants.chargeAmountPerEvent;
+          // いま energy最大になった場合
+          if(Constants.chargeMax <= this.charge && this.charge < Constants.chargeMax + Constants.chargeAmountPerEvent){
+            this.soundManager.play("charge_complete");
+          }
         }
         if(this.frame % Constants.healIntervalFrameCount === 0){
           this.heal(Constants.healAmountPerEvent);
           this.energy += Constants.addEnergyAmountPerEvent;
+          // いま energy最大になった場合
+          if(Constants.energyMax <= this.energy && this.energy < Constants.energyMax + Constants.addEnergyAmountPerEvent){
+            this.soundManager.play("discharge_available");
+          }
         }
         this.frame ++;
         break;
@@ -66,6 +74,7 @@ class ArrowLogic{
   }
 
   public startGame(): void{
+    this.soundManager.play("start");
     this.gameState = GameState.InGame;
   }
 
@@ -81,17 +90,26 @@ class ArrowLogic{
   public onMouseDown(){
     // 必殺ゲージ溜め
     this.resetCharge();
-    this.isCharging = true;
+    if(this.hasSufficientEnergy()){
+      this.isCharging = true;
+    }
   }
 
   public onMouseUp(){
     if(this.isChargeFull() && this.hasSufficientEnergy()){
       this.discharge(this.pointer.x, this.pointer.y, Constants.dischargeRadius);
       this.energy = 0;
+      this.soundManager.play("discharge");
     }
     this.isCharging = false;
   }
 
+  public onMoved(){
+    if(this.hasSufficientEnergy() && this.charge > 0){
+      this.soundManager.play("phew");
+    }
+    this.resetCharge();
+  }
   public isChargeFull(){
     return this.charge > Constants.chargeMax;
   }
@@ -128,6 +146,7 @@ class ArrowLogic{
 
     if(this.hp <= 0){
       console.log("死んだ");
+      this.soundManager.play("dead");
       this.gameState = GameState.GameOver;
     }
   }
@@ -185,6 +204,14 @@ class ArrowLogic{
     this.soundManager.register("heal3", "/game/arrow/sounds/heal3.wav",0.1);
     this.soundManager.register("heal4", "/game/arrow/sounds/heal4.wav",0.1);
     this.soundManager.register("heal5", "/game/arrow/sounds/heal5.wav",0.1);
+    this.soundManager.register("reset", "/game/arrow/sounds/reset.wav");
+    this.soundManager.register("start", "/game/arrow/sounds/start.wav");
+    this.soundManager.register("dead", "/game/arrow/sounds/dead.wav");
+    this.soundManager.register("phew", "/game/arrow/sounds/phew.wav", 0.3);
+    this.soundManager.register("discharge", "/game/arrow/sounds/discharge.wav");
+    this.soundManager.register("discharge_available", "/game/arrow/sounds/discharge_available.wav");
+    this.soundManager.register("charge_start", "/game/arrow/sounds/charge_start.wav");
+    this.soundManager.register("charge_complete", "/game/arrow/sounds/charge_complete.wav");
   }
 }
 

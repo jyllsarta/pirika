@@ -62,7 +62,7 @@
         let e = this.latestMouseMoveEvent;
         if(e !== this.prevFrameMouseMoveEvent){
           this.logic.setPointerPosition(e.offsetX / Constants.gameWindowPixelSizeX, e.offsetY / Constants.gameWindowPixelSizeY);
-          this.logic.resetCharge(); // 動いたらチャージはリセットされる ... はロジックに書くべきかなあ
+          this.logic.onMoved();
           this.prevFrameMouseMoveEvent = e;
         }
         this.logic.update();
