@@ -54,6 +54,8 @@
     }
     .hp_area{
       position: absolute;
+      font-family: 'Cute Font', cursive;
+      font-size: 20px;
       top: -$pointer-size / 2;
       left: $pointer-size / 2;
     }
