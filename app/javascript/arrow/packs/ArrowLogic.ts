@@ -82,6 +82,11 @@ class ArrowLogic{
     return this.hp / this.initialHp;
   }
 
+  public chargeRate(): number{
+    console.log(this.charge / Constants.chargeMax);
+    return Math.min(this.charge / Constants.chargeMax, 1);
+  }
+
   public resetCharge(){
     this.charge = 0;
     this.isCharging = false;

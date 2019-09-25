@@ -21,6 +21,8 @@
         :initialHp="logic.initialHp",
         :energy="logic.energy",
         :charge="logic.charge",
+        :isCharging="logic.isCharging",
+        :chargeRate="logic.chargeRate()",
         v-if="isInGameScene",
       )
       GameStartButton(

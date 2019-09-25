@@ -5,6 +5,13 @@
     .player(
       :style="{ transform: 'scale('+ props.hpRate +')' }"
     )
+    .discharge_circle.effective(
+      v-if="props.isCharging"
+    )
+    .discharge_circle.current(
+      v-if="props.isCharging",
+      :style="{ transform: 'scale('+ props.chargeRate +')' }"
+    )
     .hp_area
       span.max_hp
         | {{props.hp}}
@@ -33,6 +40,8 @@
       "initialHp",
       "energy",
       "charge",
+      "isCharging",
+      "chargeRate",
     ],
   }
 </script>
@@ -58,6 +67,22 @@
       font-size: 20px;
       top: -20px;
       left: $pointer-size / 2;
+    }
+    .discharge_circle{
+      border-radius: 10000px;
+      position: absolute;
+      top: -75 + $pointer-size / 2;
+      left: -75 + $pointer-size / 2;
+      width: 150px;
+      height: 150px; // TODO: サイズを計算して出す
+    }
+    .effective{
+      z-index: 1;
+      border: 1px solid #00bfff; // TODO: 仮
+    }
+    .current{
+      z-index: 2;
+      border: 1px solid #ff7332; // TODO: 仮
     }
   }
 </style>
