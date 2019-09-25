@@ -56,7 +56,7 @@
       position: absolute;
       font-family: 'Cute Font', cursive;
       font-size: 20px;
-      top: -$pointer-size / 2;
+      top: -20px;
       left: $pointer-size / 2;
     }
   }
