@@ -2,7 +2,10 @@
   #app
     h1
       | ふーん
-    .game(:class="{remove_cursor: isInGameScene}")
+    .game(
+      :class="{remove_cursor: isInGameScene}"
+      @click.right.prevent
+      )
       .background(@mousemove="updatePointerPosition")
       transition-group(class="balls" name="delay")
         Ball(
@@ -102,6 +105,7 @@
   @import "stylesheets/constants";
 
   .game{
+    user-select: none;
     width: $field-width;
     height: $field-height;
     margin: 50px auto 50px auto;
