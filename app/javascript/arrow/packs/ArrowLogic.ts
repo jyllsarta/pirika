@@ -70,7 +70,6 @@ class ArrowLogic{
   }
 
   public chargeRate(): number{
-    console.log(this.charge / Constants.chargeMax);
     return Math.min(this.charge / Constants.chargeMax, 1);
   }
 
