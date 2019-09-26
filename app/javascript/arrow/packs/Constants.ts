@@ -1,13 +1,12 @@
 const Constants = {
   initialHp: 500,
 
-  chargeMax: 60,
+  chargeMax: 0.5,
   energyMax: 100,
 
-  healIntervalFrameCount: 10,
-  addEnergyIntervalFrameCount: 10,
+  healIntervalTimeSeconds: 0.17,
   healAmountPerEvent: 2,
-  addEnergyAmountPerEvent: 2,
+  addEnergyAmountPerEvent: 3,
   chargeAmountPerEvent: 1,
 
   // 必殺技の有効半径
@@ -23,15 +22,15 @@ const Constants = {
   // ヒット判定のサイズ
   hitDamageRadius: 0.04,
 
-  // かすりダメージ量
-  shaveDamageRate: 1,
-  // ヒットダメージ量
-  hitDamageRate: 75,
+  // 1秒あたりのかすりダメージ量
+  shaveDamageRate: 60,
+  // 1秒あたりのヒットダメージ量
+  hitDamageRate: 4500,
 
   initialBallCount: 20,
-  spawnBallIntervalFrameCount: 60,
-  maxBallVelocityX: 0.004,
-  maxBallVelocityY: 0.008,
+  spawnBallIntervalTimeSeconds: 1,
+  maxBallVelocityX: 0.24,
+  maxBallVelocityY: 0.48,
 
   // 非常に残念ながら constants.scss と相互依存してしまっているところ
   gameWindowPixelSizeX : 600.0,

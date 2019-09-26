@@ -16,7 +16,10 @@ class ArrowLogic{
   energy: number;
   charge: number;
   isCharging: boolean;
-  frame: number;
+
+  // タイマー類
+  healEventTimer: number;
+  spawnNewBallTimer: number;
 
   constructor(){
     console.log("instantiated logic!");
@@ -25,31 +28,14 @@ class ArrowLogic{
     this.reset();
   }
 
-  public update(): void{
+  public update(timeDelta: number): void{
     switch (this.gameState) {
       case GameState.Title:
-
         break;
       case GameState.InGame:
-        this.checkDamage();
-        this.moveBall();
-        this.spawnNewBall();
-        if(this.isCharging){
-          this.charge += Constants.chargeAmountPerEvent;
-          // いま energy最大になった場合
-          if(Constants.chargeMax <= this.charge && this.charge < Constants.chargeMax + Constants.chargeAmountPerEvent){
-            this.soundManager.play("charge_complete");
-          }
-        }
-        if(this.frame % Constants.healIntervalFrameCount === 0){
-          this.heal(Constants.healAmountPerEvent);
-          this.energy += Constants.addEnergyAmountPerEvent;
-          // いま energy最大になった場合
-          if(Constants.energyMax <= this.energy && this.energy < Constants.energyMax + Constants.addEnergyAmountPerEvent){
-            this.soundManager.play("discharge_available");
-          }
-        }
-        this.frame ++;
+        this.checkDamage(timeDelta);
+        this.moveBall(timeDelta);
+        this.proceedTimerAndFireEvent(timeDelta);
         break;
       case GameState.GameOver:
         break;
@@ -116,26 +102,65 @@ class ArrowLogic{
 
   // -- private --
 
-  private moveBall(): void{
+  // このフレームにちょうどタイマーが発動したかどうか
+  // = 前のフレームではthreshold以下、現在のフレームではthreshold以上である
+  private isThisFrameTimerReached(timeDelta: number, timePiled: number, threshold: number){
+    return timePiled - timeDelta <= threshold && threshold < timePiled;
+  }
+
+  // タイマーによって発動するイベントの処理
+  // なーんかちょっとあまりにも愚直なので、いつか registerTimerEvent(callback, everyXSeconds) みたいなインターフェースで登録できるようにしてみたいな
+  private proceedTimerAndFireEvent(timeDelta: number){
+
+    if(this.isCharging){
+      this.charge += timeDelta;
+    }
+    if(this.isThisFrameTimerReached(timeDelta, this.charge, Constants.chargeMax)){
+      this.soundManager.play("charge_complete");
+    }
+
+    this.spawnNewBallTimer += timeDelta;
+
+    if(this.isThisFrameTimerReached(timeDelta, this.spawnNewBallTimer, Constants.spawnBallIntervalTimeSeconds)){
+      this.spawnNewBallTimer -= Constants.spawnBallIntervalTimeSeconds;
+      this.soundManager.play("spawn");
+      this.createRandomBall();
+    }
+
+    this.healEventTimer += timeDelta;
+
+    if(this.isThisFrameTimerReached(timeDelta, this.healEventTimer, Constants.healIntervalTimeSeconds)){
+      this.healEventTimer -= Constants.healIntervalTimeSeconds;
+      this.heal(Constants.healAmountPerEvent);
+      const energyRecovered = Constants.addEnergyAmountPerEvent * this.hpRate();
+      this.energy += energyRecovered;
+      // いま energy最大になった場合 音を鳴らす
+      if(this.isThisFrameTimerReached(energyRecovered, this.energy, Constants.energyMax)){
+        this.soundManager.play("discharge_available");
+      }
+    }
+  }
+
+  private moveBall(timeDelta: number): void{
     for(let ball of this.balls){
-      ball.x += ball.vx;
-      ball.y += ball.vy;
+      ball.x += ball.vx * timeDelta;
+      ball.y += ball.vy * timeDelta;
       ball.reflect();
     }
   }
 
-  private checkDamage(): void{
+  private checkDamage(timeDelta: number): void{
     // 全部の弾と当たり判定チェックするのは普通にO(n)なんで遅い
     // パフォーマンスによる問題が出たら枝刈りを頑張る
     // 時刻ベースにしたらここもダメージ量をTimeDeltaに比例させること
     for(let ball of this.balls){
       let distance = this.distance(this.pointer.x, this.pointer.y, ball.x, ball.y);
       if(distance < Constants.shaveDamageRadius * (this.hpRate() * Constants.ratioOfHpRateToHitBox + Constants.minimumHitBoxSizeRate)){
-        this.hp -= Constants.shaveDamageRate;
+        this.hp -= Constants.shaveDamageRate * timeDelta;
         this.soundManager.play("damage");
       }
       if(distance < Constants.hitDamageRadius * (this.hpRate() * Constants.ratioOfHpRateToHitBox + Constants.minimumHitBoxSizeRate)){
-        this.hp -= Constants.hitDamageRate;
+        this.hp -= Constants.hitDamageRate  * timeDelta;
         this.soundManager.play("damage2");
       }
     }
@@ -166,14 +191,6 @@ class ArrowLogic{
     this.soundManager.play("heal" + rand);
   }
 
-  private spawnNewBall(){
-    // TODO: timedeltaベースにする
-    if(this.frame % Constants.spawnBallIntervalFrameCount == 0){
-      this.soundManager.play("spawn");
-      this.createRandomBall();
-    }
-  }
-
   private createRandomBall(): void{
     const vx = Math.random() * Constants.maxBallVelocityX - Constants.maxBallVelocityX / 2;
     const vy = Math.random() * Constants.maxBallVelocityY - Constants.maxBallVelocityY / 2;
@@ -197,10 +214,11 @@ class ArrowLogic{
     this.gameState = GameState.Title;
     this.hp = Constants.initialHp;
     this.initialHp = Constants.initialHp;
-    this.frame = 0;
     this.energy = 0;
     this.charge = 0;
     this.isCharging = false;
+    this.spawnNewBallTimer = 0;
+    this.healEventTimer = 0;
 
     for(let i=0; i< Constants.initialBallCount; ++i){
       this.createRandomBall();

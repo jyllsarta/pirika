@@ -17,10 +17,10 @@
         :x= "Math.floor(logic.pointer.x * gameWindowWidth)",
         :y= "Math.floor(logic.pointer.y * gameWindowHeight)",
         :hpRate="logic.hpRate()",
-        :hp="logic.hp",
+        :hp="Math.floor(logic.hp)",
         :initialHp="logic.initialHp",
-        :energy="logic.energy",
-        :charge="logic.charge",
+        :energy="Math.floor(logic.energy)",
+        :charge="Math.floor(logic.charge * 100)",
         :isCharging="logic.isCharging",
         :chargeRate="logic.chargeRate()",
         v-if="isInGameScene",
@@ -43,6 +43,7 @@
     import GameStartButton from "./GameStartButton.vue";
     import ResetButton from "./ResetButton.vue";
     import Constants from "./packs/Constants"
+    import Timer from "./packs/Timer"
 
     export default {
     components: {
@@ -56,11 +57,13 @@
         logic: null,
         latestMouseMoveEvent: null,
         prevFrameMouseMoveEvent: null,
+        timer: null,
       };
     },
     created(){
       console.log("loaded arrow!");
       this.logic = new ArrowLogic();
+      this.timer = new Timer();
       this.registerEvents();
     },
     methods: {
@@ -76,7 +79,11 @@
           this.logic.onMoved();
           this.prevFrameMouseMoveEvent = e;
         }
-        this.logic.update();
+
+        const timeDelta = this.timer.timeDelta();
+        this.timer.commit();
+
+        this.logic.update(timeDelta);
         requestAnimationFrame(() => {this.update();});
       },
       updatePointerPosition(e: MouseEvent){
@@ -103,7 +110,8 @@
         return this.logic.gameState === GameState.InGame;
       },
       isGameOverScene(){
-        return this.logic.gameState === GameState.GameOver      },
+        return this.logic.gameState === GameState.GameOver
+      },
       gameWindowWidth(){
         return Constants.gameWindowPixelSizeX;
       },
