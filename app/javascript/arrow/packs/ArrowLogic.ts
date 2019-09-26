@@ -20,24 +20,11 @@ class ArrowLogic{
 
   constructor(){
     console.log("instantiated logic!");
-    this.balls = [];
-    this.pointer = new Pointer(0.0, 0.0);
-    this.gameState = GameState.Title;
-    this.hp = Constants.initialHp;
-    this.initialHp = Constants.initialHp;
-    this.frame = 0;
     this.soundManager = new SoundManager();
-    this.energy = 0;
-    this.charge = 0;
-    this.isCharging = false;
     this.loadSounds();
-
-    for(let i=0; i< Constants.initialBallCount; ++i){
-      this.createRandomBall();
-    }
+    this.reset();
   }
 
-  // update だけは受信する回数が他と比べて圧倒的に多いはずなので、ログに載る sendMessage から実行しない
   public update(): void{
     switch (this.gameState) {
       case GameState.Title:
@@ -123,6 +110,11 @@ class ArrowLogic{
     return this.energy > Constants.energyMax;
   }
 
+  public onClickResetButton(){
+    this.soundManager.play("reset");
+    this.reset();
+  }
+
   // -- private --
 
   private moveBall(): void{
@@ -198,6 +190,22 @@ class ArrowLogic{
       }
     }
     this.balls = not_removed;
+  }
+
+  private reset(){
+    this.balls = [];
+    this.pointer = new Pointer(0.0, 0.0);
+    this.gameState = GameState.Title;
+    this.hp = Constants.initialHp;
+    this.initialHp = Constants.initialHp;
+    this.frame = 0;
+    this.energy = 0;
+    this.charge = 0;
+    this.isCharging = false;
+
+    for(let i=0; i< Constants.initialBallCount; ++i){
+      this.createRandomBall();
+    }
   }
 
   private loadSounds(){

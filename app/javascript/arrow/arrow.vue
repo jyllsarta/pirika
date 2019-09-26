@@ -29,6 +29,10 @@
         @startGame="startGame",
         v-if="isTitleScene"
       )
+      ResetButton(
+        @resetGame="resetGame",
+        v-if="isGameOverScene"
+      )
 </template>
 
 <script lang="ts">
@@ -37,6 +41,7 @@
     import Ball from "./Ball.vue";
     import Pointer from "./Pointer.vue";
     import GameStartButton from "./GameStartButton.vue";
+    import ResetButton from "./ResetButton.vue";
     import Constants from "./packs/Constants"
 
     export default {
@@ -44,6 +49,7 @@
       Ball,
       Pointer,
       GameStartButton,
+      ResetButton,
     },
     data(){
       return {
@@ -79,6 +85,9 @@
       startGame(){
         this.logic.startGame();
       },
+      resetGame(){
+        this.logic.onClickResetButton();
+      },
       onMouseDown(){
         this.logic.onMouseDown();
       },
@@ -93,6 +102,8 @@
       isInGameScene(){
         return this.logic.gameState === GameState.InGame;
       },
+      isGameOverScene(){
+        return this.logic.gameState === GameState.GameOver      },
       gameWindowWidth(){
         return Constants.gameWindowPixelSizeX;
       },
