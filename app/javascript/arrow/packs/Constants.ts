@@ -1,13 +1,13 @@
 const Constants = {
   initialHp: 500,
 
+  // 最大チャージに必要な秒数
   chargeMax: 0.5,
   energyMax: 100,
 
   healIntervalTimeSeconds: 0.17,
   healAmountPerEvent: 2,
   addEnergyAmountPerEvent: 3,
-  chargeAmountPerEvent: 1,
 
   // 必殺技の有効半径
   dischargeRadius: 0.15,
