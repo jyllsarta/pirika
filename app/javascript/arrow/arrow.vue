@@ -161,6 +161,7 @@
       top: 45%;
     }
     .title, .game_over, .score{
+      pointer-events: none;
       z-index: 10;
       position: absolute;
       top: 20%;
