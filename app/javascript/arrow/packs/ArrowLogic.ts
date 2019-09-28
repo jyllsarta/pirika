@@ -16,6 +16,7 @@ class ArrowLogic{
   energy: number;
   charge: number;
   isCharging: boolean;
+  score: number;
 
   // タイマー類
   healEventTimer: number;
@@ -125,6 +126,7 @@ class ArrowLogic{
       this.spawnNewBallTimer -= Constants.spawnBallIntervalTimeSeconds;
       this.soundManager.play("spawn");
       this.createRandomBall();
+      this.score += 1;
     }
 
     this.healEventTimer += timeDelta;
@@ -205,6 +207,7 @@ class ArrowLogic{
         not_removed.push(ball);
       }
     }
+    this.score += this.balls.length - not_removed.length;
     this.balls = not_removed;
   }
 
@@ -219,6 +222,7 @@ class ArrowLogic{
     this.isCharging = false;
     this.spawnNewBallTimer = 0;
     this.healEventTimer = 0;
+    this.score = 0;
 
     for(let i=0; i< Constants.initialBallCount; ++i){
       this.createRandomBall();

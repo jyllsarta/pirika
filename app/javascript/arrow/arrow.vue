@@ -6,6 +6,12 @@
       :class="{remove_cursor: isInGameScene}"
       @click.right.prevent
       )
+      .title(v-if="isTitleScene")
+        | ICE BREAK
+      .game_over(v-if="isGameOverScene")
+        | GAME OVER
+      .score(v-if="isInGameScene")
+        | {{logic.score}}
       .background(@mousemove="updatePointerPosition")
       transition-group(class="balls" name="delay")
         Ball(
@@ -135,6 +141,7 @@
     left: 0;
     overflow: hidden;
     .background{
+      z-index: 0;
       position: absolute;
       width: 100%;
       height: 100%;
@@ -152,6 +159,16 @@
       height: 10%;
       left: 45%;
       top: 45%;
+    }
+    .title, .game_over, .score{
+      z-index: 10;
+      position: absolute;
+      top: 20%;
+      left: 20%;
+      width: 60%;
+      text-align: center;
+      font-family: 'Cute Font', cursive;
+      font-size: 60px;
     }
   }
   .remove_cursor{
