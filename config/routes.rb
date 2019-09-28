@@ -34,7 +34,9 @@ Rails.application.routes.draw do
   get 'zxcvs/high_score', to: "zxcvs#high_score"
   get 'zxcvs/ranking', to: "zxcvs#ranking"
 
-  resources :arrows, only: [:index]
+  resources :arrows, only: [:index, :create]
+  get 'arrows/high_score', to: "arrows#high_score"
+  get 'arrows/ranking', to: "arrows#ranking"
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

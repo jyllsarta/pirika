@@ -10,7 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_11_182400) do
+ActiveRecord::Schema.define(version: 2019_09_28_231300) do
+
+  create_table "arrow_scores", force: :cascade do |t|
+    t.integer "score", default: 0, null: false
+    t.integer "remove_score", default: 0, null: false
+    t.integer "time_score", default: 0, null: false
+    t.string "username", default: "", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "colortiles", force: :cascade do |t|
     t.datetime "created_at", null: false
