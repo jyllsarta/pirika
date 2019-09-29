@@ -3,6 +3,7 @@ import Pointer from "./Pointer"
 import GameState from "./GameState"
 import SoundManager from "./SoundManager"
 import Constants from "./Constants"
+import OnlineRanking from "./OnlineRanking"
 
 
 class ArrowLogic{
@@ -11,12 +12,14 @@ class ArrowLogic{
   pointer: Pointer;
   gameState: GameState;
   soundManager: SoundManager;
+  onlineRanking: OnlineRanking;
   hp: number;
   initialHp: number;
   energy: number;
   charge: number;
   isCharging: boolean;
   score: number;
+  username: string;
 
   // タイマー類
   healEventTimer: number;
@@ -25,8 +28,10 @@ class ArrowLogic{
   constructor(){
     console.log("instantiated logic!");
     this.soundManager = new SoundManager();
+    this.onlineRanking = new OnlineRanking(location.href, location.href + "/ranking", location.href + "/high_score")
     this.loadSounds();
     this.reset();
+    this.username = "チルノ";
   }
 
   public update(timeDelta: number): void{
@@ -170,6 +175,7 @@ class ArrowLogic{
     if(this.hp <= 0){
       console.log("死んだ");
       this.soundManager.play("dead");
+      this.onlineRanking.submit("hoge taro", this.score, this.score, this.score, () =>{console.log("send success!")});
       this.gameState = GameState.GameOver;
     }
   }
@@ -227,6 +233,9 @@ class ArrowLogic{
     for(let i=0; i< Constants.initialBallCount; ++i){
       this.createRandomBall();
     }
+
+    this.onlineRanking.getHighScore(this.username, ()=>{console.log("get high score done")});
+    this.onlineRanking.getRanking(()=>{console.log("get ranking done")})
   }
 
   private loadSounds(){
