@@ -18,7 +18,8 @@ class ArrowLogic{
   energy: number;
   charge: number;
   isCharging: boolean;
-  score: number;
+  timeScore: number;
+  removeScore: number;
   username: string;
 
   // タイマー類
@@ -32,6 +33,10 @@ class ArrowLogic{
     this.loadSounds();
     this.reset();
     this.username = "チルノ";
+  }
+
+  public score(){
+    return Math.floor(this.timeScore + this.removeScore);
   }
 
   public update(timeDelta: number): void{
@@ -131,9 +136,8 @@ class ArrowLogic{
       this.spawnNewBallTimer -= Constants.spawnBallIntervalTimeSeconds;
       this.soundManager.play("spawn");
       this.createRandomBall();
-      this.score += 1;
     }
-
+    this.timeScore += timeDelta;
     this.healEventTimer += timeDelta;
 
     if(this.isThisFrameTimerReached(timeDelta, this.healEventTimer, Constants.healIntervalTimeSeconds)){
@@ -175,7 +179,7 @@ class ArrowLogic{
     if(this.hp <= 0){
       console.log("死んだ");
       this.soundManager.play("dead");
-      this.onlineRanking.submit("hoge taro", this.score, this.score, this.score, () =>{console.log("send success!")});
+      this.onlineRanking.submit(this.username, this.score(), this.removeScore, this.timeScore, () =>{console.log("send success!")});
       this.gameState = GameState.GameOver;
     }
   }
@@ -213,7 +217,7 @@ class ArrowLogic{
         not_removed.push(ball);
       }
     }
-    this.score += this.balls.length - not_removed.length;
+    this.removeScore += this.balls.length - not_removed.length;
     this.balls = not_removed;
   }
 
@@ -228,7 +232,8 @@ class ArrowLogic{
     this.isCharging = false;
     this.spawnNewBallTimer = 0;
     this.healEventTimer = 0;
-    this.score = 0;
+    this.timeScore = 0;
+    this.removeScore = 0;
 
     for(let i=0; i< Constants.initialBallCount; ++i){
       this.createRandomBall();

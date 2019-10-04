@@ -11,7 +11,7 @@
       .game_over(v-if="isGameOverScene")
         | GAME OVER
       .score(v-if="isInGameScene")
-        | {{logic.score}}
+        | {{logic.score()}}
       .background(@mousemove="updatePointerPosition")
       transition-group(class="balls" name="delay")
         Ball(
