@@ -1,7 +1,7 @@
 class ArrowScore < ApplicationRecord
   def high_score?
     # スコア更新 = 「それ以上のスコアを持つレコードが自身以外に存在しない」
-    ArrowScore.where(username: self.username).where("score >= #{self.total_score}").count <= 1
+    ArrowScore.where(username: self.username).where("score >= #{self.score}").count <= 1
   end
 
   def self.high_score(username)
