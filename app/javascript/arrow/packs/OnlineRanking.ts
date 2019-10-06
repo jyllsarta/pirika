@@ -6,7 +6,7 @@ class OnlineRanking{
               private myScoreUrl: string){
   }
 
-  public submit(username, score, remove_score, time_score , callback ){
+  public submit(username: string, score: number, remove_score: number, time_score: number, callback: () => void){
     axios.post(this.scoreSubmitUrl,{
           authenticity_token: document.querySelector("meta[name=csrf-token]").attributes["content"].textContent,
           username: username,
@@ -16,7 +16,7 @@ class OnlineRanking{
         }
     )
         .then((results) => {
-          callback.call();
+          callback();
           console.log(results);
           console.log("OK");
         })
@@ -26,10 +26,10 @@ class OnlineRanking{
         })
   }
 
-  public getHighScore(username, callback ){
+  public getHighScore(username: string, callback: () => void ){
     axios.get(this.myScoreUrl+`?username=${username}`)
         .then((results) => {
-          callback.call();
+          callback();
           console.log(results);
           console.log("OK");
         })
@@ -39,10 +39,10 @@ class OnlineRanking{
         })
   }
 
-  public getRanking(callback ){
+  public getRanking(callback: () => void ){
     axios.get(this.rankingUrl)
         .then((results) => {
-          callback.call();
+          callback();
           console.log(results);
           console.log("OK");
         })
