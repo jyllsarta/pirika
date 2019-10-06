@@ -8,13 +8,13 @@ class OnlineRanking{
 
   public submit(username: string, score: number, remove_score: number, time_score: number, callback: () => void){
     axios.post(this.scoreSubmitUrl,{
-          authenticity_token: document.querySelector("meta[name=csrf-token]").attributes["content"].textContent,
-          username: username,
-          score: score,
-          remove_score: remove_score,
-          time_score: time_score,
-        }
-    )
+              authenticity_token: document.querySelector("meta[name=csrf-token]").attributes["content"].textContent,
+              username: username,
+              score: score,
+              remove_score: remove_score,
+              time_score: time_score,
+          }
+        )
         .then((results) => {
           callback();
           console.log(results);
@@ -29,13 +29,13 @@ class OnlineRanking{
   public getHighScore(username: string, callback: () => void ){
     axios.get(this.myScoreUrl+`?username=${username}`)
         .then((results) => {
-          callback();
-          console.log(results);
-          console.log("OK");
+            callback();
+            console.log(results);
+            console.log("OK");
         })
         .catch((results) => {
-          console.warn(results);
-          console.warn("NG");
+            console.warn(results);
+            console.warn("NG");
         })
   }
 
