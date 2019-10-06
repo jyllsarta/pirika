@@ -19,4 +19,3 @@ class ZxcvScore < ApplicationRecord
     ranking
     end
 end
-zxcv_score.rb
