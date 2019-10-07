@@ -7,10 +7,12 @@ class ArrowsController < ApplicationController
     render json: {is_high_score: result.high_score?}.to_json
   end
   def high_score
-    render json: {high_score: 151}.to_json
+    high_score = ArrowScore.high_score(params[:username])
+    render json: {high_score: high_score}.to_json
   end
   def ranking
-    render json: {ranking: []}.to_json
+    ranking = ArrowScore.ranking(10)
+    render json: {ranking: ranking}.to_json
   end
 
 private

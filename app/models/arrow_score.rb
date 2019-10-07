@@ -5,13 +5,13 @@ class ArrowScore < ApplicationRecord
   end
 
   def self.high_score(username)
-    ArrowScore.where(username: username).order(score: :desc).first&.total_score || 0
+    ArrowScore.where(username: username).order(score: :desc).first&.score || 0
   end
 
   def self.ranking(limit)
     ranking = []
     # order by group by なので多少ダサいが愚直に全件取得からのしちゃう
-    ArrowScore.order(total_score: :desc).each do |score|
+    ArrowScore.order(score: :desc).each do |score|
       # ユーザ名空はランキング登録しないことにした
       ranking.append(score) if ranking.all?{|rank| rank.username != score.username} && !score.username.blank?
       break if ranking.length == limit
