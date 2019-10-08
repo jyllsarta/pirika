@@ -111,6 +111,10 @@ class ArrowLogic{
     this.reset();
   }
 
+  public setName(name: string){
+    this.username = name;
+  }
+
   // -- private --
 
   // このフレームにちょうどタイマーが発動したかどうか

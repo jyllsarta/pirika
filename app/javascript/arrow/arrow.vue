@@ -39,6 +39,11 @@
         @resetGame="resetGame",
         v-if="isGameOverScene"
       )
+      NameInputArea(
+        @setName="setName",
+        v-if='isTitleScene',
+      )
+
 </template>
 
 <script lang="ts">
@@ -50,6 +55,7 @@
     import ResetButton from "./ResetButton.vue";
     import Constants from "./packs/Constants"
     import Timer from "./packs/Timer"
+    import NameInputArea from "./NameInputArea.vue";
 
     export default {
     components: {
@@ -57,6 +63,7 @@
       Pointer,
       GameStartButton,
       ResetButton,
+      NameInputArea,
     },
     data(){
       return {
@@ -107,6 +114,9 @@
       onMouseUp(){
         this.logic.onMouseUp();
       },
+      setName(name: string){
+        this.logic.setName(name);
+      }
     },
     computed: {
       isTitleScene(){
