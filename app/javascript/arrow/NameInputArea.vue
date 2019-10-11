@@ -6,10 +6,10 @@
       | {{fullName === "" ? "ななし(ランキング登録されません)" : fullName}}
     button.change_button(@click="setInputMode", v-if="!inputting")
       | 変更
-    input.name_input_box(type="text", @blur="onBlur", v-model="rawName", v-if="inputting")
+    input.name_input_box(type="text", @blur="onBlur", v-model="rawName", v-if="inputting" ref="name_input_box")
 </template>
 
-<script>
+<script lang="ts">
 import Vue from "vue";
 import jsSHA from "jssha";
 export default {
@@ -52,8 +52,8 @@ export default {
       this.inputting = true;
       this.$emit("inputStateChanged", true);
       // inputtingをオンにしても次のフレームまで待たないとまだ入力欄は作られない
-      Vue.nextTick(function() {
-        $(".name_input_box")[0].focus();
+      Vue.nextTick( ()=> {
+        this.$refs.name_input_box.focus()
       });
       console.log(this.$refs);
     },
