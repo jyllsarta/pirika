@@ -5,7 +5,9 @@ class ArrowScore < ApplicationRecord
   end
 
   def self.high_score(username)
-    ArrowScore.where(username: username).order(score: :desc).first&.score || 0
+    score_record = ArrowScore.where(username: username).order(score: :desc).first
+    return 0 if score_record.nil? || score_record.username.blank?
+    score_record.score || 0
   end
 
   def self.ranking(limit)
