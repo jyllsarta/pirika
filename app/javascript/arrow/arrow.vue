@@ -176,7 +176,7 @@
       pointer-events: none;
       z-index: 10;
       position: absolute;
-      top: 20%;
+      top: 10%;
       left: 20%;
       width: 60%;
       text-align: center;
@@ -187,7 +187,7 @@
       pointer-events: none;
       z-index: 10;
       position: absolute;
-      top: 27%;
+      top: 17.5%;
       left: 20%;
       width: 60%;
       text-align: center;

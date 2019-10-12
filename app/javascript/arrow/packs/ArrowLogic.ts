@@ -248,7 +248,7 @@ class ArrowLogic{
     this.fetchHighScore();
     this.onlineRanking.getRanking(()=>{console.log("get ranking done")})
   }
-  
+
   private fetchHighScore(){
     this.onlineRanking.getHighScore(this.username, (results)=>{this.highScore = results.data.high_score});
   }
