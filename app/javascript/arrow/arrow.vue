@@ -12,6 +12,8 @@
         | GAME OVER
       .score(v-if="isInGameScene")
         | {{logic.score()}}
+      .high_score()
+        | MAX: {{logic.highScore}}
       .background(@mousemove="updatePointerPosition")
       transition-group(class="balls" name="delay")
         Ball(
@@ -175,6 +177,17 @@
       z-index: 10;
       position: absolute;
       top: 20%;
+      left: 20%;
+      width: 60%;
+      text-align: center;
+      font-family: 'Cute Font', cursive;
+      font-size: 60px;
+    }
+    .high_score{
+      pointer-events: none;
+      z-index: 10;
+      position: absolute;
+      top: 27%;
       left: 20%;
       width: 60%;
       text-align: center;

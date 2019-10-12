@@ -26,10 +26,10 @@ class OnlineRanking{
         })
   }
 
-  public getHighScore(username: string, callback: () => void ){
+  public getHighScore(username: string, callback: (results) => void ){
     axios.get(this.myScoreUrl+`?username=${username}`)
         .then((results) => {
-            callback();
+            callback(results);
             console.log(results);
             console.log("OK");
         })

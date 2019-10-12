@@ -21,6 +21,7 @@ class ArrowLogic{
   timeScore: number;
   removeScore: number;
   username: string;
+  highScore: number;
 
   // タイマー類
   healEventTimer: number;
@@ -30,9 +31,9 @@ class ArrowLogic{
     console.log("instantiated logic!");
     this.soundManager = new SoundManager();
     this.onlineRanking = new OnlineRanking(location.href, location.href + "/ranking", location.href + "/high_score")
+    this.highScore = 0;
     this.loadSounds();
     this.reset();
-    this.username = "チルノ";
   }
 
   public score(){
@@ -113,6 +114,7 @@ class ArrowLogic{
 
   public setName(name: string){
     this.username = name;
+    this.fetchHighScore();
   }
 
   // -- private --
@@ -243,8 +245,12 @@ class ArrowLogic{
       this.createRandomBall();
     }
 
-    this.onlineRanking.getHighScore(this.username, ()=>{console.log("get high score done")});
+    this.fetchHighScore();
     this.onlineRanking.getRanking(()=>{console.log("get ranking done")})
+  }
+  
+  private fetchHighScore(){
+    this.onlineRanking.getHighScore(this.username, (results)=>{this.highScore = results.data.high_score});
   }
 
   private loadSounds(){
