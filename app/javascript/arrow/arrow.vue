@@ -152,12 +152,13 @@
     top: 0;
     left: 0;
     overflow: hidden;
+    color: $main-color;
     .background{
       z-index: 0;
       position: absolute;
       width: 100%;
       height: 100%;
-      background-color: #ededf5;
+      background-color: $light-gray;
     }
     .balls{
       position: absolute;
@@ -181,7 +182,7 @@
       width: 60%;
       text-align: center;
       font-family: 'Cute Font', cursive;
-      font-size: 60px;
+      font-size: $main-font-size;
     }
     .high_score{
       pointer-events: none;
@@ -206,7 +207,7 @@
   }
   @keyframes delay {
     0% {
-      background-color: #87c3e1;
+      background-color: $blight;
       opacity: 0.5;
     }
     100% {

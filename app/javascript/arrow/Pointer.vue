@@ -55,8 +55,11 @@
     top: -$pointer-size / 2;
     left: -$pointer-size / 2;
     .player{
+      position: absolute;
       will-change: transform;
-      background-color: #0d0d0d;
+      background-color: $accent-color;
+      top: -$pointer-size / 2;
+      left: -$pointer-size / 2;
       width: $pointer-size;
       height: $pointer-size;
       border-radius: $pointer-size / 2;
@@ -78,11 +81,11 @@
     }
     .effective{
       z-index: 1;
-      border: 1px solid #00bfff; // TODO: 仮
+      border: 1px solid $main-color; // TODO: 仮
     }
     .current{
       z-index: 2;
-      border: 1px solid #ff7332; // TODO: 仮
+      border: 1px solid $accent-color; // TODO: 仮
     }
   }
 </style>

@@ -12,7 +12,7 @@
   @import "stylesheets/constants";
   .game_start_button{
     transform: rotateZ(45deg);
-    background-color: #0d0d0d;
+    background-color: $ball-color;
     border-radius: $ball-size / 2;
     transition: 0.2s;
     &:hover{

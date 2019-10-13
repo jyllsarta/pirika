@@ -21,7 +21,7 @@
     box-shadow: 0px 6px 4px -2px rgba(0, 0, 0, 0.4);
     will-change: transform;
     position: absolute;
-    background-color: #0d0d0d;
+    background-color: $ball-color;
     width: $ball-size;
     height: $ball-size;
     border-radius: $ball-size / 2;
