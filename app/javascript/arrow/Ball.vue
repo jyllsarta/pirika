@@ -1,7 +1,8 @@
 <template lang="pug">
   // この文字列結合でtranslateするのもうちょいスマートにやりたいなあ
   .ball(
-    :style="{ transform: 'translate(' + x + 'px,' + y + 'px)' }"
+    :style="{ transform: 'translate(' + x + 'px,' + y + 'px)'}",
+    :class="[`color_${colorId}`]"
   )
 </template>
 
@@ -11,6 +12,7 @@
     props: [
       "x",
       "y",
+      "colorId",
     ],
   }
 </script>
@@ -28,4 +30,5 @@
     top: -$ball-size / 2;
     left: -$ball-size / 2;
   }
+
 </style>

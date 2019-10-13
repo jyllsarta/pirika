@@ -44,5 +44,6 @@ const Constants = {
   // 非常に残念ながら constants.scss と相互依存してしまっているところ
   gameWindowPixelSizeX : 600.0,
   gameWindowPixelSizeY : 600.0,
+  colorIdNum: 3,
 };
 export default Constants;

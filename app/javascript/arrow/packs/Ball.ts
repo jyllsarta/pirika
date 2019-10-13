@@ -3,7 +3,8 @@ class Ball{
   constructor(public x: number,
               public y: number,
               public vx: number,
-              public vy: number){
+              public vy: number,
+              public colorId: number){
     this.id = Math.floor(Math.random() * 10000000000);
   }
 

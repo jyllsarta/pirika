@@ -20,6 +20,7 @@
           v-for="ball in logic.balls" v-bind:key="ball.id",
           :x="Math.floor(ball.x * gameWindowWidth)",
           :y="Math.floor(ball.y * gameWindowHeight)",
+          :colorId="ball.colorId",
         )
       Pointer(
         :x= "Math.floor(logic.pointer.x * gameWindowWidth)",

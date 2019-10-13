@@ -225,7 +225,8 @@ class ArrowLogic{
   private createRandomBall(): void{
     const vx = Math.random() * Constants.maxBallVelocityX - Constants.maxBallVelocityX / 2;
     const vy = Math.random() * Constants.maxBallVelocityY - Constants.maxBallVelocityY / 2;
-    this.balls.push(new Ball(Math.random(), 0, vx, vy));
+    const colorId = Math.floor(Math.random() * Constants.colorIdNum);//現状ランダムだけど速度ごとに分けるとわかりやすいかも
+    this.balls.push(new Ball(Math.random(), 0, vx, vy, colorId));
   }
 
   private discharge(x: number,y: number,r: number){
