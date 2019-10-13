@@ -12,7 +12,7 @@
         | GAME OVER
       .score(v-if="isInGameScene")
         | {{logic.score()}}
-      .high_score()
+      .high_score(v-if="isTitleScene")
         | MAX: {{logic.highScore}}
       .background(@mousemove="updatePointerPosition")
       transition-group(class="balls" name="delay")
