@@ -28,6 +28,12 @@ class ArrowLogic{
   healEventTimer: number;
   spawnNewBallTimer: number;
 
+  //ディスチャージ演出用
+  isThisFrameDischargeReleased: boolean;
+  lastRemoveResult: number;
+  lastRemovedPositionX: number;
+  lastRemovedPositionY: number;
+
   constructor(){
     console.log("instantiated logic!");
     this.soundManager = new SoundManager();
@@ -90,6 +96,7 @@ class ArrowLogic{
       this.discharge(this.pointer.x, this.pointer.y, Constants.dischargeRadius);
       this.energy = 0;
       this.soundManager.play("discharge");
+      this.isThisFrameDischargeReleased = true;
     }
     this.isCharging = false;
   }
@@ -130,6 +137,7 @@ class ArrowLogic{
   // なーんかちょっとあまりにも愚直なので、いつか registerTimerEvent(callback, everyXSeconds) みたいなインターフェースで登録できるようにしてみたいな
   private proceedTimerAndFireEvent(timeDelta: number){
 
+    this.isThisFrameDischargeReleased = false;
     this.playtime += timeDelta;
     if(this.isCharging){
       this.charge += timeDelta;
@@ -242,7 +250,12 @@ class ArrowLogic{
         not_removed.push(ball);
       }
     }
-    this.removeScore += this.balls.length - not_removed.length;
+    const removedCount = this.balls.length - not_removed.length;
+    this.lastRemoveResult = removedCount;
+    this.removeScore += removedCount;
+    this.lastRemovedPositionX = this.pointer.x + Math.random() * 0.2 - 0.1; // 横方向は若干ランダム
+    this.lastRemovedPositionY = this.pointer.y - 0.1; // 消去リザルトはちょっと上に表示
+
     this.balls = not_removed;
   }
 
@@ -260,6 +273,10 @@ class ArrowLogic{
     this.timeScore = 0;
     this.removeScore = 0;
     this.playtime = 0;
+    this.isThisFrameDischargeReleased = false;
+    this.lastRemoveResult = 0;
+    this.lastRemovedPositionX = 0;
+    this.lastRemovedPositionY = 0;
 
     for(let i=0; i< Constants.initialBallCount; ++i){
       this.createRandomBall();

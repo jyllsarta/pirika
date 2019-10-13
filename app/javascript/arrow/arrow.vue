@@ -46,6 +46,12 @@
         @setName="setName",
         v-if='isTitleScene',
       )
+      RemoveScore(
+        v-if="logic.isThisFrameDischargeReleased",
+        :value="logic.lastRemoveResult",
+        :x= "Math.floor(logic.lastRemovedPositionX * gameWindowWidth)",
+        :y= "Math.floor(logic.lastRemovedPositionY * gameWindowHeight)",
+      )
 
 </template>
 
@@ -59,6 +65,7 @@
     import Constants from "./packs/Constants"
     import Timer from "./packs/Timer"
     import NameInputArea from "./NameInputArea.vue";
+    import RemoveScore from "./RemoveScore.vue";
 
     export default {
     components: {
@@ -67,6 +74,7 @@
       GameStartButton,
       ResetButton,
       NameInputArea,
+      RemoveScore,
     },
     data(){
       return {
