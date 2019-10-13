@@ -148,7 +148,7 @@ class ArrowLogic{
     this.timeScore += timeDelta;
     this.healEventTimer += timeDelta;
 
-    if(this.isThisFrameTimerReached(timeDelta, this.healEventTimer, Constants.healIntervalTimeSeconds)){
+    if(Constants.healIntervalTimeSeconds < this.healEventTimer){
       this.healEventTimer -= Constants.healIntervalTimeSeconds;
       this.heal(Constants.healAmountPerEvent);
       const energyRecovered = Constants.addEnergyAmountPerEvent * this.hpRate();
