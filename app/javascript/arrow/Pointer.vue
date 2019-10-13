@@ -1,6 +1,6 @@
 <template functional lang="pug">
   .pointer(
-      :style="{ transform: 'translate(' + props.x + 'px,' + props.y + 'px)' }"
+      :style="{ transform: 'translate(' + props.x + 'px,' + props.y + 'px)', pointerEvents: 'none'}"
     )
     .player(
       :style="{ transform: 'scale('+ props.hpRate +')' }"
