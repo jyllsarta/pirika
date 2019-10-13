@@ -2,7 +2,7 @@ const Constants = {
   initialHp: 500,
 
   // 最大チャージに必要な秒数
-  chargeMax: 0.5,
+  chargeMax: 0.25,
   energyMax: 100,
 
   healIntervalTimeSeconds: 0.17,
@@ -10,7 +10,7 @@ const Constants = {
   addEnergyAmountPerEvent: 3,
 
   // 必殺技の有効半径
-  dischargeRadius: 0.15,
+  dischargeRadius: 0.20,
 
   // minimumHitBoxSizeRate + (HP割合 * ratioOfHpRateToHitBox) が当たり判定拡大率になる
   // 0.5 , 1 なら HP0で当たり判定 0.5倍, MAXで1.5倍サイズ
@@ -29,8 +29,8 @@ const Constants = {
 
   initialBallCount: 20,
   spawnBallIntervalTimeSeconds: 1,
-  maxBallVelocityX: 0.24,
-  maxBallVelocityY: 0.48,
+  maxBallVelocityX: 0.50,
+  maxBallVelocityY: 0.75,
 
   // 非常に残念ながら constants.scss と相互依存してしまっているところ
   gameWindowPixelSizeX : 600.0,
