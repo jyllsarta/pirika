@@ -22,6 +22,7 @@ class ArrowLogic{
   removeScore: number;
   username: string;
   highScore: number;
+  playtime: number;
 
   // タイマー類
   healEventTimer: number;
@@ -129,6 +130,7 @@ class ArrowLogic{
   // なーんかちょっとあまりにも愚直なので、いつか registerTimerEvent(callback, everyXSeconds) みたいなインターフェースで登録できるようにしてみたいな
   private proceedTimerAndFireEvent(timeDelta: number){
 
+    this.playtime += timeDelta;
     if(this.isCharging){
       this.charge += timeDelta;
     }
@@ -137,9 +139,9 @@ class ArrowLogic{
     }
 
     this.spawnNewBallTimer += timeDelta;
-
-    if(this.isThisFrameTimerReached(timeDelta, this.spawnNewBallTimer, Constants.spawnBallIntervalTimeSeconds)){
-      this.spawnNewBallTimer -= Constants.spawnBallIntervalTimeSeconds;
+    let interval = this.currentBallSpawnInterval();
+    if(interval < this.spawnNewBallTimer){
+      this.spawnNewBallTimer -= interval;
       this.soundManager.play("spawn");
       this.createRandomBall();
     }
@@ -156,6 +158,17 @@ class ArrowLogic{
         this.soundManager.play("discharge_available");
       }
     }
+  }
+
+  private currentBallSpawnInterval(){
+    let prevInterval = null;
+    for(let [seconds, interval] of Constants.spawnBallIntervalTimes){
+      if (this.playtime < seconds){
+        return prevInterval;
+      }
+      prevInterval = interval;
+    }
+    return prevInterval;
   }
 
   private moveBall(timeDelta: number): void{
@@ -240,6 +253,7 @@ class ArrowLogic{
     this.healEventTimer = 0;
     this.timeScore = 0;
     this.removeScore = 0;
+    this.playtime = 0;
 
     for(let i=0; i< Constants.initialBallCount; ++i){
       this.createRandomBall();

@@ -2,7 +2,7 @@ const Constants = {
   initialHp: 500,
 
   // 最大チャージに必要な秒数
-  chargeMax: 0.25,
+  chargeMax: 0.15,
   energyMax: 100,
 
   healIntervalTimeSeconds: 0.17,
@@ -25,10 +25,19 @@ const Constants = {
   // 1秒あたりのかすりダメージ量
   shaveDamageRate: 60,
   // 1秒あたりのヒットダメージ量
-  hitDamageRate: 4500,
+  hitDamageRate: 3000,
 
   initialBallCount: 20,
-  spawnBallIntervalTimeSeconds: 1,
+  // seconds 秒 経過後は interval 秒ごとに弾を追加する
+  spawnBallIntervalTimes: [
+    //[seconds, interval]
+    [ 0, 1.0],
+    [20, 0.8],
+    [40, 0.6],
+    [55, 0.4],
+    [80, 0.2],
+    [99, 0.1],
+  ],
   maxBallVelocityX: 0.50,
   maxBallVelocityY: 0.75,
 
