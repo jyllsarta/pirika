@@ -225,7 +225,11 @@ class ArrowLogic{
   private createRandomBall(): void{
     const vx = Math.random() * Constants.maxBallVelocityX - Constants.maxBallVelocityX / 2;
     const vy = Math.random() * Constants.maxBallVelocityY - Constants.maxBallVelocityY / 2;
-    const colorId = Math.floor(Math.random() * Constants.colorIdNum);//現状ランダムだけど速度ごとに分けるとわかりやすいかも
+
+    // マンハッタン距離における速度になってしまっているけど気にしないことにする
+    const velocityMax = Constants.maxBallVelocityY + Constants.maxBallVelocityX;
+    const velocity = Math.abs(vx) + Math.abs(vy);
+    const colorId = Math.floor((velocity / velocityMax) * Constants.colorIdNum);//現状ランダムだけど速度ごとに分けるとわかりやすいかも
     this.balls.push(new Ball(Math.random(), 0, vx, vy, colorId));
   }
 
@@ -243,7 +247,7 @@ class ArrowLogic{
 
   private reset(){
     this.balls = [];
-    this.pointer = new Pointer(0.0, 0.0);
+    this.pointer = new Pointer(0.5, 0.5);
     this.gameState = GameState.Title;
     this.hp = Constants.initialHp;
     this.initialHp = Constants.initialHp;
