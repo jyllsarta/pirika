@@ -227,9 +227,10 @@ class ArrowLogic{
     const vy = Math.random() * Constants.maxBallVelocityY - Constants.maxBallVelocityY / 2;
 
     // マンハッタン距離における速度になってしまっているけど気にしないことにする
+    // vx + vy が 下位 25%, 50%, 25% の比率で色分けされるようにcolorIdを付与する
     const velocityMax = Constants.maxBallVelocityY + Constants.maxBallVelocityX;
     const velocity = Math.abs(vx) + Math.abs(vy);
-    const colorId = Math.floor((velocity / velocityMax) * Constants.colorIdNum);//現状ランダムだけど速度ごとに分けるとわかりやすいかも
+    const colorId = Math.floor((velocity * 2 / velocityMax) * Constants.colorIdNum);
     this.balls.push(new Ball(Math.random(), 0, vx, vy, colorId));
   }
 
