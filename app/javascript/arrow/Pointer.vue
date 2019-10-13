@@ -17,16 +17,8 @@
         | {{props.hp}}
       span.sep
         | /
-      span.initial_hp
-        | {{props.initialHp}}
-      span.sep
-        | /
       span.energy
-        | {{props.energy}}
-      span.sep
-        | /
-      span.charge
-        | {{props.charge}}
+        | {{props.energy}}%
 </template>
 
 <script lang="ts">
@@ -74,18 +66,18 @@
     .discharge_circle{
       border-radius: 10000px;
       position: absolute;
-      top: -75 + $pointer-size / 2;
-      left: -75 + $pointer-size / 2;
-      width: 150px;
-      height: 150px; // TODO: サイズを計算して出す
+      top: -100 + $pointer-size / 2;
+      left: -100 + $pointer-size / 2;
+      width: 200px;
+      height: 200px; // TODO: サイズを計算して出す
     }
     .effective{
       z-index: 1;
-      border: 1px solid $main-color; // TODO: 仮
+      border: 2px solid $blight;
     }
     .current{
       z-index: 2;
-      border: 1px solid $accent-color; // TODO: 仮
+      border: 2px solid $accent-color;
     }
   }
 </style>

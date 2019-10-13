@@ -27,7 +27,7 @@
         :hpRate="logic.hpRate()",
         :hp="Math.floor(logic.hp)",
         :initialHp="logic.initialHp",
-        :energy="Math.floor(logic.energy)",
+        :energy="Math.min(Math.floor(logic.energy), 100)",
         :charge="Math.floor(logic.charge * 100)",
         :isCharging="logic.isCharging",
         :chargeRate="logic.chargeRate()",
