@@ -67,10 +67,10 @@
     .discharge_circle{
       border-radius: 10000px;
       position: absolute;
-      top: -100 + $pointer-size / 2;
-      left: -100 + $pointer-size / 2;
-      width: 200px;
-      height: 200px; // TODO: サイズを計算して出す
+      top: -80 + $pointer-size / 2;
+      left: -80 + $pointer-size / 2;
+      width: 160px;
+      height: 160px; // TODO: サイズを計算して出す
     }
     .effective{
       z-index: 1;

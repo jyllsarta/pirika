@@ -10,7 +10,9 @@ const Constants = {
   addEnergyAmountPerEvent: 3,
 
   // 必殺技の有効半径
-  dischargeRadius: 0.20,
+  dischargeRadius: 0.17,
+  // 必殺技で一つ巻き込むごとにどれだけHPを回復するか
+  dischargeRemoveHealPoint: 10,
 
   // minimumHitBoxSizeRate + (HP割合 * ratioOfHpRateToHitBox) が当たり判定拡大率になる
   // 0.5 , 1 なら HP0で当たり判定 0.5倍, MAXで1.5倍サイズ
@@ -33,10 +35,10 @@ const Constants = {
     //[seconds, interval]
     [ 0, 1.0],
     [20, 0.8],
-    [40, 0.6],
-    [55, 0.4],
-    [80, 0.2],
-    [99, 0.1],
+    [40, 0.7],
+    [55, 0.6],
+    [80, 0.5],
+    [99, 0.4],
   ],
   maxBallVelocityX: 0.50,
   maxBallVelocityY: 0.75,

@@ -162,7 +162,7 @@ class ArrowLogic{
     if(Constants.healIntervalTimeSeconds < this.healEventTimer){
       this.healEventTimer -= Constants.healIntervalTimeSeconds;
       this.heal(Constants.healAmountPerEvent);
-      const energyRecovered = Constants.addEnergyAmountPerEvent * this.hpRate();
+      const energyRecovered = Constants.addEnergyAmountPerEvent * (this.hpRate() / 2 + 0.5);
       this.energy += energyRecovered;
       // いま energy最大になった場合 音を鳴らす
       if(this.isThisFrameTimerReached(energyRecovered, this.energy, Constants.energyMax)){
@@ -265,6 +265,7 @@ class ArrowLogic{
     this.removeScore += removedCount;
     this.lastRemovedPositionX = this.pointer.x + Math.random() * 0.2 - 0.1; // 横方向は若干ランダム
     this.lastRemovedPositionY = this.pointer.y - 0.1; // 消去リザルトはちょっと上に表示
+    this.hp += removedCount * Constants.dischargeRemoveHealPoint;
 
     this.balls = not_removed;
   }
