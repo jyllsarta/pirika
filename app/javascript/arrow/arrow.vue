@@ -10,7 +10,12 @@
         | ICE BREAK
       .game_over(v-if="isGameOverScene")
         | GAME OVER
-      .score(v-if="isInGameScene")
+      .high_score_updated(v-if="logic.isHighScore")
+        | HIGH SCORE!
+      .score(
+        v-if="!isTitleScene"
+        :class="{is_high_score: logic.isHighScore}"
+        )
         | {{logic.score()}}
       .high_score(v-if="isTitleScene")
         | MAX: {{logic.highScore}}
@@ -182,7 +187,7 @@
       left: 45%;
       top: 45%;
     }
-    .title, .game_over, .score{
+    .title, .game_over{
       pointer-events: none;
       z-index: 10;
       position: absolute;
@@ -193,7 +198,7 @@
       font-family: 'Cute Font', cursive;
       font-size: $main-font-size;
     }
-    .high_score{
+    .score, .high_score{
       pointer-events: none;
       z-index: 10;
       position: absolute;
@@ -202,7 +207,23 @@
       width: 60%;
       text-align: center;
       font-family: 'Cute Font', cursive;
-      font-size: 60px;
+      font-size: $main-font-size;
+    }
+    // ui text 共通の指定が結構あるからまとめたいかも
+    .high_score_updated{
+      pointer-events: none;
+      z-index: 10;
+      position: absolute;
+      top: 22%;
+      left: 53%;
+      width: 30%;
+      text-align: center;
+      font-family: 'Cute Font', cursive;
+      font-size: $main-font-size / 2;
+      color: $accent-color;
+    }
+    .is_high_score{
+      color: $accent-color;
     }
   }
   .remove_cursor{

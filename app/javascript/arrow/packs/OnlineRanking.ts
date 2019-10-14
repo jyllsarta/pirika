@@ -6,7 +6,7 @@ class OnlineRanking{
               private myScoreUrl: string){
   }
 
-  public submit(username: string, score: number, remove_score: number, time_score: number, callback: () => void){
+  public submit(username: string, score: number, remove_score: number, time_score: number, callback: (results) => void){
     axios.post(this.scoreSubmitUrl,{
               authenticity_token: document.querySelector("meta[name=csrf-token]").attributes["content"].textContent,
               username: username,
@@ -16,7 +16,7 @@ class OnlineRanking{
           }
         )
         .then((results) => {
-          callback();
+          callback(results);
           console.log(results);
           console.log("OK");
         })

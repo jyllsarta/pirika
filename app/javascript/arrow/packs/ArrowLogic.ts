@@ -34,6 +34,9 @@ class ArrowLogic{
   lastRemovedPositionX: number;
   lastRemovedPositionY: number;
 
+  // ハイスコア演出要
+  isHighScore: boolean;
+
   constructor(){
     console.log("instantiated logic!");
     this.soundManager = new SoundManager();
@@ -206,8 +209,15 @@ class ArrowLogic{
     if(this.hp <= 0){
       console.log("死んだ");
       this.soundManager.play("dead");
-      this.onlineRanking.submit(this.username, this.score(), this.removeScore, this.timeScore, () =>{console.log("send success!")});
+      this.onlineRanking.submit(this.username, this.score(), this.removeScore, this.timeScore, (results) =>{this.onSucceedSendResult(results)});
       this.gameState = GameState.GameOver;
+    }
+  }
+
+  private onSucceedSendResult(results){
+    this.isHighScore = results.data.is_high_score;
+    if(this.isHighScore){
+      this.soundManager.play("high_score");
     }
   }
 
@@ -277,6 +287,7 @@ class ArrowLogic{
     this.lastRemoveResult = 0;
     this.lastRemovedPositionX = 0;
     this.lastRemovedPositionY = 0;
+    this.isHighScore = false;
 
     for(let i=0; i< Constants.initialBallCount; ++i){
       this.createRandomBall();
@@ -286,8 +297,12 @@ class ArrowLogic{
     this.onlineRanking.getRanking(()=>{console.log("get ranking done")})
   }
 
+  private onReceiveHighScore(results){
+    this.highScore = results.data.high_score;
+  }
+
   private fetchHighScore(){
-    this.onlineRanking.getHighScore(this.username, (results)=>{this.highScore = results.data.high_score});
+    this.onlineRanking.getHighScore(this.username, (results)=>{this.onReceiveHighScore(results)});
   }
 
   private loadSounds(){
@@ -307,6 +322,7 @@ class ArrowLogic{
     this.soundManager.register("discharge_available", "/game/arrow/sounds/discharge_available.wav");
     this.soundManager.register("charge_start", "/game/arrow/sounds/charge_start.wav");
     this.soundManager.register("charge_complete", "/game/arrow/sounds/charge_complete.wav");
+    this.soundManager.register("high_score", "/game/arrow/sounds/high_score.wav");
   }
 }
 
