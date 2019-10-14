@@ -7,24 +7,22 @@ $pointer-size: 30px;
 
 $main-font-size: 60px;
 
-$main-color: #123123;
+$main-color: rgba(33, 47, 52, 0.7);
 $light-gray: #ededf5;
 
-$ball-color: #0d0d0d;
-
-$accent-color: #ff7332;
+$accent-color: rgba(238, 100, 47, 0.7);
 
 $blight: #87c3e1;
 
 $ball-colors: (
         0:  (
-                color1: rgba(48, 45, 76, 0.78),
+                color1: rgba(48, 45, 76, 0.7),
         ),
         1:  (
-                color1: rgba(33, 47, 52, 0.77),
+                color1: rgba(33, 47, 52, 0.7),
         ),
         2:  (
-                color1: rgba(29, 87, 93, 0.77),
+                color1: rgba(29, 87, 93, 0.7),
         ),
 );
 @each $idx, $property in $ball-colors{
