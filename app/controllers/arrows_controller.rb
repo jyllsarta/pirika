@@ -11,7 +11,7 @@ class ArrowsController < ApplicationController
     render json: {high_score: high_score}.to_json
   end
   def ranking
-    ranking = ArrowScore.ranking(10)
+    ranking = ArrowScore.ranking(20)
     render json: {ranking: ranking}.to_json
   end
 

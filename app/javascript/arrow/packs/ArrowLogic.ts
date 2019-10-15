@@ -23,6 +23,7 @@ class ArrowLogic{
   username: string;
   highScore: number;
   playtime: number;
+  ranking: {};
 
   // タイマー類
   healEventTimer: number;
@@ -295,7 +296,11 @@ class ArrowLogic{
     }
 
     this.fetchHighScore();
-    this.onlineRanking.getRanking(()=>{console.log("get ranking done")})
+    this.fetchRanking();
+  }
+
+  public fetchRanking(){
+    this.onlineRanking.getRanking((results)=>{this.ranking = results.data.ranking})
   }
 
   private onReceiveHighScore(results){

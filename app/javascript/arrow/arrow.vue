@@ -57,6 +57,17 @@
         :x= "Math.floor(logic.lastRemovedPositionX * gameWindowWidth)",
         :y= "Math.floor(logic.lastRemovedPositionY * gameWindowHeight)",
       )
+      .ranking_area(v-if="isTitleScene")
+        Ranking(
+          v-if='showingRanking',
+          :ranking="logic.ranking"
+        )
+        .hide_ranking_area(v-if='showingRanking', @click="hideRanking")
+        img.show_ranking_button(
+          v-if='!showingRanking',
+          @click="showRanking",
+          src="/images/arrow/ranking.png"
+        )
 
 </template>
 
@@ -71,6 +82,7 @@
     import Timer from "./packs/Timer"
     import NameInputArea from "./NameInputArea.vue";
     import RemoveScore from "./RemoveScore.vue";
+    import Ranking from "./Ranking.vue";
 
     export default {
     components: {
@@ -80,6 +92,7 @@
       ResetButton,
       NameInputArea,
       RemoveScore,
+      Ranking,
     },
     data(){
       return {
@@ -87,6 +100,7 @@
         latestMouseMoveEvent: null,
         prevFrameMouseMoveEvent: null,
         timer: null,
+        showingRanking: false,
       };
     },
     created(){
@@ -119,6 +133,7 @@
         this.latestMouseMoveEvent = e;
       },
       startGame(){
+        this.showingRanking = false;
         this.logic.startGame();
       },
       resetGame(){
@@ -132,6 +147,16 @@
       },
       setName(name: string){
         this.logic.setName(name);
+      },
+      showRanking(){
+        // ロジックのサウンドマネージャに直接命令するのはだいぶ横着なので良くない...
+        this.logic.soundManager.play("discharge_available");
+        this.logic.fetchRanking();
+        this.showingRanking = true;
+      },
+      hideRanking(){
+        this.logic.soundManager.play("phew");
+        this.showingRanking = false;
       }
     },
     computed: {
@@ -244,4 +269,35 @@
       opacity: 1;
     }
   }
+  .ranking{
+    position: absolute;
+    top: 2%;
+    left: 10%;
+    width: 80%;
+    height: 96%;
+    color: $light-gray;
+    background-color: $main-color;
+    border-radius: 8px;
+    padding: 10px;
+    z-index: 100;
+  }
+  .hide_ranking_area{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+  }
+  .show_ranking_button{
+    position: absolute;
+    bottom: 5%;
+    left: 5%;
+    width: 64px;
+    height: 64px;
+    padding: 10px;
+    background-color: $main-color;
+    border-radius: 8px;
+  }
+
 </style>

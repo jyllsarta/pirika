@@ -39,10 +39,10 @@ class OnlineRanking{
         })
   }
 
-  public getRanking(callback: () => void ){
+  public getRanking(callback: (results) => void ){
     axios.get(this.rankingUrl)
         .then((results) => {
-          callback();
+          callback(results);
           console.log(results);
           console.log("OK");
         })
