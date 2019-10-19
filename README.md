@@ -1,5 +1,8 @@
 # さーたはうす
 
+ゲーム屋さんのwebサイトです。
+
+* たくさんのブラウザゲー
 * お絵かきログ
 * しろことくろこの塔登るやつ
 * ピリカちゃんwebコンソール
@@ -13,15 +16,17 @@ railsを走らせればOK
 
 ### 前提
 
-* ruby 2.5.1
-* rails 5.2.1
+* ruby 2.6.3
+* rails 5.2.3
 
-### command
+### run
 
 ```sh
 $ git clone https://github.com/jyllsarta/pirika.git
 $ cd pirika/
 $ bundle install
 $ rails db:migrate
-$ rails server
+$ yarn install
+$ bin/webpack-dev-server # for development
+$ rails s
 ```
