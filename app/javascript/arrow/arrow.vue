@@ -6,19 +6,24 @@
       :class="{remove_cursor: isInGameScene}"
       @click.right.prevent
       )
-      .title(v-if="isTitleScene")
-        | ICE BREAK
-      .game_over(v-if="isGameOverScene")
-        | GAME OVER
-      .high_score_updated(v-if="logic.isHighScore")
-        | HIGH SCORE!
-      .score(
-        v-if="!isTitleScene"
-        :class="{is_high_score: logic.isHighScore}"
-        )
-        | {{logic.score()}}
-      .high_score(v-if="isTitleScene")
-        | MAX: {{logic.highScore}}
+      transition(name="left-show-in")
+        .title(v-if="isTitleScene")
+          | ICE BREAK
+      transition(name="left-show-in")
+        .game_over(v-if="isGameOverScene")
+          | GAME OVER
+      transition(name="left-show-in")
+        .high_score_updated(v-if="logic.isHighScore")
+          | HIGH SCORE!
+      transition(name="left-show-in")
+        .score(
+          v-if="!isTitleScene"
+          :class="{is_high_score: logic.isHighScore}"
+          )
+          | {{logic.score()}}
+      transition(name="left-show-in")
+        .high_score(v-if="isTitleScene")
+          | MAX: {{logic.highScore}}
       .background(@mousemove="updatePointerPosition")
       transition-group(class="balls" name="delay")
         Ball(
@@ -39,18 +44,21 @@
         :chargeRate="logic.chargeRate()",
         v-if="isInGameScene",
       )
-      GameStartButton(
-        @startGame="startGame",
-        v-if="isTitleScene"
-      )
-      ResetButton(
-        @resetGame="resetGame",
-        v-if="isGameOverScene"
-      )
-      NameInputArea(
-        @setName="setName",
-        v-if='isTitleScene',
-      )
+      transition(name="left-show-in")
+        GameStartButton(
+          @startGame="startGame",
+          v-if="isTitleScene"
+        )
+      transition(name="left-show-in")
+        ResetButton(
+          @resetGame="resetGame",
+          v-if="isGameOverScene"
+        )
+      transition(name="left-show-in")
+        NameInputArea(
+          @setName="setName",
+          v-if='isTitleScene',
+        )
       RemoveScore(
         v-if="logic.isThisFrameDischargeReleased",
         :value="logic.lastRemoveResult",
@@ -58,11 +66,13 @@
         :y= "Math.floor(logic.lastRemovedPositionY * gameWindowHeight)",
       )
       .ranking_area(v-if="isTitleScene")
-        Ranking(
-          v-if='showingRanking',
-          :ranking="logic.ranking"
-        )
-        .hide_ranking_area(v-if='showingRanking', @click="hideRanking")
+        transition(name="left-show-in")
+          Ranking(
+              v-if='showingRanking',
+              :ranking="logic.ranking"
+            )
+      .hide_ranking_area(v-if='showingRanking', @click="hideRanking")
+      transition(name="left-show-in")
         img.show_ranking_button(
           v-if='!showingRanking',
           @click="showRanking",
@@ -298,6 +308,21 @@
     padding: 10px;
     background-color: $main-color;
     border-radius: 8px;
+  }
+
+  .left-show-in-enter-active {
+    transition: all .3s;
+  }
+  .left-show-in-leave-active {
+    transition: all .3s;
+  }
+  .left-show-in-enter{
+    transform: translateX(10px);
+    opacity: 0;
+  }
+  .left-show-in-leave-to{
+    transform: translateX(-10px);
+    opacity: 0;
   }
 
 </style>
