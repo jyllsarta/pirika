@@ -71,13 +71,14 @@
               v-if='showingRanking',
               :ranking="logic.ranking"
             )
-      .hide_ranking_area(v-if='showingRanking', @click="hideRanking")
-      transition(name="left-show-in")
-        img.show_ranking_button(
-          v-if='!showingRanking',
-          @click="showRanking",
-          src="/images/arrow/ranking.png"
-        )
+      .ranking_button(v-if="isTitleScene")
+        transition(name="left-show-in")
+          .hide_ranking_area(v-if='showingRanking', @click="hideRanking")
+          img.show_ranking_button(
+            v-if='!showingRanking',
+            @click="showRanking",
+            src="/images/arrow/ranking.png"
+          )
 
 </template>
 
