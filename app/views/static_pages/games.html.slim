@@ -6,32 +6,105 @@ p
   a href=works_path
     | Works
   | にあります。
+
+h2
+  | ICE BREAK
+.screenshots
+  - screenshot_entries("arrow").each do |path|
+    a.screenshot[href=path]
+      img[src=path]
+a.play[href="arrows"]
+  | 遊ぶ
+p
+  | Vue.jsに手慣れるためのエクササイズ第二弾です。大量のオブジェクトの描画を試しています。
+  | 大量の氷を避けたりチャージショットで一気にふっとばしたりして高スコアを狙うゲームです。
+
+h2
+  | ZXCV
+.screenshots
+  - screenshot_entries("zxcv").each do |path|
+    a.screenshot[href=path]
+      img[src=path]
+a.play[href="zxcvs"]
+  | 遊ぶ
+p
+  | Vue.jsに手慣れるためのエクササイズと、Vueでまっとうに動くゲームが作れるのかどうかの検証として作ったゲームです。
+  | 結構手触りの良いゲームになったので満足です。こちらもスコア詰めがそこそこ盛況で、 #{ZxcvScore.count} 回プレイされております。
+
+h2
+  | css filterプロパティ完全に理解した
+.screenshots
+  - screenshot_entries("match_illust").each do |path|
+    a.screenshot[href=path]
+      img[src=path]
+a.play[href="match_illusts/index"]
+  | 遊ぶ
+p
+  | これはゲームなのか？と問われると微妙なところですが、技術を競ってスコアが出るパズルゲーム...と解釈できるはずです。
+  | Vue.js の学習のために作ったサンプルです。お手本に合わせてフィルターを調整しましょう。
+
+h2
+  | しろこのカラータイル
+.screenshots
+  - screenshot_entries("tile").each do |path|
+    a.screenshot[href=path]
+      img[src=path]
+a.play[href="tile"]
+  | 遊ぶ
+p
+  | バックエンドにAPIサーバが存在するブラウザゲーを作ってみました。
+  | ロジックとビューを切り離そうと模索してみたり、いいゲームづくりとはなにか考えながら作ってました。
+  | そこそこ盛況で、現在は #{Result.count} 回スコアが登録されています。ランキング要素がゲーム性にうまく寄与してくれました。
+
+h2
+  | ねこのやつ2(仮)
+.screenshots
+  - screenshot_entries("neko2").each do |path|
+    a.screenshot[href=path]
+      img[src=path]
+a.play[href="neko2"]
+  | 遊ぶ
+p
+  | ちゃんとしたRPGを作ってみたくて色々と試してみたゲームです。
+  | インディー系RPGでありがちな「最終形をイメージしながら次の行動を決める」ゲームを作ろうとしていました。
+  | とりあえず一通り遊びきれるところまで作ってあります。
+  | 作り切るために
+  a[href="https://www.pixiv.net/fanbox/creator/130414"]
+    | pixivFANBOX
+  | で毎週進捗報告をしていました。
+
+h2
+  | そげきねこ(仮)
+.screenshots
+  - screenshot_entries("snipon").each do |path|
+    a.screenshot[href=path]
+      img[src=path]
+a.play[href="snipon"]
+  | 遊ぶ
+p
+  | Unityの勉強がてら作った狙撃ゲーです。spaceで拡大してタルや板をよーく狙って撃ちます。
+  | スマホ用にビルドすると加速度センサーを使っていい感じにエイムできるのですが、PC版では確認できませんね...
+
 h2
   | 賽の河原
 .screenshots
-  a.screenshot[href="images/screenshot/sainokawara/screenshot.png"]
-    img[src="images/screenshot/sainokawara/screenshot.png"]
+  - screenshot_entries("sainokawara").each do |path|
+    a.screenshot[href=path]
+      img[src=path]
 a.play[href="sainokawara"]
   | 遊ぶ
 p
-  |  技術検証のデモとして作られた、生産性のないwebサービスです。 さーたはうすがgithub.ioでホスティングされていた頃に、なんとかしてサーバサイドにデータを保存させたかったというのが根っこのモチベーションです。 データはWebAppとして公開されたAPI経由でgoogle spreadsheetに保存されます。「自分より山が小さいユーザの石は崩せる」ルールまで追加する予定だったのですが、スプレッドシートとの疎通確認が取れたところで満足しました。
+  |  技術検証のデモとして作られた、生産性のないwebサービスです。
+  | さーたはうすがgithub.ioでホスティングされていた頃に、なんとかしてサーバサイドにデータを保存させたかったというのが根っこのモチベーションです。
+  | データはWebAppとして公開されたAPI経由でgoogle spreadsheetに保存されます。
+  | 「自分より山が小さいユーザの石は崩せる」ルールまで追加する予定だったのですが、スプレッドシートとの疎通確認が取れたところで満足しました。
 
 h2
   | しろことくろこの塔登るやつ
 .screenshots
-  a.screenshot[href="images/screenshot/neko/title.png"]
-    img[src="images/screenshot/neko/title.png"]
-  a.screenshot[href="images/screenshot/neko/1.png"]
-    img[src="images/screenshot/neko/1.png"]
-  a.screenshot[href="images/screenshot/neko/2.png"]
-    img[src="images/screenshot/neko/2.png"]
-  a.screenshot[href="images/screenshot/neko/3.png"]
-    img[src="images/screenshot/neko/3.png"]
-  a.screenshot[href="images/screenshot/neko/4.png"]
-    img[src="images/screenshot/neko/4.png"]
-  a.screenshot[href="images/screenshot/neko/5.png"]
-    img[src="images/screenshot/neko/5.png"]
-
+  - screenshot_entries("neko").each do |path|
+    a.screenshot[href=path]
+      img[src=path]
 a.play[href="neko"]
   | 遊ぶ
 p
@@ -42,17 +115,9 @@ p
 h2
   | 盗賊ちゃんクリッカー
 .screenshots
-  a.screenshot[href="images/screenshot/touzoku/title.png"]
-    img[src="images/screenshot/touzoku/title.png"]
-  a.screenshot[href="images/screenshot/touzoku/1.png"]
-    img[src="images/screenshot/touzoku/1.png"]
-  a.screenshot[href="images/screenshot/touzoku/2.png"]
-    img[src="images/screenshot/touzoku/2.png"]
-  a.screenshot[href="images/screenshot/touzoku/3.png"]
-    img[src="images/screenshot/touzoku/3.png"]
-  a.screenshot[href="images/screenshot/touzoku/4.png"]
-    img[src="images/screenshot/touzoku/4.png"]
-
+  - screenshot_entries("touzoku").each do |path|
+    a.screenshot[href=path]
+      img[src=path]
 a.play[href="touzoku"]
   | 遊ぶ
 p
