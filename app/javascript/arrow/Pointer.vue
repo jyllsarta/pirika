@@ -67,8 +67,8 @@
     .discharge_circle{
       border-radius: 10000px;
       position: absolute;
-      top: -80 + $pointer-size / 2;
-      left: -80 + $pointer-size / 2;
+      top: -80;
+      left: -80;
       width: 160px;
       height: 160px; // TODO: サイズを計算して出す
     }
