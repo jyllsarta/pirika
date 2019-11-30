@@ -8,10 +8,6 @@ p
   | を見てね。
 section
   #illustBox
-    - (1..@image_count).to_a.reverse.each do |n|
-      |  <a href="/images/rakugaki/
-      = n
-      | .png"><div class="thumb" style="background-image: url('/images/rakugaki/
-      = n
-      | .png');"></div>
+    - @image_filenames.reverse.each do |filename|
+      = render 'illust_thumbnail', {filename: filename, thumbnail_path: "rakugaki", original_path: "rakugaki"}
 = stylesheet_link_tag "illusts"

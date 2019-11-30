@@ -6,6 +6,6 @@ p
     | らくがき
   | もあります。そちらは眠いときにちゃちゃっと描いたものです。
 #illustBox
-  - (1..@image_count).to_a.reverse.each do |n|
-    = render 'illust_thumbnail', {n: n}
+  - @image_filenames.reverse.each do |filename|
+    = render 'illust_thumbnail', {filename: filename, thumbnail_path: "illust_thumbnails", original_path: "illust_all"}
 = stylesheet_link_tag "illusts"
