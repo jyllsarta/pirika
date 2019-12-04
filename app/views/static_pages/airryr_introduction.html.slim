@@ -94,7 +94,7 @@ p
   | show.rb を実行するとデバイスから一度だけ値を読み取り、結果を出力します。
 
 pre
-  code.prettyprint
+  code.prettyprint.lang-sh
     | bundle exec ruby show.rb
 
 p
@@ -103,23 +103,63 @@ p
 h2
   | 監視
 
-h3
-  | Mackerel
+p
+  | 監視を行う場合、以下の要件を満たしたいところです。
 
-h3
-  | サービスメトリック
+ul.with_point
+  li
+    | 時系列で値を可視化できること
+  li
+    | 任意の場所にアラートを発報させられること
+  li
+    | ログ記録の停止を感知できること
+
+p
+  a[href="https://mackerel.io/ja/"]
+    | Mackerel
+  | がちょうどよいサービスでした。二酸化炭素濃度の値を定期的にここにPOSTすることで、うまくモニターできそうです。
+    間にこのサービスを挟むことで、アラートを管理する部分とセンサーから値を取得する部分でうまくサービスの境界を作れるのも良さそうです。
 
 h2
-  | アラート
+  | モニターの開始
+
+p
+  | airryr にはMackerelへのメトリクス投稿機能をつけてあります。
+  | APIのトークンを .env に書き込むと使えます。
+
+pre
+  code.prettyprint.lang-sh
+    | cp dotenv.example .env
+      vim .env
+
+p
+  | Mackerelに登録した際に設定したサービス名と、プロフィールページから参照できるAPIキーを入力します。
+
+pre
+  code.prettyprint
+    | - MACKEREL_SERVICE_NAME=xxxxxxxx
+      - MACKEREL_API_KEY=XxXxXxXxXxXxXxXxXxXxXxXxXxXxXxXxXxXxXxXxXxXx
+      + MACKEREL_SERVICE_NAME=your_mackerel_service_name
+      + MACKEREL_API_KEY=YoUrMaCkErElApIkEy00000000000000000000000000
+
+p
+  | 監視はairryr.rb を実行させておくとできます。
+
+pre
+  code.prettyprint.lang-sh
+    | bundle exec ruby airryr.rb &>> airryr.log &
+
+h3
+  | 動作状況
+
+p
+  | こんな感じに監視できます。
 
 h3
   | Mackerel の Webhook 連携
 
 h3
   | airryr_web
-
-h3
-  | 取れた
 
 h3
   | 傾向
