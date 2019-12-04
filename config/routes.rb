@@ -17,6 +17,7 @@ Rails.application.routes.draw do
   get 'snipon/',      to: "static_pages#snipon"
   get 'touzoku/',     to: "static_pages#touzoku"
   get 'twitter_webhook/', to: "static_pages#twitter_webhook"
+  get 'airryr_introduction/', to: "static_pages#airryr_introduction"
   get 'contact/',     to: "contacts#new"
   post 'contact/',    to: "contacts#create"
 
