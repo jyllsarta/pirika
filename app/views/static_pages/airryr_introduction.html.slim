@@ -8,36 +8,97 @@ p
     | https://adventar.org/calendars/3952 
   | 12日目の記事です。 
 
-
 h2
   | はじめに
 
 p
   | センサーを置いて
 p
-  | 監視させて
+  | 監視させていると
 p
   | リプライが飛んでくる
 
-h3
-  | TL; DR
+h2
+  | なぜやるのか
 
-h3
-  | 監視させるメリット
-
+p
+  a[href="https://newscenter.lbl.gov/2012/10/17/elevated-indoor-carbon-dioxide-impairs-decision-making-performance/"]
+    | 空気が悪い状態では作業効率が落ちます。
+  | 作業効率が落ちているのに自分で気づくのは難しいので、締め切った部屋で作業し続けて無意識に効率を落としてしまっている可能性があります。
 
 h2
   | センサーから値を取得する
 
 h3
-  | co2mini というセンサー
+  | co2mini
 
-h3
-  | co2mini ライブラリ
+p
+  | API連携できたり、すぐに使えるCO2センサーはそこそこ高価で、25000円程度します。
+    10000円ほどで手に入る安価な製品に
+  a[href="https://www.amazon.co.jp/dp/B00I3XJ9LM/ref=cm_sw_em_r_mt_dp_U_yx05DbB1JFGC0"]
+    | CO2-mini
+  | というものがあります。USBで給電して部屋の二酸化炭素濃度をモニターしてくれます。
+
+p
+  a[href="http://r-kurain.hatenablog.com/entry/2016/01/26/164648"]
+    | http://r-kurain.hatenablog.com/entry/2016/01/26/164648
+
+p
+  | このセンサーから値を拾ってくるgem を書いてくださった人がいるので、これを使います。
+    記事によるとこのセンサーは、
+  b
+    | 商品紹介ページに一切書いていないけどUSB経由でセンサーの値を取得できる
+  | ようです。実際に値を取ってみました。
+
 
 h3
   | 値の取り方
 
+p
+  a[href="https://github.com/kurain/co2mini/issues/1"]
+    | Could not open library 'hidapi' · Issue #1 · kurain/co2mini
+
+p
+  | ruby_hid_api のgem が特定のhidapi ライブラリにしか対応していないことにより、利用しているOSとライブラリの組み合わせによっては動作しないようです。
+    筆者環境(tinkerboard OS)では動作しなかったので、forkしてこちらのissueにある通りの更新をしたところ動作しました。そのリポジトリがこちらです。
+
+p
+  a[href="https://github.com/jyllsarta/airryr"]
+    | https://github.com/jyllsarta/airryr
+
+h4
+  | install
+
+p
+  | まず必要なライブラリをまとめてインストールしてしまいます。
+
+pre
+  code.prettyprint.lang-sh
+    | sudo apt-get install build-essential bison openssl libreadline6 libreadline6-dev curl git-core zlib1g zlib1g-dev libssl-dev libyaml-dev libxml2-dev autoconf libc6-dev ncurses-dev automake libtool git libhidapi-hidraw0
+      sudo apt-get install ruby2.1 ruby2.1-dev git # rubyインストール済なら不要
+      sudo apt-get install usbutils
+
+p
+  | あとは clone して gem をインストールすればOKです。
+
+pre
+  code.prettyprint.lang-sh
+    | git clone https://github.com/jyllsarta/airryr.git
+      cd airryr/
+      bundle install
+
+h4
+  | 動作確認
+
+p
+  | show.rb を実行するとデバイスから一度だけ値を読み取り、結果を出力します。
+
+pre
+  code.prettyprint
+    | bundle exec ruby show.rb
+
+p
+  | 気温と二酸化炭素濃度が標準出力に出てくれば成功です。
 
 h2
   | 監視
@@ -47,7 +108,6 @@ h3
 
 h3
   | サービスメトリック
-
 
 h2
   | アラート
@@ -61,8 +121,13 @@ h3
 h3
   | 取れた
 
+h3
+  | 傾向
+
 h2
   | まとめ
 
 // data-textを外から渡せるようにしたい
 = render 'twitter_link'
+
+script[src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"]
