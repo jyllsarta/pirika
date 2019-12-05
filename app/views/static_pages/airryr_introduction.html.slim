@@ -12,11 +12,22 @@ h2
   | はじめに
 
 p
+  img.middle_picture.with_shadow[src="/images/airryr_introduction/monitor.jpg"]
+
+p
   | センサーを置いて
+
 p
-  | 監視させていると
+  img.middle_picture.with_shadow[src="/images/airryr_introduction/metrics.png"]
+
 p
-  | リプライが飛んでくる
+  | 監視させていると、空気が悪くなったら
+
+p
+  img.mini_picture.with_shadow[src="/images/airryr_introduction/reply.png"]
+
+p
+  | リプライが飛んでくる仕組みを作りました。換気の目安になって捗ります。
 
 h2
   | なぜやるのか
@@ -24,7 +35,7 @@ h2
 p
   a[href="https://newscenter.lbl.gov/2012/10/17/elevated-indoor-carbon-dioxide-impairs-decision-making-performance/"]
     | 空気が悪い状態では作業効率が落ちます。
-  | 作業効率が落ちているのに自分で気づくのは難しいので、締め切った部屋で作業し続けて無意識に効率を落としてしまっている可能性があります。
+  | 作業効率が落ちているのに自分で気づくのは難しいので、外部から通知が飛んでくるようになると安心です。
 
 h2
   | センサーから値を取得する
@@ -153,10 +164,17 @@ h3
   | 動作状況
 
 p
-  | こんな感じに監視できます。
+  img.middle_picture.with_shadow[src="/images/airryr_introduction/metrics.png"]
+
+p
+  | 監視をさせながら、窓と扉を閉め切ってみました。部屋に人が入ってから、みるみるうちに二酸化炭素濃度が上昇していくのがわかります。換気は大事ですね。
 
 h3
   | Mackerel の Webhook 連携
+
+p
+  | Mackerel上で値は取れたので、次は一定値を超えたらアラートを発報してみましょう。
+    
 
 h3
   | airryr_web

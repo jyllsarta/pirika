@@ -127,10 +127,7 @@ h2{
   font-size: 1.6em;
   border-left: $padding_thin solid $main_color;
   border-bottom: 1px solid $main_color;
-  padding-top: $padding_slice;
-  padding-left: $padding_normal;
-  padding-bottom: $padding_slice;
-  margin-bottom: $padding_normal;
+  padding: $padding_slice;
   color: $main-color;
 }
 
@@ -138,18 +135,14 @@ h3{
   color: $main-color;
   font-size: 1.3em;
   border-left: $padding_thin solid $main_color;
-  padding-left: $padding_slice;
-  padding-top: $padding_slice;
-  padding-bottom: $padding_slice;
+  padding: $padding_slice;
 }
 
 h4{
   color: $main-color;
   font-size: 1.1em;
   border-left: $padding_slice solid $main_color;
-  padding-left: $padding_slice;
-  padding-top: $padding_slice;
-  padding-bottom: $padding_slice;
+  padding: $padding_slice;
 }
 
 section{
@@ -161,6 +154,19 @@ p{
   padding: $padding_thin;
   white-space: pre-wrap;
   line-height: 1.7em;
+}
+
+.middle_picture{
+  width: 600px;
+}
+
+.mini_picture{
+  width: 350px;
+}
+
+.with_shadow{
+  border-radius: 10px;
+  box-shadow: 0px 0px 1px 3px $gray1;
 }
 
 .text{
