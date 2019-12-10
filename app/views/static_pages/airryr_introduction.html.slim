@@ -40,11 +40,8 @@ p
 h2
   | センサーから値を取得する
 
-h3
-  | co2mini
-
 p
-  | API連携できたり、すぐに使えるCO2センサーはそこそこ高価で、25000円程度します。
+  | API連携できたりする高機能なCO2センサーはそこそこ高価で、25000円程度します。
     10000円ほどで手に入る安価な製品に
   a[href="https://www.amazon.co.jp/dp/B00I3XJ9LM/ref=cm_sw_em_r_mt_dp_U_yx05DbB1JFGC0"]
     | CO2-mini
@@ -60,7 +57,6 @@ p
   b
     | 商品紹介ページに一切書いていないけどUSB経由でセンサーの値を取得できる
   | ようです。実際に値を取ってみました。
-
 
 h3
   | 値の取り方
@@ -85,8 +81,7 @@ p
 
 pre
   code.prettyprint.lang-sh
-    | sudo apt-get install build-essential bison openssl libreadline6 libreadline6-dev curl git-core zlib1g zlib1g-dev libssl-dev libyaml-dev libxml2-dev autoconf libc6-dev ncurses-dev automake libtool git libhidapi-hidraw0
-      sudo apt-get install ruby2.1 ruby2.1-dev git # rubyインストール済なら不要
+    | sudo apt-get install libhidapi-hidraw0
       sudo apt-get install usbutils
 
 p
@@ -131,7 +126,7 @@ p
   | がちょうどよいサービスでした。二酸化炭素濃度の値を定期的にここにPOSTすることで、うまくモニターできそうです。
     間にこのサービスを挟むことで、アラートを管理する部分とセンサーから値を取得する部分でうまくサービスの境界を作れるのも良さそうです。
 
-h2
+h3
   | モニターの開始
 
 p
@@ -185,7 +180,7 @@ p
   | 対象メトリクス・Warning/Criticalのしきい値・途切れアラート発報までの時間を設定できます。
     ここで設定した条件を満たすと、通知チャンネル ( https://mackerel.io/orgs/オーガニゼーション名/channels ) に指定した通知先にpostされます。
 
-h3
+h2
   | airryr_web
 
 p
