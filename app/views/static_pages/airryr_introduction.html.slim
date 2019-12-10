@@ -174,16 +174,69 @@ h3
 
 p
   | Mackerel上で値は取れたので、次は一定値を超えたらアラートを発報してみましょう。
-    
+
+p
+  | アラートしきい値の設定は https://mackerel.io/orgs/オーガニゼーション名/monitors からできます。
+
+p
+  img.mini_picture.with_shadow[src="/images/airryr_introduction/threshold.png"]
+
+p
+  | 対象メトリクス・Warning/Criticalのしきい値・途切れアラート発報までの時間を設定できます。
+    ここで設定した条件を満たすと、通知チャンネル ( https://mackerel.io/orgs/オーガニゼーション名/channels ) に指定した通知先にpostされます。
 
 h3
   | airryr_web
 
+p
+  | MackerelはSlackやLINE, Yammerなどプライベートなチャットツールへの通知のみ標準で用意されています。本来はサーバ監視サービスなので、オープンな場であるtwitterに投稿させるのは想定していないのでしょう。
+    しかし通知先には任意のWebhook URLを指定できます。これを利用すれば、通知を受け取って発言させることができそうです。
+
+p
+  | そこで、Webhookの通知のPOSTリクエストを受け取ってtwitterに発言させるだけのsinatra アプリケーションを作りました。
+
+p
+  a[href="https://github.com/jyllsarta/airryr_web"]
+    | https://github.com/jyllsarta/airryr_web
+
+p
+  | READMEの指示に従って設定を書き込むとwebサーバとして動作します。
+    (twitter のデベロッパーアカウントが必要になります。取得に少し手間がかかりますのでご注意ください。)
+
+pre
+  code.prettyprint.lang-sh
+    | bundle exec ruby airryr_web.rb &
+
+p
+  | こちらを動作させた状態でメトリクスがしきい値を超えると、対象のユーザアカウントで発言を行います。
+
 h3
-  | 傾向
+  | できた
+
+p
+  img.middle_picture.with_shadow[src="/images/airryr_introduction/reply2.png"]
+
+p
+  | しきい値を超えた / 下がり始めたタイミングでリプライを飛ばさせることができました。
+    twitterに発言を流させることによって、在宅時に監視すべきものを増やさずに済んだのがよいですね。
 
 h2
   | まとめ
+
+ul.with_point
+  li
+    | 二酸化炭素センサーから値を読み取って
+  li
+    | Mackerelに流して
+  li
+    | MackerelからのWebhook通知をtwitterに流すしくみ
+
+p
+  | それぞれを作りました。実際にはシステムを作る過程で部屋の空気に対して意識が向くようになってしまったので、現状は換気をそもそも怠らなくなってしまい通知が飛んでくることがほとんどなくなってしまいました。
+    ただ、うっかり空気が悪い中のろのろと効率悪く作業している、ということがなくなったのは確かな安心感があります。
+    導入までにかかるコストはセンサーとラズパイなどの費用だけですので、空気がこもってると感じることがある方は試してみるとよいでしょう。それで数%でも作業効率が改善すればすぐに元は取れます。
+
+
 
 // data-textを外から渡せるようにしたい
 = render 'twitter_link'
