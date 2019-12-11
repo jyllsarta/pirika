@@ -1,0 +1,239 @@
+- provide :title, "部屋の空気が悪くなるとtwitterで通知を送ってくれるbotを作った話"
+h1
+  | 部屋の空気が悪くなるとtwitterで通知を送ってくれるbotを作った話
+
+p
+  | この記事は 
+  a[href="https://adventar.org/calendars/3952"]
+    | https://adventar.org/calendars/3952 
+  | 12日目の記事です。 
+
+h2
+  | はじめに
+
+p
+  img.middle_picture.with_shadow[src="/images/airryr_introduction/monitor.jpg"]
+
+p
+  | センサーを置いて
+
+p
+  img.middle_picture.with_shadow[src="/images/airryr_introduction/metrics.png"]
+
+p
+  | 監視させていると、空気が悪くなったら
+
+p
+  img.mini_picture.with_shadow[src="/images/airryr_introduction/reply.png"]
+
+p
+  | リプライが飛んでくる仕組みを作りました。換気の目安になって捗ります。
+
+h2
+  | なぜやるのか
+
+p
+  a[href="https://newscenter.lbl.gov/2012/10/17/elevated-indoor-carbon-dioxide-impairs-decision-making-performance/"]
+    | 空気が悪い状態では作業効率が落ちます。
+  | 作業効率が落ちているのに自分で気づくのは難しいので、外部から通知が飛んでくるようになると安心です。
+
+h2
+  | センサーから値を取得する
+
+p
+  | API連携できたりする高機能なCO2センサーはそこそこ高価で、25000円程度します。
+    10000円ほどで手に入る安価な製品に
+  a[href="https://www.amazon.co.jp/dp/B00I3XJ9LM/ref=cm_sw_em_r_mt_dp_U_yx05DbB1JFGC0"]
+    | CO2-mini
+  | というものがあります。USBで給電して部屋の二酸化炭素濃度をモニターしてくれます。
+
+p
+  a[href="http://r-kurain.hatenablog.com/entry/2016/01/26/164648"]
+    | http://r-kurain.hatenablog.com/entry/2016/01/26/164648
+
+p
+  | このセンサーから値を拾ってくるgem を書いてくださった人がいるので、これを使います。
+    記事によるとこのセンサーは、
+  b
+    | 商品紹介ページに一切書いていないけどUSB経由でセンサーの値を取得できる
+  | ようです。実際に値を取ってみました。
+
+h3
+  | 値の取り方
+
+p
+  a[href="https://github.com/kurain/co2mini/issues/1"]
+    | Could not open library 'hidapi' · Issue #1 · kurain/co2mini
+
+p
+  | ruby_hid_api のgem が特定のhidapi ライブラリにしか対応していないことにより、利用しているOSとライブラリの組み合わせによっては動作しないようです。
+    筆者環境(tinkerboard OS)では動作しなかったので、forkしてこちらのissueにある通りの更新をしたところ動作しました。そのリポジトリがこちらです。
+
+p
+  a[href="https://github.com/jyllsarta/airryr"]
+    | https://github.com/jyllsarta/airryr
+
+h4
+  | install
+
+p
+  | まず必要なライブラリをまとめてインストールしてしまいます。
+
+pre
+  code.prettyprint.lang-sh
+    | sudo apt-get install libhidapi-hidraw0
+      sudo apt-get install usbutils
+
+p
+  | あとは clone して gem をインストールすればOKです。
+
+pre
+  code.prettyprint.lang-sh
+    | git clone https://github.com/jyllsarta/airryr.git
+      cd airryr/
+      bundle install
+
+h4
+  | 動作確認
+
+p
+  | show.rb を実行するとデバイスから一度だけ値を読み取り、結果を出力します。
+
+pre
+  code.prettyprint.lang-sh
+    | bundle exec ruby show.rb
+
+p
+  | 気温と二酸化炭素濃度が標準出力に出てくれば成功です。
+
+h2
+  | 監視
+
+p
+  | 監視を行う場合、以下の要件を満たしたいところです。
+
+ul.with_point
+  li
+    | 時系列で値を可視化できること
+  li
+    | 任意の場所にアラートを発報させられること
+  li
+    | ログ記録の停止を感知できること
+
+p
+  a[href="https://mackerel.io/ja/"]
+    | Mackerel
+  | がちょうどよいサービスでした。二酸化炭素濃度の値を定期的にここにPOSTすることで、うまくモニターできそうです。
+    間にこのサービスを挟むことで、アラートを管理する部分とセンサーから値を取得する部分でうまくサービスの境界を作れるのも良さそうです。
+
+h3
+  | モニターの開始
+
+p
+  | airryr にはMackerelへのメトリクス投稿機能をつけてあります。
+  | APIのトークンを .env に書き込むと使えます。
+
+pre
+  code.prettyprint.lang-sh
+    | cp dotenv.example .env
+      vim .env
+
+p
+  | Mackerelに登録した際に設定したサービス名と、プロフィールページから参照できるAPIキーを入力します。
+
+pre
+  code.prettyprint
+    | - MACKEREL_SERVICE_NAME=xxxxxxxx
+      - MACKEREL_API_KEY=XxXxXxXxXxXxXxXxXxXxXxXxXxXxXxXxXxXxXxXxXxXx
+      + MACKEREL_SERVICE_NAME=your_mackerel_service_name
+      + MACKEREL_API_KEY=YoUrMaCkErElApIkEy00000000000000000000000000
+
+p
+  | 監視はairryr.rb を実行させておくとできます。
+
+pre
+  code.prettyprint.lang-sh
+    | bundle exec ruby airryr.rb &>> airryr.log &
+
+h3
+  | 動作状況
+
+p
+  img.middle_picture.with_shadow[src="/images/airryr_introduction/metrics.png"]
+
+p
+  | 監視をさせながら、窓と扉を閉め切ってみました。部屋に人が入ってから、みるみるうちに二酸化炭素濃度が上昇していくのがわかります。換気は大事ですね。
+
+h3
+  | Mackerel の Webhook 連携
+
+p
+  | Mackerel上で値は取れたので、次は一定値を超えたらアラートを発報してみましょう。
+
+p
+  | アラートしきい値の設定は https://mackerel.io/orgs/オーガニゼーション名/monitors からできます。
+
+p
+  img.mini_picture.with_shadow[src="/images/airryr_introduction/threshold.png"]
+
+p
+  | 対象メトリクス・Warning/Criticalのしきい値・途切れアラート発報までの時間を設定できます。
+    ここで設定した条件を満たすと、通知チャンネル ( https://mackerel.io/orgs/オーガニゼーション名/channels ) に指定した通知先にpostされます。
+
+h2
+  | airryr_web
+
+p
+  | MackerelはSlackやLINE, Yammerなどプライベートなチャットツールへの通知のみ標準で用意されています。本来はサーバ監視サービスなので、オープンな場であるtwitterに投稿させるのは想定していないのでしょう。
+    しかし通知先には任意のWebhook URLを指定できます。これを利用すれば、通知を受け取って発言させることができそうです。
+
+p
+  | そこで、Webhookの通知のPOSTリクエストを受け取ってtwitterに発言させるだけのsinatra アプリケーションを作りました。
+
+p
+  a[href="https://github.com/jyllsarta/airryr_web"]
+    | https://github.com/jyllsarta/airryr_web
+
+p
+  | READMEの指示に従って設定を書き込むとwebサーバとして動作します。
+    (twitter のデベロッパーアカウントが必要になります。取得に少し手間がかかりますのでご注意ください。)
+
+pre
+  code.prettyprint.lang-sh
+    | bundle exec ruby airryr_web.rb &
+
+p
+  | こちらを動作させた状態でメトリクスがしきい値を超えると、対象のユーザアカウントで発言を行います。
+
+h3
+  | できた
+
+p
+  img.middle_picture.with_shadow[src="/images/airryr_introduction/reply2.png"]
+
+p
+  | しきい値を超えた / 下がり始めたタイミングでリプライを飛ばさせることができました。
+    twitterに発言を流させることによって、在宅時に監視すべきものを増やさずに済んだのがよいですね。
+
+h2
+  | まとめ
+
+ul.with_point
+  li
+    | 二酸化炭素センサーから値を読み取って
+  li
+    | Mackerelに流して
+  li
+    | MackerelからのWebhook通知をtwitterに流すしくみ
+
+p
+  | それぞれを作りました。実際にはシステムを作る過程で部屋の空気に対して意識が向くようになってしまったので、現状は換気をそもそも怠らなくなってしまい通知が飛んでくることがほとんどなくなってしまいました。
+    ただ、うっかり空気が悪い中のろのろと効率悪く作業している、ということがなくなったのは確かな安心感があります。
+    導入までにかかるコストはセンサーとラズパイなどの費用だけですので、空気がこもってると感じることがある方は試してみるとよいでしょう。それで数%でも作業効率が改善すればすぐに元は取れます。
+
+
+
+// data-textを外から渡せるようにしたい
+= render 'twitter_link', {text: "部屋の空気が悪くなるとtwitterで通知を送ってくれるbotを作った話", link_to: airryr_introduction_url}
+
+script[src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"]

@@ -46,6 +46,9 @@ class StaticPagesController < ApplicationController
   def twitter_webhook
   end
 
+  def airryr_inrtoduction
+  end
+
   def works
   end
 
