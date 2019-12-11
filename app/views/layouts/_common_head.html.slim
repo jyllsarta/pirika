@@ -1,10 +1,10 @@
 meta charset="utf-8"
-meta name="description" content="じぃるの制作物をまとめるサイトです。ブラウザゲーとお絵かきログを置いてます。"
-meta property="og:title" content="さーたはうす"
-meta property="og:url" content=root_url
-meta property="og:image" content="https://jyllsarta.github.io/images/icon/ogp_image.png"
+meta name="description" content=(og_description.present? ? og_description : "じぃるの制作物をまとめるサイトです。ブラウザゲーとお絵かきログを置いてます。")
+meta property="og:title" content=(og_title.present? ? og_title : "さーたはうす")
+meta property="og:url" content=(og_url.present? ? og_url : root_url)
+meta property="og:image" content=(og_image.present? ? og_image : "https://jyllsarta.github.io/images/icon/ogp_image.png")
 meta property="og:site_name" content="さーたはうす"
-meta property="og:description" content="じぃるの制作物をまとめるサイトです。ブラウザゲーとお絵かきログを置いてます。"
+meta property="og:description" content=(og_description.present? ? og_description : "じぃるの制作物をまとめるサイトです。ブラウザゲーとお絵かきログを置いてます。")
 
 meta name="twitter:card" content="summary"
 meta name="twitter:site" content="@jyll"

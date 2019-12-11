@@ -2,7 +2,7 @@ html
   head
     title
       = full_title(yield :title)
-    = render "layouts/common_head"
+    = render "layouts/common_head", {og_url: (yield :og_url), og_description: (yield :og_description), og_image: (yield :og_image), og_title: (yield :og_title)}
     = render  "layouts/shim"
     = stylesheet_link_tag "reset"
     = stylesheet_link_tag "custom"
