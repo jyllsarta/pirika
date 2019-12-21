@@ -58,6 +58,6 @@ class StaticPagesController < ApplicationController
   private
   def image_filenames(dirname)
     paths = Dir.glob("public/images/#{dirname}/*", base: Rails.root)
-    paths.map{|path| path.split("/")[-1]}
+    paths.map{|path| path.split("/")[-1]}.sort
   end
 end
