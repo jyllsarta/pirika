@@ -52,5 +52,11 @@ environment ENV.fetch("RAILS_ENV") { "development" }
 # end
 #
 
+if Rails.env.production?
+  cert = "/etc/letsencrypt/live/jyllsarta.net/fullchain.pem"
+  key = "/etc/letsencrypt/live/jyllsarta.net/privkey.pem"
+  ssl_bind "0.0.0.0", 3000, cert: cert, key: key
+end
+
 # Allow puma to be restarted by `rails restart` command.
 plugin :tmp_restart
