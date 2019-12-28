@@ -61,3 +61,6 @@ end
 
 # Allow puma to be restarted by `rails restart` command.
 plugin :tmp_restart
+daemonize
+pidfile "#{Dir.pwd}/tmp/pids/puma.pid"
+stdout_redirect "#{Dir.pwd}/log/puma.log", "#{Dir.pwd}/log/pumaerr.log", true
