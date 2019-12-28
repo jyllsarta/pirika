@@ -9,7 +9,6 @@ threads threads_count, threads_count
 
 # Specifies the `port` that Puma will listen on to receive requests; default is 3000.
 #
-port        ENV.fetch("PORT") { 3000 }
 
 # Specifies the `environment` that Puma will run in.
 #
@@ -52,10 +51,12 @@ environment ENV.fetch("RAILS_ENV") { "development" }
 # end
 #
 
-if Rails.env.production?
+if ENV["RAILS_ENV"] == "production" && ENV["SSL_ENABLED"] == "y"
   cert = "/etc/letsencrypt/live/jyllsarta.net/fullchain.pem"
   key = "/etc/letsencrypt/live/jyllsarta.net/privkey.pem"
-  ssl_bind "0.0.0.0", 3000, cert: cert, key: key
+  ssl_bind "0.0.0.0", 3443, cert: cert, key: key
+else
+  port ENV.fetch("PORT") { 3000 }
 end
 
 # Allow puma to be restarted by `rails restart` command.
