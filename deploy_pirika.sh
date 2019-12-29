@@ -16,5 +16,5 @@ kill ${PID}
 
 echo "start server"
 # for http start
-# RAILS_ENV=production bundle exec rails s -d
-SSL_ENABLED=y RAILS_ENV=production bundle exec pumactl start
+RAILS_ENV=production bundle exec rails s -d
+#SSL_ENABLED=y RAILS_ENV=production bundle exec pumactl start
