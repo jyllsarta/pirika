@@ -9,7 +9,7 @@ class ColorTileAPI {
     $(function () {
       $.ajax({
         type: "GET",
-        url: "http://" + location.host + "/tile/new",
+        url: (location.hostname === 'localhost' ? "http://" : "https://") + location.host + "/tile/new",
         timeout: 10000,
       })
         .done(function (response, textStatus, jqXHR) {
@@ -30,7 +30,7 @@ class ColorTileAPI {
     $(function () {
       $.ajax({
         type: "POST",
-        url: "http://" + location.host + "/tile/results/create",
+        url: (location.hostname === 'localhost' ? "http://" : "https://") + location.host + "/tile/results/create",
         timeout: 10000,
         dataType: "json",
         data: {
@@ -57,7 +57,7 @@ class ColorTileAPI {
     $(function () {
       $.ajax({
         type: "GET",
-        url: `http://${location.host}/tile/${username}/highscore`,
+        url: `${(location.hostname === 'localhost' ? "http://" : "https://")}${location.host}/tile/${username}/highscore`,
         timeout: 10000,
         dataType: "json",
         data: {
