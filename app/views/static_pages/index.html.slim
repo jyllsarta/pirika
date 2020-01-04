@@ -184,11 +184,9 @@ p
     | illust
   | で全部見れます。
 
-ul#top_image_gallery
-  // これ自動生成できるといいなあ
-  - (1..18).to_a.reverse.each do |i|
+ul#illustBox
+  - @image_filenames.reverse.take(18).each do |filename|
     li
-      a[href="images/illust/#{i}.png"]
-        img.illust_thumbnail[src="images/illust/#{i}m.png" alt=""]
+      = render 'illust_thumbnail', {filename: filename, thumbnail_path: "illust_thumbnails", original_path: "illust_all"}
 
 = stylesheet_link_tag "top"

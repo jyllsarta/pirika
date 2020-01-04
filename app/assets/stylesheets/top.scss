@@ -174,7 +174,8 @@ p{
 }
 
 .illust_thumbnail{
-  width: 380px;
+  height: 230px;
+  width: 230px;
   border:1px solid transparent;
 }
 
@@ -205,11 +206,28 @@ dd{
   width: 70%;
 }
 
-#top_image_gallery{
-  display: flex;
-  flex-wrap: wrap;
-  flex-direction: row;
+.thumb{
+  width: 380px;
+  height: 100px;
+  background-size: 400px;
+  background-position: center;
+  background-repeat: no-repeat;
+  box-shadow:inset -1px -1px 2px 3px rgba(242,240,255,2);
+  filter: brightness(105%);
 }
+
+#illustBox{
+  display: flex;
+  width: 100%;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.thumb:hover{
+  filter: none;
+  filter: brightness(120%) blur(2px);
+}
+
 .em_link{
   font-size: 1.5em;
 }

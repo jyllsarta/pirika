@@ -1,5 +1,6 @@
 class StaticPagesController < ApplicationController
   def index
+    @image_filenames = image_filenames("illust_all")
   end
 
   def contact
@@ -11,9 +12,6 @@ class StaticPagesController < ApplicationController
 
   def rakugaki
     @image_filenames= image_filenames("rakugaki")
-  end
-
-  def index
   end
 
   def neko
