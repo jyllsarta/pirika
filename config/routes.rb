@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   root 'static_pages#index'
   get 'index/',       to: "static_pages#index"
   get 'samusugi/',    to: "static_pages#samusugi"
+  get 'ika/',         to: "static_pages#ika"
   get 'works/',       to: "static_pages#works"
   get 'games/',       to: "static_pages#games"
   get 'illusts/',     to: "static_pages#illusts"
