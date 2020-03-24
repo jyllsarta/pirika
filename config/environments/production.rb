@@ -90,4 +90,5 @@ Rails.application.configure do
   config.active_record.dump_schema_after_migration = false
   
   #config.force_ssl = true
+  config.action_controller.forgery_protection_origin_check = false
 end
