@@ -3,7 +3,7 @@
   "private": true,
   "dependencies": {
     "@rails/webpacker": "^4.0.7",
-    "axios": "^0.19.0",
+    "axios": "^0.21.1",
     "jssha": "^2.3.1",
     "pug-loader": "^2.4.0",
     "pug-plain-loader": "^1.0.0",
@@ -13,7 +13,7 @@
     "vue-template-compiler": "^2.6.10"
   },
   "devDependencies": {
-    "pug": "^2.0.4",
+    "pug": "^3.0.1",
     "ts-loader": "^6.1.0",
     "webpack-dev-server": "^3.7.2"
   }
