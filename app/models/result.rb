@@ -1,12 +1,11 @@
 # 1プレイの結果
 class Result < ApplicationRecord
-  validates :seed, null: false
-  validates :score, null: false
-  validates :username, null: false
-  validates :playlog, null: false
-  validates :difficulty, null: false
-  validates :remain_time, null: false
-  validates :extinct, null: false
+  validates :seed, presence: true
+  validates :score, presence: true
+  validates :username, presence: true
+  validates :playlog, presence: true
+  validates :difficulty, presence: true
+  validates :remain_time, presence: true
 
   def self.high_scores(username)
     scores = self.where(username: username).order(score: "DESC")

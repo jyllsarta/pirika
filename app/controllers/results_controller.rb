@@ -23,7 +23,7 @@ class ResultsController < ApplicationController
       playlog: clicklogs.try(:permit!).try(:to_h) || {},
       difficulty: difficulty,
       remain_time: remain_time,
-      extinct: extinct
+      extinct: extinct || false
     )
     render json: {score: score, is_high_score: is_high_score, is_best_time: is_best_time, time: remain_time, extinct: extinct}
   end
