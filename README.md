@@ -1,3 +1,9 @@
+# MOVED
+
+jyllsarta.net は 
+https://github.com/jyllsarta/elixirika
+こちらに移行しました。
+
 # さーたはうす
 
 ゲーム屋さんのwebサイトです。
